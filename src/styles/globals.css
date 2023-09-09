@@ -3,3 +3,20 @@
 body{
     font-family: 'Poppins' ;
 }
+
+:root{
+    --custom-aq-button-bg-color: #053B50; /* Custom button background color */
+    --custom-aq-button-border-color:#176B87; /* Custom button border color */
+    --custom-aq-button-text-color: #F8F0E5; /* Custom button text color */
+}
+
+.custom-button{
+ background-color: var(--custom-aq-button-bg-color);
+    border-color: var(--custom-aq-button-border-color);
+    color: var(--custom-aq-button-text-color);
+}
+
+.custom-button:hover{
+background-color: var(--custom-aq-button-text-color);
+    color: var(--custom-aq-button-bg-color);
+}

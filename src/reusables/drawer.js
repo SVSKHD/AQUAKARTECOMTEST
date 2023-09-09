@@ -1,9 +1,9 @@
 import {Offcanvas} from "react-bootstrap"
 const AquaDrawer = (props) =>{
-    const {title , show , handleClose } = props
+    const {title , show , handleClose , position} = props
     return(
         <>
-            <Offcanvas show={show} onHide={handleClose} backdrop="static">
+            <Offcanvas show={show} onHide={handleClose} placement={position} backdrop="static">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{title}</Offcanvas.Title>
                 </Offcanvas.Header>
@@ -14,4 +14,4 @@ const AquaDrawer = (props) =>{
         </>
     )
 }
-AquaDrawer
+export default AquaDrawer
