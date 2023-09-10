@@ -1,10 +1,13 @@
 import AquaNavBar from "@/Layout/Header";
+import AquaPageWrapper from "@/Layout/transition/pageWrapper";
 
 const AquaLayout = (props) =>{
     return(
         <>
         <AquaNavBar/>
-            {props.children}
+            <AquaPageWrapper>
+                {props.children}
+            </AquaPageWrapper>
         </>
     )
 }
