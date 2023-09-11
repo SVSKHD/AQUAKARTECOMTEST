@@ -1,12 +1,12 @@
 import {Button , Container , Form , Nav , Navbar , Offcanvas} from "react-bootstrap"
-
+import {FaSearch} from "react-icons/fa"
 const AquaNavBar =()=> {
     return (
         <>
 
                 <Navbar key={'md'} expand={'md'} className="shadow-lg">
                     <Container>
-                        <Navbar.Brand href="#">Aquakart</Navbar.Brand>
+                        <Navbar.Brand href="/">Aquakart</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-md`}
@@ -31,7 +31,7 @@ const AquaNavBar =()=> {
                                         className="me-2"
                                         aria-label="Search"
                                     />
-                                    <Button variant="outline-success">Search</Button>
+                                    <Button variant="outline-success"><FaSearch size={25}/></Button>
                                 </Form>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
