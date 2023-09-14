@@ -8,9 +8,10 @@ const AquaCategorySchema = new mongoose.Schema(
         description: {
             type: String,
         },
-        image: {
-            type: String
-        },
+        images: [{
+            publicId: String,  // Public ID of the image in Cloudinary
+            url: String,       // URL of the image in Cloudinary
+        }],
         keywords: {
             type: String
         }
@@ -20,8 +21,8 @@ const AquaCategorySchema = new mongoose.Schema(
     }
 );
 
-const AquaInvoices =
+const AquaCategory =
     mongoose.models.AquaCategory ||
     mongoose.model("AquaCategory", AquaCategorySchema);
 
-export default AquaInvoices;
+export default AquaCategory;

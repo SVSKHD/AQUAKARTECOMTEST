@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;500&display=swap');
 
 body{
-    font-family: 'Poppins' ;
+    font-family: 'Poppins' 
+}
+.aqua-body{
+    font-family: 'Poppins'!important ;
+    height: 100vh;
+}
+
+cus-nav{
+    opacity: 20%;
 }
 
 :root{
@@ -19,4 +27,13 @@ body{
 .custom-button:hover{
 background-color: var(--custom-aq-button-text-color);
     color: var(--custom-aq-button-bg-color);
+}
+
+.modal-footer{
+    border-top: none!important;
+    border-style: none;
+}
+
+.modal-header{
+    border-bottom: none!important;
 }

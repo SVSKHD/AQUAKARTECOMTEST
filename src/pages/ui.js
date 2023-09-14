@@ -7,6 +7,8 @@ import AquaLargeTitle from "@/reusables/largeTitle";
 import AquaTextAreaInput from "@/reusables/textarea";
 import AquaDrawer from "@/reusables/drawer";
 import AquaButton from "@/reusables/button";
+import AquaToast from "@/reusables/js/toast";
+
 const UIPage = () =>{
 const drawerPositions = ['start', 'end', 'top', 'bottom']
     const [drawer , setDrawer] = useState(false)
@@ -63,6 +65,12 @@ const drawerPositions = ['start', 'end', 'top', 'bottom']
             <hr/>
             <AquaHeading level={1}>Dialog</AquaHeading>
             <hr/>
+            <hr/>
+            <AquaHeading level={1}>Toast</AquaHeading>
+            <hr/>
+            <AquaButton onClick={()=>AquaToast("success" , "success")}>success</AquaButton>
+            <AquaButton onClick={()=>AquaToast("success" , "error")}>error</AquaButton>
+            <AquaButton onClick={()=>AquaToast("success" , "info")}>info</AquaButton>
         </Container>
         </>
     )

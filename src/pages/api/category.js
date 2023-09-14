@@ -18,16 +18,34 @@ Router.post(async (req, res) => {
 });
 
 
+
 Router.get(async (req, res) => {
-    try {
+    const { category } = req.query
+    if (category) {
         db.connectDb()
-        const categories = await AquaCategory.find({});
-        res.status(200).json(categories);
+        let individual = await AquaCategory.findById(category)
+        res.status(200).json(individual)
         db.disconnectDb()
-    } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+    } else if (!category) {
+        db.connectDb()
+        let invoices = await AquaCategory.find()
+        res.status(200).json(invoices)
+        db.disconnectDb()
     }
-});
+})
+
+Router.delete(async (req, res) => {
+    const { invoice } = req.query
+    if (invoice) {
+        db.connectDb()
+        let individualInvoice = await AquaInvoices.deleteOne(invoice)
+        res.status(200).json(individualInvoice)
+        db.disconnectDb()
+    } else if (!invoice) {
+        res.status(400).json({ success: false })
+
+    }
+})
 
 
 
