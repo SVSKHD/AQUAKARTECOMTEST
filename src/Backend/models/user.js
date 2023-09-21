@@ -25,7 +25,7 @@ const aquaUserSchema = new mongoose.Schema({
         gstEmail: { type: String },
         gstNo: { type: String },
         gstPhone: { type: Number },
-
+        gstAddres: { type: String }
     },
     cart: [{
         // Define the structure of items in the cart
