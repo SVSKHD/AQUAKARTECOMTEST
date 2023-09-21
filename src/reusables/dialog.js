@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 const AquaDialog = (props) => {
-    const { size, show, handleClose, title, center, Buttons } = props
+    const { size, show, handleClose, title, center, footerButtons } = props
     return (
         <>
             <Modal
@@ -20,7 +20,7 @@ const AquaDialog = (props) => {
                     {props.children}
                 </Modal.Body>
                 <Modal.Footer className='aqua-boder-none'>
-                    {Buttons}
+                    {footerButtons}
                 </Modal.Footer>
             </Modal>
         </>

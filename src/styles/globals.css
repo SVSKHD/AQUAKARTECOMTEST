@@ -1,39 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;500&display=swap');
-
-body{
-    font-family: 'Poppins' 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;500&display=swap");
+body {
+  font-family: "Poppins";
 }
-.aqua-body{
-    font-family: 'Poppins'!important ;
-    height: 100vh;
+.aqua-body {
+  font-family: "Poppins" !important ;
+  height: 100vh;
 }
-
-cus-nav{
-    opacity: 20%;
+cus-nav {
+  opacity: 20%;
 }
-
-:root{
-    --custom-aq-button-bg-color: #053B50; /* Custom button background color */
-    --custom-aq-button-border-color:#176B87; /* Custom button border color */
-    --custom-aq-button-text-color: #F8F0E5; /* Custom button text color */
+:root {
+  --custom-aq-button-bg-color: #053b50; /* Custom button background color */
+  --custom-aq-button-border-color: #176b87; /* Custom button border color */
+  --custom-aq-button-text-color: #f8f0e5; /* Custom button text color */
 }
-
-.custom-button{
- background-color: var(--custom-aq-button-bg-color);
-    border-color: var(--custom-aq-button-border-color);
-    color: var(--custom-aq-button-text-color);
+.custom-button {
+  background-color: var(--custom-aq-button-bg-color);
+  border-color: var(--custom-aq-button-border-color);
+  color: var(--custom-aq-button-text-color);
 }
 
-.custom-button:hover{
-background-color: var(--custom-aq-button-text-color);
-    color: var(--custom-aq-button-bg-color);
+.custom-button:hover {
+  background-color: var(--custom-aq-button-text-color);
+  color: var(--custom-aq-button-bg-color);
 }
 
-.modal-footer{
-    border-top: none!important;
-    border-style: none;
+.modal-footer {
+  border-top: none !important;
+  border-style: none;
 }
 
-.modal-header{
-    border-bottom: none!important;
+.modal-header {
+  border-bottom: none !important;
+}
+
+.padd-inner-content {
+  padding-top: none !important;
+  padding-bottom: none !important;
+  padding: 2.5rem;
+}
+
+.tabs-background {
+  padding: 0.5rem;
+  background-color: #053b50 !important;
+  border-radius: 0.5rem;
+  color: #f8f0e5;
+  margin: 0.5rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 30px; /* Space for the icon */
+}
+
+.form-control {
+  border-right-style: none !important;
+}
+.input-group-text {
+  background-color: transparent !important;
+}
+.nav-tabs .nav-link {
+    border-bottom-left-radius: var(--bs-nav-tabs-border-radius);
+    border-bottom-right-radius: var(--bs-nav-tabs-border-radius);
+    color: var(--bs-white);
+    transition: color .3s ease-in-out,background-color .3s ease-in-out,border-color .3s ease-in-out;
+}
+.viewpass{
+    position: absolute;
+    top: 4px;
+    right: 11px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.input-container {
+    position: relative;
+    width: 300px; /* Adjust the width as needed */
+  }
+
+  /* Style for the input field */
+  .input-field {
+    width: 100%;
+    padding: 10px 30px 10px 10px; /* Adjust the padding for your desired spacing */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  /* Style for the icon */
+  .input-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #333;
+  }
+.show-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* about */
+
+.about-large-title {
+  padding: 3rem;
+  color: linear-gradient(146deg, #573aa5, #14bf99, #053885, #df0e9c);
+  background-size: 800% 800%;
+
+  animation: AnimationName 7s ease infinite;
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 49%;
+  }
+  50% {
+    background-position: 100% 52%;
+  }
+  100% {
+    background-position: 0% 49%;
+  }
+}
+
+.about-title {
+  padding: 6rem;
+}
+
+.aqua-crystal-color {
+  border-radius: 2rem;
+  height: 600px;
+  padding: 2rem;
+  color: white;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

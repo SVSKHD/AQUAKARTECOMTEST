@@ -22,12 +22,14 @@ const AquaUserDialog = () => {
                 }
                 center={true}
                 title={<AquaHeading level={3}>{signupStatus ? "Signin" : "Singup"}</AquaHeading>}
-                Buttons={<AquaButton>{signupStatus ? "Signin" : "Signup"}</AquaButton>}
+                footerButtons={<AquaButton>{signupStatus ? "Signin" : "Signup"}</AquaButton>}
             >
                 <div className="text-center">
                     <Image src={LOGO} alt="Aquakart" height="80" width="80" />
                 </div>
+                <div className="padd-inner-content">
                 {signupStatus ? <AquaSignup /> : <AquaSignin />}
+                </div>
             </AquaDialog>
         </>
     );

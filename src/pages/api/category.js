@@ -1,4 +1,4 @@
-import {createRouter} from "next-connect"
+import { createRouter } from "next-connect"
 import db from '../../utils/db'
 import AquaCategory from '@/Backend/models/category';
 
@@ -13,7 +13,7 @@ Router.post(async (req, res) => {
         res.status(200).json(category)
         db.disconnectDb()
     } catch (error) {
-       res.status(400).json(error)        
+        res.status(400).json(error)
     }
 });
 

@@ -1,5 +1,6 @@
 import AquaLayout from "@/Layout/Layout";
 import AquaHeading from "@/reusables/heading";
+import AquaInput from "@/reusables/input";
 
 const AquaHomeComponent = () =>{
     return(
