@@ -11,6 +11,7 @@ const addressSchema = new mongoose.Schema({
 // Define the User schema
 const aquaUserSchema = new mongoose.Schema({
     userDetails: {
+        id: { type: String },
         username: String, // You can add other user-related fields as needed
         email: {
             type: String,
@@ -45,6 +46,6 @@ const aquaUserSchema = new mongoose.Schema({
     addresses: [addressSchema], // Store multiple addresses as an array of address objects
 });
 
-const AquaUser = mongoose.model('AquaUser', aquaUserSchema);
+const AquaUser = mongoose.models.AquaUser || mongoose.model('AquaUser', aquaUserSchema);
 
 export default AquaUser

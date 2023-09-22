@@ -18,6 +18,20 @@ Router.post(async (req, res) => {
     }
   })
   .get(async (req, res) => {
+    try {
+      db.connectDb();
+      const user = await AquaUser.find({});
+      if (!user) {
+        res.status(404).json({ message: 'Users not found' });
+        return;
+      }
+      res.status(200).json(user);
+      db.disconnectDb();
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  })
+  .get(async (req, res) => {
     // Retrieve a user by ID
     const { userId } = req.query;
     try {
