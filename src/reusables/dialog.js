@@ -10,6 +10,7 @@ const AquaDialog = (props) => {
                 size={size}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered={center}
+                className='dialog-customs'
             >
                 <Modal.Header className='aqua-boder-none'>
                     <Modal.Title id="contained-modal-title-vcenter">

@@ -105,6 +105,11 @@ cus-nav {
   cursor: pointer;
 }
 
+
+.custom-image{
+  border-radius: 1rem!important;
+}
+
 /* about */
 
 .about-large-title {
@@ -151,4 +156,9 @@ cus-nav {
   100% {
     background-position: 0% 50%;
   }
+}
+
+
+.dialog-customs{
+  border-radius: 2rem!important;
 }
