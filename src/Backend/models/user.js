@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+import validator from "validator";
+import bcrypt from 'bcrypt';
 // Define the Address schema
 const addressSchema = new mongoose.Schema({
     street: String,
@@ -10,17 +11,35 @@ const addressSchema = new mongoose.Schema({
 
 // Define the User schema
 const aquaUserSchema = new mongoose.Schema({
-    userDetails: {
-        id: { type: String },
-        username: String, // You can add other user-related fields as needed
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        phoneNo: String,
-        userPhoto: String,
+    id: { type: String },
+    username: String, // You can add other user-related fields as needed
+    email: {
+        type: String,
+        required: [true, "Please provide an email"],
+        validate: [validator.isEmail, "Please enter email in correct format"],
+        unique: true,
     },
+    password: {
+        type: String,
+        required: [true, "Please provide a password"],
+        minlength: [6, "password should be atleast 6 char"],
+        select: false,
+    },
+    role: {
+        type: String,
+        default: "user",
+    },
+    photo: {
+        id: {
+            type: String,
+
+        },
+        secure_url: {
+            type: String,
+
+        },
+    },
+    phoneNo: String,
     // You can store the photo URL or file path
     gstDetails: {
         gstEmail: { type: String },
@@ -44,6 +63,13 @@ const aquaUserSchema = new mongoose.Schema({
         addedDate: Date,
     }],
     addresses: [addressSchema], // Store multiple addresses as an array of address objects
+});
+
+aquaUserSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
+        return next();
+    }
+    this.password = await bcrypt.hash(this.password, 10);
 });
 
 const AquaUser = mongoose.models.AquaUser || mongoose.model('AquaUser', aquaUserSchema);

@@ -1,22 +1,37 @@
 import { createRouter } from "next-connect"
 import db from '../../utils/db' // Import your database connection
 import AquaUser from '../../Backend/models/user'; // Import your Mongoose User model
+import _ from "lodash"
 
 const Router = createRouter();
 
 Router.post(async (req, res) => {
-    // Create a new user
-    const userData = req.body;
-    try {
-      db.connectDb();
-      const user = new AquaUser(userData);
-      await user.save();
-      res.status(201).json(user);
-      db.disconnectDb();
-    } catch (error) {
-      res.status(400).json(error);
-    }
+  // Create a new user
+  //let result;
+  db.connectDb()
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    res.status(400).json("please enter valid email and password")
+  }
+
+  const user = await AquaUser.create({
+    email,
+    password,
   })
+  const sanitisedUseer = { id: user._id, email: user.email, role: user.role }
+  res.status(201).json(sanitisedUseer);
+  db.disconnectDb()
+  // try {
+  //   db.connectDb();
+  //   const user = new AquaUser(userData);
+  //   await user.save();
+  //   res.status(201).json(user);
+  //   db.disconnectDb();
+  // } catch (error) {
+  //   res.status(400).json(error);
+  // }
+})
   .get(async (req, res) => {
     try {
       db.connectDb();

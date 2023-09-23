@@ -1,23 +1,26 @@
 import Image from "next/image"
 import AQ from "../testImages/shoe.webp"
 
-const AquaVerticalCard = () => {
+const AquaVerticalCard = (props) => {
+    const {title , description , } = props
     return (
         <>
-            <div className="card mb-3 shadow-lg rounded-25" styles={{ maxWidth: '540px' }}>
-                <div className="row g-0">
-                    <div className="col-md-6">
-                    <div className="gradient-1">
-                        <Image src={AQ} className="img-fluid rounded-start shadow-lg custom-image" alt="..." />
-                    </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
+            <div class="card aq-card shadow-lg">
+                <div className="shadow-lg aq-card-image-vertical gradient-1">
+                    <Image src={AQ} class="card-img-top custom-image" alt="..." />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
         </>

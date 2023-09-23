@@ -103,6 +103,17 @@ cus-nav {
   cursor: pointer;
 }
 
+.aq-card{
+  width:20rem;
+  border-radius:1.5rem;
+  margin:1rem
+}
+
+.aq-card-image-vertical{
+  border-radius: 1rem;
+  margin: -10px;
+}
+
 
 .custom-image{
   border-radius: 1rem!important;
@@ -112,7 +123,6 @@ cus-nav {
 }
 .gradient-1{
   background: linear-gradient(140deg, #7c0168, #870172, #230018);
-  border-radius: 25px;
 }
 /* about */
 
