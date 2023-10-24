@@ -1,17 +1,19 @@
 import { Accordion } from "react-bootstrap"
 
 const AquaAccordian = (props) => {
-    const { title, description , key} = props
+    const { title, description , key , children} = props
     return (
         <>
-            <Accordion defaultActiveKey={key}>
+            <Accordion className="shadow-lg aqua-accordian" defaultActiveKey={key}>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>{title}</Accordion.Header>
                     <Accordion.Body>
-                        {description}
+                        {children}
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
         </>
     )
 }
+
+export default AquaAccordian

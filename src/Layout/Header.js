@@ -10,7 +10,9 @@ const AquaNavBar = () => {
 
             <Navbar key={'md'} sticky="top" expand={'md'} variant="light" className="shadow-lg bg-transparent cus-nav">
                 <Container>
-                    <Navbar.Brand href="/">Aquakart</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img src="https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png" alt="Aquakart" height="50" width="50" />
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar-expand-md`}

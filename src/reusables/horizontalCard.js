@@ -1,9 +1,9 @@
 import Image from "next/image"
-import AQ from "../testImages/shoe.webp"
+import AQ from "../assests/Default.png"
 const AquaHorizontalCard = () => {
     return (
             <>
-            <div className="card mb-3 shadow-lg rounded-25" styles={{ maxWidth: '540px' }}>
+            <div className="card mb-3 aq-card shadow-lg rounded-25" styles={{ maxWidth: '540px' }}>
                 <div className="row g-0">
                     <div className="col-md-6">
                         <div className="gradient-1">

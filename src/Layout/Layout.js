@@ -12,7 +12,7 @@ const AquaLayout = (props) => {
             <AquaCartDrawer />
             <AquaUserDialog />
             <AquaPageWrapper>
-                <AquaSeo />
+                <AquaSeo seo={props.seo}/>
                 {props.children}
             </AquaPageWrapper>
             <AquaFooter />

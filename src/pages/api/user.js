@@ -32,6 +32,12 @@ Router.post(async (req, res) => {
   //   res.status(400).json(error);
   // }
 })
+  .post(async (req, res) => {
+    db.connectDb()
+    const email = req.query
+    console.log("email")
+    db.disconnectDb()
+  })
   .get(async (req, res) => {
     try {
       db.connectDb();

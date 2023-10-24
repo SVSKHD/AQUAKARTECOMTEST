@@ -32,11 +32,9 @@ const aquaUserSchema = new mongoose.Schema({
     photo: {
         id: {
             type: String,
-
         },
         secure_url: {
             type: String,
-
         },
     },
     phoneNo: String,

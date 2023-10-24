@@ -1,7 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
-import ExampleCarouselImage from 'components/ExampleCarouselImage';
 
-const AquaUnControlledCarousel(images) {
+const AquaUnControlledCarousel = (images) => {
     return (
         <Carousel>
             {images.map((r, i) => (

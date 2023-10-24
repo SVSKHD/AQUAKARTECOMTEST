@@ -176,3 +176,33 @@ cus-nav {
 .dialog-customs{
   border-radius: 2rem!important;
 }
+
+
+
+.image-card-width{
+  width: 240px;
+}
+
+.card-carousel{
+  padding: 1rem;
+}
+
+.img-card-display{
+  background-color: #053b50;
+  padding: 0.5rem;
+  color: white;
+  text-align: center;
+  border-radius: 1rem;
+  opacity: 80%;
+}
+
+.aqua-accordian{
+  border-radius: 1rem;
+}
+
+
+.aqua-category-card{
+  border-style: none;
+  border-radius: 1rem;
+}
+

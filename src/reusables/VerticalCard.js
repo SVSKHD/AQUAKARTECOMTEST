@@ -1,17 +1,18 @@
 import Image from "next/image"
 import AQ from "../testImages/shoe.webp"
+import AquaUnControlledCarousel from "./carousel"
 
 const AquaVerticalCard = (props) => {
-    const {title , description , } = props
+    const {title , description , images } = props
     return (
         <>
-            <div class="card aq-card shadow-lg">
+            <div class="card aq-card shadow-lg rounded-25">
                 <div className="shadow-lg aq-card-image-vertical gradient-1">
-                    <Image src={AQ} class="card-img-top custom-image" alt="..." />
+                    {images ? (<><AquaUnControlledCarousel images={images}/></>) :<Image src={AQ} class="card-img-top custom-image" alt="..." />}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">{title}</h5>
+                    <p class="card-text">{description}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Cras justo odio</li>
