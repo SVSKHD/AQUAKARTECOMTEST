@@ -1,7 +1,10 @@
 {
-  "name": "aquakart",
+  "name": "aquakartecom",
   "version": "0.1.0",
   "private": false,
+  "publishConfig": {
+     "registry": "http://62.72.56.15:8081/repository/aquakartecom/" 
+  };
   "scripts": {
     "dev": "next dev",
     "build": "next build",
