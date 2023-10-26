@@ -11,12 +11,17 @@ const getSubCategoryById = async (query) => (
     await axios.get(`${baseUrl}/subcategory/get?id=${query}`)
 )
 
+const getSubCategoryByTitle = async (query) => (
+    await axios.get(`${baseUrl}/subcategory/get?title=${query}`)
+)
+
 
 
 const AquaSubCategoryOperations = () => {
     return {
         getSubCategories,
         getSubCategoryById,
+        getSubCategoryByTitle
     }
 }
 
