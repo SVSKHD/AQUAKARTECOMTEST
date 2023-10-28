@@ -15,16 +15,16 @@ const AquaSubCategoryPageComponent = () => {
     }
 
     const router = useRouter()
-    let title = router.query.id
+    let titleData = router.query.id
 
     const loadCategory = useCallback(() => {
-        getSubCategoryByTitle(title).then((res) => {
+        getSubCategoryByTitle(titleData).then((res) => {
             setCategory(res.data)
         })
             .catch((err) => {
                 console.log("err", err)
             })
-    }, [getSubCategoryByTitle, setCategory])
+    }, [getSubCategoryByTitle, setCategory , titleData])
 
     useEffect(() => {
         loadCategory()

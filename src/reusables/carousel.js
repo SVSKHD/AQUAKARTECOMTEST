@@ -4,7 +4,7 @@ const AquaUnControlledCarousel = (images) => {
     return (
         <Carousel>
             {images.map((r, i) => (
-                <div>
+                <div key={i}>
                     <Carousel.Item>
                         <Image
                             className="d-block w-100"
