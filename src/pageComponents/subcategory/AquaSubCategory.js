@@ -24,7 +24,7 @@ const AquaSubCategoryPageComponent = () => {
             .catch((err) => {
                 console.log("err", err)
             })
-    }, [])
+    }, [getSubCategoryByTitle, setCategory])
 
     useEffect(() => {
         loadCategory()

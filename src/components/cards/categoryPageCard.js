@@ -1,11 +1,12 @@
 import AQ from "../../assests/Default.png"
+import Image from "next/image"
 const AquaCommonCategoryCard = ({ data }) => {
     const { title, photos, description } = data
     return (
         <>
             <div className="aqua-category-card shadow-lg p-2">
 
-                <img src={photos ? photos[0].secure_url : AQ} className="card-img-top rounded-4 mb-5" alt={title} />
+                <Image src={photos ? photos[0].secure_url : AQ} className="card-img-top rounded-4 mb-5" alt={title} />
 
                 <br />
                 <div className="card-body">

@@ -1,7 +1,9 @@
 import AquaButton from "@/reusables/button";
+import Image from "next/image";
 import { Button, Container, Form, Nav, Navbar, Offcanvas } from "react-bootstrap"
 import { FaSearch, FaUser, FaCartPlus } from "react-icons/fa"
 import { useDispatch } from "react-redux";
+
 
 const AquaNavBar = () => {
     const dispatch = useDispatch()
@@ -11,7 +13,7 @@ const AquaNavBar = () => {
             <Navbar key={'md'} sticky="top" expand={'md'} variant="light" className="shadow-lg bg-transparent cus-nav">
                 <Container>
                     <Navbar.Brand href="/">
-                        <img src="https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png" alt="Aquakart" height="50" width="50" />
+                        <Image src="https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png" alt="Aquakart" height="50" width="50" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
                     <Navbar.Offcanvas

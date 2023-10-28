@@ -1,12 +1,12 @@
 import Carousel from 'react-bootstrap/Carousel';
-
+import Image from "next/image"
 const AquaUnControlledCarousel = (images) => {
     return (
         <Carousel>
             {images.map((r, i) => (
                 <div>
                     <Carousel.Item>
-                        <img
+                        <Image
                             className="d-block w-100"
                             src={r.image}
                             alt={r.alt}

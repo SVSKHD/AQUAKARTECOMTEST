@@ -9,7 +9,7 @@ const AquaImageCard = (props) => {
         <>
         <Link href={link}>
             <div className="card text-bg-dark image-card-width shadow-lg">
-                <img src={images ? images[0].secure_url : AQ} className="card-img" alt={title} width="50" height="200" />
+                <Image src={images ? images[0].secure_url : AQ} className="card-img" alt={title} width="50" height="200" />
                 <div className="card-img-overlay">
                     <div className="img-card-display">
                         <h5 className="card-title">{title}</h5>

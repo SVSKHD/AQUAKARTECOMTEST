@@ -34,6 +34,7 @@ const AquaUserDialog = () => {
                             type: "SET_AUTH_STATUS_VISIBLE",
                             payload: !signupStatus
                         })
+                        // eslint-disable-next-line react/no-unescaped-entities
                     }}>{signupStatus ? <AquaHeading level={6}>Already Have An Account..? Signin</AquaHeading> : <AquaHeading level={6}>Don't Have Account..? Signup</AquaHeading>}</span>
                 </div>
             </AquaDialog>
