@@ -4,15 +4,15 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
 
 const getSubCategories = async () => (
-    await axios.get(`${baseUrl}/subcategory/get`)
+    await axios.get(`admin/crm/api/subcategory/get`)
 )
 
 const getSubCategoryById = async (query) => (
-    await axios.get(`${baseUrl}/subcategory/get?id=${query}`)
+    await axios.get(`admin/crm/api/subcategory/get?id=${query}`)
 )
 
 const getSubCategoryByTitle = async (query) => (
-    await axios.get(`${baseUrl}/subcategory/get?title=${query}`)
+    await axios.get(`admin/crm/api/subcategory/get?title=${query}`)
 )
 
 
