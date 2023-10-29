@@ -6,7 +6,10 @@ const nextConfig = {
   },
   webpack(config, options) {
     return config;
-  }
+  },
+  env: {
+    apiKey: 'https://aquakart.co.in/admin/crm/api',
+  },
 }
 
 module.exports = nextConfig

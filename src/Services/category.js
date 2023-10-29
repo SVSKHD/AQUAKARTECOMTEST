@@ -1,15 +1,16 @@
 import axios from "axios"
 
+const baseUrl = process.env.apiKey
 const getCategories = async () => (
-    await axios.get(`admin/crm/api/category/get`)
+    await axios.get(`${baseUrl}/category/get`)
 )
 
 const getCategoryById = async (query) => (
-    await axios.get(`admin/crm/api/category/get?id=${query}`)
+    await axios.get(`${baseUrl}/category/get?id=${query}`)
 )
 
 const getCategoryByTitle = async (query) => (
-    await axios.get(`admin/crm/api/category/get?title=${query}`)
+    await axios.get(`${baseUrl}/category/get?title=${query}`)
 )
 
 
