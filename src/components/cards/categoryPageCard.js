@@ -6,7 +6,7 @@ const AquaCommonCategoryCard = ({ data }) => {
         <>
             <div className="aqua-category-card shadow-lg p-2">
 
-                <Image src={photos ? photos[0].secure_url : AQ} className="card-img-top rounded-4 mb-5" alt={title} width="200" height="300"/>
+                <Image src={photos ? photos[0].secure_url : AQ} className="card-img-top rounded-4 mb-5" alt={title} width="300" height="380"/>
 
                 <br />
                 <div className="card-body">

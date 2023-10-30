@@ -23,7 +23,7 @@ const responsive = {
 
 const AquaCardMultiItemCarousel = (props) => {
     return (
-        <Carousel infinite={true} dots={true} autoPlaySpeed={1000} autoPlay={true} swipeable={true} ssr={true} draggable={true} responsive={responsive} className='card-carousel'>
+        <Carousel infinite={true} dots={true} autoPlaySpeed={7000} autoPlay={true} swipeable={true} ssr={true} draggable={true} responsive={responsive} className='card-carousel'>
             {props.children}
         </Carousel>
     );
