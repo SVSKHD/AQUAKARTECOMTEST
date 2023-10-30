@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import AquaLayout from "@/Layout/Layout"
-import AquaCategoryOperations from "@/Services/category"
 import AquaCommonCategoryCard from "@/components/cards/categoryPageCard"
+import AquaCategoryOperations from "@/Services/category"
 
 
 
-const AquaCategoryPageComponent = () => {
+const AquaSubCategoryPageComponent = () => {
     const [category, setCategory] = useState({})
     const { getCategoryByTitle } = AquaCategoryOperations()
     const SeoData = {
@@ -26,7 +26,7 @@ const AquaCategoryPageComponent = () => {
             .catch((err) => {
                 console.log("err", err)
             })
-    }, [getCategoryByTitle, setCategory, titleData])
+    }, [getSubCategoryByTitle, setCategory, titleData])
 
     useEffect(() => {
         loadCategory()
@@ -47,4 +47,4 @@ const AquaCategoryPageComponent = () => {
         </>
     )
 }
-export default AquaCategoryPageComponent
+export default AquaSubCategoryPageComponent
