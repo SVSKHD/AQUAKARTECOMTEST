@@ -30,7 +30,7 @@ const AquaSubCategoryHolder = () => {
                         {subcategories.map((r, i) => (
                             <>
                                 <div className="col-md-2 col-lg-3 col-xs-6 col-sm-16">
-                                    <AquaImageCard title={r.title} images={r.photos} link={`/subcategory/${r.title}`} />
+                                    <AquaImageCard key={i} title={r.title} images={r.photos} link={`/subcategory/${r.title}`} />
                                 </div>
                             </>
                         ))}

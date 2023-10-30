@@ -1,6 +1,6 @@
 import Head from "next/head"
-const AquaSeo = ({seo}) => {
-    const { title, description, keywords, keyphrases, canonical } = seo
+const AquaSeo = ({ seo }) => {
+    const { title, description, keywords, keyphrases, canonical, image } = seo
     return (
         <>
             <Head>
@@ -13,11 +13,11 @@ const AquaSeo = ({seo}) => {
 
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
-                <meta property="og:image" content="https://www.example.com/image.jpg" />
+                <meta property="og:image" content={image} />
 
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
-                <meta name="twitter:image" content="https://www.example.com/image.jpg" />
+                <meta name="twitter:image" content={image ? image : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png"} />
 
 
 

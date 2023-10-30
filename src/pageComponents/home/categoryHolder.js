@@ -3,6 +3,7 @@ import AquaImageCard from "@/reusables/imageCard"
 import AquaToast from "@/reusables/js/toast"
 import AquaCardMultiItemCarousel from "@/reusables/cardCarousel"
 import { useEffect, useState, useCallback } from "react"
+import {FadeLoader} from "react-spinners"
 
 
 
@@ -25,13 +26,13 @@ const AquaCategoryHolder = () => {
 
     return (
         <>
-            {!categories.length ? <h3>No Categories yet</h3> : (
+            {!categories.length ? <FadeLoader/> : (
                 <div className="row">
                     <AquaCardMultiItemCarousel>
                         {categories.map((r, i) => (
                             <>
                                 <div className="col-md-2 col-lg-3 col-xs-6 col-sm-16">
-                                    <AquaImageCard title={r.title} images={r.photos} link={`/category/${r.title}`}/>
+                                    <AquaImageCard title={r.title} images={r.photos} link={`/category/${r.title}`} />
                                 </div>
                             </>
                         ))}
