@@ -23,7 +23,7 @@ const AquaNavBar = () => {
                     >
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                                Offcanvas
+                                Menu
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
