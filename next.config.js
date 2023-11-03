@@ -8,7 +8,7 @@ const nextConfig = {
     return config;
   },
   env: {
-    apiKey: 'https://aquakart.co.in/admin/crm/api',
+    apiKey: 'https://aquakart.co.in',
   },
 }
 
