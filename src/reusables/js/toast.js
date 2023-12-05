@@ -1,39 +1,53 @@
-import { toast } from 'react-hot-toast';
-import { BiMessageSquareCheck,BiMessageSquareX , BiInfoCircle } from 'react-icons/bi';
+import { toast } from "react-hot-toast";
+import {
+  BiMessageSquareCheck,
+  BiMessageSquareX,
+  BiInfoCircle,
+} from "react-icons/bi";
 
 const AquaToast = (message, type) => {
   let icon;
   let backgroundColor;
 
   switch (type) {
-    case 'success':
+    case "success":
       icon = <BiMessageSquareCheck size={40} />;
-      backgroundColor = '#539165';
+      backgroundColor = "#539165";
       break;
-    case 'error':
+    case "error":
       icon = <BiMessageSquareX size={40} />;
-      backgroundColor = '#FF0000';
+      backgroundColor = "#FF0000";
       break;
-    case 'info':
+    case "info":
       icon = <BiInfoCircle size={40} />;
-      backgroundColor = '#0077B6';
+      backgroundColor = "#0077B6";
       break;
     default:
       icon = null;
-      backgroundColor = '#00425A';
+      backgroundColor = "#00425A";
   }
 
   toast(message, {
     icon,
     style: {
-      border: '1px solid #713200',
-      padding: '10px',
-      color: '#FFFFFF',
+      color: "#FFFFFF",
       backgroundColor,
-      width:'350px',
-      fontSize:'1.2rem'
+      width: "300px",
+      fontSize: "0.9rem",
+      borderRadius: "32px",
     },
-    duration: 2000,
+    duration: 5000,
+    render: ({ t }) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <p>{message}</p>
+        <button
+          onClick={() => toast.dismiss(t.id)}
+          style={{ marginLeft: "auto" }}
+        >
+          Dismiss
+        </button>
+      </div>
+    ),
   });
 };
 
