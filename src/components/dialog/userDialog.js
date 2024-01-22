@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AquaDialog from "@/reusables/dialog";
 import AquaHeading from "@/reusables/heading";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,20 +7,44 @@ import AquaSignin from "../Auth/Signin";
 import LOGO from "../../assests/logo.png";
 import Image from "next/image";
 import AquaButton from "@/reusables/button";
+import { Spinner } from "react-bootstrap";
+import UserOperations from "@/Services/user";
 
 const AquaUserDialog = () => {
   const dispatch = useDispatch();
+  const { UserLogin, UserSignup } = UserOperations();
   const { authDialog, signupStatus } = useSelector((state) => ({ ...state }));
-  const handleSubmit = () => {
+  const [signupData, setSignupData] = useState({ email: "", password: "" });
+  const [signinData, setSigninData] = useState({ email: "", password: "" });
+
+  const handleSignupDataChange = (data) => {
+    setSignupData(data);
+  };
+
+  const handleSigninDataChanged = (data) => {
+    setSigninData(data);
+  };
+  const [status, setStatus] = useState({
+    loading: false,
+    success: false,
+    error: false,
+    successMessage: "",
+    errorMessage: "",
+  });
+  const handleSubmit = (data) => {
+    setStatus((status.loading = true));
+    console.log("status", status);
     if (signupStatus === true) {
-      console.log("signup-status", signupStatus);
+      console.log("signup-status", signupStatus, signupData);
     } else if (signupStatus === false) {
-      console.log("signup status", signupStatus);
+      console.log("signup status", signupStatus, signinData);
     }
   };
+
   return (
     <>
       <AquaDialog
+        className="aqua-auth-dialog"
         show={authDialog}
         handleClose={() =>
           dispatch({
@@ -30,12 +55,16 @@ const AquaUserDialog = () => {
         center={true}
         title={
           <AquaHeading center={true} level={3}>
-            {signupStatus ? "Signup" : "Singin"}
+            {signupStatus ? "Signup" : "Sign in"}
           </AquaHeading>
         }
         footerButtons={
           <AquaButton onClick={handleSubmit}>
-            {signupStatus ? "Signup" : "Signin"}
+            {status.loading ? (
+              <Spinner animation="border" variant="light" />
+            ) : (
+              <>{signupStatus ? "Signup" : "Sign in"}</>
+            )}
           </AquaButton>
         }
       >
@@ -43,7 +72,11 @@ const AquaUserDialog = () => {
           <Image src={LOGO} alt="Aquakart" height="80" width="80" />
         </div>
         <div className="padd-inner-content">
-          {signupStatus ? <AquaSignup /> : <AquaSignin />}
+          {signupStatus ? (
+            <AquaSignup onDataChanged={handleSignupDataChange} />
+          ) : (
+            <AquaSignin onDataChanged={handleSigninDataChanged} />
+          )}
           <span
             className="text-center text-primary"
             onClick={() => {

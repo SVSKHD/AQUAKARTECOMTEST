@@ -6,8 +6,9 @@ body {
   font-family: "Poppins" !important ;
   height: 100vh;
 }
-cus-nav {
-  opacity: 20%;
+.cus-nav {
+  border-bottom-right-radius: 30px !important;
+  border-bottom-left-radius: 30px;
 }
 :root {
   --custom-aq-button-bg-color: #053b50; /* Custom button background color */
@@ -56,45 +57,45 @@ cus-nav {
   padding-right: 30px; /* Space for the icon */
 }
 
-
 .input-group-text {
   background-color: transparent !important;
 }
 .nav-tabs .nav-link {
-    border-bottom-left-radius: var(--bs-nav-tabs-border-radius);
-    border-bottom-right-radius: var(--bs-nav-tabs-border-radius);
-    color: var(--bs-white);
-    transition: color .3s ease-in-out,background-color .3s ease-in-out,border-color .3s ease-in-out;
+  border-bottom-left-radius: var(--bs-nav-tabs-border-radius);
+  border-bottom-right-radius: var(--bs-nav-tabs-border-radius);
+  color: var(--bs-white);
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
 }
-.viewpass{
-    position: absolute;
-    top: 4px;
-    right: 11px;
-    font-size: 20px;
-    cursor: pointer;
+.viewpass {
+  position: absolute;
+  top: 4px;
+  right: 11px;
+  font-size: 20px;
+  cursor: pointer;
 }
 .input-container {
-    position: relative;
-    width: 300px; /* Adjust the width as needed */
-  }
+  position: relative;
+  width: 300px; /* Adjust the width as needed */
+}
 
-  /* Style for the input field */
-  .input-field {
-    width: 100%;
-    padding: 10px 30px 10px 10px; /* Adjust the padding for your desired spacing */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+/* Style for the input field */
+.input-field {
+  width: 100%;
+  padding: 10px 30px 10px 10px; /* Adjust the padding for your desired spacing */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-  /* Style for the icon */
-  .input-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #333;
-  }
+/* Style for the icon */
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #333;
+}
 .show-password-toggle {
   position: absolute;
   top: 50%;
@@ -103,25 +104,24 @@ cus-nav {
   cursor: pointer;
 }
 
-.aq-card{
-  width:20rem;
-  border-radius:1.5rem;
-  margin:1rem
+.aq-card {
+  width: 20rem;
+  border-radius: 1.5rem;
+  margin: 1rem;
 }
 
-.aq-card-image-vertical{
+.aq-card-image-vertical {
   border-radius: 1rem;
   margin: -10px;
 }
 
-
-.custom-image{
-  border-radius: 1rem!important;
+.custom-image {
+  border-radius: 1rem !important;
 }
-.rounded-25{
-  border-radius: 25px!important;
+.rounded-25 {
+  border-radius: 25px !important;
 }
-.gradient-1{
+.gradient-1 {
   background: linear-gradient(140deg, #7c0168, #870172, #230018);
 }
 /* about */
@@ -172,22 +172,31 @@ cus-nav {
   }
 }
 
-
-.dialog-customs{
-  border-radius: 2rem!important;
+.dialog-customs {
+  border-radius: 5rem !important;
 }
 
+.modal-content{
+  border-radius: 2.7rem;
+  margin: 5px;
+}
 
+.modal-border-radius .modal-content {
+  border-radius: 2rem; /* Adjust the value as needed */
+}
 
-.image-card-width{
+.aqua-auth-dialog {
+  border-radius: 2rem;
+}
+.image-card-width {
   width: 240px;
 }
 
-.card-carousel{
+.card-carousel {
   padding: 1rem;
 }
 
-.img-card-display{
+.img-card-display {
   background-color: #053b50;
   padding: 0.5rem;
   color: white;
@@ -196,13 +205,11 @@ cus-nav {
   opacity: 80%;
 }
 
-.aqua-accordian{
+.aqua-accordian {
   border-radius: 1rem;
 }
 
-
-.aqua-category-card{
+.aqua-category-card {
   border-style: none;
   border-radius: 1rem;
 }
-
