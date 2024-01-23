@@ -1,8 +1,7 @@
 import AquaLayout from "@/Layout/Layout";
-import AquaHeading from "@/reusables/heading";
-import AquaInput from "@/reusables/input";
 import AquaCategoryHolder from "./categoryHolder";
 import AquaSubCategoryHolder from "./subCategoryHolder";
+import AquaProductHolder from "./productHolder";
 
 const AquaHomeComponent = () => {
     const SeoData = {
@@ -14,7 +13,7 @@ const AquaHomeComponent = () => {
             <AquaLayout seo={SeoData}>
                 <AquaCategoryHolder />
                 <AquaSubCategoryHolder />
-                <AquaHeading level={1}>Hello Aquakart</AquaHeading>
+                <AquaProductHolder/>
             </AquaLayout>
         </>
     )

@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const UserLogin = (data) => axios.post("admin/crm/api/user/register", data);
+const baseUrl = process.env.apiKey;
+const UserLogin = (data) =>
+  axios.post(`${baseUrl}/admin/crm/api/user/signup`, data);
 
-const UserSignup = (data) => axios.post("/admin/crm/api/user/login", data);
+const UserSignup = (data) =>
+  axios.post(`${baseUrl}/admin/crm/api/user/login`, data);
 
 const ForgotPassword = () => {};
 
