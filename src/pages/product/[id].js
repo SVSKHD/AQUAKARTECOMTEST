@@ -1,8 +1,8 @@
-const DynamicProduct = () =>{
-return(
-    <>
-    <h1>Hello Product</h1>
-    </>
-)
+const AquaProduct = () => {
+    return (
+        <>
+            <h1>Hello Product</h1>
+        </>
+    )
 }
-export default DynamicProduct``
+export default AquaProduct
