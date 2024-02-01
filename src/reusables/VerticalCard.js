@@ -1,27 +1,22 @@
 import Image from "next/image"
 import AQ from "../testImages/shoe.webp"
-import AquaUnControlledCarousel from "./carousel"
+import AquaProductUnControlledCarousel from "./productCarousel"
+import {FaHeart , FaRegHeart} from "react-icons/fa"
+import AquaButton from "./button"
 
 const AquaVerticalCard = (props) => {
-    const {title , description , images } = props
+    const {title , description , images , favourite} = props
     return (
         <>
             <div class="card aq-card shadow-lg rounded-25">
                 <div className="shadow-lg aq-card-image-vertical gradient-1">
-                    {images ? (<><AquaUnControlledCarousel images={images}/></>) :<Image src={AQ} class="card-img-top custom-image" alt="..." />}
+                    {images ? (<><AquaProductUnControlledCarousel images={images} className="card-img-top custom-image" width="100" height="280" alt={`Aquakart Images | ${title}`} /></>) :<Image src={AQ} className="card-img-top custom-image" alt="..." />}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{title}</h5>
-                    <p class="card-text">{description}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <div className="row">
+                        <div className="col-10"><h3 class="card-title mt-3">{title}</h3></div>
+                        <div className="col-2"><AquaButton variant="normal"/><FaRegHeart size={23}/></div>
+                    </div>
                 </div>
             </div>
         </>

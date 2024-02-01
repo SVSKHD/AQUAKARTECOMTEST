@@ -3,7 +3,7 @@ import Image from "next/image"
 const AquaUnControlledCarousel = (images) => {
     return (
         <Carousel>
-            {images.map((r, i) => (
+            {images?.map((r, i) => (
                 <div key={i}>
                     <Carousel.Item>
                         <Image
