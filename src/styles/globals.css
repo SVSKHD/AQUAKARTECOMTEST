@@ -221,6 +221,35 @@ body {
   border-radius: 2rem!important;
 }
 
+.carousel-indicators{
+  margin-left: 16rem!important;
+}
+
 .carousel inner{
   border-radius: 2rem!important;
+}
+
+.align-margin{
+  margin-bottom: 15px;
+}
+
+.badge-product-align{
+  position: absolute;
+  border-bottom-left-radius: 0px!important;
+  border-top-left-radius: 0px!important;
+}
+
+.product-card-body{
+  padding: 10px;
+}
+
+.product-cart {
+  position: absolute;
+  right: 0; /* Added 'px' to define the unit */
+  top: 0; /* Added 'px' to define the unit */
+  z-index: 1;
+  border-radius: 50%; /* Corrected property name for border radius */
+  padding: 10px; /* Removed quotes *//* Corrected property name for background color */
+  border: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Removed the trailing slash */
 }
