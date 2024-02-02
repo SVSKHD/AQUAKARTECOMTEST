@@ -1,8 +1,4 @@
-const AquaForgotPassowrd = () =>{
-return(
-    <>
-    
-    </>
-)
-}
-export default AquaForgotPassowrd
+const AquaForgotPassowrd = () => {
+  return <></>;
+};
+export default AquaForgotPassowrd;

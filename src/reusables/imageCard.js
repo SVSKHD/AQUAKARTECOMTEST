@@ -14,8 +14,8 @@ const AquaImageCard = (props) => {
             alt={title}
             width="50"
             height="200"
-            layout="responsive" 
-            objectFit="cover" 
+            layout="responsive"
+            objectFit="cover"
             quality={75}
           />
           <div className="card-img-overlay">

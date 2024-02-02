@@ -1,10 +1,10 @@
-import AquaSubCategoryPageComponent from "@/pageComponents/subcategory/AquaSubCategory"
+import AquaSubCategoryPageComponent from "@/pageComponents/subcategory/AquaSubCategory";
 
 const AquaSubCategory = () => {
-    return (
-        <>
-            <AquaSubCategoryPageComponent />
-        </>
-    )
-}
-export default AquaSubCategory
+  return (
+    <>
+      <AquaSubCategoryPageComponent />
+    </>
+  );
+};
+export default AquaSubCategory;

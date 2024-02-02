@@ -1,10 +1,10 @@
 import AquaShopComponent from "@/pageComponents/shop";
 
-const ShopPage = () =>{
-    return(
-        <>
-        <AquaShopComponent/>
-        </>
-    )
-}
-export default ShopPage
+const ShopPage = () => {
+  return (
+    <>
+      <AquaShopComponent />
+    </>
+  );
+};
+export default ShopPage;

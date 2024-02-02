@@ -1,15 +1,15 @@
-import AquaCategoryPageComponent from "@/pageComponents/category/AquaCategory"
+import AquaCategoryPageComponent from "@/pageComponents/category/AquaCategory";
 
-const AquaCategory = ({params}) =>{
-return(
+const AquaCategory = ({ params }) => {
+  return (
     <>
-    <AquaCategoryPageComponent id={params.id}/>
+      <AquaCategoryPageComponent id={params.id} />
     </>
-)
-}
+  );
+};
 export function getServerSideProps(context) {
-    return {
-        props: { params: context.params },
-    };
+  return {
+    props: { params: context.params },
+  };
 }
-export default AquaCategory
+export default AquaCategory;

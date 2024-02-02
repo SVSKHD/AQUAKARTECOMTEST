@@ -1,10 +1,10 @@
-import AquaComparePageComponent from "@/pageComponents/compare"
+import AquaComparePageComponent from "@/pageComponents/compare";
 
 const AquaComparePage = () => {
-    return (
-        <>
-            <AquaComparePageComponent />
-        </>
-    )
-}
-export default AquaComparePage
+  return (
+    <>
+      <AquaComparePageComponent />
+    </>
+  );
+};
+export default AquaComparePage;

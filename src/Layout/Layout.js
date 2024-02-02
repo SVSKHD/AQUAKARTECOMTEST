@@ -6,17 +6,17 @@ import AquaUserDialog from "@/components/dialog/userDialog";
 import AquaSeo from "./seo/seo";
 
 const AquaLayout = (props) => {
-    return (
-        <>
-            <AquaNavBar />
-            <AquaCartDrawer />
-            <AquaUserDialog />
-            <AquaPageWrapper>
-                <AquaSeo seo={props.seo}/>
-                {props.children}
-            </AquaPageWrapper>
-            <AquaFooter />
-        </>
-    )
-}
-export default AquaLayout
+  return (
+    <>
+      <AquaNavBar />
+      <AquaCartDrawer />
+      <AquaUserDialog />
+      <AquaPageWrapper>
+        <AquaSeo seo={props.seo} />
+        {props.children}
+      </AquaPageWrapper>
+      <AquaFooter />
+    </>
+  );
+};
+export default AquaLayout;

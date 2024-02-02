@@ -1,11 +1,10 @@
-import AquaAboutPageComponent from "@/pageComponents/About"
-
+import AquaAboutPageComponent from "@/pageComponents/About";
 
 const AboutPage = () => {
-    return (
-        <>
-            <AquaAboutPageComponent />
-        </>
-    )
-}
-export default AboutPage
+  return (
+    <>
+      <AquaAboutPageComponent />
+    </>
+  );
+};
+export default AboutPage;

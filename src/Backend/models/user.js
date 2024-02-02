@@ -1,75 +1,82 @@
 import mongoose from "mongoose";
 import validator from "validator";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 // Define the Address schema
 const addressSchema = new mongoose.Schema({
-    street: String,
-    city: String,
-    state: String,
-    postalCode: String,
+  street: String,
+  city: String,
+  state: String,
+  postalCode: String,
 });
 
 // Define the User schema
 const aquaUserSchema = new mongoose.Schema({
-    id: { type: String },
-    username: String, // You can add other user-related fields as needed
-    email: {
-        type: String,
-        required: [true, "Please provide an email"],
-        validate: [validator.isEmail, "Please enter email in correct format"],
-        unique: true,
+  id: { type: String },
+  username: String, // You can add other user-related fields as needed
+  email: {
+    type: String,
+    required: [true, "Please provide an email"],
+    validate: [validator.isEmail, "Please enter email in correct format"],
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Please provide a password"],
+    minlength: [6, "password should be atleast 6 char"],
+    select: false,
+  },
+  role: {
+    type: String,
+    default: "user",
+  },
+  photo: {
+    id: {
+      type: String,
     },
-    password: {
-        type: String,
-        required: [true, "Please provide a password"],
-        minlength: [6, "password should be atleast 6 char"],
-        select: false,
+    secure_url: {
+      type: String,
     },
-    role: {
-        type: String,
-        default: "user",
+  },
+  phoneNo: String,
+  // You can store the photo URL or file path
+  gstDetails: {
+    gstEmail: { type: String },
+    gstNo: { type: String },
+    gstPhone: { type: Number },
+    gstAddres: { type: String },
+  },
+  cart: [
+    {
+      // Define the structure of items in the cart
+      productId: mongoose.Schema.Types.ObjectId, // Reference to the product
+      quantity: Number,
     },
-    photo: {
-        id: {
-            type: String,
-        },
-        secure_url: {
-            type: String,
-        },
+  ],
+  orders: [
+    {
+      // Define the structure of user orders
+      orderId: mongoose.Schema.Types.ObjectId, // Reference to the order
+      orderDate: Date,
     },
-    phoneNo: String,
-    // You can store the photo URL or file path
-    gstDetails: {
-        gstEmail: { type: String },
-        gstNo: { type: String },
-        gstPhone: { type: Number },
-        gstAddres: { type: String }
+  ],
+  wishes: [
+    {
+      // Define the structure of user wishes
+      productId: mongoose.Schema.Types.ObjectId, // Reference to the product
+      addedDate: Date,
     },
-    cart: [{
-        // Define the structure of items in the cart
-        productId: mongoose.Schema.Types.ObjectId, // Reference to the product
-        quantity: Number,
-    }],
-    orders: [{
-        // Define the structure of user orders
-        orderId: mongoose.Schema.Types.ObjectId, // Reference to the order
-        orderDate: Date,
-    }],
-    wishes: [{
-        // Define the structure of user wishes
-        productId: mongoose.Schema.Types.ObjectId, // Reference to the product
-        addedDate: Date,
-    }],
-    addresses: [addressSchema], // Store multiple addresses as an array of address objects
+  ],
+  addresses: [addressSchema], // Store multiple addresses as an array of address objects
 });
 
 aquaUserSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
-        return next();
-    }
-    this.password = await bcrypt.hash(this.password, 10);
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
-const AquaUser = mongoose.models.AquaUser || mongoose.model('AquaUser', aquaUserSchema);
+const AquaUser =
+  mongoose.models.AquaUser || mongoose.model("AquaUser", aquaUserSchema);
 
-export default AquaUser
+export default AquaUser;

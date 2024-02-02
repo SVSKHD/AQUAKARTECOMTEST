@@ -2,7 +2,7 @@ import AquaProductOperations from "@/Services/product";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaCardMultiItemCarousel from "@/reusables/cardCarousel";
 import AquaToast from "@/reusables/js/toast";
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback } from "react";
 
 const AquaProductHolder = () => {
   const [products, setProducts] = useState([]);
@@ -32,7 +32,12 @@ const AquaProductHolder = () => {
             <AquaCardMultiItemCarousel>
               {products.map((r, i) => (
                 <>
-                <AquaVerticalCard title={r.title} images={r.photos} price={r.price}/>
+                  <AquaVerticalCard
+                    title={r.title}
+                    images={r.photos}
+                    price={r.price}
+                    description={r.description}
+                  />
                 </>
               ))}
             </AquaCardMultiItemCarousel>
