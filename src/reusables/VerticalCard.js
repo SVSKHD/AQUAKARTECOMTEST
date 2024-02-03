@@ -2,23 +2,27 @@ import Image from "next/image";
 import AQ from "../testImages/shoe.webp";
 import { Badge, ButtonGroup } from "react-bootstrap";
 import AquaProductUnControlledCarousel from "./productCarousel";
-import { FaHeart, FaRegHeart, FaCartPlus , FaCartArrowDown, FaShare } from "react-icons/fa";
+import {
+  FaHeart,
+  FaRegHeart,
+  FaCartPlus,
+  FaCartArrowDown,
+  FaShare,
+} from "react-icons/fa";
 import AquaButton from "./button";
 import { useState } from "react";
 import AquaDialog from "./dialog";
 import { useRouter } from "next/router";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const AquaVerticalCard = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { cartCount } = useSelector((state) => ({ ...state }));
   const [quickView, setQuickView] = useState(false);
-  const [cartAdd , setCartAdd] = useState(false)
+  const [cartAdd, setCartAdd] = useState(false);
   const router = useRouter();
 
-  const addProductToCart = () =>{
-
-  }
+  const addProductToCart = () => {};
 
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
@@ -66,7 +70,11 @@ const AquaVerticalCard = (props) => {
               <FaShare size={25} />
             </AquaButton>
             <AquaButton variant="normal">
-              {cartAdd ? <FaCartArrowDown className="text-success" size={25}/> : <FaCartPlus className="text-secondary" size={25} />}
+              {cartAdd ? (
+                <FaCartArrowDown className="text-success" size={25} />
+              ) : (
+                <FaCartPlus className="text-secondary" size={25} />
+              )}
             </AquaButton>
             <AquaButton variant="normal">
               <FaRegHeart size={25} className="text-danger" />
@@ -107,20 +115,29 @@ const AquaVerticalCard = (props) => {
                 </h4>
               </div>
             </div>
-            <div className="card-text text-muted">{description?.substring(0,100)}...</div>
+            <div className="card-text text-muted">
+              {description?.substring(0, 100)}...
+            </div>
             <div className="text-center card-body">
-          <ButtonGroup size="sm">
-            <AquaButton onClick={() => redirectProduct(title)} variant="normal">
-              <FaShare size={25} />
-            </AquaButton>
-            <AquaButton variant="normal">
-              {cartAdd ? <FaCartArrowDown className="text-success" size={25}/> : <FaCartPlus className="text-secondary" size={25} />}
-            </AquaButton>
-            <AquaButton variant="normal">
-              <FaRegHeart size={25} className="text-danger" />
-            </AquaButton>
-          </ButtonGroup>
-        </div>
+              <ButtonGroup size="sm">
+                <AquaButton
+                  onClick={() => redirectProduct(title)}
+                  variant="normal"
+                >
+                  <FaShare size={25} />
+                </AquaButton>
+                <AquaButton variant="normal">
+                  {cartAdd ? (
+                    <FaCartArrowDown className="text-success" size={25} />
+                  ) : (
+                    <FaCartPlus className="text-secondary" size={25} />
+                  )}
+                </AquaButton>
+                <AquaButton variant="normal">
+                  <FaRegHeart size={25} className="text-danger" />
+                </AquaButton>
+              </ButtonGroup>
+            </div>
           </div>
         </div>
       </AquaDialog>
