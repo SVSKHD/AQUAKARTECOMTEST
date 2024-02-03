@@ -21,7 +21,7 @@ const AquaNavBar = () => {
           sticky="top"
           expand={"md"}
           variant="light"
-          className="shadow-lg bg-transparent cus-nav pr-3 pl-3"
+          className="shadow-lg bg-transparent cus-nav pr-3 pl-3 mb-3"
         >
           <Container>
             <Navbar.Brand href="/">

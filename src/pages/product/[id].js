@@ -1,7 +1,9 @@
+import DynamicProduct from "@/pageComponents/product/dynamicProduct";
+
 const AquaProduct = () => {
   return (
     <>
-      <h1>Hello Product</h1>
+      <DynamicProduct/>
     </>
   );
 };
