@@ -6,12 +6,15 @@ import AquaUserDialog from "@/components/dialog/userDialog";
 import AquaSeo from "./seo/seo";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const AquaLayout = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
+  const router = useRouter();
+  const currentPath = router.pathname;
   useEffect(() => {
-    if (!user) {
+    if (!user && currentPath === "/") {
       setTimeout(
         () =>
           dispatch({
@@ -21,7 +24,7 @@ const AquaLayout = (props) => {
         3000,
       );
     }
-  }, [user, dispatch]);
+  }, [user, dispatch, currentPath]);
   return (
     <>
       <AquaNavBar />

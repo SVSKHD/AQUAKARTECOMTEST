@@ -8,6 +8,7 @@ import {
   FaCartPlus,
   FaCartArrowDown,
   FaShare,
+  FaRegShareSquare,
 } from "react-icons/fa";
 import AquaButton from "./button";
 import { useState } from "react";
@@ -30,11 +31,7 @@ const AquaVerticalCard = (props) => {
   const { title, description, images, favourite, price } = props;
   return (
     <>
-      <div
-        onMouseEnter={() => setTimeout(() => setQuickView(true), 2000)}
-        onMouseca
-        class="card aq-card shadow-lg rounded-25"
-      >
+      <div class="card aq-card shadow-lg rounded-25">
         <div className="shadow-lg aq-card-image-vertical gradient-1">
           {images ? (
             <>
@@ -77,7 +74,14 @@ const AquaVerticalCard = (props) => {
               )}
             </AquaButton>
             <AquaButton variant="normal">
-              <FaRegHeart size={25} className="text-danger" />
+              {favourite ? (
+                <FaHeart size={25} className="text-danger" />
+              ) : (
+                <FaRegHeart size={25} className="text-danger" />
+              )}
+            </AquaButton>
+            <AquaButton onClick={() => setQuickView(true)} variant="normal">
+              <FaRegShareSquare size={25} />
             </AquaButton>
           </ButtonGroup>
         </div>
@@ -134,7 +138,11 @@ const AquaVerticalCard = (props) => {
                   )}
                 </AquaButton>
                 <AquaButton variant="normal">
-                  <FaRegHeart size={25} className="text-danger" />
+                  {favourite ? (
+                    <FaHeart size={25} className="text-danger" />
+                  ) : (
+                    <FaRegHeart size={25} className="text-danger" />
+                  )}
                 </AquaButton>
               </ButtonGroup>
             </div>
