@@ -25,7 +25,7 @@ const DynamicProduct = () => {
   const SeoData = {
     title: `Aquakart | Product - ${product?.title}`,
     description:`${product?.description}`,
-    image:`${product.photos[0]?.secure_url}`,
+    image:`${product?.photos? product.photos[0].secure_url : LOGO}`,
     keywords:`Aquakart Products ${product?.keywords}`
   };
   return (
