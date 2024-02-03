@@ -18,12 +18,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 const AquaVerticalCard = (props) => {
   const dispatch = useDispatch();
+  const {data} = props
   const { cartCount } = useSelector((state) => ({ ...state }));
   const [quickView, setQuickView] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
   const router = useRouter();
 
-  const addProductToCart = () => {};
+  const addProductToCart = (data) => {
+    console.log("product", data)
+  };
 
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
@@ -63,10 +66,10 @@ const AquaVerticalCard = (props) => {
         </div>
         <div className="text-center card-body">
           <ButtonGroup size="sm">
-            <AquaButton onClick={() => redirectProduct(title)} variant="normal">
+            <AquaButton onClick={() => redirectProduct(data._id)} variant="normal">
               <FaShare size={25} />
             </AquaButton>
-            <AquaButton variant="normal">
+            <AquaButton onClick={()=>addProductToCart(data)} variant="normal">
               {cartAdd ? (
                 <FaCartArrowDown className="text-success" size={25} />
               ) : (
@@ -125,12 +128,12 @@ const AquaVerticalCard = (props) => {
             <div className="text-center card-body">
               <ButtonGroup size="sm">
                 <AquaButton
-                  onClick={() => redirectProduct(title)}
+                  onClick={() => redirectProduct(data._id)}
                   variant="normal"
                 >
                   <FaShare size={25} />
                 </AquaButton>
-                <AquaButton variant="normal">
+                <AquaButton  variant="normal">
                   {cartAdd ? (
                     <FaCartArrowDown className="text-success" size={25} />
                   ) : (

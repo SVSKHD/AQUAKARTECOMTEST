@@ -6,7 +6,7 @@ const getProducts = async () =>
   await axios.get(`${baseUrl}/admin/crm/api/product/get`);
 
 const getProductById = async (query) =>
-  await axios.get(`${baseUrl}/admin/crm/api/category/get?id=${query}`);
+  await axios.get(`${baseUrl}/admin/crm/api/product/get?id=${query}`);
 
 const AquaProductOperations = () => {
   return {

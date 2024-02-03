@@ -37,6 +37,7 @@ const AquaProductHolder = () => {
                     images={r.photos}
                     price={r.price}
                     description={r.description}
+                    data={r}
                   />
                 </>
               ))}
