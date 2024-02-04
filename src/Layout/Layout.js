@@ -19,23 +19,20 @@ const AquaLayout = (props) => {
 
   // Check for stored state in localStorage
   useEffect(() => {
-    const shownDialog = localStorage.getItem('hasShownDialog') === 'true';
+    const shownDialog = localStorage.getItem("hasShownDialog") === "true";
     setHasShownDialog(shownDialog);
   }, []);
 
   useEffect(() => {
     if (!user && currentPath === "/" && !hasShownDialog) {
-      setTimeout(
-        () => {
-          dispatch({
-            type: "SET_AUTH_DIALOG_VISIBLE",
-            payload: true,
-          });
-          setHasShownDialog(true); // Update state to reflect the dialog has been shown
-          localStorage.setItem('hasShownDialog', 'true'); // Store the state in localStorage
-        },
-        10000,
-      );
+      setTimeout(() => {
+        dispatch({
+          type: "SET_AUTH_DIALOG_VISIBLE",
+          payload: true,
+        });
+        setHasShownDialog(true); // Update state to reflect the dialog has been shown
+        localStorage.setItem("hasShownDialog", "true"); // Store the state in localStorage
+      }, 10000);
     }
   }, [user, dispatch, currentPath, hasShownDialog]);
 

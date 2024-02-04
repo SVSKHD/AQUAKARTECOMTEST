@@ -21,16 +21,16 @@ export default function App({ Component, pageProps }) {
 
     // Google Analytics
     const handleRouteChange = (url) => {
-      window.gtag('config', 'G-FS41RRVRD4', {
+      window.gtag("config", "G-FS41RRVRD4", {
         page_path: url,
       });
     };
 
     // Subscribe to route changes
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on("routeChangeComplete", handleRouteChange);
     // Cleanup subscription on unmount
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
 

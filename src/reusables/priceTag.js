@@ -1,8 +1,4 @@
-const AquaPriceTrag = () =>{
-return(
-    <>
-    
-    </>
-)
-}
-export default AquaPriceTrag
+const AquaPriceTrag = () => {
+  return <></>;
+};
+export default AquaPriceTrag;
