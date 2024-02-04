@@ -13,18 +13,32 @@ const AquaLayout = (props) => {
   const { user } = useSelector((state) => ({ ...state }));
   const router = useRouter();
   const currentPath = router.pathname;
+
+  // Introduce a new state to track if the dialog has been shown
+  const [hasShownDialog, setHasShownDialog] = useState(false);
+
+  // Check for stored state in localStorage
   useEffect(() => {
-    if (!user && currentPath === "/") {
+    const shownDialog = localStorage.getItem('hasShownDialog') === 'true';
+    setHasShownDialog(shownDialog);
+  }, []);
+
+  useEffect(() => {
+    if (!user && currentPath === "/" && !hasShownDialog) {
       setTimeout(
-        () =>
+        () => {
           dispatch({
             type: "SET_AUTH_DIALOG_VISIBLE",
             payload: true,
-          }),
-        3000,
+          });
+          setHasShownDialog(true); // Update state to reflect the dialog has been shown
+          localStorage.setItem('hasShownDialog', 'true'); // Store the state in localStorage
+        },
+        10000,
       );
     }
-  }, [user, dispatch, currentPath]);
+  }, [user, dispatch, currentPath, hasShownDialog]);
+
   return (
     <>
       <AquaNavBar />
@@ -38,4 +52,5 @@ const AquaLayout = (props) => {
     </>
   );
 };
+
 export default AquaLayout;

@@ -254,3 +254,8 @@ body {
   border: none;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Removed the trailing slash */
 }
+
+
+.product-price-align{
+  font-size: 3rem;
+}
