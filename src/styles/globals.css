@@ -15,9 +15,9 @@ body {
   --custom-aq-button-text-color: #f8f0e5; /* Custom button text color */
 }
 .custom-button {
-  background-color: var(--custom-aq-button-bg-color);
-  border-color: var(--custom-aq-button-border-color);
-  color: var(--custom-aq-button-text-color);
+  background-color: var(--custom-aq-button-bg-color)!important;
+  border-color: var(--custom-aq-button-border-color)!important;
+  color: var(--custom-aq-button-text-color)!important;
 }
 
 .custom-button:hover {
@@ -273,5 +273,5 @@ body {
 }
 
 .width-adjust {
-  width: 150px;
+  width: 150px;!important
 }
