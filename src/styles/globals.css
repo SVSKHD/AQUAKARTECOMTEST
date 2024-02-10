@@ -258,3 +258,20 @@ body {
 .product-price-align {
   font-size: 3rem;
 }
+
+.dynamic-product-price-brand {
+  display: flex;
+}
+
+.dynamic-product-brand {
+  margin: 10px;
+  font-size: 2.5rem;
+}
+
+.dynamic-product-cart-fav {
+  display: flex;
+}
+
+.width-adjust {
+  width: 150px;
+}
