@@ -31,15 +31,57 @@ const AquaUserDialog = () => {
     successMessage: "",
     errorMessage: "",
   });
-  const handleSubmit = (data) => {
-    setStatus((status.loading = true));
-    console.log("status", status);
-    if (signupStatus === true) {
-      console.log("signup-status", signupStatus, signupData);
-    } else if (signupStatus === false) {
-      console.log("signup status", signupStatus, signinData);
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setStatus((prevStatus) => ({ ...prevStatus, loading: true })); // Correctly update loading state
+    if (signupStatus===true) {
+      // If it's in signup mode
+      console.log("Signup Data:", signupData , signupStatus);
+      UserSignup(signupData) // Use signupData for signup
+        .then((res) => {
+          console.log("Signup success:", res);
+          setStatus((prevStatus) => ({
+            ...prevStatus,
+            loading: false,
+            success: true,
+            successMessage: "Signup successful!",
+          }));
+        })
+        .catch((err) => {
+          console.log("Signup error:", err);
+          setStatus((prevStatus) => ({
+            ...prevStatus,
+            loading: false,
+            error: true,
+            errorMessage: "Signup failed!",
+          }));
+        });
+    } else {
+      // If it's in signin mode
+      console.log("Signin Data:", signinData , signupStatus);
+      UserLogin(signinData) // Use signinData for signin
+        .then((res) => {
+          console.log("Signin success:", res);
+          setStatus((prevStatus) => ({
+            ...prevStatus,
+            loading: false,
+            success: true,
+            successMessage: "Signin successful!",
+          }));
+        })
+        .catch((err) => {
+          console.log("Signin error:", err);
+          setStatus((prevStatus) => ({
+            ...prevStatus,
+            loading: false,
+            error: true,
+            errorMessage: "Signin failed!",
+          }));
+        });
     }
   };
+  
+  console.log("signup", signupStatus)
 
   return (
     <>
@@ -55,7 +97,7 @@ const AquaUserDialog = () => {
         center={true}
         title={
           <AquaHeading center={true} level={3}>
-            {signupStatus ? "Signup" : "Sign in"}
+            {signupStatus ? "Signup" : "Signin"}
           </AquaHeading>
         }
         footerButtons={
@@ -63,7 +105,7 @@ const AquaUserDialog = () => {
             {status.loading ? (
               <Spinner animation="border" variant="light" />
             ) : (
-              <>{signupStatus ? "Signup" : "Sign in"}</>
+              <>{signupStatus ? "Signup" : "Signin"}</>
             )}
           </AquaButton>
         }

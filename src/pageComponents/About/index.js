@@ -9,7 +9,7 @@ const AquaAboutPageComponent = () => {
   return (
     <>
       <AquaLayout seo={SeoData}>
-        <div className="card-body aqua-crystal-color">
+        <div className="card-body aqua-crystal-color container">
           <div className="row">
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
               <div className="about-large-title" />

@@ -12,8 +12,7 @@ const AquaLayout = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
   const router = useRouter();
-  const currentPath = router.pathname;
-
+  
   // Introduce a new state to track if the dialog has been shown
   const [hasShownDialog, setHasShownDialog] = useState(false);
 
@@ -24,7 +23,10 @@ const AquaLayout = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!user && currentPath === "/" && !hasShownDialog) {
+    // Ensuring the dialog is shown only on the root path
+    const isRootPath = router.pathname === "/";
+
+    if (!user && isRootPath && !hasShownDialog) {
       setTimeout(() => {
         dispatch({
           type: "SET_AUTH_DIALOG_VISIBLE",
@@ -32,9 +34,9 @@ const AquaLayout = (props) => {
         });
         setHasShownDialog(true); // Update state to reflect the dialog has been shown
         localStorage.setItem("hasShownDialog", "true"); // Store the state in localStorage
-      }, 10000);
+      }, 10000); // Adjust the timeout as needed
     }
-  }, [user, dispatch, currentPath, hasShownDialog]);
+  }, [user, dispatch, router.pathname, hasShownDialog]);
 
   return (
     <>

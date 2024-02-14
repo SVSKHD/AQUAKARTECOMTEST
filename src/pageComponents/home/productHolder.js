@@ -10,7 +10,6 @@ const AquaProductHolder = () => {
   const LoadProducts = useCallback(() => {
     getProducts()
       .then((res) => {
-        console.log("prod", res.data);
         setProducts(res.data);
       })
       .catch(() => {
@@ -32,6 +31,7 @@ const AquaProductHolder = () => {
             <AquaCardMultiItemCarousel>
               {products.map((r, i) => (
                 <>
+                <div key={i}>
                   <AquaVerticalCard
                     title={r.title}
                     images={r.photos}
@@ -39,6 +39,7 @@ const AquaProductHolder = () => {
                     description={r.description}
                     data={r}
                   />
+                  </div>
                 </>
               ))}
             </AquaCardMultiItemCarousel>
