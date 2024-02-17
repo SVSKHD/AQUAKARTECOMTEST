@@ -11,7 +11,7 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import AquaButton from "./button";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import AquaDialog from "./dialog";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,29 +20,59 @@ import AquaToast from "./js/toast";
 const AquaVerticalCard = (props) => {
   const dispatch = useDispatch();
   const { data } = props;
-  const { cartCount } = useSelector((state) => ({ ...state }));
+  const { cartCount , favCount} = useSelector((state) => ({ ...state }));
   const [quickView, setQuickView] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
+  const [favAdd , setFavAdd] = useState(false)
   const router = useRouter();
 
+  useEffect(() => {
+    const isProductInCart = cartCount.some(item => item._id === data._id);
+    setCartAdd(isProductInCart);
+  }, [cartCount, data._id]);
+
   const addProductToCart = (productData) => {
-    // Check if product is already in the cart
     const isProductInCart = cartCount.some(item => item._id === productData._id);
   
     if (!isProductInCart) {
-      // Dispatch the action to add the product to the Redux store
       dispatch({
         type: "ADD_TO_CART",
         payload: productData,
       });
-  
-      // Optionally, show a message or update the UI
-      setCartAdd(true);
+      AquaToast("SuccessFully Added to Cart", "success")
+      setCartAdd(true)
     } else {
-      // Optionally, handle the case where the product is already in the cart
-      AquaToast("Product is already in the cart", "info");
+      // Product is already in the cart, remove it
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        payload: productData._id,
+      });
+      AquaToast("Successfully removed from cart", "info");
+      setCartAdd(false);
     }
   };
+
+  const addProductToFav = (productData) => {
+    const isProductInFav = favCount.some(item => item._id === productData._id);
+  
+    if (!isProductInFav) {
+      dispatch({
+        type: "ADD_TO_FAV",
+        payload: productData,
+      });
+      AquaToast("Successfully added to Favorites", "success");
+      setFavAdd(true); // Update the state to reflect the addition
+    } else {
+      dispatch({
+        type: "REMOVE_FROM_FAV",
+        payload: productData._id,
+      });
+      AquaToast("Successfully removed from Favorites", "info");
+      setFavAdd(false); // Update the state to reflect the removal
+    }
+  };
+  
+  
 
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
@@ -95,8 +125,8 @@ const AquaVerticalCard = (props) => {
                 <FaCartPlus className="text-secondary" size={25} />
               )}
             </AquaButton>
-            <AquaButton variant="normal">
-              {favourite ? (
+            <AquaButton onClick={()=>addProductToFav(data)} variant="normal">
+              {favAdd ? (
                 <FaHeart size={25} className="text-danger" />
               ) : (
                 <FaRegHeart size={25} className="text-danger" />

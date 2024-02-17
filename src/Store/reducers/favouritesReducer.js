@@ -6,21 +6,21 @@ if (typeof window !== "undefined") {
 }
 
 // Reducer function for cart operations
-export const cartReducer = (state = initialState, action) => {
+export const favReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_CART":
+    case "ADD_TO_FAV":
       const itemIndex = state.findIndex(item => item._id === action.payload._id);
       if (itemIndex >= 0) {
         return state; // Item already exists, no addition
       } else {
         const newState = [...state, action.payload];
-        localStorage.setItem("cart", JSON.stringify(newState));
+        localStorage.setItem("fav", JSON.stringify(newState));
         return newState;
       }
 
-    case "REMOVE_FROM_CART":
+    case "REMOVE_FROM_FAV":
       const newState = state.filter(item => item._id !== action.payload);
-      localStorage.setItem("cart", JSON.stringify(newState));
+      localStorage.setItem("fav", JSON.stringify(newState));
       return newState;
 
     default:

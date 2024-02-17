@@ -7,12 +7,14 @@ import { cartDrawerReducer } from "./reducers/cartDrawerReducer";
 import { userReducer } from "./reducers/userDataReducer";
 import { cartReducer } from "./reducers/cartCountReducer";
 import { CODReducer } from "./reducers/CODreducer";
+import {favReducer} from "./reducers/favouritesReducer"
 
 const rootReducer = combineReducers({
   authDialog: authDialogReducer, // Combine your reducers here
   signupStatus: authStatusReducer,
   cartDrawer: cartDrawerReducer,
   cartCount: cartReducer,
+  favCount:favReducer,
   COD: CODReducer,
   user: userReducer,
 });
