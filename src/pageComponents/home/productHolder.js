@@ -31,14 +31,14 @@ const AquaProductHolder = () => {
             <AquaCardMultiItemCarousel>
               {products.map((r, i) => (
                 <>
-                <div key={i}>
-                  <AquaVerticalCard
-                    title={r.title}
-                    images={r.photos}
-                    price={r.price}
-                    description={r.description}
-                    data={r}
-                  />
+                  <div key={i}>
+                    <AquaVerticalCard
+                      title={r.title}
+                      images={r.photos}
+                      price={r.price}
+                      description={r.description}
+                      data={r}
+                    />
                   </div>
                 </>
               ))}

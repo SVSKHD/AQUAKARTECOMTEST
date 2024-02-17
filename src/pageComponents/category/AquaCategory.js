@@ -17,9 +17,10 @@ const AquaSubCategoryPageComponent = () => {
     title: `Aquakart | ${category.title}`,
     description: category.description,
     keywords: category.keywords,
-    image: category.photos && category.photos.length > 0
-      ? category.photos[0].secure_url
-      : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
+    image:
+      category.photos && category.photos.length > 0
+        ? category.photos[0].secure_url
+        : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
   };
 
   const titleData = router.query.id;
@@ -60,20 +61,22 @@ const AquaSubCategoryPageComponent = () => {
             <AquaCommonCategoryCard data={category} />
           </div>
           <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-            <h1 className="text-muted">{category.title} category has {products.length} product</h1>
-            <hr/>
+            <h1 className="text-muted">
+              {category.title} category has {products.length} product
+            </h1>
+            <hr />
             <div className="row">
-            {products.map((product, index) => (
-              <div className="col" key={index}>
-                <AquaVerticalCard
-                  title={product.title}
-                  images={product.photos}
-                  price={product.price}
-                  description={product.description}
-                  data={product}
-                />
-              </div>
-            ))}
+              {products.map((product, index) => (
+                <div className="col" key={index}>
+                  <AquaVerticalCard
+                    title={product.title}
+                    images={product.photos}
+                    price={product.price}
+                    description={product.description}
+                    data={product}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

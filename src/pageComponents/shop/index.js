@@ -7,28 +7,28 @@ import { useCallback, useEffect, useState } from "react";
 import AquaToast from "@/reusables/js/toast";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 
-
 const AquaShopComponent = () => {
   const SeoData = {
     title: "Aquakart | Shop",
   };
-  const {getProducts} = AquaProductOperations()
-  const [products , setProducts] = useState([])
-  const [productLoading , setProductLoading] = useState(false)
-  const LoadProducts = useCallback(() =>{
-    setProductLoading(true)
-    getProducts().then((res)=>{
-     setProducts(res.data)
-     setProductLoading(false)
-    })
-    .catch(()=>{
-      AquaToast("Please try again", "error")
-      setProductLoading(false)
-    })
-  },[getProducts , setProducts])
-  useEffect(()=>{
-   LoadProducts()
-  },[LoadProducts])
+  const { getProducts } = AquaProductOperations();
+  const [products, setProducts] = useState([]);
+  const [productLoading, setProductLoading] = useState(false);
+  const LoadProducts = useCallback(() => {
+    setProductLoading(true);
+    getProducts()
+      .then((res) => {
+        setProducts(res.data);
+        setProductLoading(false);
+      })
+      .catch(() => {
+        AquaToast("Please try again", "error");
+        setProductLoading(false);
+      });
+  }, [getProducts, setProducts]);
+  useEffect(() => {
+    LoadProducts();
+  }, [LoadProducts]);
 
   return (
     <AquaLayout seo={SeoData}>
@@ -45,17 +45,20 @@ const AquaShopComponent = () => {
           <AquaCard>
             <AquaHeading level={1}>
               <div className="row">
-              {products.map((r,i)=>(
-                <div key={i} className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
-                <AquaVerticalCard
-                    title={r.title}
-                    images={r.photos}
-                    price={r.price}
-                    description={r.description}
-                    data={r}
-                  />
-                </div>
-              ))}
+                {products.map((r, i) => (
+                  <div
+                    key={i}
+                    className="col-md-4 col-lg-4 col-xs-12 col-sm-12"
+                  >
+                    <AquaVerticalCard
+                      title={r.title}
+                      images={r.photos}
+                      price={r.price}
+                      description={r.description}
+                      data={r}
+                    />
+                  </div>
+                ))}
               </div>
             </AquaHeading>
           </AquaCard>

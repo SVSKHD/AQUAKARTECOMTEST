@@ -11,7 +11,7 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import AquaButton from "./button";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import AquaDialog from "./dialog";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,27 +20,29 @@ import AquaToast from "./js/toast";
 const AquaVerticalCard = (props) => {
   const dispatch = useDispatch();
   const { data } = props;
-  const { cartCount , favCount} = useSelector((state) => ({ ...state }));
+  const { cartCount, favCount } = useSelector((state) => ({ ...state }));
   const [quickView, setQuickView] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
-  const [favAdd , setFavAdd] = useState(false)
+  const [favAdd, setFavAdd] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const isProductInCart = cartCount.some(item => item._id === data._id);
+    const isProductInCart = cartCount.some((item) => item._id === data._id);
     setCartAdd(isProductInCart);
   }, [cartCount, data._id]);
 
   const addProductToCart = (productData) => {
-    const isProductInCart = cartCount.some(item => item._id === productData._id);
-  
+    const isProductInCart = cartCount.some(
+      (item) => item._id === productData._id,
+    );
+
     if (!isProductInCart) {
       dispatch({
         type: "ADD_TO_CART",
         payload: productData,
       });
-      AquaToast("SuccessFully Added to Cart", "success")
-      setCartAdd(true)
+      AquaToast("SuccessFully Added to Cart", "success");
+      setCartAdd(true);
     } else {
       // Product is already in the cart, remove it
       dispatch({
@@ -53,8 +55,10 @@ const AquaVerticalCard = (props) => {
   };
 
   const addProductToFav = (productData) => {
-    const isProductInFav = favCount.some(item => item._id === productData._id);
-  
+    const isProductInFav = favCount.some(
+      (item) => item._id === productData._id,
+    );
+
     if (!isProductInFav) {
       dispatch({
         type: "ADD_TO_FAV",
@@ -71,8 +75,6 @@ const AquaVerticalCard = (props) => {
       setFavAdd(false); // Update the state to reflect the removal
     }
   };
-  
-  
 
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
@@ -125,7 +127,7 @@ const AquaVerticalCard = (props) => {
                 <FaCartPlus className="text-secondary" size={25} />
               )}
             </AquaButton>
-            <AquaButton onClick={()=>addProductToFav(data)} variant="normal">
+            <AquaButton onClick={() => addProductToFav(data)} variant="normal">
               {favAdd ? (
                 <FaHeart size={25} className="text-danger" />
               ) : (

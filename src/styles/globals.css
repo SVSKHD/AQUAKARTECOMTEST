@@ -15,7 +15,7 @@ body {
   --custom-aq-button-text-color: #f8f0e5; /* Custom button text color */
 }
 .offcanvas-bottom {
-  height: 50%!important; /* Set to your desired height */
+  height: 50% !important; /* Set to your desired height */
 }
 .custom-button {
   background-color: var(--custom-aq-button-bg-color) !important;
@@ -279,6 +279,6 @@ body {
   width: 150px !important;
 }
 
-.cart-card-width{
-  width:400px
+.cart-card-width {
+  width: 400px;
 }

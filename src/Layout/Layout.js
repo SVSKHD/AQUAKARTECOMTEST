@@ -12,7 +12,7 @@ const AquaLayout = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
   const router = useRouter();
-  
+
   // Introduce a new state to track if the dialog has been shown
   const [hasShownDialog, setHasShownDialog] = useState(false);
 

@@ -32,11 +32,11 @@ const AquaUserDialog = () => {
     errorMessage: "",
   });
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, loading: true })); // Correctly update loading state
-    if (signupStatus===true) {
+    if (signupStatus === true) {
       // If it's in signup mode
-      console.log("Signup Data:", signupData , signupStatus);
+      console.log("Signup Data:", signupData, signupStatus);
       UserSignup(signupData) // Use signupData for signup
         .then((res) => {
           console.log("Signup success:", res);
@@ -58,7 +58,7 @@ const AquaUserDialog = () => {
         });
     } else {
       // If it's in signin mode
-      console.log("Signin Data:", signinData , signupStatus);
+      console.log("Signin Data:", signinData, signupStatus);
       UserLogin(signinData) // Use signinData for signin
         .then((res) => {
           console.log("Signin success:", res);
@@ -80,8 +80,8 @@ const AquaUserDialog = () => {
         });
     }
   };
-  
-  console.log("signup", signupStatus)
+
+  console.log("signup", signupStatus);
 
   return (
     <>

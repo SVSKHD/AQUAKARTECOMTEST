@@ -9,7 +9,9 @@ if (typeof window !== "undefined") {
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
-      const itemIndex = state.findIndex(item => item._id === action.payload._id);
+      const itemIndex = state.findIndex(
+        (item) => item._id === action.payload._id,
+      );
       if (itemIndex >= 0) {
         return state; // Item already exists, no addition
       } else {
@@ -19,7 +21,7 @@ export const cartReducer = (state = initialState, action) => {
       }
 
     case "REMOVE_FROM_CART":
-      const newState = state.filter(item => item._id !== action.payload);
+      const newState = state.filter((item) => item._id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(newState));
       return newState;
 
