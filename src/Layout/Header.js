@@ -45,9 +45,15 @@ const AquaNavBar = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="/shop">Shop</Nav.Link>
-                  <Nav.Link href="/compare">Compare</Nav.Link>
-                  <Nav.Link href="/about">About Us</Nav.Link>
+                  <Nav.Link className="text-bold" href="/shop">
+                    Shop
+                  </Nav.Link>
+                  <Nav.Link className="text-bold" href="/compare">
+                    Compare
+                  </Nav.Link>
+                  <Nav.Link className="text-bold" href="/about">
+                    About Us
+                  </Nav.Link>
                 </Nav>
                 <Form className="d-flex mr-1">
                   <Form.Control

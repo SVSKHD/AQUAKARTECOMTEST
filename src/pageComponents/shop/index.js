@@ -46,10 +46,7 @@ const AquaShopComponent = () => {
             <AquaHeading level={1}>
               <div className="row">
                 {products.map((r, i) => (
-                  <div
-                    key={i}
-                    className="col-md-4 col-lg-4 col-xs-12 col-sm-12"
-                  >
+                  <div key={i} className="col">
                     <AquaVerticalCard
                       title={r.title}
                       images={r.photos}

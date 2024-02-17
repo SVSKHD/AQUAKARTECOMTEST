@@ -10,16 +10,25 @@ import {
   FaPlus,
   FaMinus,
   FaHeart,
+  FaCartArrowDown,
   FaRegHeart,
   FaCartPlus,
 } from "react-icons/fa";
 import AquaButton from "@/reusables/button";
+import ProductFunctions from "@/reusableUtils/poroductFunctions";
+import AquaToast from "@/reusables/js/toast";
+import { useSelector } from "react-redux";
+
 
 const DynamicProduct = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(0);
+  const [fav, setFav] = useState(false);
+  const [cart, setCart] = useState(false);
   const [loading, setLoading] = useState(false);
   const { getProductById } = AquaProductOperations();
+  const { addProductToCart, addProductToFav } = ProductFunctions();
+  const { cartCount, favCount } = useSelector((state) => ({ ...state }));
   const router = useRouter();
   const id = router.query.id;
   useEffect(() => {
@@ -35,12 +44,33 @@ const DynamicProduct = () => {
         setLoading(false);
       });
   }, [getProductById, id]);
+
+  useEffect(() => {
+    const isProductInCart = cartCount.some((item) => item._id === product?._id);
+    const isProductInFav = favCount.some((item) => item._id === product?._id);
+    setCart(isProductInCart);
+    setFav(isProductInFav);
+  }, [product , favCount , cartCount]);
+
+  const stockAdd = () => {
+    if (quantity === 5) {
+      AquaToast("you can only add 5", "info");
+    } else {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
+  };
+
+  const stockSub = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0)); // Prevents negative quantity
+  };
+
   const SeoData = {
     title: `Aquakart | Product - ${product?.title}`,
     description: `${product?.description}`,
     image: `${product?.photos ? product.photos[0].secure_url : LOGO}`,
     keywords: `Aquakart Products ${product?.keywords}`,
   };
+
   return (
     <>
       <AquaLayout seo={SeoData}>
@@ -81,7 +111,7 @@ const DynamicProduct = () => {
                 </h4>
               </span>
               <InputGroup className="mb-3 width-adjust">
-                <Button variant="outline-secondary">
+                <Button variant="outline-dark" onClick={stockSub}>
                   <FaMinus size={25} />
                 </Button>
                 <Form.Control
@@ -89,18 +119,32 @@ const DynamicProduct = () => {
                   className="text-center"
                   value={quantity}
                 />
-                <Button variant="outline-secondary">
+                <Button variant="outline-dark" onClick={stockAdd}>
                   <FaPlus size={25} />
                 </Button>
               </InputGroup>
               <div className="dynamic-product-cart-fav">
-                <AquaButton>
-                  <FaCartPlus size={25} />
+                <AquaButton
+                  variant="normal"
+                  onClick={() => addProductToCart(product, setCart)}
+                >
+                  {cart ? (
+                    <FaCartArrowDown className="text-success" size={25} />
+                  ) : (
+                    <FaCartPlus className="text-dark" size={25} />
+                  )}
                 </AquaButton>
-                <AquaButton>Checkout</AquaButton>
-                <AquaButton variant="normal">
-                  <FaRegHeart size={25} className="text-danger" />
+                <AquaButton
+                  variant="normal"
+                  onClick={() => addProductToFav(product, setFav)}
+                >
+                  {fav ? (
+                    <FaHeart size={25} className="text-danger" />
+                  ) : (
+                    <FaRegHeart size={25} className="text-danger" />
+                  )}
                 </AquaButton>
+                <AquaButton href="/checkout">Checkout</AquaButton>
               </div>
               <hr />
               <h5 className="text-muted">{product?.description}</h5>
