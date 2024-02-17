@@ -27,13 +27,15 @@ const AquaVerticalCard = (props) => {
   const router = useRouter();
 
   useEffect(() => {
-    const isProductInCart = cartCount.some((item) => item._id === data._id);
+    const isProductInCart = cartCount.some((item) => item._id === data?._id);
+    const isProductInFav = favCount.some((item) => item._id === data?._id);
     setCartAdd(isProductInCart);
-  }, [cartCount, data._id]);
+    setFavAdd(isProductInFav)
+  }, [cartCount, data._id , favCount]);
 
   const addProductToCart = (productData) => {
     const isProductInCart = cartCount.some(
-      (item) => item._id === productData._id,
+      (item) => item._id === productData?._id,
     );
 
     if (!isProductInCart) {
@@ -47,7 +49,7 @@ const AquaVerticalCard = (props) => {
       // Product is already in the cart, remove it
       dispatch({
         type: "REMOVE_FROM_CART",
-        payload: productData._id,
+        payload: productData?._id,
       });
       AquaToast("Successfully removed from cart", "info");
       setCartAdd(false);
@@ -56,7 +58,7 @@ const AquaVerticalCard = (props) => {
 
   const addProductToFav = (productData) => {
     const isProductInFav = favCount.some(
-      (item) => item._id === productData._id,
+      (item) => item._id === productData?._id,
     );
 
     if (!isProductInFav) {
@@ -69,7 +71,7 @@ const AquaVerticalCard = (props) => {
     } else {
       dispatch({
         type: "REMOVE_FROM_FAV",
-        payload: productData._id,
+        payload: productData?._id,
       });
       AquaToast("Successfully removed from Favorites", "info");
       setFavAdd(false); // Update the state to reflect the removal
