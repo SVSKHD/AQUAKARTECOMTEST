@@ -14,10 +14,6 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     // Load existing cart from localStorage
-    const existingCart = JSON.parse(localStorage.getItem("cart"));
-    if (existingCart) {
-      Store.dispatch(initializeCart(existingCart));
-    }
 
     // Google Analytics
     const handleRouteChange = (url) => {

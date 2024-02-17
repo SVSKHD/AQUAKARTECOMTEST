@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 
 
 const AquaShopFilters = () => {
-
+  const [categories , setCategories] = useState([])
+  const [subs , setSubs] = useState([])
+  const [range , setRange] = useState()
+  
   return (
     <>
       <AquaAccordian

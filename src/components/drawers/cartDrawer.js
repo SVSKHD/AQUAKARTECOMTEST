@@ -1,10 +1,11 @@
 import AquaDrawer from "@/reusables/drawer";
 import AquaHeading from "@/reusables/heading";
 import { useSelector, useDispatch } from "react-redux";
+import AquaCartCard from "../cards/cartCard";
 
 const AquaCartDrawer = () => {
   const dispatch = useDispatch();
-  const { cartDrawer } = useSelector((state) => ({ ...state }));
+  const { cartDrawer , cartCount } = useSelector((state) => ({ ...state }));
   return (
     <>
       <AquaDrawer
@@ -15,9 +16,18 @@ const AquaCartDrawer = () => {
             payload: false,
           })
         }
+        title={ <AquaHeading level={3}>cart items</AquaHeading>}
+        size={"md"}
         position="bottom"
       >
-        <AquaHeading level={3}>cart items</AquaHeading>
+       
+        <div className="row">
+        {cartCount.map((r,i)=>(
+          <div className="col" key={i}>
+            <AquaCartCard data={r}/>
+          </div>
+        ))}
+        </div>
       </AquaDrawer>
     </>
   );

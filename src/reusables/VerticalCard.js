@@ -15,6 +15,7 @@ import { useState } from "react";
 import AquaDialog from "./dialog";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import AquaToast from "./js/toast";
 
 const AquaVerticalCard = (props) => {
   const dispatch = useDispatch();
@@ -24,8 +25,23 @@ const AquaVerticalCard = (props) => {
   const [cartAdd, setCartAdd] = useState(false);
   const router = useRouter();
 
-  const addProductToCart = (data) => {
-    console.log("product", data);
+  const addProductToCart = (productData) => {
+    // Check if product is already in the cart
+    const isProductInCart = cartCount.some(item => item._id === productData._id);
+  
+    if (!isProductInCart) {
+      // Dispatch the action to add the product to the Redux store
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: productData,
+      });
+  
+      // Optionally, show a message or update the UI
+      setCartAdd(true);
+    } else {
+      // Optionally, handle the case where the product is already in the cart
+      AquaToast("Product is already in the cart", "info");
+    }
   };
 
   const redirectProduct = (id) => {
