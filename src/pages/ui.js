@@ -109,7 +109,6 @@ const UIPage = () => {
         <AquaHeading level={1}>Cards</AquaHeading>
         <div className="row">
           <div className="col">
-            <AquaVerticalCard />
           </div>
           <div className="col">
             <AquaHorizontalCard />

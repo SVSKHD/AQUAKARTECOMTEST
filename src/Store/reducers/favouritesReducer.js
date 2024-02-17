@@ -1,7 +1,7 @@
 // Initial state loaded from local storage or set to an empty array
 let initialState = [];
 if (typeof window !== "undefined") {
-  const storedCart = localStorage.getItem("cart");
+  const storedCart = localStorage.getItem("fav");
   initialState = storedCart ? JSON.parse(storedCart) : [];
 }
 
