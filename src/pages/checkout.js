@@ -1,8 +1,7 @@
-import AquaCheckoutComponent from "@/pageComponents/checkout/checkoutComponent"
+import AquaCheckoutComponent from "@/pageComponents/checkout/checkoutComponent";
 
-const Checkout = () =>{
-return(
-    <AquaCheckoutComponent/>
-)
-}
-export default Checkout
+const Checkout = () => {
+  return <AquaCheckoutComponent />;
+};
+
+export default Checkout;

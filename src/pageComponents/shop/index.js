@@ -37,7 +37,8 @@ const AquaShopComponent = () => {
       <div className="row mb-4">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaCard>
-            <AquaHeading level={1}>Shop Filters</AquaHeading>
+            <AquaHeading level={3}>Shop Filters</AquaHeading>
+            <hr />
             <AquaShopFilters />
           </AquaCard>
         </div>

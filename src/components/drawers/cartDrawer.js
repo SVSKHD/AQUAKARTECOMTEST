@@ -6,6 +6,7 @@ import AquaCartCard from "../cards/cartCard";
 const AquaCartDrawer = () => {
   const dispatch = useDispatch();
   const { cartDrawer, cartCount } = useSelector((state) => ({ ...state }));
+  const total = cartCount.reduce((a, r) => a + Number(r.price), 0);
   return (
     <>
       <AquaDrawer
@@ -16,13 +17,20 @@ const AquaCartDrawer = () => {
             payload: false,
           })
         }
-        title={<AquaHeading level={3}>cart items</AquaHeading>}
+        title={
+          <div className="d-flex">
+            <AquaHeading level={3}>Cart Items -- </AquaHeading>
+            <div className="flex-fill text-end text-success text-end">
+              <AquaHeading level={3}>{total}</AquaHeading>
+            </div>
+          </div>
+        }
         size={"md"}
         position="bottom"
       >
         <div className="row">
           {cartCount.map((r, i) => (
-            <div className="col" key={i}>
+            <div className="col-md-3 col-lg-3 col-xs-12 col-sm-12" key={i}>
               <AquaCartCard data={r} />
             </div>
           ))}

@@ -4,7 +4,10 @@ const AquaAccordian = (props) => {
   const { title, description, key, children } = props;
   return (
     <>
-      <Accordion className="shadow-lg aqua-accordian" defaultActiveKey={key}>
+      <Accordion
+        className="shadow-lg aqua-accordian mb-1"
+        defaultActiveKey={key}
+      >
         <Accordion.Item>
           <Accordion.Header>{title}</Accordion.Header>
           <Accordion.Body>{children}</Accordion.Body>

@@ -9,10 +9,11 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { FaSearch, FaUser, FaCartPlus } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
+  const { cartCount } = useSelector((state) => ({ ...state }));
   return (
     <>
       <div className="container">
@@ -63,16 +64,22 @@ const AquaNavBar = () => {
                     aria-label="Search"
                   />
                 </Form>
-                <AquaButton
-                  onClick={() =>
-                    dispatch({
-                      type: "SET_CART_DRAWER_VISIBLE",
-                      payload: true,
-                    })
-                  }
-                >
-                  <FaCartPlus size={25} />
-                </AquaButton>
+                <div className="position-relative">
+                  <AquaButton
+                    variant="normal"
+                    onClick={() =>
+                      dispatch({
+                        type: "SET_CART_DRAWER_VISIBLE",
+                        payload: true,
+                      })
+                    }
+                  >
+                    <FaCartPlus size={25} />
+                  </AquaButton>
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartCount.length}
+                  </span>
+                </div>
                 <AquaButton
                   variant={"normal"}
                   onClick={() =>

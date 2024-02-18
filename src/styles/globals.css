@@ -280,5 +280,9 @@ body {
 }
 
 .cart-card-width {
-  width: 400px;
+  width: 350px;
+}
+
+.accordion-button {
+  padding: 5px 10px 5px 10px;
 }

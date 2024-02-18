@@ -19,7 +19,6 @@ import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaToast from "@/reusables/js/toast";
 import { useSelector } from "react-redux";
 
-
 const DynamicProduct = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(0);
@@ -50,7 +49,7 @@ const DynamicProduct = () => {
     const isProductInFav = favCount.some((item) => item._id === product?._id);
     setCart(isProductInCart);
     setFav(isProductInFav);
-  }, [product , favCount , cartCount]);
+  }, [product, favCount, cartCount]);
 
   const stockAdd = () => {
     if (quantity === 5) {

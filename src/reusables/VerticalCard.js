@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import AQ from "../testImages/shoe.webp";
 import { Badge, ButtonGroup } from "react-bootstrap";
@@ -11,11 +12,11 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import AquaButton from "./button";
-import { useState, useEffect } from "react";
 import AquaDialog from "./dialog";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
+import ReactCanvasConfetti from "react-canvas-confetti";
 
 const AquaVerticalCard = (props) => {
   const { data } = props;
@@ -25,41 +26,65 @@ const AquaVerticalCard = (props) => {
   const [favAdd, setFavAdd] = useState(false);
   const router = useRouter();
   const { addProductToCart, addProductToFav } = ProductFunctions();
+  const confettiRef = useRef(null);
 
   useEffect(() => {
     const isProductInCart = cartCount.some((item) => item._id === data?._id);
     const isProductInFav = favCount.some((item) => item._id === data?._id);
     setCartAdd(isProductInCart);
     setFavAdd(isProductInFav);
-  }, [cartCount, data._id, favCount]);
+  }, [cartCount, data?._id, favCount]);
 
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
   };
 
-  const { title, description, images, favourite, price } = props;
+  const fireConfetti = () => {
+    if (confettiRef.current) {
+      confettiRef.current({
+        angle: 90,
+        spread: 360,
+        startVelocity: 30,
+        elementCount: 100,
+        decay: 0.9,
+        colors: ["#bb0000", "#ffffff"],
+      });
+    }
+  };
+  const { title, description, images, price } = props;
+
   return (
     <>
-      <div class="card aq-card shadow-lg rounded-25">
+      <ReactCanvasConfetti
+        ref={confettiRef}
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          width: "100%",
+          height: "100%",
+          top: 0,
+          left: 0,
+          zIndex: 10,
+        }}
+      />
+      <div className="card aq-card shadow-lg rounded-25">
         <div className="shadow-lg aq-card-image-vertical gradient-1">
           {images ? (
-            <>
-              <AquaProductUnControlledCarousel
-                images={images}
-                className="card-img-top custom-image"
-                width="100"
-                height="280"
-                alt={`Aquakart Images | ${title}`}
-              />
-            </>
+            <AquaProductUnControlledCarousel
+              images={images}
+              className="card-img-top custom-image"
+              width="100"
+              height="280"
+              alt={`Aquakart Images | ${title}`}
+            />
           ) : (
             <Image src={AQ} className="card-img-top custom-image" alt="..." />
           )}
         </div>
-        <div class="product-card-body">
+        <div className="product-card-body">
           <div className="row align-items-center">
             <div className="col-10">
-              <h3 class="card-title mt-3">{title}</h3>
+              <h3 className="card-title mt-3">{title}</h3>
             </div>
             <div className="col-2">
               <h1>
@@ -89,7 +114,10 @@ const AquaVerticalCard = (props) => {
               )}
             </AquaButton>
             <AquaButton
-              onClick={() => addProductToFav(data, setFavAdd)}
+              onClick={() => {
+                addProductToFav(data, setFavAdd);
+                fireConfetti();
+              }}
               variant="normal"
             >
               {favAdd ? (
@@ -113,15 +141,13 @@ const AquaVerticalCard = (props) => {
         <div className="row">
           <div className="col-5">
             {images ? (
-              <>
-                <AquaProductUnControlledCarousel
-                  images={images}
-                  className="card-img-top custom-image"
-                  width="100"
-                  height="280"
-                  alt={`Aquakart Images | ${title}`}
-                />
-              </>
+              <AquaProductUnControlledCarousel
+                images={images}
+                className="card-img-top custom-image"
+                width="100"
+                height="280"
+                alt={`Aquakart Images | ${title}`}
+              />
             ) : (
               <Image src={AQ} className="card-img-top custom-image" alt="..." />
             )}
@@ -140,40 +166,11 @@ const AquaVerticalCard = (props) => {
             <div className="card-text text-muted">
               {description?.substring(0, 100)}...
             </div>
-            <div className="text-center card-body">
-              <ButtonGroup size="sm">
-                <AquaButton
-                  onClick={() => redirectProduct(data._id)}
-                  variant="normal"
-                >
-                  <FaShare size={25} />
-                </AquaButton>
-                <AquaButton
-                  onClick={() => addProductToCart(data, setCartAdd)}
-                  variant="normal"
-                >
-                  {cartAdd ? (
-                    <FaCartArrowDown className="text-success" size={25} />
-                  ) : (
-                    <FaCartPlus className="text-secondary" size={25} />
-                  )}
-                </AquaButton>
-                <AquaButton
-                  onClick={() => addProductToFav(data, setFavAdd)}
-                  variant="normal"
-                >
-                  {favourite ? (
-                    <FaHeart size={25} className="text-danger" />
-                  ) : (
-                    <FaRegHeart size={25} className="text-danger" />
-                  )}
-                </AquaButton>
-              </ButtonGroup>
-            </div>
           </div>
         </div>
       </AquaDialog>
     </>
   );
 };
+
 export default AquaVerticalCard;
