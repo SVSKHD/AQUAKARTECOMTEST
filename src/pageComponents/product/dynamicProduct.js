@@ -17,11 +17,11 @@ import {
 import AquaButton from "@/reusables/button";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaToast from "@/reusables/js/toast";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const DynamicProduct = () => {
-  const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+  const [product, setProduct] = useState({ quantity: 1 });
   const [fav, setFav] = useState(false);
   const [cart, setCart] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const DynamicProduct = () => {
     getProductById(id)
       .then((res) => {
         console.log("res", res.data);
-        setProduct(res.data);
+        setProduct((prev) => ({ ...res.data, quantity: prev.quantity }));
         setLoading(false);
       })
       .catch((err) => {
@@ -52,15 +52,31 @@ const DynamicProduct = () => {
   }, [product, favCount, cartCount]);
 
   const stockAdd = () => {
-    if (quantity === 5) {
-      AquaToast("you can only add 5", "info");
-    } else {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-    }
+    setProduct((prevProduct) => {
+      const newQuantity =
+        prevProduct.quantity < 5 ? prevProduct.quantity + 1 : 5;
+      if (newQuantity === 5) {
+        AquaToast("You can only add 5", "info");
+      } else {
+        dispatch({
+          type: "UPDATE_QUANTITY",
+          payload: { productId: prevProduct._id, quantity: newQuantity },
+        });
+      }
+      return { ...prevProduct, quantity: newQuantity };
+    });
   };
 
   const stockSub = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0)); // Prevents negative quantity
+    setProduct((prevProduct) => {
+      const newQuantity = Math.max(prevProduct.quantity - 1, 1);
+      // Dispatch the action after updating the local state
+      dispatch({
+        type: "UPDATE_QUANTITY",
+        payload: { productId: prevProduct._id, quantity: newQuantity },
+      });
+      return { ...prevProduct, quantity: newQuantity };
+    });
   };
 
   const SeoData = {
@@ -116,7 +132,7 @@ const DynamicProduct = () => {
                 <Form.Control
                   aria-label="Example text with two button addons"
                   className="text-center"
-                  value={quantity}
+                  value={product.quantity}
                 />
                 <Button variant="outline-dark" onClick={stockAdd}>
                   <FaPlus size={25} />

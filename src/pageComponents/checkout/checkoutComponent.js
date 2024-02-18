@@ -1,11 +1,13 @@
 import AquaLayout from "@/Layout/Layout";
 import { useSelector } from "react-redux";
-import AquaCartCard from "@/components/cards/cartCard";
+import AquaCartPageCard from "@/components/cards/cartPageCard";
+import ProductFunctions from "@/reusableUtils/poroductFunctions";
 
 const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const { favCount, cartCount } = useSelector((state) => ({ ...state }));
-  const total = cartCount.reduce((a, r) => a + Number(r.price), 0);
+  const { cartTotal } = ProductFunctions();
+  const total = cartCount.reduce((a, r) => a + Number(r.price * r.quantit), 0);
 
   return (
     <>
@@ -16,13 +18,14 @@ const AquaCheckoutComponent = () => {
               <div className="card-body">
                 <h3>Cart</h3>
                 <hr />
-                <div className="row">
+                <div>
                   {cartCount.length > 0 ? (
                     <>
                       {cartCount.map((r) => (
                         <>
-                          <div className="col mb-3">
-                            <AquaCartCard data={r} />
+                          <div>
+                            <AquaCartPageCard data={r} />
+                            <hr />
                           </div>
                         </>
                       ))}
@@ -42,7 +45,7 @@ const AquaCheckoutComponent = () => {
                     <h3>Total</h3>
                   </div>
                   <div class="p-2 flex-fill text-end text-success">
-                    <h3>₹{total}</h3>
+                    <h3>₹{cartTotal()}</h3>
                   </div>
                 </div>
 

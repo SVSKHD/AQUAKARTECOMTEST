@@ -2,11 +2,12 @@ import AquaDrawer from "@/reusables/drawer";
 import AquaHeading from "@/reusables/heading";
 import { useSelector, useDispatch } from "react-redux";
 import AquaCartCard from "../cards/cartCard";
+import ProductFunctions from "@/reusableUtils/poroductFunctions";
 
 const AquaCartDrawer = () => {
   const dispatch = useDispatch();
   const { cartDrawer, cartCount } = useSelector((state) => ({ ...state }));
-  const total = cartCount.reduce((a, r) => a + Number(r.price), 0);
+  const { cartTotal } = ProductFunctions();
   return (
     <>
       <AquaDrawer
@@ -21,7 +22,7 @@ const AquaCartDrawer = () => {
           <div className="d-flex">
             <AquaHeading level={3}>Cart Items -- </AquaHeading>
             <div className="flex-fill text-end text-success text-end">
-              <AquaHeading level={3}>{total}</AquaHeading>
+              <AquaHeading level={3}>{cartTotal()}</AquaHeading>
             </div>
           </div>
         }

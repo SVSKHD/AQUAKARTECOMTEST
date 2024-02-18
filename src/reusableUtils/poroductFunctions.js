@@ -49,9 +49,17 @@ const ProductFunctions = () => {
     }
   };
 
+  const cartTotal = () => {
+    return cartCount.reduce(
+      (total, item) => total + item.quantity * item.price,
+      0,
+    );
+  };
+
   return {
     addProductToCart,
     addProductToFav,
+    cartTotal,
   };
 };
 

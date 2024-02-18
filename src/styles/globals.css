@@ -286,3 +286,11 @@ body {
 .accordion-button {
   padding: 5px 10px 5px 10px;
 }
+
+.cart-title {
+  color: grey;
+}
+
+.cart-title:hover {
+  color: #230018;
+}
