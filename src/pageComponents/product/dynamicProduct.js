@@ -92,7 +92,7 @@ const DynamicProduct = () => {
           </div>
         ) : (
           <div className="row mb-3">
-            <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
+            <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
               {product?.photos ? (
                 <>
                   <AquaProductUnControlledCarousel
@@ -111,7 +111,7 @@ const DynamicProduct = () => {
                 />
               )}
             </div>
-            <div className="col-md-8 col-xs-12 col-sm-12 col-lg-8">
+            <div className="col-md-6 col-xs-12 col-sm-12 col-lg-6">
               <h1 className="display-2 text-bold">{product?.title}</h1>
               <span className="dynamic-product-price-brand">
                 <h4 className="price product-price-align">
@@ -158,7 +158,9 @@ const DynamicProduct = () => {
                 <AquaButton href="/checkout">Checkout</AquaButton>
               </div>
               <hr />
-              <h5 className="text-muted">{product?.description}</h5>
+              <div className="container">
+              <div dangerouslySetInnerHTML={{ __html: product?.description }}/>
+              </div>
             </div>
           </div>
         )}
