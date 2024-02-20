@@ -1,10 +1,31 @@
+import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import AQ from "../../assests/Default.png";
 
 const AquaCartPageCard = ({ data }) => {
-  const { title, price, photos, quantity } = data;
+  const { title, price, photos, quantity, _id } = data;
+  const [localQuantity, setLocalQuantity] = useState(data?.quantity);
+  const router = useRouter();
+  const Redirect = () => {
+    router.push(`/product/${_id}`);
+  };
+
+  const { QuantityAdd, QuantitySub } = ProductFunctions();
+
+  const handleQuantityAdd = (no) => {
+    setLocalQuantity(localQuantity + 1);
+    QuantityAdd(data, no);
+  };
+
+  const handleQuantitySub = (no) => {
+    setLocalQuantity(localQuantity - 1);
+    QuantitySub(data, no);
+  };
+
   return (
     <>
       <div>
@@ -12,7 +33,7 @@ const AquaCartPageCard = ({ data }) => {
           <div class="row g-0">
             <div class="col-md-2">
               <Image
-                src={photos[0].secure_url}
+                src={photos ? photos[0].secure_url : AQ}
                 height="250"
                 width="200"
                 className="img-fluid rounded-3"
@@ -21,20 +42,28 @@ const AquaCartPageCard = ({ data }) => {
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="cart-title">{title}</h5>
+                <h5 class="cart-title" onClick={() => Redirect()}>
+                  {title}
+                </h5>
                 <p class="card-text">
                   <small class="text-success">{price}</small>
                 </p>
                 <InputGroup size="sm" className="mb-3 width-adjust">
-                  <Button variant="outline-light">
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleQuantitySub(localQuantity - 1)}
+                  >
                     <FaMinus size={25} className="text-dark" />
                   </Button>
                   <Form.Control
                     aria-label="Example text with two button addons"
                     className="text-center"
-                    value={quantity}
+                    value={localQuantity}
                   />
-                  <Button variant="outline-light">
+                  <Button
+                    variant="outline-light"
+                    onClick={() => handleQuantityAdd(localQuantity + 1)}
+                  >
                     <FaPlus size={25} className="text-dark" />
                   </Button>
                 </InputGroup>

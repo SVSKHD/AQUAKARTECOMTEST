@@ -294,3 +294,7 @@ body {
 .cart-title:hover {
   color: #230018;
 }
+
+.cart-text-price {
+  color: #14bf99;
+}

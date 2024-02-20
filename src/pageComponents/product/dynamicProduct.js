@@ -26,7 +26,8 @@ const DynamicProduct = () => {
   const [cart, setCart] = useState(false);
   const [loading, setLoading] = useState(false);
   const { getProductById } = AquaProductOperations();
-  const { addProductToCart, addProductToFav } = ProductFunctions();
+  const { addProductToCart, addProductToFav, quantityChange } =
+    ProductFunctions();
   const { cartCount, favCount } = useSelector((state) => ({ ...state }));
   const router = useRouter();
   const id = router.query.id;
@@ -55,13 +56,11 @@ const DynamicProduct = () => {
     setProduct((prevProduct) => {
       const newQuantity =
         prevProduct.quantity < 5 ? prevProduct.quantity + 1 : 5;
+      if (newQuantity <= 5) {
+        quantityChange(prevProduct._id, newQuantity);
+      }
       if (newQuantity === 5) {
         AquaToast("You can only add 5", "info");
-      } else {
-        dispatch({
-          type: "UPDATE_QUANTITY",
-          payload: { productId: prevProduct._id, quantity: newQuantity },
-        });
       }
       return { ...prevProduct, quantity: newQuantity };
     });
@@ -71,10 +70,7 @@ const DynamicProduct = () => {
     setProduct((prevProduct) => {
       const newQuantity = Math.max(prevProduct.quantity - 1, 1);
       // Dispatch the action after updating the local state
-      dispatch({
-        type: "UPDATE_QUANTITY",
-        payload: { productId: prevProduct._id, quantity: newQuantity },
-      });
+      quantityChange(prevProduct._id, newQuantity);
       return { ...prevProduct, quantity: newQuantity };
     });
   };

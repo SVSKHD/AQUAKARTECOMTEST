@@ -1,5 +1,6 @@
 import AquaButton from "@/reusables/button";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -14,6 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 const AquaNavBar = () => {
   const dispatch = useDispatch();
   const { cartCount } = useSelector((state) => ({ ...state }));
+  const [cartLength, setCartLength] = useState(0);
+  useEffect(() => {
+    setCartLength(cartCount.length);
+  }, [cartCount]);
+
   return (
     <>
       <div className="container">
@@ -77,7 +83,7 @@ const AquaNavBar = () => {
                     <FaCartPlus size={25} />
                   </AquaButton>
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartCount.length}
+                    {cartLength}
                   </span>
                 </div>
                 <AquaButton
