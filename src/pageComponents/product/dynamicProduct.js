@@ -159,7 +159,9 @@ const DynamicProduct = () => {
               </div>
               <hr />
               <div className="container">
-              <div dangerouslySetInnerHTML={{ __html: product?.description }}/>
+                <div
+                  dangerouslySetInnerHTML={{ __html: product?.description }}
+                />
               </div>
             </div>
           </div>

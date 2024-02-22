@@ -60,20 +60,22 @@ const AquaCheckoutComponent = () => {
             <div className="card shadow-lg">
               <div className="card-body">
                 <ul className="conatiner list-group list-group-flush">
-                  {cartCount.map((r, i) => (
+                  {cartCount.map((r) => (
                     <>
-                      <a
-                        href="#"
-                        className="list-group-item list-group-item-action"
-                        aria-current="true"
-                      >
-                        <div className="d-flex w-100 justify-content-between">
-                          <h6 className="mb-1 cart-title">{r.title}</h6>
-                          <h6 className="cart-text-price">
-                            ₹{r.price * r.quantity}
-                          </h6>
-                        </div>
-                      </a>
+                      <div key={r}>
+                        <a
+                          href="#"
+                          className="list-group-item list-group-item-action"
+                          aria-current="true"
+                        >
+                          <div className="d-flex w-100 justify-content-between">
+                            <h6 className="mb-1 cart-title">{r.title}</h6>
+                            <h6 className="cart-text-price">
+                              ₹{r.price * r.quantity}
+                            </h6>
+                          </div>
+                        </a>
+                      </div>
                     </>
                   ))}
                 </ul>

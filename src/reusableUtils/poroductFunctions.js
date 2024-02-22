@@ -12,7 +12,7 @@ const ProductFunctions = () => {
     if (!isProductInCart) {
       dispatch({
         type: "ADD_TO_CART",
-        payload: {...productData,quantity:1},
+        payload: { ...productData, quantity: 1 },
       });
       AquaToast("SuccessFully Added to Cart", "success");
       setCartAdd(true);
@@ -20,7 +20,7 @@ const ProductFunctions = () => {
       // Product is already in the cart, remove it
       dispatch({
         type: "REMOVE_FROM_CART",
-        payload: productData?._id 
+        payload: productData?._id,
       });
       AquaToast("Successfully removed from cart", "info");
       setCartAdd(false);

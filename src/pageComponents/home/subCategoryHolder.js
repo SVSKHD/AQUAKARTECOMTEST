@@ -24,7 +24,7 @@ const AquaSubCategoryHolder = () => {
   return (
     <>
       {!subcategories.length ? (
-        <h3>No Categories yet</h3>
+        <h3>No Sub-Categories yet</h3>
       ) : (
         <div className="row">
           <AquaCardMultiItemCarousel>

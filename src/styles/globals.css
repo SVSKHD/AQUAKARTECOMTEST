@@ -298,3 +298,37 @@ body {
 .cart-text-price {
   color: #14bf99;
 }
+
+/* product page */
+
+/* Add this inside your component or in your global CSS file */
+.super-scroll-container {
+  display: flex;
+}
+
+.fixed-image-section {
+  position: sticky;
+  top: 0; /* Adjust this value based on your header height or desired offset */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.scrollable-content-section {
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100vh; /* Adjust if necessary */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .super-scroll-container {
+    flex-direction: column;
+  }
+
+  .fixed-image-section,
+  .scrollable-content-section {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+}
