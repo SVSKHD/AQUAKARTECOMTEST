@@ -24,7 +24,9 @@ const AquaCartDrawer = () => {
           <div className="d-flex">
             <AquaHeading level={3}>Cart Items -- </AquaHeading>
             <div className="flex-fill text-end text-success text-end">
-              <AquaHeading level={3}>{total}</AquaHeading>
+              <AquaHeading level={3}>
+                {cartCount.length > 0 ? total : ""}
+              </AquaHeading>
             </div>
           </div>
         }

@@ -179,6 +179,11 @@ body {
   }
 }
 
+.toast-body {
+  padding: 5px;
+  color: white !important;
+}
+
 .dialog-customs {
   border-radius: 5rem !important;
 }
@@ -285,10 +290,6 @@ body {
 
 .accordion-button {
   padding: 5px 10px 5px 10px;
-}
-
-.cart-title {
-  color: grey;
 }
 
 .cart-title:hover {

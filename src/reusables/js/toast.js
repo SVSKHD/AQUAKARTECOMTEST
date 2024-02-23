@@ -11,44 +11,67 @@ const AquaToast = (message, type) => {
 
   switch (type) {
     case "success":
-      icon = <BiMessageSquareCheck size={40} />;
+      icon = <BiMessageSquareCheck size={20} />;
       backgroundColor = "#539165";
+      // Directly call toast.success here
+      toast.success(message, {
+        icon,
+        duration: 6000, // Adjust duration as needed
+        position: "top-right",
+        style: {
+          borderRadius: "20px",
+          padding: "10px",
+          backgroundColor,
+          color: "white",
+        },
+      });
       break;
     case "error":
-      icon = <BiMessageSquareX size={40} />;
+      icon = <BiMessageSquareX size={20} />;
       backgroundColor = "#FF0000";
+      // Directly call toast.error here
+      toast.error(message, {
+        icon,
+        duration: 6000, // Adjust duration as needed
+        position: "top-right",
+        style: {
+          borderRadius: "20px",
+          padding: "10px",
+          backgroundColor,
+          color: "white",
+        },
+      });
       break;
     case "info":
-      icon = <BiInfoCircle size={40} />;
+      icon = <BiInfoCircle size={20} />;
       backgroundColor = "#0077B6";
+      // Directly call toast.info here
+      toast(message, {
+        icon,
+        duration: 6000, // Adjust duration as needed
+        position: "top-right",
+        style: {
+          borderRadius: "20px",
+          padding: "10px",
+          backgroundColor,
+          color: "white",
+        },
+      });
       break;
     default:
-      icon = null;
-      backgroundColor = "#00425A";
+      // Handle the default case, possibly with toast.info or another method
+      toast(message, {
+        // Using generic toast for cases not covered by success, error, or info
+        duration: 6000, // Adjust duration as needed
+        position: "top-right",
+        style: {
+          borderRadius: "20px",
+          padding: "10px",
+          backgroundColor: "#00425A", // Default background color
+          color: "white",
+        },
+      });
   }
-
-  toast(message, {
-    icon,
-    style: {
-      color: "#FFFFFF",
-      backgroundColor,
-      width: "300px",
-      fontSize: "0.9rem",
-      borderRadius: "32px",
-    },
-    duration: 5000,
-    render: ({ t }) => (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <p>{message}</p>
-        <button
-          onClick={() => toast.dismiss(t.id)}
-          style={{ marginLeft: "auto" }}
-        >
-          Dismiss
-        </button>
-      </div>
-    ),
-  });
 };
 
 export default AquaToast;

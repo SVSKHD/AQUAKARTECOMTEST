@@ -16,7 +16,7 @@ const AquaCheckoutComponent = () => {
     <>
       <AquaLayout seo={seo}>
         <div className="row mb-3">
-          <div className="col-md-8 col-md-8 col-xs-12 col-sm-12">
+          <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
             <div className="card shadow-lg">
               <div className="card-body">
                 <h3>Cart</h3>
@@ -56,7 +56,7 @@ const AquaCheckoutComponent = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
+          <div className="col-md-5 col-lg-5 col-xs-12 col-sm-12">
             <div className="card shadow-lg">
               <div className="card-body">
                 <ul className="conatiner list-group list-group-flush">
@@ -69,9 +69,10 @@ const AquaCheckoutComponent = () => {
                           aria-current="true"
                         >
                           <div className="d-flex w-100 justify-content-between">
-                            <h6 className="mb-1 cart-title">{r.title}</h6>
+                            <h6 className="">{r.title}</h6>
                             <h6 className="cart-text-price">
-                              ₹{r.price * r.quantity}
+                              ₹{r.price} * {r.quantity} = ₹
+                              {r.price * r.quantity}
                             </h6>
                           </div>
                         </a>

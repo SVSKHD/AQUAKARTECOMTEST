@@ -8,7 +8,7 @@ import AQ from "../../assests/Default.png";
 
 const AquaCartPageCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
-  const [localQuantity, setLocalQuantity] = useState(data?.quantity);
+  const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const router = useRouter();
   const Redirect = () => {
     router.push(`/product/${_id}`);
@@ -16,16 +16,19 @@ const AquaCartPageCard = ({ data }) => {
 
   const { QuantityAdd, QuantitySub } = ProductFunctions();
 
-  const handleQuantityAdd = (no) => {
-    setLocalQuantity(localQuantity + 1);
-    QuantityAdd(data, no);
+  const handleQuantityAdd = () => {
+    if (localQuantity < 5) {
+      setLocalQuantity(localQuantity + 1);
+      QuantityAdd(data, localQuantity + 1);
+    }
   };
 
-  const handleQuantitySub = (no) => {
-    setLocalQuantity(localQuantity - 1);
-    QuantitySub(data, no);
+  const handleQuantitySub = () => {
+    if (localQuantity > 1) {
+      setLocalQuantity(localQuantity - 1);
+      QuantitySub(data, localQuantity - 1);
+    }
   };
-
   return (
     <>
       <div>

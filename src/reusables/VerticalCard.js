@@ -163,9 +163,6 @@ const AquaVerticalCard = (props) => {
                 </h4>
               </div>
             </div>
-            <div className="card-text text-muted">
-              {description?.substring(0, 100)}...
-            </div>
           </div>
         </div>
       </AquaDialog>
