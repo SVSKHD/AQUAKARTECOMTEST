@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AquaCartCard from "../cards/cartCard";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaButton from "@/reusables/button";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaCartDrawer = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,17 @@ const AquaCartDrawer = () => {
         }
         title={
           <div className="d-flex">
-            <AquaHeading level={3}>Cart Items -- </AquaHeading>
+            <AquaHeading level={3}>
+              {" "}
+              {cartCount.length > 0 ? "CART TOTAL -- " : ""}
+            </AquaHeading>
             <div className="flex-fill text-end text-success text-end">
               <AquaHeading level={3}>
-                {cartCount.length > 0 ? total : ""}
+                {cartCount.length > 0 ? (
+                  <AquaCurrencyFormat amount={total} adjust={true} />
+                ) : (
+                  ""
+                )}
               </AquaHeading>
             </div>
           </div>

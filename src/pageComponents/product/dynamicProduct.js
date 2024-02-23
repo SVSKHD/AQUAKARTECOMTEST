@@ -18,6 +18,7 @@ import AquaButton from "@/reusables/button";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaToast from "@/reusables/js/toast";
 import { useSelector, useDispatch } from "react-redux";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const DynamicProduct = () => {
   const dispatch = useDispatch();
@@ -115,7 +116,10 @@ const DynamicProduct = () => {
               <h1 className="display-2 text-bold">{product?.title}</h1>
               <span className="dynamic-product-price-brand">
                 <h4 className="price product-price-align">
-                  <Badge bg="success"> ₹{product?.price}</Badge>
+                  <Badge bg="success">
+                    {" "}
+                    <AquaCurrencyFormat amount={product?.price} />
+                  </Badge>
                 </h4>
                 <h4 className="dynamic-product-brand">
                   Brand : {product?.brand}

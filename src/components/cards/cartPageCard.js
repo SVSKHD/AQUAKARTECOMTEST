@@ -5,6 +5,7 @@ import { useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import AQ from "../../assests/Default.png";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaCartPageCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
@@ -29,6 +30,7 @@ const AquaCartPageCard = ({ data }) => {
       QuantitySub(data, localQuantity - 1);
     }
   };
+
   return (
     <>
       <div>
@@ -49,7 +51,9 @@ const AquaCartPageCard = ({ data }) => {
                   {title}
                 </h5>
                 <p class="card-text">
-                  <small class="text-success">{price}</small>
+                  <small class="text-success">
+                    <AquaCurrencyFormat amount={price} />
+                  </small>
                 </p>
                 <InputGroup size="sm" className="mb-3 width-adjust">
                   <Button

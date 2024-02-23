@@ -62,7 +62,7 @@ const AquaToast = (message, type) => {
       // Handle the default case, possibly with toast.info or another method
       toast(message, {
         // Using generic toast for cases not covered by success, error, or info
-        duration: 6000, // Adjust duration as needed
+        duration: 2000, // Adjust duration as needed
         position: "top-right",
         style: {
           borderRadius: "20px",
