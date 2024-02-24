@@ -81,14 +81,14 @@ const AquaCheckoutComponent = () => {
                           aria-current="true"
                         >
                           <div className="d-flex w-100 justify-content-between">
-                            <h6 className="">{r.title}</h6>
-                            <h6 className="cart-text-price">
+                            <p className="card-subtitle">{r.title}</p>
+                            <p className="cart-text-price">
                               <AquaCurrencyFormat amount={r.price} /> *{" "}
                               {r.quantity} ={" "}
                               <AquaCurrencyFormat
                                 amount={r.price * r.quantity}
                               />
-                            </h6>
+                            </p>
                           </div>
                         </a>
                       </div>

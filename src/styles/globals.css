@@ -23,6 +23,12 @@ body {
   color: var(--custom-aq-button-text-color) !important;
 }
 
+.footer-aqua {
+  background-color: #053885;
+  padding: 1rem;
+  color: white;
+}
+
 .custom-button:hover {
   background-color: var(--custom-aq-button-text-color);
   color: var(--custom-aq-button-bg-color);

@@ -1,6 +1,7 @@
 import AquaLayout from "@/Layout/Layout";
 import AquaHeading from "@/reusables/heading";
 import AquaTabs from "@/reusables/tabs";
+import AquaCartComponent from "./cartComponent";
 import { useState } from "react";
 
 const AquaComparePageComponent = () => {
@@ -15,7 +16,7 @@ const AquaComparePageComponent = () => {
     },
     {
       title: "Cart",
-      component: <h1>Cart</h1>,
+      component: <AquaCartComponent />,
     },
     {
       title: "Compare",
