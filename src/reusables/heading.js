@@ -3,7 +3,7 @@ const AquaHeading = ({ level, children, center }) => {
 
   return (
     <div className={center ? "text-center" : ""}>
-      <HeadingTag className="mt-3">{children}</HeadingTag>
+      <HeadingTag className="mt-2">{children}</HeadingTag>
     </div>
   );
 };

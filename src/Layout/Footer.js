@@ -2,10 +2,28 @@ import AquaCard from "@/reusables/card";
 import AquaHeading from "@/reusables/heading";
 import AQ from "../assests/logo-white.png";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+import AquaCategoryOperations from "@/Services/category";
+import {FaInstagram , FaWhatsapp , FaTelegram} from "react-icons/fa"
 
 const AquaFooter = () => {
   const date = new Date();
   const Year = date.getFullYear();
+  const [categories , setCategories] = useState([])
+  const {getCategories} = AquaCategoryOperations()
+  const loadCategories = useCallback(() => {
+    getCategories()
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch(() => {
+        AquaToast("something went wrong", "error");
+      });
+  }, [getCategories, setCategories]);
+
+  useEffect(() => {
+    loadCategories();
+  }, [loadCategories]);
   return (
     <>
       <div>
@@ -25,10 +43,22 @@ const AquaFooter = () => {
                 <h4 className="text-center">Aquakart</h4>
               </div>
               <div className="col">
-                <h4>categiories</h4>
+                <h4>Categories</h4>
+                <ul>
+                  {categories.map((c)=>(
+                    <li key={c}>{c.title}</li>
+                  ))}
+                </ul>
               </div>
               <div className="col">
                 <h4>subscribe form</h4>
+                <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email address</label>
+  <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Enter your Email" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+  <button class="btn btn-light" type="button" id="button-addon2"><FaTelegram size={20} /></button>
+</div>
+</div>
               </div>
             </div>
           </div>
@@ -37,7 +67,12 @@ const AquaFooter = () => {
               <div className="col">
                 <AquaHeading level={5}>AquaKart © {Year}</AquaHeading>
               </div>
-              <div className="col"></div>
+              <div className="col text-end">
+              <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn"><FaInstagram size={20}/></button>
+  <button type="button" class="btn"><FaWhatsapp size={20}/></button>
+</div>
+              </div>
             </div>
           </AquaCard>
         </div>
