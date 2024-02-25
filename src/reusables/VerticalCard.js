@@ -68,11 +68,11 @@ const AquaVerticalCard = (props) => {
         }}
       />
       <div className="card aq-card shadow-lg rounded-25">
-        <div className="shadow-lg aq-card-image-vertical gradient-1">
+        <div className="shadow-lg aq-card-image-vertical rounded-4">
           {images ? (
             <AquaProductUnControlledCarousel
               images={images}
-              className="card-img-top custom-image"
+              className="card-img-top custom-image rounded-4"
               width="100"
               height="280"
               alt={`Aquakart Images | ${title}`}
