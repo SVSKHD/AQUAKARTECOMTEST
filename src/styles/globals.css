@@ -23,6 +23,23 @@ body {
   color: var(--custom-aq-button-text-color) !important;
 }
 
+.dynamic-product {
+  display: flex;
+}
+
+.fixed-column {
+  position: sticky;
+  top: 0; /* Adjust this value based on your header/nav height */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.scrollable-column {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
 .footer-aqua {
   background-color: #053885;
   padding: 1rem;
@@ -339,3 +356,5 @@ body {
     height: auto;
   }
 }
+
+

@@ -92,8 +92,9 @@ const DynamicProduct = () => {
             <Spinner animation="border" variant="dark" />
           </div>
         ) : (
+          <div className="dynamic-product">
           <div className="row mb-3">
-            <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
+            <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
               {product?.photos ? (
                 <>
                   <AquaProductUnControlledCarousel
@@ -112,7 +113,7 @@ const DynamicProduct = () => {
                 />
               )}
             </div>
-            <div className="col-md-6 col-xs-12 col-sm-12 col-lg-6">
+            <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
               <h1 className="display-2 text-bold">{product?.title}</h1>
               <span className="dynamic-product-price-brand">
                 <h4 className="price product-price-align">
@@ -168,6 +169,7 @@ const DynamicProduct = () => {
                 />
               </div>
             </div>
+          </div>
           </div>
         )}
       </AquaLayout>
