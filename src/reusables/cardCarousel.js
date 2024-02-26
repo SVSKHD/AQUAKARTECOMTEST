@@ -24,8 +24,8 @@ const responsive = {
 const AquaCardMultiItemCarousel = (props) => {
   return (
     <Carousel
+      arrows={false}
       infinite={true}
-      dots={true}
       autoPlaySpeed={7000}
       autoPlay={true}
       swipeable={true}

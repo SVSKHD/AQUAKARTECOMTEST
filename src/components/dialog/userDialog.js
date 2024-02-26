@@ -9,6 +9,7 @@ import Image from "next/image";
 import AquaButton from "@/reusables/button";
 import { Spinner } from "react-bootstrap";
 import UserOperations from "@/Services/user";
+import AquaToast from "@/reusables/js/toast";
 
 const AquaUserDialog = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const AquaUserDialog = () => {
       UserSignup(signupData) // Use signupData for signup
         .then((res) => {
           console.log("Signup success:", res);
+          AquaToast("succefully signed you up" , "success")
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -49,6 +51,7 @@ const AquaUserDialog = () => {
         })
         .catch((err) => {
           console.log("Signup error:", err);
+          AquaToast(err.message,"error")
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -62,6 +65,7 @@ const AquaUserDialog = () => {
       UserLogin(signinData) // Use signinData for signin
         .then((res) => {
           console.log("Signin success:", res);
+          AquaToast("succefully logged in","success")
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -71,6 +75,7 @@ const AquaUserDialog = () => {
         })
         .catch((err) => {
           console.log("Signin error:", err);
+          AquaToast(err.message,"error")
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
