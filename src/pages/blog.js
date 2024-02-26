@@ -1,7 +1,9 @@
+import AquaBlogComponent from "@/pageComponents/blog";
+
 const AquaBlog = () => {
   return (
     <>
-      <h1>Aqua bLOg</h1>
+      <AquaBlogComponent />
     </>
   );
 };
