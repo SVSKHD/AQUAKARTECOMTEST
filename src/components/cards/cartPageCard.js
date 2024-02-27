@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus , FaTrash} from "react-icons/fa";
 import AQ from "../../assests/Default.png";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
@@ -76,8 +76,12 @@ const AquaCartPageCard = ({ data }) => {
                 </InputGroup>
               </div>
             </div>
-            <div className="col-md-3">
-              <div className="text-end"></div>
+            <div className="col-md-4">
+              <div className="text-end">
+                <button className="btn btn">
+                 <FaTrash className="aqua-cart-margin-right text-danger" size={25}/>
+                </button>
+              </div>
             </div>
           </div>
         </div>

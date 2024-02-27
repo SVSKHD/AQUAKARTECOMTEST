@@ -1,5 +1,5 @@
 import AquaLayout from "@/Layout/Layout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AquaCartPageCard from "@/components/cards/cartPageCard";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import { useState, useEffect } from "react";
@@ -8,12 +8,19 @@ import Link from "next/link";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaCheckoutComponent = () => {
+  const dispatch = useDispatch()
   const seo = { title: "Aquakart | Checkout" };
   const [deleteAll, setDeleteAll] = useState(false);
   const { favCount, cartCount } = useSelector((state) => ({ ...state }));
 
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
+
+  const handleDeleteAll = () =>{
+    dispatch({
+      type:"EMPTY_CART"
+    })
+  }
 
   return (
     <>
@@ -43,9 +50,9 @@ const AquaCheckoutComponent = () => {
                             Select All
                           </label>
                         </div>
-                        <div className="col text-end">
+                        <div className="col text-end p-0 ">
                           {deleteAll ? (
-                            <button className="btn btn-dark">
+                            <button className="btn btn-dark" onClick={handleDeleteAll}>
                               <FaTrash size={20} />
                             </button>
                           ) : (
@@ -96,7 +103,7 @@ const AquaCheckoutComponent = () => {
                   ))}
                 </ul>
 
-                <div class="d-flex">
+                { cartCount.length>0 ? ( <div class="d-flex">
                   <div class="p-2 flex-fill">
                     <h4>Total</h4>
                   </div>
@@ -105,7 +112,8 @@ const AquaCheckoutComponent = () => {
                       <AquaCurrencyFormat amount={total} adjust={true} />
                     </h4>
                   </div>
-                </div>
+                </div> ) : <h4 className="text-center">Add items to cart </h4>}
+               
 
                 <div class="row">
                   <Link href="/shop" className="btn col m-2 btn btn-light">

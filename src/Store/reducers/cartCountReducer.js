@@ -24,10 +24,10 @@ export const cartReducer = (state = initialState, action) => {
       const newState = state.filter((item) => item._id !== action.payload);
       localStorage.setItem("cart", JSON.stringify(newState));
       return newState;
+
     case "UPDATE_QUANTITY":
       const newStateUpdate = state.map((item) => {
         if (item._id === action.payload.productId) {
-          // Ensure the quantity is not negative or zero
           const updatedQuantity = Math.max(action.payload.quantity, 1);
           return { ...item, quantity: updatedQuantity };
         }
@@ -35,6 +35,10 @@ export const cartReducer = (state = initialState, action) => {
       });
       localStorage.setItem("cart", JSON.stringify(newStateUpdate));
       return newStateUpdate;
+
+    case "EMPTY_CART":
+      localStorage.removeItem("cart"); // Remove the cart from local storage
+      return []; // Return an empty array to reset the cart state
 
     default:
       return state;
