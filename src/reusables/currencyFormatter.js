@@ -1,19 +1,15 @@
 import React from "react";
 
 const AquaCurrencyFormat = ({ amount, adjust }) => {
-  // Assuming you want to subtract 1 from the amount before formatting
-  let adjustedAmount;
+  // Default the amount to 0 if it's not provided
+  let adjustedAmount = amount || 0;
 
+  // Subtract 1 from the amount if adjust is true
   if (adjust) {
-    adjustedAmount = amount - 1;
-  }else if(!amount || amount===0){
-    adjustedAmount
-  } 
-  else {
-    adjustedAmount = amount;
+    adjustedAmount -= 1;
   }
 
-  // Use the Intl.NumberFormat to format the currency without the currency symbol
+  // Use the Intl.NumberFormat to format the currency
   const formattedAmount = new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 0, // Assuming you don't want decimal places
   }).format(adjustedAmount);
