@@ -1,9 +1,10 @@
 import AquaLayout from "@/Layout/Layout"
 
 const AquaBlogComponent = () => {
+    const seoData = {"title":"Aquakart | Blogs"}
     return (
         <>
-            <AquaLayout>
+            <AquaLayout seo={seoData}>
                 <h1>AquaBlog</h1>
             </AquaLayout>
         </>
