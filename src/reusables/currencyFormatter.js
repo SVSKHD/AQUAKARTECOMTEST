@@ -6,7 +6,7 @@ const AquaCurrencyFormat = ({ amount, adjust }) => {
 
   if (adjust) {
     adjustedAmount = amount - 1;
-  }else if(!adjust || adjust===0){
+  }else if(!amount || amount===0){
     adjustedAmount
   } 
   else {
