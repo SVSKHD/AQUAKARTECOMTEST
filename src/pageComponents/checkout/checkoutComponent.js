@@ -13,6 +13,30 @@ const AquaCheckoutComponent = () => {
   const [deleteAll, setDeleteAll] = useState(false);
   const { favCount, cartCount } = useSelector((state) => ({ ...state }));
 
+  const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
+
+  useEffect(() => {
+    // Function to load Razorpay script
+    const loadRazorpayScript = () => {
+      if (window.Razorpay) {
+        // Razorpay is already loaded
+        setRazorpayLoaded(true);
+        return;
+      }
+
+      // Create a new script element
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => {
+        // Script has been loaded
+        setRazorpayLoaded(true);
+      };
+
+      document.body.appendChild(script);
+    };
+
+    loadRazorpayScript();
+  }, []);
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
@@ -21,6 +45,41 @@ const AquaCheckoutComponent = () => {
       type:"EMPTY_CART"
     })
   }
+
+  const handlePayment = () => {
+    
+    if (!isRazorpayLoaded) {
+      alert("Razorpay SDK is not loaded yet!");
+      return;
+    }
+
+    // Razorpay setup
+    const options = {
+      key: 'YOUR_RAZORPAY_KEY', // Replace with your actual key
+      amount: total * 100, // Amount in smallest currency unit (e.g., paise for INR)
+      currency: "INR",
+      name: "Aquakart",
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      handler: function (response) {
+        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+      },
+      prefill: {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        contact: "9999999999",
+      },
+      notes: {
+        address: "Aquakart Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
 
   return (
     <>
@@ -120,7 +179,7 @@ const AquaCheckoutComponent = () => {
                     Continue To Shop
                   </Link>
 
-                  <button class="col m-2 btn btn-dark" type="button">
+                  <button onClick={handlePayment} class="col m-2 btn btn-dark" type="button">
                     Proceed to Pay
                   </button>
                 </div>

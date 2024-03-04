@@ -76,7 +76,7 @@ aquaUserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-const AquaUser =
-  mongoose.models.AquaUser || mongoose.model("AquaUser", aquaUserSchema);
+const AquaEcomUser =
+  mongoose.models.AquaEcomUser || mongoose.model("AquaEcomUser", aquaUserSchema);
 
-export default AquaUser;
+export default AquaEcomUser;
