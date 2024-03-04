@@ -9,8 +9,9 @@ import {
   Navbar,
   Offcanvas,
 } from "react-bootstrap";
-import { FaSearch, FaUser, FaCartPlus } from "react-icons/fa";
+import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
@@ -93,9 +94,11 @@ const AquaNavBar = () => {
                 </div>
                 {user ? (
                   <>
-                    <AquaButton>
-                      Hello {createUserName(user.user.email)}
-                    </AquaButton>
+                    <Link href="/dashboard">
+                      <AquaButton>
+                        Hello {createUserName(user.user.email)}
+                      </AquaButton>
+                    </Link>
                   </>
                 ) : (
                   <>
