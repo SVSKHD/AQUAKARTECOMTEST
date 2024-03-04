@@ -8,10 +8,11 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   const { email, password } = req.body;
+  const normalizedEmail = email.toLowerCase();
   db.connectDb();
   try {
     // Check if the user already exists
-    const userExists = await AquaEcomUser.findOne({ email });
+    const userExists = await AquaEcomUser.findOne({ normalizedEmail });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -24,7 +25,7 @@ router.post(async (req, res) => {
     // Create a new user
     const user = await AquaEcomUser.create({
       id: uniqueId,
-      email,
+      email:normalizedEmail,
       password: password, // Store the hashed password
     });
 
