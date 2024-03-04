@@ -36,11 +36,14 @@ const AquaFooter = () => {
         </AquaCard> */}
 
         <div className="footer-aqua">
-          <div className="container mt-2">
+          <div className="mt-2">
             <div className="row">
               <div className="col text-center">
                 <Image src={AQ} alt="Aquakart" height="150" width="150" />
                 <h4 className="text-center">Aquakart</h4>
+              </div>
+              <div className="col">
+                <h4>Quick links</h4>
               </div>
               <div className="col">
                 <h4>Categories</h4>
