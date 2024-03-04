@@ -1,5 +1,6 @@
 import UserHeader from "./userHeader"
 
+
 const userLayout = (props) => {
     return (
         <>
@@ -26,7 +27,7 @@ const userLayout = (props) => {
                     <div className="col-8">
                         <div className="card">
                             <div className="card-body">
-                        <UserHeader />
+                        <UserHeader name="hithesh" />
                         {props.children}
                         </div>
                         </div>

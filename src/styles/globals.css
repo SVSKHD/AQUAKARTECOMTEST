@@ -359,3 +359,8 @@ body {
 .aqua-cart-margin-right {
   margin-right: 22px;
 }
+
+.aqua-username::first-letter{
+  font-size: 8rem!important;
+  color: azure;
+}
