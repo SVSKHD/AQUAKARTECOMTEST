@@ -93,83 +93,83 @@ const DynamicProduct = () => {
           </div>
         ) : (
           <div className="dynamic-product">
-          <div className="row mb-3">
-            <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
-              {product?.photos ? (
-                <>
-                  <AquaProductUnControlledCarousel
-                    images={product?.photos}
+            <div className="row mb-3">
+              <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
+                {product?.photos ? (
+                  <>
+                    <AquaProductUnControlledCarousel
+                      images={product?.photos}
+                      className="card-img-top custom-image"
+                      width="100"
+                      height="280"
+                      alt={`Aquakart Images | ${product.title}`}
+                    />
+                  </>
+                ) : (
+                  <Image
+                    src={LOGO}
                     className="card-img-top custom-image"
-                    width="100"
-                    height="280"
-                    alt={`Aquakart Images | ${product.title}`}
+                    alt="..."
                   />
-                </>
-              ) : (
-                <Image
-                  src={LOGO}
-                  className="card-img-top custom-image"
-                  alt="..."
-                />
-              )}
-            </div>
-            <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
-              <h1 className="display-2 text-bold">{product?.title}</h1>
-              <span className="dynamic-product-price-brand">
-                <h4 className="price product-price-align">
-                  <Badge bg="success">
-                    {" "}
-                    <AquaCurrencyFormat amount={product?.price} />
-                  </Badge>
-                </h4>
-                <h4 className="dynamic-product-brand">
-                  Brand : {product?.brand}
-                </h4>
-              </span>
-              <InputGroup className="mb-3 width-adjust">
-                <Button variant="outline-dark" onClick={stockSub}>
-                  <FaMinus size={25} />
-                </Button>
-                <Form.Control
-                  aria-label="Example text with two button addons"
-                  className="text-center"
-                  value={product.quantity}
-                />
-                <Button variant="outline-dark" onClick={stockAdd}>
-                  <FaPlus size={25} />
-                </Button>
-              </InputGroup>
-              <div className="dynamic-product-cart-fav">
-                <AquaButton
-                  variant="normal"
-                  onClick={() => addProductToCart(product, setCart)}
-                >
-                  {cart ? (
-                    <FaCartArrowDown className="text-success" size={25} />
-                  ) : (
-                    <FaCartPlus className="text-dark" size={25} />
-                  )}
-                </AquaButton>
-                <AquaButton
-                  variant="normal"
-                  onClick={() => addProductToFav(product, setFav)}
-                >
-                  {fav ? (
-                    <FaHeart size={25} className="text-danger" />
-                  ) : (
-                    <FaRegHeart size={25} className="text-danger" />
-                  )}
-                </AquaButton>
-                <AquaButton href="/checkout">Checkout</AquaButton>
+                )}
               </div>
-              <hr />
-              <div className="container">
-                <div
-                  dangerouslySetInnerHTML={{ __html: product?.description }}
-                />
+              <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
+                <h1 className="display-2 text-bold">{product?.title}</h1>
+                <span className="dynamic-product-price-brand">
+                  <h4 className="price product-price-align">
+                    <Badge bg="success">
+                      {" "}
+                      <AquaCurrencyFormat amount={product?.price} />
+                    </Badge>
+                  </h4>
+                  <h4 className="dynamic-product-brand">
+                    Brand : {product?.brand}
+                  </h4>
+                </span>
+                <InputGroup className="mb-3 width-adjust">
+                  <Button variant="outline-dark" onClick={stockSub}>
+                    <FaMinus size={25} />
+                  </Button>
+                  <Form.Control
+                    aria-label="Example text with two button addons"
+                    className="text-center"
+                    value={product.quantity}
+                  />
+                  <Button variant="outline-dark" onClick={stockAdd}>
+                    <FaPlus size={25} />
+                  </Button>
+                </InputGroup>
+                <div className="dynamic-product-cart-fav">
+                  <AquaButton
+                    variant="normal"
+                    onClick={() => addProductToCart(product, setCart)}
+                  >
+                    {cart ? (
+                      <FaCartArrowDown className="text-success" size={25} />
+                    ) : (
+                      <FaCartPlus className="text-dark" size={25} />
+                    )}
+                  </AquaButton>
+                  <AquaButton
+                    variant="normal"
+                    onClick={() => addProductToFav(product, setFav)}
+                  >
+                    {fav ? (
+                      <FaHeart size={25} className="text-danger" />
+                    ) : (
+                      <FaRegHeart size={25} className="text-danger" />
+                    )}
+                  </AquaButton>
+                  <AquaButton href="/checkout">Checkout</AquaButton>
+                </div>
+                <hr />
+                <div className="container">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: product?.description }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
           </div>
         )}
       </AquaLayout>

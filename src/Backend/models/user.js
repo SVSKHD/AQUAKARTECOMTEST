@@ -77,6 +77,7 @@ aquaUserSchema.pre("save", async function (next) {
 });
 
 const AquaEcomUser =
-  mongoose.models.AquaEcomUser || mongoose.model("AquaEcomUser", aquaUserSchema);
+  mongoose.models.AquaEcomUser ||
+  mongoose.model("AquaEcomUser", aquaUserSchema);
 
 export default AquaEcomUser;

@@ -14,11 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
-  const { cartCount } = useSelector((state) => ({ ...state }));
+  const { cartCount, user } = useSelector((state) => ({ ...state }));
   const [cartLength, setCartLength] = useState(0);
   useEffect(() => {
     setCartLength(cartCount.length);
   }, [cartCount]);
+
+  function createUserName(email) {
+    const usernamePart = email.split("@")[0]; // Get the part before '@'
+    return usernamePart.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
+  }
 
   return (
     <>
@@ -86,17 +91,27 @@ const AquaNavBar = () => {
                     {cartLength}
                   </span>
                 </div>
-                <AquaButton
-                  variant={"normal"}
-                  onClick={() =>
-                    dispatch({
-                      type: "SET_AUTH_DIALOG_VISIBLE",
-                      payload: true,
-                    })
-                  }
-                >
-                  <FaUser size={25} />
-                </AquaButton>
+                {user ? (
+                  <>
+                    <AquaButton>
+                      Hello {createUserName(user.user.email)}
+                    </AquaButton>
+                  </>
+                ) : (
+                  <>
+                    <AquaButton
+                      variant={"normal"}
+                      onClick={() =>
+                        dispatch({
+                          type: "SET_AUTH_DIALOG_VISIBLE",
+                          payload: true,
+                        })
+                      }
+                    >
+                      <FaUser size={25} />
+                    </AquaButton>
+                  </>
+                )}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

@@ -36,9 +36,9 @@ const AquaUserDialog = () => {
     event.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, loading: true }));
     if (signupStatus === true) {
-      UserSignup(signupData) 
+      UserSignup(signupData)
         .then((res) => {
-          AquaToast("succefully signed you up" , "success")
+          AquaToast("succefully signed you up", "success");
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -51,7 +51,7 @@ const AquaUserDialog = () => {
           });
         })
         .catch((err) => {
-          AquaToast(err.message,"error")
+          AquaToast(err.message, "error");
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -60,22 +60,27 @@ const AquaUserDialog = () => {
           }));
         });
     } else {
-      UserLogin(signinData) 
+      UserLogin(signinData)
         .then((res) => {
-          AquaToast("succefully logged in","success")
+          AquaToast("succefully logged in", "success");
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
             success: true,
             successMessage: "Signin successful!",
           }));
+          console.log(res.data);
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: res.data,
+          });
           dispatch({
             type: "SET_AUTH_DIALOG_VISIBLE",
-            payload: true,
-          })
+            payload: false,
+          });
         })
         .catch(() => {
-          AquaToast("Please try again","error")
+          AquaToast("Please try again", "error");
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,

@@ -8,7 +8,7 @@ import Link from "next/link";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaCheckoutComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const seo = { title: "Aquakart | Checkout" };
   const [deleteAll, setDeleteAll] = useState(false);
   const { favCount, cartCount } = useSelector((state) => ({ ...state }));
@@ -40,14 +40,13 @@ const AquaCheckoutComponent = () => {
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
-  const handleDeleteAll = () =>{
+  const handleDeleteAll = () => {
     dispatch({
-      type:"EMPTY_CART"
-    })
-  }
+      type: "EMPTY_CART",
+    });
+  };
 
   const handlePayment = () => {
-    
     if (!isRazorpayLoaded) {
       alert("Razorpay SDK is not loaded yet!");
       return;
@@ -55,14 +54,16 @@ const AquaCheckoutComponent = () => {
 
     // Razorpay setup
     const options = {
-      key: 'YOUR_RAZORPAY_KEY', // Replace with your actual key
+      key: "YOUR_RAZORPAY_KEY", // Replace with your actual key
       amount: total * 100, // Amount in smallest currency unit (e.g., paise for INR)
       currency: "INR",
       name: "Aquakart",
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       handler: function (response) {
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+        alert(
+          `Payment successful! Payment ID: ${response.razorpay_payment_id}`,
+        );
       },
       prefill: {
         name: "John Doe",
@@ -111,7 +112,10 @@ const AquaCheckoutComponent = () => {
                         </div>
                         <div className="col text-end p-0 ">
                           {deleteAll ? (
-                            <button className="btn btn-dark" onClick={handleDeleteAll}>
+                            <button
+                              className="btn btn-dark"
+                              onClick={handleDeleteAll}
+                            >
                               <FaTrash size={20} />
                             </button>
                           ) : (
@@ -162,24 +166,31 @@ const AquaCheckoutComponent = () => {
                   ))}
                 </ul>
 
-                { cartCount.length>0 ? ( <div class="d-flex">
-                  <div class="p-2 flex-fill">
-                    <h4>Total</h4>
+                {cartCount.length > 0 ? (
+                  <div class="d-flex">
+                    <div class="p-2 flex-fill">
+                      <h4>Total</h4>
+                    </div>
+                    <div class="p-2 flex-fill text-end text-success">
+                      <h4>
+                        <AquaCurrencyFormat amount={total} adjust={true} />
+                      </h4>
+                    </div>
                   </div>
-                  <div class="p-2 flex-fill text-end text-success">
-                    <h4>
-                      <AquaCurrencyFormat amount={total} adjust={true} />
-                    </h4>
-                  </div>
-                </div> ) : <h4 className="text-center">Add items to cart </h4>}
-               
+                ) : (
+                  <h4 className="text-center">Add items to cart </h4>
+                )}
 
                 <div class="row">
                   <Link href="/shop" className="btn col m-2 btn btn-light">
                     Continue To Shop
                   </Link>
 
-                  <button onClick={handlePayment} class="col m-2 btn btn-dark" type="button">
+                  <button
+                    onClick={handlePayment}
+                    class="col m-2 btn btn-dark"
+                    type="button"
+                  >
                     Proceed to Pay
                   </button>
                 </div>
