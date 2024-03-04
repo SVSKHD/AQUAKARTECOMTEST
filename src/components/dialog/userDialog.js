@@ -34,13 +34,10 @@ const AquaUserDialog = () => {
   });
   const handleSubmit = (event) => {
     event.preventDefault();
-    setStatus((prevStatus) => ({ ...prevStatus, loading: true })); // Correctly update loading state
+    setStatus((prevStatus) => ({ ...prevStatus, loading: true }));
     if (signupStatus === true) {
-      // If it's in signup mode
-      console.log("Signup Data:", signupData, signupStatus);
-      UserSignup(signupData) // Use signupData for signup
+      UserSignup(signupData) 
         .then((res) => {
-          console.log("Signup success:", res);
           AquaToast("succefully signed you up" , "success")
           setStatus((prevStatus) => ({
             ...prevStatus,
@@ -48,9 +45,12 @@ const AquaUserDialog = () => {
             success: true,
             successMessage: "Signup successful!",
           }));
+          dispatch({
+            type: "SET_AUTH_STATUS_VISIBLE",
+            payload: false,
+          });
         })
         .catch((err) => {
-          console.log("Signup error:", err);
           AquaToast(err.message,"error")
           setStatus((prevStatus) => ({
             ...prevStatus,
@@ -60,11 +60,8 @@ const AquaUserDialog = () => {
           }));
         });
     } else {
-      // If it's in signin mode
-      console.log("Signin Data:", signinData, signupStatus);
-      UserLogin(signinData) // Use signinData for signin
+      UserLogin(signinData) 
         .then((res) => {
-          console.log("Signin success:", res);
           AquaToast("succefully logged in","success")
           setStatus((prevStatus) => ({
             ...prevStatus,
@@ -72,10 +69,13 @@ const AquaUserDialog = () => {
             success: true,
             successMessage: "Signin successful!",
           }));
+          dispatch({
+            type: "SET_AUTH_DIALOG_VISIBLE",
+            payload: true,
+          })
         })
-        .catch((err) => {
-          console.log("Signin error:", err);
-          AquaToast(err.message,"error")
+        .catch(() => {
+          AquaToast("Please try again","error")
           setStatus((prevStatus) => ({
             ...prevStatus,
             loading: false,
@@ -85,9 +85,6 @@ const AquaUserDialog = () => {
         });
     }
   };
-
-  console.log("signup", signupStatus);
-
   return (
     <>
       <AquaDialog
