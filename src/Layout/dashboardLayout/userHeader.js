@@ -1,12 +1,10 @@
-const userHeader = () =>{
-return(
-    <>
-    <div className="card shadow-lg">
-        <div className="card-body">
-
-        </div>
-    </div>
-    </>
-)
+const UserHeader = () => {
+    return (
+        <>
+            <div className="card-body">
+                <h1>User name</h1>
+            </div>
+        </>
+    )
 }
-export default userHeader
+export default UserHeader
