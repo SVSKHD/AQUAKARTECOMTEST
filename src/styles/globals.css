@@ -360,7 +360,10 @@ body {
   margin-right: 22px;
 }
 
-.aqua-username::first-letter{
-  font-size: 8rem!important;
-  color: azure;
+.card-body .aqua-username::first-letter {
+  font-size: 1.5em; /* Adjust as needed */
+  color: #FF5733; /* Adjust as needed */
+  /* Use !important only as a last resort */
 }
+
+

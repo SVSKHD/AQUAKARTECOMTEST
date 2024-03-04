@@ -1,7 +1,13 @@
+import { useDispatch, useSelector } from "react-redux"
 import UserHeader from "./userHeader"
 
 
-const userLayout = (props) => {
+const UserLayout = (props) => {
+    const { user } = useSelector((state) => ({ ...state }));
+    function createUserName(email) {
+        const usernamePart = email?.split("@")[0]; // Get the part before '@'
+        return usernamePart?.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
+      }
     return (
         <>
             <div className="container">
@@ -25,9 +31,9 @@ const userLayout = (props) => {
                         </div>
                     </div>
                     <div className="col-8">
-                        <div className="card">
+                        <div className="card shadow-lg">
                             <div className="card-body">
-                        <UserHeader name="hithesh" />
+                        <UserHeader name={createUserName(user?.email)} />
                         {props.children}
                         </div>
                         </div>
@@ -38,4 +44,4 @@ const userLayout = (props) => {
         </>
     )
 }
-export default userLayout
+export default UserLayout
