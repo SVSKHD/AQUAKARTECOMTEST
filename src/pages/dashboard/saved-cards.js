@@ -1,12 +1,12 @@
 import UserLayout from "@/Layout/dashboardLayout/userLayout";
 
-const UserOrder = () => {
+const UserSavedCards = () => {
   return (
     <>
       <UserLayout>
-        <h1>orders</h1>
+        <h1>saved cards</h1>
       </UserLayout>
     </>
   );
 };
-export default UserOrder;
+export default UserSavedCards;
