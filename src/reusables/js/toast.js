@@ -16,7 +16,7 @@ const AquaToast = (message, type) => {
       // Directly call toast.success here
       toast.success(message, {
         icon,
-        duration: 6000, // Adjust duration as needed
+        duration: 2000, // Adjust duration as needed
         position: "top-right",
         style: {
           borderRadius: "20px",

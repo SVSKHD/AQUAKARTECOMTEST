@@ -6,11 +6,13 @@ import { InputGroup, Button, Form } from "react-bootstrap";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import AQ from "../../assests/Default.png";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
+import { useDispatch } from "react-redux";
 
 const AquaCartPageCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const router = useRouter();
+  const dispatch = useDispatch()
   const Redirect = () => {
     router.push(`/product/${_id}`);
   };
@@ -30,6 +32,13 @@ const AquaCartPageCard = ({ data }) => {
       QuantitySub(data, localQuantity - 1);
     }
   };
+
+  const handleRemoveClicked = (r) =>{
+    dispatch({
+      type:"REMOVE_FROM_CART",
+      payload:r._id
+    })
+  }
 
   return (
     <>
@@ -78,7 +87,7 @@ const AquaCartPageCard = ({ data }) => {
             </div>
             <div className="col-md-4">
               <div className="text-end">
-                <button className="btn btn">
+                <button className="btn btn" onClick={()=>handleRemoveClicked(data)}>
                   <FaTrash
                     className="aqua-cart-margin-right text-danger"
                     size={25}
