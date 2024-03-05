@@ -33,7 +33,7 @@ const UserLayout = (props) => {
                                     {menu.map((r, i) => (
                                         <a key={i} href={r.path} className="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1">{r.name}</h5>
+                                                <h5 class="mb-1">{r.title}</h5>
                                             </div>
                                         </a>
                                     ))}
