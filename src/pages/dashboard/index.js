@@ -1,13 +1,10 @@
-import UserLayout from "@/Layout/dashboardLayout/userLayout"
+import UserLayout from "@/Layout/dashboardLayout/userLayout";
 
-const userDashBoard = () =>{
-    
-return(
+const userDashBoard = () => {
+  return (
     <>
-    <UserLayout>
-
-    </UserLayout>
+      <UserLayout></UserLayout>
     </>
-)
-}
-export default userDashBoard
+  );
+};
+export default userDashBoard;

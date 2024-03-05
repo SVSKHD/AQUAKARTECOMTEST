@@ -362,8 +362,12 @@ body {
 
 .card-body .aqua-username::first-letter {
   font-size: 1.5em; /* Adjust as needed */
-  color: #FF5733; /* Adjust as needed */
+  color: #ff5733; /* Adjust as needed */
   /* Use !important only as a last resort */
 }
 
 
+.pdescription{
+  font-size: 4rem;
+  color: #053b50;
+}

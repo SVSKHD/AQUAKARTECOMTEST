@@ -27,6 +27,20 @@ const AquaAboutPageComponent = () => {
             </div>
           </div>
         </div>
+        <div className="m-2">
+          <div className="row">
+            <div className="col-6">
+              <AquaLargeTitle display={3}>
+                Introduction to AquaKart
+              </AquaLargeTitle>
+            </div>
+            <div className="col-6">
+              <p className="pdescription">
+                AquaKart was founded with a clear mission: to revolutionize the way people experience water. Born from a passion for enhancing health and protecting the environment, AquaKart has swiftly become a leading name in water softening solutions. Our commitment to innovation, quality, and customer welfare stands at the core of everything we do.
+              </p>
+            </div>
+          </div>
+        </div>
       </AquaLayout>
     </>
   );

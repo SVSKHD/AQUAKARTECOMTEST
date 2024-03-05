@@ -1,13 +1,10 @@
-import UserLayout from "@/Layout/dashboardLayout/userLayout"
+import UserLayout from "@/Layout/dashboardLayout/userLayout";
 
-const UserFav = () =>{
-    
-return(
+const UserFav = () => {
+  return (
     <>
-    <UserLayout>
-
-    </UserLayout>
+      <UserLayout></UserLayout>
     </>
-)
-}
-export default UserFav
+  );
+};
+export default UserFav;

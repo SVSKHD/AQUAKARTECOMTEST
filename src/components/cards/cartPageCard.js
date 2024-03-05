@@ -12,7 +12,7 @@ const AquaCartPageCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const Redirect = () => {
     router.push(`/product/${_id}`);
   };
@@ -33,12 +33,12 @@ const AquaCartPageCard = ({ data }) => {
     }
   };
 
-  const handleRemoveClicked = (r) =>{
+  const handleRemoveClicked = (r) => {
     dispatch({
-      type:"REMOVE_FROM_CART",
-      payload:r._id
-    })
-  }
+      type: "REMOVE_FROM_CART",
+      payload: r._id,
+    });
+  };
 
   return (
     <>
@@ -87,7 +87,10 @@ const AquaCartPageCard = ({ data }) => {
             </div>
             <div className="col-md-4">
               <div className="text-end">
-                <button className="btn btn" onClick={()=>handleRemoveClicked(data)}>
+                <button
+                  className="btn btn"
+                  onClick={() => handleRemoveClicked(data)}
+                >
                   <FaTrash
                     className="aqua-cart-margin-right text-danger"
                     size={25}

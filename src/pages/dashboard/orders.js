@@ -1,13 +1,10 @@
-import UserLayout from "@/Layout/dashboardLayout/userLayout"
+import UserLayout from "@/Layout/dashboardLayout/userLayout";
 
-const UserOrder = () =>{
-    
-return(
+const UserOrder = () => {
+  return (
     <>
-    <UserLayout>
-
-    </UserLayout>
+      <UserLayout></UserLayout>
     </>
-)
-}
-export default UserOrder
+  );
+};
+export default UserOrder;

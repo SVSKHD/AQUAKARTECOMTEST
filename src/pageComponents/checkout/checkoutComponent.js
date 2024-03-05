@@ -90,7 +90,6 @@ const AquaCheckoutComponent = () => {
             <div className="card shadow-lg">
               <div className="card-body">
                 <h3>Cart</h3>
-
                 <div>
                   {cartCount.length > 0 ? (
                     <>

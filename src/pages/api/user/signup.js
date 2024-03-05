@@ -25,7 +25,7 @@ router.post(async (req, res) => {
     // Create a new user
     const user = await AquaEcomUser.create({
       id: uniqueId,
-      email:normalizedEmail,
+      email: normalizedEmail,
       password: password, // Store the hashed password
     });
 
