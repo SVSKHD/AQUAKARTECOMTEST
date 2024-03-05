@@ -11,15 +11,15 @@ const UserLayout = (props) => {
     const menu = [
         {
             title: "orders",
-            path: "/orders"
+            path: "/dashboard/orders"
         },
         {
             title: "wish-list",
-            path: "/wishlist"
+            path: "/dashboard/wishlist"
         },
         {
             title: "Saved-Cards",
-            path: "/saved-cards"
+            path: "/dashboard/saved-cards"
         }
     ]
     return (
