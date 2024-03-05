@@ -33,7 +33,7 @@ const UserLayout = (props) => {
                     <div className="col-8">
                         <div className="card shadow-lg">
                             <div className="card-body">
-                        <UserHeader name={createUserName(user?.email)} />
+                        <UserHeader name={createUserName(user?.user?.email)} />
                         {props.children}
                         </div>
                         </div>
