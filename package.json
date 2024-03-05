@@ -35,6 +35,7 @@
     "react-redux": "^8.1.2",
     "react-spinners": "^0.13.8",
     "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
     "shortid": "^2.2.16",
     "uuid": "^9.0.0",
     "validator": "^13.11.0"
