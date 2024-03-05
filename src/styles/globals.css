@@ -366,8 +366,7 @@ body {
   /* Use !important only as a last resort */
 }
 
-
-.pdescription::first-letter{
+.pdescription::first-letter {
   font-size: 4rem;
   color: #053b50;
 }
