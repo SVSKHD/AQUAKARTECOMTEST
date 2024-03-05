@@ -1,4 +1,5 @@
 import AquaLayout from "@/Layout/Layout";
+import AquaStandardShadowCard from "@/components/cards/aquaStandardShadowCard";
 import AquaHeading from "@/reusables/heading";
 import AquaLargeTitle from "@/reusables/largeTitle";
 
@@ -18,12 +19,13 @@ const AquaAboutPageComponent = () => {
               </AquaLargeTitle>
             </div>
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
-              <div className="about-title" />
-              <AquaHeading>
-                Hello there welcome back, we are in starting stage of using
-                softeners as every place dosen't deliver the same water softenes
-                some places are great and some places are not{" "}
-              </AquaHeading>
+              <AquaStandardShadowCard>
+                <p className="about-title">
+                  Hello there welcome back, we are in starting stage of using
+                  softeners as every place dosen't deliver the same water softenes
+                  some places are great and some places are not{" "}
+                </p>
+              </AquaStandardShadowCard>
             </div>
           </div>
         </div>
