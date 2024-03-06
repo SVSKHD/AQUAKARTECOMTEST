@@ -8,6 +8,8 @@ import {
   Nav,
   Navbar,
   Offcanvas,
+  ButtonGroup,
+  Dropdown,
 } from "react-bootstrap";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -94,11 +96,26 @@ const AquaNavBar = () => {
                 </div>
                 {user ? (
                   <>
-                    <Link href="/dashboard">
-                      <AquaButton>
+                    <Dropdown className="ms-3" as={ButtonGroup}>
+                      <Button variant="dark">
+                        {" "}
                         Hello {createUserName(user.user.email)}
-                      </AquaButton>
-                    </Link>
+                      </Button>
+
+                      <Dropdown.Toggle
+                        variant="dark"
+                        id="dropdown-split-basic"
+                      />
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="/dashboard">
+                          Dashboard
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">
+                          <Button variant="danger">logout</Button>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </>
                 ) : (
                   <>
