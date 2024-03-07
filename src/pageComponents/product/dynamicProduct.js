@@ -109,7 +109,7 @@ const DynamicProduct = () => {
                   <Image
                     src={LOGO}
                     className="card-img-top custom-image"
-                    alt="..."
+                    alt="Aquakart"
                   />
                 )}
               </div>
