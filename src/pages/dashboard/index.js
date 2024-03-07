@@ -3,7 +3,7 @@ import UserForm from "@/components/forms/userUpdateForm";
 import UserPasswordForm from "@/components/forms/userpasswordForm";
 import { useState } from "react";
 
-const userDashBoard = () => {
+const UserDashBoard = () => {
   const [detailsStatus, setDetailStatus] = useState(false);
   const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
   return (
@@ -41,4 +41,4 @@ const userDashBoard = () => {
     </>
   );
 };
-export default userDashBoard;
+export default UserDashBoard;
