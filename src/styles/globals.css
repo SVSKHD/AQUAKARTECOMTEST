@@ -370,3 +370,7 @@ body {
   font-size: 4rem;
   color: #053b50;
 }
+
+.user-dashboard-height{
+  height: 400px;
+}

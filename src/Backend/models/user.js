@@ -25,6 +25,10 @@ const aquaUserSchema = new mongoose.Schema({
     minlength: [6, "password should be atleast 6 char"],
     select: false,
   },
+  alternativeEmail: {
+    type: String,
+    validate: [validator.isEmail, "Please enter email in correct format"]
+  },
   role: {
     type: String,
     default: "user",

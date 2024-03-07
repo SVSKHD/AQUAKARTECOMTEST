@@ -10,6 +10,10 @@ const UserLayout = (props) => {
   }
   const menu = [
     {
+      title: "Dashboard",
+      path: "/dashboard"
+    },
+    {
       title: "orders",
       path: "/dashboard/orders",
     },
@@ -20,6 +24,10 @@ const UserLayout = (props) => {
     {
       title: "Saved-Cards",
       path: "/dashboard/saved-cards",
+    },
+    {
+      title: "cart",
+      path: "/dashboard/cart",
     },
   ];
   return (
@@ -48,14 +56,14 @@ const UserLayout = (props) => {
               </div>
             </div>
             <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-              <div className="card shadow-lg">
+              <div className="card shadow-lg mb-1">
                 <div className="card-body">
                   <UserHeader name={createUserName(user?.user?.email)} />
-                  <div className="card shadow-lg">
-                    <div className="card-body">
-                      <div className="container">{props.children}</div>
-                    </div>
-                  </div>
+                </div>
+              </div>
+              <div className="card shadow-lg user-dashboard-height">
+                <div className="card-body">
+                  <div className="container">{props.children}</div>
                 </div>
               </div>
             </div>
