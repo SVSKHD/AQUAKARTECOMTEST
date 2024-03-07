@@ -18,6 +18,7 @@ import Link from "next/link";
 const AquaNavBar = () => {
   const dispatch = useDispatch();
   const { cartCount, user } = useSelector((state) => ({ ...state }));
+ 
   const [cartLength, setCartLength] = useState(0);
   useEffect(() => {
     setCartLength(cartCount.length);
@@ -111,8 +112,11 @@ const AquaNavBar = () => {
                         <Dropdown.Item href="/dashboard">
                           Dashboard
                         </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                          <Button variant="danger">logout</Button>
+                        <Dropdown.Item>
+                          <Button variant="danger" onClick={() => dispatch({
+                            type: "LOGOUT",
+                            payload: null
+                          })}>logout</Button>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>

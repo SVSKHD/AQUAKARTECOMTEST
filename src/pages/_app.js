@@ -10,7 +10,7 @@ import { useRouter } from "next/router"; // Import useRouter
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
-const Store = createStore(rootReducer);
+
 
 const persistConfig = {
   key: "root",

@@ -1,8 +1,20 @@
 import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const AquaUserHead = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const handleLogout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null
+    })
+    router.push("/")
+  }
   return (
     <Container>
       <Navbar expand="lg" className="shadow-lg cus-nav">
@@ -15,6 +27,9 @@ const AquaUserHead = () => {
               width="50"
             />
           </Navbar.Brand>
+          <button className="btn btn-danger" onClick={handleLogout} >
+            <FaArrowRightFromBracket size={25} />
+          </button>
         </Container>
       </Navbar>
     </Container>
