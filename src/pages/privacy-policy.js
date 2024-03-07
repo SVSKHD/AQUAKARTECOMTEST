@@ -1,11 +1,11 @@
-import AquaLayout from "@/Layout/Layout"
+import AquaLayout from "@/Layout/Layout";
 
-const AquaPrivacyPolicy = () =>{
-return(
+const AquaPrivacyPolicy = () => {
+  return (
     <AquaLayout>
-        <h1>Privacy And Policy</h1>
-        <hr/>
+      <h1>Privacy And Policy</h1>
+      <hr />
     </AquaLayout>
-)
-}
-export default AquaPrivacyPolicy
+  );
+};
+export default AquaPrivacyPolicy;

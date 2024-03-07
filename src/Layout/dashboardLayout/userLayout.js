@@ -11,7 +11,7 @@ const UserLayout = (props) => {
   const menu = [
     {
       title: "Dashboard",
-      path: "/dashboard"
+      path: "/dashboard",
     },
     {
       title: "orders",

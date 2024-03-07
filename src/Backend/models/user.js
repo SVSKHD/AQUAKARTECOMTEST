@@ -27,7 +27,7 @@ const aquaUserSchema = new mongoose.Schema({
   },
   alternativeEmail: {
     type: String,
-    validate: [validator.isEmail, "Please enter email in correct format"]
+    validate: [validator.isEmail, "Please enter email in correct format"],
   },
   role: {
     type: String,
