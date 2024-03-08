@@ -2,8 +2,10 @@ import AquaLayout from "@/Layout/Layout";
 import AquaCategoryHolder from "./categoryHolder";
 import AquaSubCategoryHolder from "./subCategoryHolder";
 import AquaProductHolder from "./productHolder";
+import { useRouter } from "next/router";
 
 const AquaHomeComponent = () => {
+  const router = useRouter()
   const SeoData = {
     title: "Aquakart | Online Shopping for Softeners purifiers and many more",
     description:
