@@ -43,7 +43,7 @@ const AquaFooter = () => {
                 <h4 className="text-center">Aquakart</h4>
               </div>
               <div className="col">
-                <h4>Quick links</h4>
+                <p className="footer-col-heading">Quick links</p>
               </div>
               <div className="col">
                 <h4>Categories</h4>

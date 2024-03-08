@@ -12,6 +12,30 @@ const AquaPrivacyPolicy = () => {
     {
       "title": "Purpose and Scope",
       "description": "The purpose of this Privacy Policy is to inform you about how Aquakart collects, processes, and protects your personal data when you interact with our website. Whether you're browsing our products, signing up for an account, or making a purchase, we want you to understand our practices to ensure a transparent and trustworthy environment."
+    },
+    {
+      "title": "Collectables",
+      "description": "For authentication and identification purposes, Aquakart requires users to provide their email addresses and passwords. This allows us to determine whether a user is returning or new to our app. We collect phone numbers to confirm orders and facilitate communication for delivery purposes, ensuring accuracy in navigation and prompt service. Additionally, we offer the option to save payment card details for the convenience of users, streamlining future purchases."
+    },
+    {
+      "title": "Security and privacy",
+      "description": "Aquakart employs state-of-the-art databases and cutting-edge technologies to ensure the utmost security of collected data, making it resilient to breaches. Furthermore, we utilize multi-factor authentication methods to maintain the stability and security of our data."
+    },
+    {
+      "title": "Contact and Contact Sharing",
+      "description": "Regarding the privacy of children, Aquakart is committed to safeguarding the personal information of those under 13 years of age (or the applicable minimum age as per local laws), in strict adherence to regulations such as the Children's Online Privacy Protection Act (COPPA)."
+    },
+    {
+      "title": "COPPA (Children Privacy)",
+      "description": " Contact details are provided to our transit partners to facilitate navigation and delivery. This ensures they can effectively communicate and locate the specified types of properties through the app"
+    },
+    {
+      "title":"Cookies and Tracking Technologies",
+      "description":"Aquakart utilizes cookies, web beacons, and various tracking technologies to gather information regarding user interactions and preferences. This data aids in enhancing user experiences by allowing us to tailor our services and content to better suit individual needs."
+    },
+    {
+      "title":"User Rights",
+      "description":"Aquakart ensures users are aware of their entitlements concerning their personal information, including the abilities to access, amend, erase, or withdraw consent for specific data uses"
     }
   ]
   const seo = {

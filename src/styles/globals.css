@@ -374,3 +374,8 @@ body {
 .user-dashboard-height {
   height: 400px;
 }
+
+.footer-col-heading{
+  font-size:14px;
+  color: #EEF5FF;
+}
