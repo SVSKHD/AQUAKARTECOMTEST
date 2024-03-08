@@ -24,6 +24,12 @@ const AquaFooter = () => {
   useEffect(() => {
     loadCategories();
   }, [loadCategories]);
+  const quickLinks = [
+    {
+      title: "privacy-policy",
+      link: "/privacy-policy",
+    },
+  ];
   return (
     <>
       <div>
@@ -44,17 +50,33 @@ const AquaFooter = () => {
               </div>
               <div className="col">
                 <p className="footer-col-heading">Quick links</p>
+                {quickLinks.map((r, i) => (
+                  <>
+                    <p key={i} className="footer-item-adjust">
+                      <a href={r.link} className="footer-item-adjust">
+                        {r.title}
+                      </a>
+                    </p>
+                  </>
+                ))}
               </div>
               <div className="col">
-                <h4>Categories</h4>
-                <ul>
-                  {categories.map((c) => (
-                    <li key={c}>{c.title}</li>
-                  ))}
-                </ul>
+                <p className="footer-col-heading">Categories</p>
+
+                {categories.map((c, i) => (
+                  <>
+                    <p key={i} className="footer-item-adjust">
+                      <a
+                        href={`/category/${c.title}`}
+                        className="footer-item-adjust"
+                      >
+                        {c.title}
+                      </a>
+                    </p>
+                  </>
+                ))}
               </div>
               <div className="col">
-                <h4>subscribe form</h4>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">
                     Email address

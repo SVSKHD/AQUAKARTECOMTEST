@@ -5,7 +5,7 @@ import AquaProductHolder from "./productHolder";
 import { useRouter } from "next/router";
 
 const AquaHomeComponent = () => {
-  const router = useRouter()
+  const router = useRouter();
   const SeoData = {
     title: "Aquakart | Online Shopping for Softeners purifiers and many more",
     description:
