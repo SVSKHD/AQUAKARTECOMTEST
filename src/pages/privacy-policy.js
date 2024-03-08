@@ -49,7 +49,7 @@ const AquaPrivacyPolicy = () => {
       <div className="row mb-5">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           {PrivacyPolicy.map((r, i) => (
-            <div key={i} className="card mb-1" onClick={() => setDesription(r)}>
+            <div key={i} className="card privacy-card shadow-lg mb-1" onClick={() => setDesription(r)}>
               <div className="card-body">
                 <div className="card-title">{i + 1} - {r.title}</div>
               </div>
