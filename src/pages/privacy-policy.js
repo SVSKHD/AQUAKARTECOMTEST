@@ -2,6 +2,7 @@ import { useState } from "react"
 import AquaLayout from "@/Layout/Layout";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { FaEnvelope } from "react-icons/fa"
+import { useRouter } from "next/router";
 
 const AquaPrivacyPolicy = () => {
   const [description, setDesription] = useState("")
@@ -39,12 +40,14 @@ const AquaPrivacyPolicy = () => {
       "description": "Aquakart ensures users are aware of their entitlements concerning their personal information, including the abilities to access, amend, erase, or withdraw consent for specific data uses"
     }
   ]
+  const router = useRouter()
   const seo = {
     "title": "Aquakart | Privacy Policy",
     "description" : "Explore Aquakart's Privacy Policy to understand how we protect your data. Learn about your rights, our secure practices, and commitment to privacy.",
     "keywords":"online ecom privacy store , Privacy policy store , online shopping",
     "keyphrases":"privacy-policy, policy-store",
-    "image":"https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png"
+    "image":"https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
+    "canonical":`${process.env.apiKey}${router.pathname}`
   }
   return (
     <AquaLayout seo={seo}>
