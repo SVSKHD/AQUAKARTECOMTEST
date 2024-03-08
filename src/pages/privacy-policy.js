@@ -1,6 +1,7 @@
 import { useState } from "react"
 import AquaLayout from "@/Layout/Layout";
 import AquaLargeTitle from "@/reusables/largeTitle";
+import { FaEnvelope } from "react-icons/fa"
 
 const AquaPrivacyPolicy = () => {
   const [description, setDesription] = useState("")
@@ -30,12 +31,12 @@ const AquaPrivacyPolicy = () => {
       "description": " Contact details are provided to our transit partners to facilitate navigation and delivery. This ensures they can effectively communicate and locate the specified types of properties through the app"
     },
     {
-      "title":"Cookies and Tracking Technologies",
-      "description":"Aquakart utilizes cookies, web beacons, and various tracking technologies to gather information regarding user interactions and preferences. This data aids in enhancing user experiences by allowing us to tailor our services and content to better suit individual needs."
+      "title": "Cookies and Tracking Technologies",
+      "description": "Aquakart utilizes cookies, web beacons, and various tracking technologies to gather information regarding user interactions and preferences. This data aids in enhancing user experiences by allowing us to tailor our services and content to better suit individual needs."
     },
     {
-      "title":"User Rights",
-      "description":"Aquakart ensures users are aware of their entitlements concerning their personal information, including the abilities to access, amend, erase, or withdraw consent for specific data uses"
+      "title": "User Rights",
+      "description": "Aquakart ensures users are aware of their entitlements concerning their personal information, including the abilities to access, amend, erase, or withdraw consent for specific data uses"
     }
   ]
   const seo = {
@@ -63,6 +64,9 @@ const AquaPrivacyPolicy = () => {
                 <AquaLargeTitle display={3}>{description.title}</AquaLargeTitle>
                 <hr />
                 <p className="text-muted">{description.description}</p>
+              </div>
+              <div className="card-body">
+                for any quieries please contact us at <a className="btn btn-base" href="mailto:customercare@aquakart.co.in"><FaEnvelope size={30} /></a>
               </div>
             </div>
           </div>

@@ -9,8 +9,8 @@ const AquaFaq = () => {
         <AquaLayout seo={seo}>
             <AquaLargeTitle display={2}>FAQ</AquaLargeTitle>
             <p className="text-muted">Frequently Asked questions</p>
-            <hr/>
-            
+            <hr />
+
         </AquaLayout>
     )
 }
