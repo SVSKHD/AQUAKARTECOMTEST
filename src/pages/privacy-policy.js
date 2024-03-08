@@ -24,11 +24,11 @@ const AquaPrivacyPolicy = () => {
     },
     {
       "title": "Contact and Contact Sharing",
-      "description": "Regarding the privacy of children, Aquakart is committed to safeguarding the personal information of those under 13 years of age (or the applicable minimum age as per local laws), in strict adherence to regulations such as the Children's Online Privacy Protection Act (COPPA)."
+      "description": "Contact details are provided to our transit partners to facilitate navigation and delivery. This ensures they can effectively communicate and locate the specified types of properties through the app"
     },
     {
       "title": "COPPA (Children Privacy)",
-      "description": " Contact details are provided to our transit partners to facilitate navigation and delivery. This ensures they can effectively communicate and locate the specified types of properties through the app"
+      "description": "Regarding the privacy of children, Aquakart is committed to safeguarding the personal information of those under 13 years of age (or the applicable minimum age as per local laws), in strict adherence to regulations such as the Children's Online Privacy Protection Act (COPPA)."
     },
     {
       "title": "Cookies and Tracking Technologies",
