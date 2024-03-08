@@ -29,6 +29,10 @@ const AquaFooter = () => {
       title: "privacy-policy",
       link: "/privacy-policy",
     },
+    {
+      title: "terms and conditions",
+      link: "/terms-and-conditions",
+    },
   ];
   return (
     <>
