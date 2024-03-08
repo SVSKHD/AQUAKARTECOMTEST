@@ -31,11 +31,11 @@ const UserDashBoard = () => {
             </div>
           </div>
         </div>
-        
-        <hr/>
+
+        <hr />
         <div>
-        {detailsStatus ? <UserForm /> : ""}
-        {NewPasswordStatus ? <UserPasswordForm /> : ""}
+          {detailsStatus ? <UserForm /> : ""}
+          {NewPasswordStatus ? <UserPasswordForm /> : ""}
         </div>
       </UserLayout>
     </>
