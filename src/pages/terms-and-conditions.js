@@ -45,7 +45,7 @@ const AquaTermsAndConditions = () => {
         "AquaKart does not guarantee that the website will be uninterrupted or error-free, and we will not be liable for any interruptions, errors, or other inconveniences. The website and all products and services delivered to you through the website are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties, or conditions of any kind, either express or implied.",
     },
     {
-      titile: "Privacy Policy",
+      title: "Privacy Policy",
       description:
         "Your privacy is of utmost importance to AquaKart. Our Privacy Policy outlines how we collect, use, protect, or otherwise handle your Personally Identifiable Information in accordance with our website. This includes information collected when you register on our site, place an order, subscribe to a newsletter, or enter information on our site.",
     },
