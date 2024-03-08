@@ -44,7 +44,7 @@ const AquaPrivacyPolicy = () => {
   }
   return (
     <AquaLayout seo={seo}>
-      <h1>Privacy And Policy</h1>
+      <h1>Privacy-Policy</h1>
       <hr />
       <div className="row mb-5">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
