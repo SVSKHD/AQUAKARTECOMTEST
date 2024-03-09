@@ -6,10 +6,13 @@ import AquaProductOperations from "@/Services/product";
 import { useCallback, useEffect, useState } from "react";
 import AquaToast from "@/reusables/js/toast";
 import AquaVerticalCard from "@/reusables/VerticalCard";
+import { useRouter } from "next/router";
 
 const AquaShopComponent = () => {
+  const router = useRouter()
   const SeoData = {
     title: "Aquakart | Shop",
+    canonical:`${process.env.apiKey}${router.asPath}`
   };
   const { getProducts } = AquaProductOperations();
   const [products, setProducts] = useState([]);

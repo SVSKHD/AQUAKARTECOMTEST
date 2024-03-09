@@ -11,6 +11,7 @@ const AquaSubCategoryPageComponent = () => {
     title: `Aquakart | ${category.title}`,
     description: category.description,
     keywords: category.keywords,
+    canonical:`${process.env.apiKey}${router.asPath}`,
     image: category.photos
       ? category.photos[0].secure_url
       : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
