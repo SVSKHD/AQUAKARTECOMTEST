@@ -24,8 +24,6 @@ const AquaSubCategoryPageComponent = () => {
         : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
   };
 
-  console.log("path" , router.asPath)
-
   const titleData = router.query.id;
 
   const loadCategory = useCallback(() => {
