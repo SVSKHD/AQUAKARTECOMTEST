@@ -33,18 +33,14 @@ const AquaFooter = () => {
       title: "terms and conditions",
       link: "/terms-and-conditions",
     },
+    {
+      title:"About-us",
+      link:"/about"
+    }
   ];
   return (
     <>
       <div>
-        {/* <AquaCard>
-          <AquaCard>
-            <div className="text-center">
-              <AquaHeading level={5}>AquaKart © {Year}</AquaHeading>
-            </div>
-          </AquaCard>
-        </AquaCard> */}
-
         <div className="footer-aqua">
           <div className="mt-2">
             <div className="row">
