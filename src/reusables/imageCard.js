@@ -7,7 +7,7 @@ const AquaImageCard = (props) => {
   return (
     <>
       <Link href={link}>
-        <div className="card text-bg-dark image-card-width shadow-lg rounded-5 img-border">
+        <div className="card text-bg-dark image-card-width shadow-lg rounded-5 border-0">
           <Image
             src={images ? images[0].secure_url : AQ}
             className="card-img shadow-lg rounded-5" 
