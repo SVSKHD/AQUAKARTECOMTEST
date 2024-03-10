@@ -4,10 +4,10 @@ const AquaCommonCategoryCard = ({ data }) => {
   const { title, photos, description } = data;
   return (
     <>
-      <div className="card aqua-category-card shadow-lg p-2 mb-3">
+      <div className="card aqua-category-card shadow-lg p-2 mb-3 rounded-5">
         <Image
           src={photos ? photos[0].secure_url : AQ}
-          className="card-img-top rounded-4"
+          className="card-img-top rounded-5"
           alt={title}
           width="180"
           height="380"
