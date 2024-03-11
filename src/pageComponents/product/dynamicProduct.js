@@ -172,7 +172,7 @@ const DynamicProduct = () => {
               </div>
             </div>
 
-            {product?.relatedProducts.length > 0 ? (
+            {product?.relatedProducts?.length > 0 ? (
               <div className="row">
                 <>
                   <hr />
