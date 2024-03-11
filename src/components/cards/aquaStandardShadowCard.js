@@ -1,7 +1,7 @@
 const AquaStandardShadowCard = (props) => {
   return (
     <>
-      <div className="card shadow-lg">
+      <div className="card shadow-lg rounded-5">
         <div className="card-body">{props.children}</div>
       </div>
     </>

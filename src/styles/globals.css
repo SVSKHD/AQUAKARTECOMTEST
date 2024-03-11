@@ -22,6 +22,10 @@ body {
   /* Custom button text color */
 }
 
+.img-border{
+  border-style: none;
+}
+
 .offcanvas-bottom {
   height: 50% !important;
   /* Set to your desired height */
@@ -416,6 +420,7 @@ body {
 .footer-col-heading {
   font-size: 14px;
   color: #eef5ff;
+  margin-bottom: 5px;
 }
 
 .privacy-card {
@@ -430,4 +435,16 @@ body {
   transform: translate(10px, -10px);
   -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.footer-item-adjust {
+  font-size: 10px;
+  text-decoration: none;
+  color: white;
+  margin-bottom: 1px;
+}
+
+.terms-and-conditons-height {
+  height: 500px;
+  overflow-y: scroll;
 }

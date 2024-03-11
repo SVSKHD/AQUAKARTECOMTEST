@@ -1,5 +1,6 @@
 import UserLayout from "@/Layout/dashboardLayout/userLayout";
 import UserDashboardCartCard from "@/components/cards/userDashboardCartCard";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 const UserCart = () => {
@@ -21,11 +22,11 @@ const UserCart = () => {
           ""
         )}
         <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button">
+          <Link class="btn btn-primary" href="/shop" type="button">
             {cartCount.length > 0
               ? "Continue to Shop"
               : "Add Something to cart"}
-          </button>
+          </Link>
         </div>
       </UserLayout>
     </>

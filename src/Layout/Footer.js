@@ -24,17 +24,23 @@ const AquaFooter = () => {
   useEffect(() => {
     loadCategories();
   }, [loadCategories]);
+  const quickLinks = [
+    {
+      title: "privacy-policy",
+      link: "/privacy-policy",
+    },
+    {
+      title: "terms and conditions",
+      link: "/terms-and-conditions",
+    },
+    {
+      title:"About-us",
+      link:"/about"
+    }
+  ];
   return (
     <>
       <div>
-        {/* <AquaCard>
-          <AquaCard>
-            <div className="text-center">
-              <AquaHeading level={5}>AquaKart © {Year}</AquaHeading>
-            </div>
-          </AquaCard>
-        </AquaCard> */}
-
         <div className="footer-aqua">
           <div className="mt-2">
             <div className="row">
@@ -44,17 +50,33 @@ const AquaFooter = () => {
               </div>
               <div className="col">
                 <p className="footer-col-heading">Quick links</p>
+                {quickLinks.map((r, i) => (
+                  <>
+                    <p key={i} className="footer-item-adjust">
+                      <a href={r.link} className="footer-item-adjust">
+                        {r.title}
+                      </a>
+                    </p>
+                  </>
+                ))}
               </div>
               <div className="col">
-                <h4>Categories</h4>
-                <ul>
-                  {categories.map((c) => (
-                    <li key={c}>{c.title}</li>
-                  ))}
-                </ul>
+                <p className="footer-col-heading">Categories</p>
+
+                {categories.map((c, i) => (
+                  <>
+                    <p key={i} className="footer-item-adjust">
+                      <a
+                        href={`/category/${c.title}`}
+                        className="footer-item-adjust"
+                      >
+                        {c.title}
+                      </a>
+                    </p>
+                  </>
+                ))}
               </div>
               <div className="col">
-                <h4>subscribe form</h4>
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">
                     Email address

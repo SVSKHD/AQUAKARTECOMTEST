@@ -1,14 +1,14 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 export default async (req, res) => {
   const { email, subject, message } = req.body;
 
   // Create a transporter
   let transporter = nodemailer.createTransport({
-    service: 'your-email-provider', // e.g., 'Gmail', 'Yahoo', etc.
+    service: "your-email-provider", // e.g., 'Gmail', 'Yahoo', etc.
     auth: {
-      user: 'your-email@example.com',
-      pass: 'your-email-password',
+      user: "your-email@example.com",
+      pass: "your-email-password",
     },
   });
 
@@ -26,6 +26,6 @@ export default async (req, res) => {
     if (error) {
       return res.status(500).json({ error: error.message });
     }
-    res.status(200).json({ message: 'Email sent successfully!', info });
+    res.status(200).json({ message: "Email sent successfully!", info });
   });
 };

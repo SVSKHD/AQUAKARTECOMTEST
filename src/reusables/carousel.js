@@ -7,7 +7,7 @@ const AquaUnControlledCarousel = (images) => {
         <div key={i}>
           <Carousel.Item>
             <Image
-              className="d-block w-100 rounded"
+              className="d-block w-100 rounded-5"
               src={r.image}
               alt={r.alt}
             />
