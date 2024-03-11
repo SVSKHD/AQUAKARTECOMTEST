@@ -5,7 +5,7 @@ import { InputGroup, Form, Button } from "react-bootstrap";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 const UserDashboardCartCard = ({ r }) => {
-  const [product, setProduct] = useState({ quantity: 1 });
+  const [product, setProduct] = useState(r);
   const { addProductToCart, addProductToFav, quantityChange } =
     ProductFunctions();
   const stockAdd = () => {
@@ -22,7 +22,7 @@ const UserDashboardCartCard = ({ r }) => {
     });
   };
 
-  const stockSub = () => {
+  const stockSub = (r) => {
     setProduct((prevProduct) => {
       const newQuantity = Math.max(prevProduct.quantity - 1, 1);
       // Dispatch the action after updating the local state
@@ -52,7 +52,7 @@ const UserDashboardCartCard = ({ r }) => {
                 <Form.Control
                   aria-label="Example text with two button addons"
                   className="text-center"
-                  value={product.quantity}
+                  value={r.quantity}
                 />
                 <Button variant="outline-dark" onClick={stockAdd}>
                   <FaPlus size={25} />
