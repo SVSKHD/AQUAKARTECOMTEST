@@ -37,6 +37,10 @@ const AquaFooter = () => {
       title: "About-us",
       link: "/about",
     },
+    {
+      title:"shipping-policy",
+      link:"/shiiping-policy"
+    }
   ];
   return (
     <>

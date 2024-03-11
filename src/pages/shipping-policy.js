@@ -1,6 +1,12 @@
 const ShippingPolicy = () =>{
+    const shippingPolicy = [
+        {
+            title:"",
+            description:""
+        }
+    ]
 return(
-    <h1>Shipping policy</h1>
+    <h1>hello test</h1>
 )
 }
 export default ShippingPolicy
