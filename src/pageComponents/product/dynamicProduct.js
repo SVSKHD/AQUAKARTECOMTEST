@@ -19,6 +19,7 @@ import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaToast from "@/reusables/js/toast";
 import { useSelector, useDispatch } from "react-redux";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
+import AquaVerticalCard from "@/reusables/VerticalCard";
 
 const DynamicProduct = () => {
   const dispatch = useDispatch();
@@ -36,12 +37,10 @@ const DynamicProduct = () => {
     setLoading(true);
     getProductById(id)
       .then((res) => {
-        console.log("res", res.data);
         setProduct((prev) => ({ ...res.data, quantity: prev.quantity }));
         setLoading(false);
       })
       .catch((err) => {
-        console.log("err", err);
         setLoading(false);
       });
   }, [getProductById, id]);
@@ -92,84 +91,112 @@ const DynamicProduct = () => {
             <Spinner animation="border" variant="dark" />
           </div>
         ) : (
-          <div className="dynamic-product">
-            <div className="row mb-3">
-              <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
-                {product?.photos ? (
-                  <>
-                    <AquaProductUnControlledCarousel
-                      images={product?.photos}
+          <div>
+            <div className="dynamic-product">
+              <div className="row mb-3">
+                <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
+                  {product?.photos ? (
+                    <>
+                      <AquaProductUnControlledCarousel
+                        images={product?.photos}
+                        className="card-img-top custom-image"
+                        width="100"
+                        height="280"
+                        alt={`Aquakart Images | ${product.title}`}
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={LOGO}
                       className="card-img-top custom-image"
-                      width="100"
-                      height="280"
-                      alt={`Aquakart Images | ${product.title}`}
+                      alt="Aquakart"
                     />
-                  </>
-                ) : (
-                  <Image
-                    src={LOGO}
-                    className="card-img-top custom-image"
-                    alt="Aquakart"
-                  />
-                )}
-              </div>
-              <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
-                <h1 className="display-2 text-bold">{product?.title}</h1>
-                <span className="dynamic-product-price-brand">
-                  <h4 className="price product-price-align">
-                    <Badge bg="success">
-                      {" "}
-                      <AquaCurrencyFormat amount={product?.price} />
-                    </Badge>
-                  </h4>
-                  <h4 className="dynamic-product-brand">
-                    Brand : {product?.brand}
-                  </h4>
-                </span>
-                <InputGroup className="mb-3 width-adjust">
-                  <Button variant="outline-dark" onClick={stockSub}>
-                    <FaMinus size={25} />
-                  </Button>
-                  <Form.Control
-                    aria-label="Example text with two button addons"
-                    className="text-center"
-                    value={product.quantity}
-                  />
-                  <Button variant="outline-dark" onClick={stockAdd}>
-                    <FaPlus size={25} />
-                  </Button>
-                </InputGroup>
-                <div className="dynamic-product-cart-fav">
-                  <AquaButton
-                    variant="normal"
-                    onClick={() => addProductToCart(product, setCart)}
-                  >
-                    {cart ? (
-                      <FaCartArrowDown className="text-success" size={25} />
-                    ) : (
-                      <FaCartPlus className="text-dark" size={25} />
-                    )}
-                  </AquaButton>
-                  <AquaButton
-                    variant="normal"
-                    onClick={() => addProductToFav(product, setFav)}
-                  >
-                    {fav ? (
-                      <FaHeart size={25} className="text-danger" />
-                    ) : (
-                      <FaRegHeart size={25} className="text-danger" />
-                    )}
-                  </AquaButton>
-                  <AquaButton href="/checkout">Checkout</AquaButton>
+                  )}
                 </div>
-                <hr />
-                <div className="container">
-                  <div
-                    dangerouslySetInnerHTML={{ __html: product?.description }}
-                  />
+                <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
+                  <h1 className="display-2 text-bold">{product?.title}</h1>
+                  <span className="dynamic-product-price-brand">
+                    <h4 className="price product-price-align">
+                      <Badge bg="success">
+                        {" "}
+                        <AquaCurrencyFormat amount={product?.price} />
+                      </Badge>
+                    </h4>
+                    <h4 className="dynamic-product-brand">
+                      Brand : {product?.brand}
+                    </h4>
+                  </span>
+                  <InputGroup className="mb-3 width-adjust">
+                    <Button variant="outline-dark" onClick={stockSub}>
+                      <FaMinus size={25} />
+                    </Button>
+                    <Form.Control
+                      aria-label="Example text with two button addons"
+                      className="text-center"
+                      value={product.quantity}
+                    />
+                    <Button variant="outline-dark" onClick={stockAdd}>
+                      <FaPlus size={25} />
+                    </Button>
+                  </InputGroup>
+                  <div className="dynamic-product-cart-fav">
+                    <AquaButton
+                      variant="normal"
+                      onClick={() => addProductToCart(product, setCart)}
+                    >
+                      {cart ? (
+                        <FaCartArrowDown className="text-success" size={25} />
+                      ) : (
+                        <FaCartPlus className="text-dark" size={25} />
+                      )}
+                    </AquaButton>
+                    <AquaButton
+                      variant="normal"
+                      onClick={() => addProductToFav(product, setFav)}
+                    >
+                      {fav ? (
+                        <FaHeart size={25} className="text-danger" />
+                      ) : (
+                        <FaRegHeart size={25} className="text-danger" />
+                      )}
+                    </AquaButton>
+                    <AquaButton href="/checkout">Checkout</AquaButton>
+                  </div>
+                  <hr />
+                  <div className="container">
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product?.description }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+
+            {product.relatedProducts.length > 0 ? (
+              <div className="row">
+                <>
+                  <hr />
+                  {product.relatedProducts.map((r, i) => (
+                    <>
+                      <div
+                        key={i}
+                        className="col-md-4 col-lg-4 col-xs-12 col-sm-12"
+                      >
+                        <AquaVerticalCard
+                          title={r.title}
+                          images={r.photos}
+                          price={r.price}
+                          description={r.description}
+                          data={r}
+                        />
+                      </div>
+                    </>
+                  ))}
+                </>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         )}
       </AquaLayout>

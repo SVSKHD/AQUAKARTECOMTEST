@@ -39,7 +39,7 @@ const UserDashboardCartCard = ({ r }) => {
             <img
               src={photos[0].secure_url}
               class="img-fluid rounded-start"
-              alt="..."
+              alt={title}
             />
           </div>
           <div class="col-md-8">

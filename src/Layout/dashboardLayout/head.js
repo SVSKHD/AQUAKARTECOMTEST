@@ -9,11 +9,11 @@ const AquaUserHead = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleLogout = () => {
+    router.push("/");
     dispatch({
       type: "LOGOUT",
       payload: null,
     });
-    router.push("/");
   };
   return (
     <Container>
