@@ -12,7 +12,9 @@ const UserWishList = () => {
         {favCount.length ? (
           <>
             {favCount.map((r, i) => (
+              <div key={i}>
               <UserDashboardFavCard r={r} />
+              </div>
             ))}
           </>
         ) : (
