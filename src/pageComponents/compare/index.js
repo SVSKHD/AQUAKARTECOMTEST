@@ -6,12 +6,13 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 const AquaComparePageComponent = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [products, setProducts] = useState([]);
   const SeoData = {
     title: "Aquakart | Compare",
-    canonical:`${process.env.apiKey}${router.asPath}`,
-    image:"https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png"
+    canonical: `${process.env.apiKey}${router.asPath}`,
+    image:
+      "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
   };
   const compareTabs = [
     {

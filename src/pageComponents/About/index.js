@@ -34,10 +34,22 @@ const AquaAboutPageComponent = () => {
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
               <AquaStandardShadowCard>
                 <p className="pdescription">
-                Aquakart is committed to enhancing the quality of water for households and industries alike, guided by a vision to ensure clean and safe water accessibility for all. Our core values emphasize sustainability, innovation, and customer-centric solutions.
+                  Aquakart is committed to enhancing the quality of water for
+                  households and industries alike, guided by a vision to ensure
+                  clean and safe water accessibility for all. Our core values
+                  emphasize sustainability, innovation, and customer-centric
+                  solutions.
                 </p>
-                <br/>
-                <p className="pdescription">Our main objective is to offer cutting-edge water treatment options, featuring an extensive selection of water softeners engineered to effectively address hard water issues. This ensures that our clients reap the advantages of softened water. Moreover, we personally evaluate each product before featuring it on our platform, enhancing reliability and customer trust.</p>
+                <br />
+                <p className="pdescription">
+                  Our main objective is to offer cutting-edge water treatment
+                  options, featuring an extensive selection of water softeners
+                  engineered to effectively address hard water issues. This
+                  ensures that our clients reap the advantages of softened
+                  water. Moreover, we personally evaluate each product before
+                  featuring it on our platform, enhancing reliability and
+                  customer trust.
+                </p>
               </AquaStandardShadowCard>
             </div>
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
@@ -47,16 +59,18 @@ const AquaAboutPageComponent = () => {
             </div>
           </div>
           <div className="row mb-5">
-          <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
-              <AquaLargeTitle display={3}>
-                Why choose us..?
-              </AquaLargeTitle>
+            <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
+              <AquaLargeTitle display={3}>Why choose us..?</AquaLargeTitle>
             </div>
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
               <AquaStandardShadowCard>
                 <p className="pdescription">
-                The motivation behind our focus on water quality stems from the crucial role water plays in health and sustainability. By offering efficient water softening solutions, we aim to contribute to the wellbeing of our customers and the preservation of our environment and health.
-        </p>
+                  The motivation behind our focus on water quality stems from
+                  the crucial role water plays in health and sustainability. By
+                  offering efficient water softening solutions, we aim to
+                  contribute to the wellbeing of our customers and the
+                  preservation of our environment and health.
+                </p>
               </AquaStandardShadowCard>
             </div>
           </div>

@@ -17,7 +17,7 @@ const AquaSubCategoryPageComponent = () => {
     title: `Aquakart | ${category.title}`,
     description: category.description,
     keywords: category.keywords,
-    canonical:`${process.env.apiKey}${router.asPath}`,
+    canonical: `${process.env.apiKey}${router.asPath}`,
     image:
       category.photos && category.photos.length > 0
         ? category.photos[0].secure_url

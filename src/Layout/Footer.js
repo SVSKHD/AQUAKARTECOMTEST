@@ -34,9 +34,9 @@ const AquaFooter = () => {
       link: "/terms-and-conditions",
     },
     {
-      title:"About-us",
-      link:"/about"
-    }
+      title: "About-us",
+      link: "/about",
+    },
   ];
   return (
     <>

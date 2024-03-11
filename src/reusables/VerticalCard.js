@@ -78,7 +78,11 @@ const AquaVerticalCard = (props) => {
               alt={`Aquakart Images | ${title}`}
             />
           ) : (
-            <Image src={AQ} className="card-img-top custom-image rounded-5 shadow-lg" alt="..." />
+            <Image
+              src={AQ}
+              className="card-img-top custom-image rounded-5 shadow-lg"
+              alt="..."
+            />
           )}
         </div>
         <div className="product-card-body">
