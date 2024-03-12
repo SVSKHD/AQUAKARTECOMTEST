@@ -21,8 +21,8 @@ const AquaHomeComponent = () => {
   return (
     <>
       <AquaLayout seo={SeoData}>
-        <AquaCategoryHolder />
-        <AquaSubCategoryHolder />
+        {/* <AquaCategoryHolder />
+        <AquaSubCategoryHolder /> */}
         <AquaProductHolder />
       </AquaLayout>
     </>
