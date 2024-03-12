@@ -112,9 +112,9 @@ const AquaFooter = () => {
               </div>
               <div className="col text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn">
+                  <a type="button" class="btn" href="https://www.instagram.com/aquakart.co.in/">
                     <FaInstagram size={20} />
-                  </button>
+                  </a>
                   <button type="button" class="btn">
                     <FaWhatsapp size={20} />
                   </button>
