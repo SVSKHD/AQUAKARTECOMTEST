@@ -27,8 +27,7 @@ const AquaCardMultiItemCarousel = (props) => {
   additionalTransfrom={0}
   arrows
   autoPlaySpeed={3000}
-  beforeChange={function(nextSlide,_ref2){var currentSlide=_ref2.currentSlide;_ref2.onMove;return alert("previous slide is "+currentSlide+" nextSlide is "+nextSlide)}}
-  centerMode={false}
+  centerMode
   className=""
   containerClass="container"
   dotListClass=""
@@ -48,33 +47,36 @@ const AquaCardMultiItemCarousel = (props) => {
         max: 3000,
         min: 1024
       },
-      items: 1
+      items: 3,
+      partialVisibilityGutter: 40
     },
     mobile: {
       breakpoint: {
         max: 464,
         min: 0
       },
-      items: 1
+      items: 1,
+      partialVisibilityGutter: 25
     },
     tablet: {
       breakpoint: {
         max: 1024,
         min: 464
       },
-      items: 1
+      items: 1,
+      partialVisibilityGutter: 30
     }
   }}
   rewind={false}
   rewindWithAnimation={false}
   rtl={false}
   shouldResetAutoplay
-  showDots
+  showDots={false}
   sliderClass=""
   slidesToSlide={1}
   swipeable
 >
-  {props.children}
+{props.children}
 </Carousel>
     // <Carousel
     //   arrows={false}
