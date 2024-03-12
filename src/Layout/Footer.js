@@ -40,6 +40,10 @@ const AquaFooter = () => {
     {
       title:"shipping-policy",
       link:"/shiiping-policy"
+    },
+    {
+      title:"contact-us",
+      link:"/contact-us"
     }
   ];
   return (

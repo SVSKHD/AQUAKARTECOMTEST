@@ -448,3 +448,15 @@ body {
   height: 500px;
   overflow-y: scroll;
 }
+
+.decorate{
+  text-decoration: underline;
+}
+
+.align-contact-card {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%; /* Example width, adjust as needed */
+  max-width: 500px; /* Example max-width, adjust as needed */
+}
