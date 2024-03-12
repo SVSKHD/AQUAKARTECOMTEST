@@ -38,13 +38,13 @@ const AquaFooter = () => {
       link: "/about",
     },
     {
-      title:"shipping-policy",
-      link:"/shiiping-policy"
+      title: "shipping-policy",
+      link: "/shiiping-policy",
     },
     {
-      title:"contact-us",
-      link:"/contact-us"
-    }
+      title: "contact-us",
+      link: "/contact-us",
+    },
   ];
   return (
     <>
@@ -116,7 +116,11 @@ const AquaFooter = () => {
               </div>
               <div className="col text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <a type="button" class="btn" href="https://www.instagram.com/aquakart.co.in/">
+                  <a
+                    type="button"
+                    class="btn"
+                    href="https://www.instagram.com/aquakart.co.in/"
+                  >
                     <FaInstagram size={20} />
                   </a>
                   <button type="button" class="btn">

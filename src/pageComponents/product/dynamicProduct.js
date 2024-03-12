@@ -80,7 +80,6 @@ const DynamicProduct = () => {
     description: `${product?.description}`,
     image: `${product?.photos ? product.photos[0].secure_url : LOGO}`,
     keywords: `Aquakart Products ${product?.keywords}`,
-    
   };
 
   return (
