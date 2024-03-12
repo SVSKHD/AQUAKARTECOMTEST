@@ -5,12 +5,17 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import AquaCategoryOperations from "@/Services/category";
 import { FaInstagram, FaWhatsapp, FaTelegram } from "react-icons/fa";
+import AquaSubCategoryOperations from "@/Services/subCategory";
 
 const AquaFooter = () => {
   const date = new Date();
   const Year = date.getFullYear();
   const [categories, setCategories] = useState([]);
+  const [subs , setSubs] = useState([])
   const { getCategories } = AquaCategoryOperations();
+  const {getSubCategories} = AquaSubCategoryOperations()
+
+
   const loadCategories = useCallback(() => {
     getCategories()
       .then((res) => {
@@ -21,9 +26,21 @@ const AquaFooter = () => {
       });
   }, [getCategories, setCategories]);
 
+  const loadSubCategories = useCallback(() => {
+    getSubCategories()
+      .then((res) => {
+        setSubs(res.data);
+      })
+      .catch(() => {
+        AquaToast("something went wrong", "error");
+      });
+  }, [getSubCategories, setSubs]);
+  
+
   useEffect(() => {
     loadCategories();
-  }, [loadCategories]);
+    loadSubCategories()
+  }, [loadCategories , loadSubCategories]);
   const quickLinks = [
     {
       title: "privacy-policy",
@@ -45,6 +62,10 @@ const AquaFooter = () => {
       title: "contact-us",
       link: "/contact-us",
     },
+    {
+      title: "faq",
+      link: "/faq",
+    },
   ];
   return (
     <>
@@ -63,6 +84,22 @@ const AquaFooter = () => {
                     <p key={i} className="footer-item-adjust">
                       <a href={r.link} className="footer-item-adjust">
                         {r.title}
+                      </a>
+                    </p>
+                  </>
+                ))}
+              </div>
+              <div className="col">
+                <p className="footer-col-heading">Sub Categories</p>
+
+                {subs.map((c, i) => (
+                  <>
+                    <p key={i} className="footer-item-adjust">
+                      <a
+                        href={`/category/${c.title}`}
+                        className="footer-item-adjust"
+                      >
+                        {c.title}
                       </a>
                     </p>
                   </>

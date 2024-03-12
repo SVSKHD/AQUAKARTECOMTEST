@@ -14,23 +14,36 @@ const ShippingPolicy = () => {
   };
   const shippingPolicy = [
     {
-      title: "",
+      title: "Shipping & Delivery In Hyderabad",
+      description: "",
+    },
+    {
+      title: "Shipping & Delivery out of Hyderabad",
+      description: "",
+    },
+    {
+      title: "Shipping & Delivery out of Telangana",
       description: "",
     },
   ];
   return (
     <AquaLayout seo={seo}>
-      <AquaHeading level={h1}>Shipping Policy</AquaHeading>
+      <AquaHeading level={1}>Shipping Policy</AquaHeading>
       <div className="row">
         <div className="col-md-3 col-lg-3 col-xs-12 col-sm-12">
-          <div className="card">
+          <div className="card shadow-lg">
             <div className="card-body"></div>
           </div>
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-          <div className="card">
-            <div className="card-body"></div>
+          <div className="card shadow-lg mb-3">
+            <div className="card-body">
+              <hr/>
+            <h4 className="text-danger">Note :</h4>
+            </div>
+           
           </div>
+          
         </div>
       </div>
     </AquaLayout>
