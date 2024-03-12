@@ -1,11 +1,13 @@
 import AquaLayout from "@/Layout/Layout"
 import AquaHeading from "@/reusables/heading"
+import { useState } from "react"
 
 const ShippingPolicy = () =>{
+    const [data , setData] = useState("")
     const seo = {
         title:"Aquakart | Shipping and delivery policy",
         description:"Aquakart is renowned for its vast array of aquatic products, catering to enthusiasts and professionals alike. The cornerstone of our customer satisfaction lies in our transparent and efficient shipping policy, designed to deliver your aquatic essentials with speed, care, and precision.",
-        keywords:"Aquakart shipping-policy , shipping rates , national-shipping",
+        keywords:"Aquakart shipping-policy , shipping rates , national-shipping AquaKart Shipping Policy, Free Shipping Hyderabad,Quick Delivery Service ,Cash on Delivery Hyderabad ,Andhra Pradesh Shipping , Telangana Shipping Services ,Rayalaseema Product Delivery , Nationwide Shipping India , Fast Shipping AquaKart , Online Shopping Delivery , Business Days Shipping , E-commerce Shipping India , Secure Packaging AquaKart , Customer Service AquaKart , Order Tracking AquaKart",
         keyphrases:"charges regarding aquakart"
     }
     const shippingPolicy = [
