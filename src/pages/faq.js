@@ -41,7 +41,7 @@ const AquaFaq = () => {
         <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
           {leftPhase.map((r,i)=>(
             <div key={i}>
-            <AquaAccordian title={r.title} children={r.description}/>
+            <AquaAccordian title={r.title} description={r.description}/>
             </div>
           ))}
 

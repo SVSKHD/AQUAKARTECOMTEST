@@ -10,7 +10,7 @@ const AquaAccordian = (props) => {
       >
         <Accordion.Item>
           <Accordion.Header>{title}</Accordion.Header>
-          <Accordion.Body>{children}</Accordion.Body>
+          <Accordion.Body>{description}</Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </>
