@@ -30,10 +30,8 @@ const AquaPageWrapper = (props) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <Container fluid={isSmallScreen}>
-            <div className="mb-2" />
-            <div className="aqua-body">{props.children}</div>
-          </Container>
+          <div className="mb-2" />
+          <div className="aqua-body">{props.children}</div>
         </motion.div>
       </AnimatePresence>
     </>

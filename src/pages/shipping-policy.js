@@ -24,8 +24,12 @@ const ShippingPolicy = () => {
     },
     {
       title: "Shipping & Delivery out of Telangana",
-      description: "",
+      description: "Orders from Telangana will be dispatched within 5-10 days. Please allow this time frame for shipping. We appreciate your patience and look forward to serving you!",
     },
+    {
+      title: "Packing and Contents",
+      description: "Experience premium packaging with Aquakart, meticulously crafted to deliver your items in perfect condition. Each package includes your chosen products, a detailed guide, warranty info, surprise gifts, and customer support contacts for a delightful unboxing journey."
+    }
   ];
   return (
     <AquaLayout seo={seo}>
@@ -59,6 +63,24 @@ const ShippingPolicy = () => {
                   <li>We typically dispatch orders ahead of the scheduled time in Hyderabad.</li>
                   <li>Beyond Hyderabad, delivery times may exceed the initial estimates.</li>
                 </ul>
+                <div className="card shadow-lg">
+                  <div className="card-body">
+                    <div className="text-center">
+                      <a
+                        className="btn btn-base"
+                        href="mailto:customercare@aquakart.co.in"
+                      >
+                        <FaEnvelope size={30} />
+                      </a>
+                      <a
+                        className="btn btn-base"
+                        href="https://wa.me/919014774667?text=Hello please clear out query we are contacting you from Aquakart"
+                      >
+                        <FaWhatsapp size={30} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
