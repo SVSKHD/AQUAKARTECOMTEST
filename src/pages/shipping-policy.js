@@ -2,7 +2,7 @@ import AquaLayout from "@/Layout/Layout";
 import AquaHeading from "@/reusables/heading";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useState } from "react";
-
+import {FaEnvelope , FaWhatsapp} from "react-icons/fa"
 const ShippingPolicy = () => {
   const [data, setData] = useState("");
   const seo = {
