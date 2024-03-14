@@ -7,6 +7,7 @@ import AquaSeo from "./seo/seo";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { Container } from "react-bootstrap";
 
 const AquaLayout = (props) => {
   const dispatch = useDispatch();
@@ -45,7 +46,11 @@ const AquaLayout = (props) => {
       <AquaUserDialog />
       <AquaPageWrapper>
         <AquaSeo seo={props.seo} />
-        {props.children}
+        {props.container ? (
+          <Container>{props.children}</Container>
+        ) : (
+          <>{props.children}</>
+        )}
       </AquaPageWrapper>
       <AquaFooter />
     </>

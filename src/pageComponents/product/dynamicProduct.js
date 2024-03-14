@@ -84,7 +84,7 @@ const DynamicProduct = () => {
 
   return (
     <>
-      <AquaLayout seo={SeoData}>
+      <AquaLayout seo={SeoData} container={true}>
         {loading ? (
           <div className="text-center">
             {" "}

@@ -9,7 +9,7 @@ const AquaAboutPageComponent = () => {
   };
   return (
     <>
-      <AquaLayout seo={SeoData}>
+      <AquaLayout seo={SeoData} container={true}>
         <div className="m-2">
           <div className="row mb-5">
             <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">

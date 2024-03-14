@@ -34,7 +34,7 @@ const AquaShopComponent = () => {
   }, [LoadProducts]);
 
   return (
-    <AquaLayout seo={SeoData}>
+    <AquaLayout seo={SeoData} container={true}>
       <AquaHeading level={1}>Shop here</AquaHeading>
       <hr />
       <div className="row mb-4">

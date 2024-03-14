@@ -11,10 +11,9 @@ const AquaFooter = () => {
   const date = new Date();
   const Year = date.getFullYear();
   const [categories, setCategories] = useState([]);
-  const [subs , setSubs] = useState([])
+  const [subs, setSubs] = useState([]);
   const { getCategories } = AquaCategoryOperations();
-  const {getSubCategories} = AquaSubCategoryOperations()
-
+  const { getSubCategories } = AquaSubCategoryOperations();
 
   const loadCategories = useCallback(() => {
     getCategories()
@@ -35,12 +34,11 @@ const AquaFooter = () => {
         AquaToast("something went wrong", "error");
       });
   }, [getSubCategories, setSubs]);
-  
 
   useEffect(() => {
     loadCategories();
-    loadSubCategories()
-  }, [loadCategories , loadSubCategories]);
+    loadSubCategories();
+  }, [loadCategories, loadSubCategories]);
   const quickLinks = [
     {
       title: "privacy-policy",

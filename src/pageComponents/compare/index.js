@@ -2,6 +2,7 @@ import AquaLayout from "@/Layout/Layout";
 import AquaHeading from "@/reusables/heading";
 import AquaTabs from "@/reusables/tabs";
 import AquaCartComponent from "./cartComponent";
+import AquaWishComponent from "./wishListComponent";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -17,7 +18,7 @@ const AquaComparePageComponent = () => {
   const compareTabs = [
     {
       title: "Wishlist",
-      component: <h1>wishlist</h1>,
+      component: <AquaWishComponent />,
     },
     {
       title: "Cart",
@@ -30,8 +31,7 @@ const AquaComparePageComponent = () => {
   ];
   return (
     <>
-      <AquaLayout seo={SeoData}>
-        <AquaHeading level={1}>Hello Aquakart Compare</AquaHeading>
+      <AquaLayout seo={SeoData} container={true}>
         <AquaTabs tabs={compareTabs} />
       </AquaLayout>
     </>

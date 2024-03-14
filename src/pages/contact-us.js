@@ -11,7 +11,7 @@ const AquaContactUs = () => {
     keywords: "",
   };
   return (
-    <AquaLayout seo={seo}>
+    <AquaLayout seo={seo} container={true}>
       <div className="row mb-3">
         <div className="col-md-6 col-lg-6 col-xs-12 col-sm-12">
           <AquaStandardShadowCard>

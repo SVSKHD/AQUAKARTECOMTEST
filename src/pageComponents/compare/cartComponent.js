@@ -11,7 +11,7 @@ const AquaCartComponent = () => {
           ))}
         </>
       ) : (
-        "No Products in cart yet"
+        <h4>No Products in Cart yet</h4>
       )}
     </div>
   );
