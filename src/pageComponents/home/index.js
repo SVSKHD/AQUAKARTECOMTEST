@@ -21,10 +21,24 @@ const AquaHomeComponent = () => {
 
   return (
     <>
-      <AquaLayout seo={SeoData} container={true}>
+      <AquaLayout seo={SeoData}>
+        <div className="container">
         <div className="mb-5 text-center">
         <h1 className="underline-animation">Aquakart</h1>
-        <h2 className="index-second">"Transform your water from 'rock concert' to 'smooth jazz' with our water softeners!"</h2>
+        <h2 className="index-second display-3">"Transform your water from 'rock concert' to 'smooth jazz' with our water softeners!"</h2>
+        </div>
+       </div>
+        <div className="index-section1 mb-3">
+          <div className="container p-3">
+            <div className="row">
+              <div className="col">
+                <p className="index-section1-p">Putting the humor aside, we're here to guide you to the perfect water softener tailored to your home's needs and preferences.</p>
+              </div>
+              <div className="col">
+                categories
+              </div>
+            </div>
+          </div>
         </div>
      
         {/* <AquaCategoryHolder />

@@ -36,7 +36,6 @@ body {
 
 .index-second{
   color: #176b87;
-  font-size: 3.5rem;
   margin: 1rem;
   padding: 2rem;
   text-decoration: underline 0.15em rgba(255, 255, 255, 0);
@@ -47,6 +46,17 @@ body {
 .index-second:hover{
   text-decoration: underline;
   text-decoration-color: #053885
+}
+
+.index-section1{
+  background-color: #053885;
+}
+
+.index-section1-p{
+color: white;
+font-family: Poppins;
+font-weight: 600;
+font-size: 2.5rem;
 }
 
 
@@ -73,7 +83,6 @@ body {
 
 .aqua-body {
   font-family: "Poppins" !important;
-  font-weight: 200;
 }
 
 .cus-nav {
