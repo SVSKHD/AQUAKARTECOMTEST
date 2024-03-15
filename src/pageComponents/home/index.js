@@ -24,7 +24,7 @@ const AquaHomeComponent = () => {
       <AquaLayout seo={SeoData}>
         <div className="container">
         <div className="mb-5 text-center">
-        <h1 className="underline-animation">Aquakart</h1>
+        <h1 className="underline-animation display-1">Aquakart</h1>
         <h2 className="index-second display-3">"Transform your water from 'rock concert' to 'smooth jazz' with our water softeners!"</h2>
         </div>
        </div>
