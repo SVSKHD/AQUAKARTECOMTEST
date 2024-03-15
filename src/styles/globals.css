@@ -1,11 +1,79 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.underline-animation{
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 6rem;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);  
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* For browsers that do not support background-clip: text */
+  -webkit-text-fill-color: transparent; /* For webkit browsers */
+}
+
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.index-second{
+  color: #176b87;
+  font-size: 3.5rem;
+  margin: 1rem;
+  padding: 2rem;
+  text-decoration: underline 0.15em rgba(255, 255, 255, 0);
+  transition: text-decoration-color 300ms;
+  cursor: pointer;
+}
+
+.index-second:hover{
+  text-decoration: underline;
+  text-decoration-color: #053885
+}
+
+
+.display-1{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.display-2{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.display-3{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .aqua-body {
   font-family: "Poppins" !important;
+  font-weight: 200;
 }
 
 .cus-nav {
@@ -260,6 +328,10 @@ body {
 
 .card-carousel {
   padding: 1rem;
+}
+
+@media screen {
+  
 }
 
 .img-card-display {

@@ -3,6 +3,7 @@ import AquaCategoryHolder from "./categoryHolder";
 import AquaSubCategoryHolder from "./subCategoryHolder";
 import AquaProductHolder from "./productHolder";
 import { useRouter } from "next/router";
+import AquaLargeTitle from "@/reusables/largeTitle";
 
 const AquaHomeComponent = () => {
   const router = useRouter();
@@ -21,9 +22,14 @@ const AquaHomeComponent = () => {
   return (
     <>
       <AquaLayout seo={SeoData} container={true}>
+        <div className="mb-5 text-center">
+        <h1 className="underline-animation">Aquakart</h1>
+        <h2 className="index-second">"Transform your water from 'rock concert' to 'smooth jazz' with our water softeners!"</h2>
+        </div>
+     
         {/* <AquaCategoryHolder />
         <AquaSubCategoryHolder /> */}
-        <AquaProductHolder />
+        {/* <AquaProductHolder /> */}
       </AquaLayout>
     </>
   );
