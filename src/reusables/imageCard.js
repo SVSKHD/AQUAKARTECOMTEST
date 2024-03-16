@@ -12,11 +12,11 @@ const AquaImageCard = (props) => {
             src={images ? images[0].secure_url : AQ}
             className="card-img shadow-lg rounded-5"
             alt={title}
-            width="50"
-            height="200"
+            width="250"
+            height="500"
             layout="responsive"
             objectFit="cover"
-            quality={75}
+            quality={100}
           />
           <div className="card-img-overlay">
             <div className="img-card-display">

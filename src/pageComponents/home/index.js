@@ -31,18 +31,18 @@ const AquaHomeComponent = () => {
         <div className="index-section1 mb-3">
           <div className="container p-3">
             <div className="row">
-              <div className="col">
+              <div className="col-md-6 col-lg-6">
                 <p className="index-section1-p">Putting the humor aside, we're here to guide you to the perfect water softener tailored to your home's needs and preferences.</p>
               </div>
-              <div className="col">
-                categories
+              <div className="col-md-6 col-lg-6">
+              <AquaCategoryHolder />
               </div>
             </div>
           </div>
         </div>
      
-        {/* <AquaCategoryHolder />
-        <AquaSubCategoryHolder /> */}
+       
+        {/* <AquaSubCategoryHolder /> */}
         {/* <AquaProductHolder /> */}
       </AquaLayout>
     </>
