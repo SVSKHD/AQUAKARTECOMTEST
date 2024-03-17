@@ -32,6 +32,11 @@ body {
   }
 }
 
+
+.image-div-adjust{
+  height: auto;
+}
+
 .index-second{
   color: #176b87;
   margin: 1rem;

@@ -34,7 +34,7 @@ const AquaHomeComponent = () => {
               <div className="col-md-6 col-lg-6">
                 <p className="index-section1-p">Putting the humor aside, we're here to guide you to the perfect water softener tailored to your home's needs and preferences.</p>
               </div>
-              <div className="col-md-6 col-lg-6">
+              <div className="col-md-6 col-lg-6 image-div-adjust">
               <AquaCategoryHolder />
               </div>
             </div>
