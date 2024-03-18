@@ -35,14 +35,14 @@ const UserDashBoard = () => {
     if (user?.user?._id) {
       await userGetData(user.user._id)
         .then((res) => {
-          setFormData((data) => ({ ...data, addresses: res.data.addresses }));
-          console.log("data", res.data, formData);
+          setFormData((data) => ({ ...data, addresses: res.data.data.addresses || []}));
+          console.log(res.data.data.addresses);
         })
         .catch((err) => {
           console.log("err", err);
         });
     }
-  }, [userGetData, dispatch, user, formData]);
+  }, [userGetData, user ]);
 
   useEffect(() => {
     getDataAndManipulateStore();
