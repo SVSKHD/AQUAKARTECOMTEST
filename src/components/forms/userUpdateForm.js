@@ -33,7 +33,6 @@ const UserForm = ({ data, onUpdate }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {JSON.stringify(data)}
         <div className="row">
           <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
             <AquaHeading level={4}>Contact Details</AquaHeading>
@@ -81,7 +80,7 @@ const UserForm = ({ data, onUpdate }) => {
                       onChange={(e) => handleChange(e, i, "postalCode")}
                     />
                     <button
-                      className="btn btn-secondary btn-sm"
+                      className="btn btn-outline-primary btn-sm"
                       onClick={() => setEditIndex(null)}
                     >
                       Save
