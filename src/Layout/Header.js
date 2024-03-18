@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
+
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
@@ -25,8 +25,10 @@ const AquaNavBar = () => {
   }, [cartCount]);
 
   function createUserName(email) {
+    if(email){
     const usernamePart = email.split("@")[0]; // Get the part before '@'
     return usernamePart.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
+    }
   }
 
   return (
@@ -100,7 +102,7 @@ const AquaNavBar = () => {
                     <Dropdown className="ms-3" as={ButtonGroup}>
                       <Button variant="dark">
                         {" "}
-                        Hello {createUserName(user.user.email)}
+                        Hello {createUserName(user?.user?.email)}
                       </Button>
 
                       <Dropdown.Toggle
