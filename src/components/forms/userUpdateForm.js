@@ -9,13 +9,17 @@ const UserForm = (address, contactDetails) => {
         <div className="row">
           <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
             <AquaHeading level={4}>Contact Details</AquaHeading>
-            <AquaInput label="Alternating Email" value={contactDetails.alternativeEmail}/>
+            <AquaInput label="Alternating Email" value={contactDetails.alternativeEmail} />
             <AquaInput label="phoneNo" value={contactDetails.phoneNo} />
           </div>
           <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
             <AquaHeading level={4}>Address</AquaHeading>
             <div className="row">
-              { }
+              {address?.map((r, i) => (
+                <div className="col">
+                  
+                </div>
+              ))}
             </div>
             <div>
               <AquaInput label="street" />
