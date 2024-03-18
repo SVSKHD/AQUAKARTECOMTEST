@@ -42,15 +42,15 @@ const UserLayout = (props) => {
             <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
               <div className="card shadow-lg">
                 <div className="card-body">
-                  <div className="list-group">
+                  <div className="list-group list-group-flush">
                     {menu.map((r, i) => (
                       <a
                         key={i}
                         href={r.path}
-                        className={`list-group-item list-group-item-action-${Router.pathname === r.path ? "active" : ""}`}
+                        className={`list-group-item list-group-item-action dashboard-list-item ${Router.pathname === r.path ? "active rounded-4" : ""}`}
                       >
                         <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1">{r.title}</h5>
+                          <h5 class="mb-1 dashboard-menu-item">{r.title}</h5>
                         </div>
                       </a>
                     ))}

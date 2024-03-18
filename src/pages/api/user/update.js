@@ -6,7 +6,7 @@ const router = createRouter()
 
 router.put(async(req,res)=>{
 db.connectDb()
-console.log("id",id)
+console.log("id",req.body)
 db.disconnectDb()
 })
 
