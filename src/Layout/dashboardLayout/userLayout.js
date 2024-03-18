@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import UserHeader from "./userHeader";
 import AquaUserHead from "./head";
-
+import { useRouter } from "next/router";
 const UserLayout = (props) => {
   const { user } = useSelector((state) => ({ ...state }));
-  function createUserName(email) {
+  const Router = useRouter()
+  const createUserName = (email) => {
     const usernamePart = email?.split("@")[0]; // Get the part before '@'
     return usernamePart?.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
   }
+
+
   const menu = [
     {
       title: "Dashboard",
@@ -44,7 +47,7 @@ const UserLayout = (props) => {
                       <a
                         key={i}
                         href={r.path}
-                        className="list-group-item list-group-item-action"
+                        className={`list-group-item list-group-item-action-${Router.pathname === r.path ? "active" : ""}`}
                       >
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">{r.title}</h5>
