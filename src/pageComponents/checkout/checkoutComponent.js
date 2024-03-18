@@ -84,7 +84,7 @@ const AquaCheckoutComponent = () => {
 
   return (
     <>
-      <AquaLayout seo={seo}>
+      <AquaLayout seo={seo} container={true}>
         <div className="row mb-3">
           <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
             <div className="card shadow-lg">

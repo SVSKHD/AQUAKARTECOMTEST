@@ -497,8 +497,13 @@ font-size: 2.5rem;
   color: #053b50;
 }
 
+.dashboard-cart-card{
+  height: 100px;
+}
+
 .user-dashboard-height {
-  height: 400px;
+  height: 520px;
+  overflow-y: auto;
 }
 
 .footer-col-heading {
