@@ -37,7 +37,7 @@ const UserLayout = (props) => {
       <div>
         <AquaUserHead />
         <div className="container">
-          <div className="row mt-5">
+          <div className="row mt-5 mb-3">
             <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
               <div className="card shadow-lg">
                 <div className="card-body">

@@ -33,6 +33,7 @@ const UserForm = ({ data, onUpdate }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {JSON.stringify(data)}
         <div className="row">
           <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
             <AquaHeading level={4}>Contact Details</AquaHeading>
@@ -51,7 +52,7 @@ const UserForm = ({ data, onUpdate }) => {
           </div>
           <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
             <AquaHeading level={4}>Addresses</AquaHeading>
-            {formData?.addresses.map((address, i) => (
+            {formData?.addresses?.map((address, i) => (
               <div key={i} className="mb-3">
                 {editIndex === i ? (
                   <>
