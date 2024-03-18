@@ -14,7 +14,6 @@ import {
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-
 const AquaNavBar = () => {
   const dispatch = useDispatch();
   const { cartCount, user } = useSelector((state) => ({ ...state }));
@@ -25,9 +24,9 @@ const AquaNavBar = () => {
   }, [cartCount]);
 
   function createUserName(email) {
-    if(email){
-    const usernamePart = email.split("@")[0]; // Get the part before '@'
-    return usernamePart.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
+    if (email) {
+      const usernamePart = email.split("@")[0]; // Get the part before '@'
+      return usernamePart.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
     }
   }
 

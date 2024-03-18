@@ -17,7 +17,7 @@ const AquaToast = (message, type) => {
       toast.success(message, {
         icon,
         duration: 2000, // Adjust duration as needed
-        position: "top-right",
+        position: "top-center",
         style: {
           borderRadius: "20px",
           padding: "10px",
@@ -33,7 +33,7 @@ const AquaToast = (message, type) => {
       toast.error(message, {
         icon,
         duration: 6000, // Adjust duration as needed
-        position: "top-right",
+        position: "top-center",
         style: {
           borderRadius: "20px",
           padding: "10px",
@@ -49,7 +49,7 @@ const AquaToast = (message, type) => {
       toast(message, {
         icon,
         duration: 6000, // Adjust duration as needed
-        position: "top-right",
+        position: "top-center",
         style: {
           borderRadius: "20px",
           padding: "10px",
@@ -63,7 +63,7 @@ const AquaToast = (message, type) => {
       toast(message, {
         // Using generic toast for cases not covered by success, error, or info
         duration: 2000, // Adjust duration as needed
-        position: "top-right",
+        position: "top-center",
         style: {
           borderRadius: "20px",
           padding: "10px",

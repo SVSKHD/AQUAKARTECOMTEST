@@ -1,61 +1,59 @@
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import UserLayout from "@/Layout/dashboardLayout/userLayout";
 import UserOperations from "@/Services/user";
 import UserForm from "@/components/forms/userUpdateForm";
 import UserPasswordForm from "@/components/forms/userpasswordForm";
-import { useState, useEffect , useCallback} from "react";
-import { useDispatch, useSelector } from "react-redux";
+
+const initialState = {
+  phoneNo: "",
+  addresses: [
+    {
+      street: "",
+      city: "",
+      state: "",
+      postalCode: "",
+    },
+  ],
+  gstDetails: {
+    gstEmail: "",
+    gstNo: "",
+    gstPhone: "",
+    gstAddress: "",
+  },
+};
 
 const UserDashBoard = () => {
   const { user } = useSelector((state) => ({ ...state }));
-  const dispatch = useDispatch()
-  const { userGetData } = UserOperations()
+  const dispatch = useDispatch();
+  const { userGetData } = UserOperations();
+  const [formData, setFormData] = useState(initialState);
+  const [detailsStatus, setDetailStatus] = useState(false);
+  const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
 
-
-  const getDataAndManipulateStore = useCallback(() => {
+  const getDataAndManipulateStore = useCallback(async () => {
     if (user?.user?._id) {
-      userGetData(user.user._id)
+      await userGetData(user.user._id)
         .then((res) => {
-          console.log("data", res.data);
-          dispatch({ type: "LOGGED_IN_USER", payload: res.data });
+          setFormData((data) => ({ ...data, addresses: res.data.addresses }));
+          console.log("data", res.data, formData);
         })
         .catch((err) => {
           console.log("err", err);
         });
     }
-  }, [user?.user?._id, userGetData, dispatch]);
+  }, [userGetData, dispatch, user, formData]);
 
   useEffect(() => {
     getDataAndManipulateStore();
   }, [getDataAndManipulateStore]);
 
-
-  const initialState = {
-    phoneNo: "",
-    addresses: [
-      {
-        street: "",
-        city: "",
-        state: "",
-        postalCode: "",
-      }
-    ],
-    gstDetails: {
-      gstEmail: "",
-      gstNo: "",
-      gstPhone: "",
-      gstAddress: "",
-    }
-  };
-
-  const [formData, setFormData] = useState(initialState);
-  const [detailsStatus, setDetailStatus] = useState(false);
-  const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
   return (
     <>
       <UserLayout>
         <div className="row">
           <div className="col">
-            <div class="d-grid gap-2">
+            <div className="d-grid gap-2">
               <button
                 className="btn btn-dark btn-block"
                 onClick={() => setDetailStatus(!detailsStatus)}
@@ -65,7 +63,7 @@ const UserDashBoard = () => {
             </div>
           </div>
           <div className="col">
-            <div class="d-grid gap-2">
+            <div className="d-grid gap-2">
               <button
                 className="btn btn-dark btn-block"
                 onClick={() => setNewPasswordStatus(!NewPasswordStatus)}
@@ -78,11 +76,12 @@ const UserDashBoard = () => {
 
         <hr />
         <div>
-          {detailsStatus ? <UserForm data={formData} /> : ""}
-          {NewPasswordStatus ? <UserPasswordForm /> : ""}
+          {detailsStatus ? <UserForm data={formData} /> : null}
+          {NewPasswordStatus ? <UserPasswordForm /> : null}
         </div>
       </UserLayout>
     </>
   );
 };
+
 export default UserDashBoard;

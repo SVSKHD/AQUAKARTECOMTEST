@@ -8,7 +8,6 @@ import { FaInstagram, FaWhatsapp, FaTelegram } from "react-icons/fa";
 import AquaSubCategoryOperations from "@/Services/subCategory";
 import AquaToast from "@/reusables/js/toast";
 
-
 const AquaFooter = () => {
   const date = new Date();
   const Year = date.getFullYear();

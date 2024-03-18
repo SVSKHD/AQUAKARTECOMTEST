@@ -23,7 +23,7 @@ const responsive = {
 
 const AquaCardMultiItemCarousel = (props) => {
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       <Carousel
         additionalTransfrom={0}
         arrows={false}
