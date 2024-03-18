@@ -1,27 +1,21 @@
 import AquaInput from "@/reusables/input";
 import AquaTextAreaInput from "@/reusables/textarea";
 
-const UserForm = () => {
+const UserForm = (mode) => {
   return (
     <>
       <form>
-        <div className="row">
-          <div className="col">
-            <AquaInput label="email" />
-          </div>
-          <div className="col">
-            <AquaInput label="email" />
-          </div>
+       <div className="row">
+        <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
+
         </div>
-        <div className="row">
-          <div className="col">
-            <AquaInput label="phone" />
-          </div>
-          <div className="col">
-            <AquaTextAreaInput />
-          </div>
+        <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
+
         </div>
-        <button className="btn btn-secondary">Submit</button>
+         <button className="btn btn-primary">
+           update details
+         </button>
+       </div>
       </form>
     </>
   );

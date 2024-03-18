@@ -49,8 +49,8 @@ const UserLayout = (props) => {
                         href={r.path}
                         className={`list-group-item list-group-item-action dashboard-list-item ${Router.pathname === r.path ? "active rounded-4" : ""}`}
                       >
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1 dashboard-menu-item">{r.title}</h5>
+                        <div className="d-flex w-100 justify-content-between">
+                          <h5 className="mb-1 dashboard-menu-item">{r.title}</h5>
                         </div>
                       </a>
                     ))}
@@ -61,7 +61,7 @@ const UserLayout = (props) => {
             <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
               <div className="card shadow-lg mb-1">
                 <div className="card-body">
-                  <UserHeader name={createUserName(user?.user?.email)} />
+                  <UserHeader name={createUserName(user?.user?.email)} id={user?.user?.id}/>
                 </div>
               </div>
               <div className="card shadow-lg user-dashboard-height">
