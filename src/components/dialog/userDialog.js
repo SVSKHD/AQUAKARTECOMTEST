@@ -25,6 +25,7 @@ const AquaUserDialog = () => {
   const handleSigninDataChanged = (data) => {
     setSigninData(data);
   };
+
   const [status, setStatus] = useState({
     loading: false,
     success: false,
@@ -32,95 +33,70 @@ const AquaUserDialog = () => {
     successMessage: "",
     errorMessage: "",
   });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, loading: true }));
-    if (signupStatus === true) {
-      UserSignup(signupData)
-        .then((res) => {
-          AquaToast("succefully signed you up", "success");
-          setStatus((prevStatus) => ({
-            ...prevStatus,
-            loading: false,
-            success: true,
-            successMessage: "Signup successful!",
-          }));
-          dispatch({
-            type: "SET_AUTH_STATUS_VISIBLE",
-            payload: false,
-          });
-        })
-        .catch((err) => {
-          AquaToast(err.message, "error");
-          setStatus((prevStatus) => ({
-            ...prevStatus,
-            loading: false,
-            error: true,
-            errorMessage: "Signup failed!",
-          }));
+
+    const formData = signupStatus ? signupData : signinData;
+    const operation = signupStatus ? UserSignup : UserLogin;
+
+    operation(formData)
+      .then((res) => {
+        const message = signupStatus ? "succefully signed you up" : "succefully logged in";
+        AquaToast(message, "success");
+        setStatus((prevStatus) => ({
+          ...prevStatus,
+          loading: false,
+          success: true,
+          successMessage: signupStatus ? "Signup successful!" : "Signin successful!",
+        }));
+        dispatch({
+          type: signupStatus ? "SET_AUTH_STATUS_VISIBLE" : "LOGGED_IN_USER",
+          payload: signupStatus ? false : res.data,
         });
-    } else {
-      UserLogin(signinData)
-        .then((res) => {
-          AquaToast("succefully logged in", "success");
-          setStatus((prevStatus) => ({
-            ...prevStatus,
-            loading: false,
-            success: true,
-            successMessage: "Signin successful!",
-          }));
-          console.log(res.data);
-          dispatch({
-            type: "LOGGED_IN_USER",
-            payload: res.data,
-          });
-          dispatch({
-            type: "SET_AUTH_DIALOG_VISIBLE",
-            payload: false,
-          });
-        })
-        .catch(() => {
-          AquaToast("Please try again", "error");
-          setStatus((prevStatus) => ({
-            ...prevStatus,
-            loading: false,
-            error: true,
-            errorMessage: "Signin failed!",
-          }));
+        dispatch({
+          type: "SET_AUTH_DIALOG_VISIBLE",
+          payload: false,
         });
+      })
+      .catch((err) => {
+        const errorMessage = err.message || (signupStatus ? "Signup failed!" : "Signin failed!");
+        AquaToast(errorMessage, "error");
+        setStatus((prevStatus) => ({
+          ...prevStatus,
+          loading: false,
+          error: true,
+          errorMessage: errorMessage,
+        }));
+      });
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSubmit(event);
     }
   };
+
   return (
     <>
       <AquaDialog
         className="aqua-auth-dialog"
         show={authDialog}
-        handleClose={() =>
-          dispatch({
-            type: "SET_AUTH_DIALOG_VISIBLE",
-            payload: false,
-          })
-        }
+        handleClose={() => dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: false })}
         center={true}
-        title={
-          <AquaHeading center={true} level={3}>
-            {signupStatus ? "Signup" : "Signin"}
-          </AquaHeading>
-        }
+        title={<AquaHeading center={true} level={3}>{signupStatus ? "Signup" : "Signin"}</AquaHeading>}
         footerButtons={
           <AquaButton onClick={handleSubmit}>
-            {status.loading ? (
-              <Spinner animation="border" variant="light" />
-            ) : (
-              <>{signupStatus ? "Signup" : "Signin"}</>
-            )}
+            {status.loading ? <Spinner animation="border" variant="light" /> : <>{signupStatus ? "Signup" : "Signin"}</>}
           </AquaButton>
         }
       >
-        <div className="text-center">
+        <div className="text-center" onKeyDownCapture={handleKeyDown}>
           <Image src={LOGO} alt="Aquakart" height="80" width="80" />
         </div>
-        <div className="padd-inner-content">
+        <div className="padd-inner-content" onKeyDown={handleKeyDown}>
           {signupStatus ? (
             <AquaSignup onDataChanged={handleSignupDataChange} />
           ) : (
@@ -128,25 +104,14 @@ const AquaUserDialog = () => {
           )}
           <span
             className="text-center text-primary"
-            onClick={() => {
-              dispatch({
-                type: "SET_AUTH_STATUS_VISIBLE",
-                payload: !signupStatus,
-              });
-              // eslint-disable-next-line react/no-unescaped-entities
-            }}
+            onClick={() => dispatch({ type: "SET_AUTH_STATUS_VISIBLE", payload: !signupStatus })}
           >
-            {signupStatus ? (
-              <AquaHeading level={6}>
-                Already Have An Account..? Signin
-              </AquaHeading>
-            ) : (
-              <AquaHeading level={6}>Don't Have Account..? Signup</AquaHeading>
-            )}
+            {signupStatus ? "Already Have An Account..? Signin" : "Don't Have Account..? Signup"}
           </span>
         </div>
       </AquaDialog>
     </>
   );
 };
+
 export default AquaUserDialog;

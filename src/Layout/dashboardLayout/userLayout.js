@@ -39,7 +39,7 @@ const UserLayout = (props) => {
         <div className="container">
           <div className="row mt-5 mb-3">
             <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
-              <div className="card shadow-lg">
+              <div className="card shadow-lg rounded-4">
                 <div className="card-body">
                   <div className="list-group list-group-flush">
                     {menu.map((r, i) => (
@@ -60,7 +60,7 @@ const UserLayout = (props) => {
               </div>
             </div>
             <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-              <div className="card shadow-lg mb-1">
+              <div className="card shadow-lg mb-1 rounded-4">
                 <div className="card-body">
                   <UserHeader
                     name={createUserName(user?.user?.email)}
@@ -68,7 +68,7 @@ const UserLayout = (props) => {
                   />
                 </div>
               </div>
-              <div className="card shadow-lg user-dashboard-height">
+              <div className="card shadow-lg user-dashboard-height rounded-4">
                 <div className="card-body">
                   <div className="container">{props.children}</div>
                 </div>
