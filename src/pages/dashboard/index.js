@@ -35,18 +35,21 @@ const UserDashBoard = () => {
     if (user?.user?._id) {
       await userGetData(user.user._id)
         .then((res) => {
+          dispatch({ type: "LOGGED_IN_USER", payload: res?.data?.data });
           setFormData((data) => ({ ...data, addresses: res.data.data.addresses || []}));
           console.log(res.data.data.addresses);
         })
         .catch((err) => {
           console.log("err", err);
+          dispatch({ type: "LOGGED_IN_USER", payload: null });
         });
     }
-  }, [userGetData, user ]);
+  }, [userGetData, user , dispatch]);
 
   useEffect(() => {
     getDataAndManipulateStore();
-  }, [getDataAndManipulateStore]);
+    console.log("user", user)
+  }, [getDataAndManipulateStore , user]);
 
   return (
     <>

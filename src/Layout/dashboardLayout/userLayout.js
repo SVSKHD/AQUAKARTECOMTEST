@@ -2,8 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import UserHeader from "./userHeader";
 import AquaUserHead from "./head";
 import { useRouter } from "next/router";
+import { useEffect , useCallback} from "react";
+import UserOperations from "@/Services/user";
+
 const UserLayout = (props) => {
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => ({ ...state }));
+
   const Router = useRouter();
   const createUserName = (email) => {
     const usernamePart = email?.split("@")[0]; // Get the part before '@'
@@ -66,6 +71,7 @@ const UserLayout = (props) => {
                     name={createUserName(user?.user?.email)}
                     id={user?.user?.id}
                   />
+                  {JSON.stringify(user.data)}
                 </div>
               </div>
               <div className="card shadow-lg user-dashboard-height rounded-4">
