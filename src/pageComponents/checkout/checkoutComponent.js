@@ -6,16 +6,29 @@ import { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
+import { useRouter } from "next/router";
+import axios from "axios"
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
+import { v4 as uuidv4 } from 'uuid';
+import { verify } from "jsonwebtoken";
 
 const AquaCheckoutComponent = () => {
   const dispatch = useDispatch();
   const seo = { title: "Aquakart | Checkout" };
   const [deleteAll, setDeleteAll] = useState(false);
-  const { favCount, cartCount } = useSelector((state) => ({ ...state }));
-
+  const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
+  const router = useRouter()
   const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("router", router.pathname)
+    if (router.pathname === "/checkout") {
+      dispatch({
+        type: "SET_CART_DRAWER_VISIBLE",
+        payload: false,
+      })
+    }
     // Function to load Razorpay script
     const loadRazorpayScript = () => {
       if (window.Razorpay) {
@@ -36,7 +49,7 @@ const AquaCheckoutComponent = () => {
     };
 
     loadRazorpayScript();
-  }, []);
+  }, [router]);
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
@@ -46,41 +59,71 @@ const AquaCheckoutComponent = () => {
     });
   };
 
-  const handlePayment = () => {
-    if (!isRazorpayLoaded) {
-      alert("Razorpay SDK is not loaded yet!");
-      return;
-    }
-
-    // Razorpay setup
-    const options = {
-      key: "YOUR_RAZORPAY_KEY", // Replace with your actual key
-      amount: total * 100, // Amount in smallest currency unit (e.g., paise for INR)
-      currency: "INR",
-      name: "Aquakart",
-      description: "Test Transaction",
-      image: "https://example.com/your_logo",
-      handler: function (response) {
-        alert(
-          `Payment successful! Payment ID: ${response.razorpay_payment_id}`,
-        );
-      },
-      prefill: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        contact: "9999999999",
-      },
-      notes: {
-        address: "Aquakart Corporate Office",
-      },
-      theme: {
-        color: "#3399cc",
+  const initiatePhonePePayment = async () => {
+  
+    const transactionId = "Tr-" + uuidv4().toString(36).slice(-6);
+    const merchantUserId = 'MUID-' + uuidv4().toString(36).slice(-6);
+  
+    const payload = {
+      merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
+      merchantTransactionId: transactionId,
+      merchantUserId: merchantUserId,
+      amount: 10000, // Example amount in paise
+      redirectUrl: `http://localhost:3000/api/status/${transactionId}`,
+      redirectMode: "POST",
+      callbackUrl: `http://localhost:3000/api/status/${transactionId}`,
+      mobileNumber: '9999999999', // Example mobile number
+      paymentInstrument: {
+        type: "PAY_PAGE",
       },
     };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+  
+    const dataPayload = JSON.stringify(payload);
+    const dataBase64 = Buffer.from(dataPayload).toString("base64");
+  
+    const fullURL = dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
+    const dataSha256 = sha256(fullURL).toString();
+  
+    const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
+  
+    const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+  
+    try {
+      const response = await axios.post(
+        UAT_PAY_API_URL,
+        {
+          request: dataBase64,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+            "X-VERIFY": checksum,
+          },
+        }
+      );
+  
+      if (response) {
+        const redirect=response.data.data.instrumentResponse.redirectInfo.url;
+        router.push(redirect)// Redirect user to PhonePe payment page
+      }
+    } catch (error) {
+      console.error('Payment initiation failed:', error);
+    }
   };
+  
+  const handlePayment = (event) => {
+    event.preventDefault()
+    if (!user) {
+      dispatch({
+        type: "SET_AUTH_DIALOG_VISIBLE",
+        payload: true,
+      });
+    } else {
+      initiatePhonePePayment();
+    }
+  };
+  
 
   return (
     <>
