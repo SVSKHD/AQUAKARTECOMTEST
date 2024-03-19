@@ -61,17 +61,17 @@ const AquaCheckoutComponent = () => {
 
   const initiatePhonePePayment = async () => {
   
-    const transactionId = "Tr-" + uuidv4().toString(36).slice(-6);
+    const transactionId = "AQTr-" + uuidv4().toString(36).slice(-6);
     const merchantUserId = 'MUID-' + uuidv4().toString(36).slice(-6);
   
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
       merchantTransactionId: transactionId,
       merchantUserId: merchantUserId,
-      amount: 10000, // Example amount in paise
-      redirectUrl: `http://localhost:3000/api/status/${transactionId}`,
+      amount: (total-1)*100, // Example amount in paise
+      redirectUrl: `/orders/${transactionId}`,
       redirectMode: "POST",
-      callbackUrl: `http://localhost:3000/api/status/${transactionId}`,
+      callbackUrl: `/orders/${transactionId}`,
       mobileNumber: '9999999999', // Example mobile number
       paymentInstrument: {
         type: "PAY_PAGE",
