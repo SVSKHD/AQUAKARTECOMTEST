@@ -6,7 +6,12 @@ const UserForm = ({ data, onUpdate }) => {
   const [formData, setFormData] = useState(data);
   const [editIndex, setEditIndex] = useState(null); // To track which address is being edited
   const [showAddressInputs, setShowAddressInputs] = useState(false); // To show/hide new address inputs
-  const [newAddress, setNewAddress] = useState({ street: "", city: "", state: "", postalCode: "" }); // State for a new address
+  const [newAddress, setNewAddress] = useState({
+    street: "",
+    city: "",
+    state: "",
+    postalCode: "",
+  }); // State for a new address
 
   useEffect(() => {
     setFormData(data);
@@ -15,7 +20,10 @@ const UserForm = ({ data, onUpdate }) => {
   const handleChange = (e, index, field) => {
     if (index !== undefined && field) {
       const updatedAddresses = [...formData.addresses];
-      updatedAddresses[index] = { ...updatedAddresses[index], [field]: e.target.value };
+      updatedAddresses[index] = {
+        ...updatedAddresses[index],
+        [field]: e.target.value,
+      };
       setFormData({ ...formData, addresses: updatedAddresses });
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,8 +59,18 @@ const UserForm = ({ data, onUpdate }) => {
       <div className="row">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaHeading level={4}>Contact Details</AquaHeading>
-          <AquaInput label="Alternative Email" name="alternativeEmail" value={formData.alternativeEmail || ""} onChange={handleChange} />
-          <AquaInput label="Phone No" name="phoneNo" value={formData.phoneNo || ""} onChange={handleChange} />
+          <AquaInput
+            label="Alternative Email"
+            name="alternativeEmail"
+            value={formData.alternativeEmail || ""}
+            onChange={handleChange}
+          />
+          <AquaInput
+            label="Phone No"
+            name="phoneNo"
+            value={formData.phoneNo || ""}
+            onChange={handleChange}
+          />
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
           <AquaHeading level={4}>Addresses</AquaHeading>
@@ -60,18 +78,46 @@ const UserForm = ({ data, onUpdate }) => {
             <div key={i} className="mb-3">
               {editIndex === i ? (
                 <>
-                  <AquaInput label="Street" name="street" value={address.street} onChange={(e) => handleChange(e, i, "street")} />
-                  <AquaInput label="City" name="city" value={address.city} onChange={(e) => handleChange(e, i, "city")} />
-                  <AquaInput label="State" name="state" value={address.state} onChange={(e) => handleChange(e, i, "state")} />
-                  <AquaInput label="Postal Code" name="postalCode" value={address.postalCode} onChange={(e) => handleChange(e, i, "postalCode")} />
-                  <button type="button" className="btn btn-outline-primary btn-sm" onClick={handleSaveEdit}>
+                  <AquaInput
+                    label="Street"
+                    name="street"
+                    value={address.street}
+                    onChange={(e) => handleChange(e, i, "street")}
+                  />
+                  <AquaInput
+                    label="City"
+                    name="city"
+                    value={address.city}
+                    onChange={(e) => handleChange(e, i, "city")}
+                  />
+                  <AquaInput
+                    label="State"
+                    name="state"
+                    value={address.state}
+                    onChange={(e) => handleChange(e, i, "state")}
+                  />
+                  <AquaInput
+                    label="Postal Code"
+                    name="postalCode"
+                    value={address.postalCode}
+                    onChange={(e) => handleChange(e, i, "postalCode")}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={handleSaveEdit}
+                  >
                     Save
                   </button>
                 </>
               ) : (
                 <div>
                   <p>{`${address.street}, ${address.city}, ${address.state}, ${address.postalCode}`}</p>
-                  <button type="button" className="btn btn-info btn-sm" onClick={() => handleEditClick(i)}>
+                  <button
+                    type="button"
+                    className="btn btn-info btn-sm"
+                    onClick={() => handleEditClick(i)}
+                  >
                     Edit
                   </button>
                 </div>
@@ -80,18 +126,48 @@ const UserForm = ({ data, onUpdate }) => {
           ))}
           {showAddressInputs && (
             <div>
-              <AquaInput label="Street" name="street" value={newAddress.street} onChange={(e) => handleNewAddressChange(e, "street")} />
-              <AquaInput label="City" name="city" value={newAddress.city} onChange={(e) => handleNewAddressChange(e, "city")} />
-              <AquaInput label="State" name="state" value={newAddress.state} onChange={(e) => handleNewAddressChange(e, "state")} />
-              <AquaInput label="Postal Code" name="postalCode" value={newAddress.postalCode} onChange={(e) => handleNewAddressChange(e, "postalCode")} />
-              <button type="button" className="btn btn-primary btn-sm" onClick={handleAddNewAddress}>
+              <AquaInput
+                label="Street"
+                name="street"
+                value={newAddress.street}
+                onChange={(e) => handleNewAddressChange(e, "street")}
+              />
+              <AquaInput
+                label="City"
+                name="city"
+                value={newAddress.city}
+                onChange={(e) => handleNewAddressChange(e, "city")}
+              />
+              <AquaInput
+                label="State"
+                name="state"
+                value={newAddress.state}
+                onChange={(e) => handleNewAddressChange(e, "state")}
+              />
+              <AquaInput
+                label="Postal Code"
+                name="postalCode"
+                value={newAddress.postalCode}
+                onChange={(e) => handleNewAddressChange(e, "postalCode")}
+              />
+              <button
+                type="button"
+                className="btn btn-primary btn-sm"
+                onClick={handleAddNewAddress}
+              >
                 Add Address
               </button>
             </div>
           )}
           {!showAddressInputs && (
-            <button type="button" className="btn btn-dark" onClick={() => setShowAddressInputs(true)}>
-              {formData.addresses.length > 0 ? "Add Another Address" : "Add Address"}
+            <button
+              type="button"
+              className="btn btn-dark"
+              onClick={() => setShowAddressInputs(true)}
+            >
+              {formData.addresses.length > 0
+                ? "Add Another Address"
+                : "Add Address"}
             </button>
           )}
         </div>

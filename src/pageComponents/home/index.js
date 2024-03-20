@@ -21,8 +21,12 @@ const AquaHomeComponent = () => {
   };
 
   useEffect(() => {
-    console.log("api", process.env.NEXT_PUBLIC_API_URL , process.env.NEXT_PUBLIC_SALT_KEY)
-  }, [])
+    console.log(
+      "api",
+      process.env.NEXT_PUBLIC_API_URL,
+      process.env.NEXT_PUBLIC_SALT_KEY,
+    );
+  }, []);
 
   return (
     <>

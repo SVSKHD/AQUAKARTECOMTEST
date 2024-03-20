@@ -30,16 +30,14 @@ const AquaCategoryHolder = () => {
         <div className="row">
           <AquaCardMultiItemCarousel>
             {categories.map((r, i) => (
-           
-                <div key={i} className="col-md-2 col-lg-3 col-xs-12 col-sm-12">
-                  <AquaImageCard
-                    key={i}
-                    title={r.title}
-                    images={r.photos}
-                    link={`/category/${r.title}`}
-                  />
-                </div>
-            
+              <div key={i} className="col-md-2 col-lg-3 col-xs-12 col-sm-12">
+                <AquaImageCard
+                  key={i}
+                  title={r.title}
+                  images={r.photos}
+                  link={`/category/${r.title}`}
+                />
+              </div>
             ))}
           </AquaCardMultiItemCarousel>
         </div>

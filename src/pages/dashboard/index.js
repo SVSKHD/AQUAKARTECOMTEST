@@ -36,10 +36,13 @@ const UserDashBoard = () => {
     if (user?.user?._id) {
       await userGetData(user.user._id)
         .then((res) => {
-          console.log("user", res.data.data , user)
+          console.log("user", res.data.data, user);
           // dispatch({ type: "LOGGED_IN_USER", payload: res?.data?.data });
           dispatch({ type: "UPDATE_USER_DETAILS", payload: res?.data?.data });
-          setFormData((data) => ({ ...data, addresses: res.data.data.addresses || []}));
+          setFormData((data) => ({
+            ...data,
+            addresses: res.data.data.addresses || [],
+          }));
           console.log(res.data.data.addresses);
         })
         .catch((err) => {
@@ -47,7 +50,7 @@ const UserDashBoard = () => {
           dispatch({ type: "LOGGED_IN_USER", payload: null });
         });
     }
-  }, [userGetData, user , dispatch]);
+  }, [userGetData, user, dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,10 +59,9 @@ const UserDashBoard = () => {
         setIsDataFetched(true);
       }
     };
-  
+
     fetchData();
   }, [getDataAndManipulateStore, isDataFetched, user?.user?._id]);
-  
 
   return (
     <>

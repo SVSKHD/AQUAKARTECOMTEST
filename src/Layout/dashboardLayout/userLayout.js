@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import UserHeader from "./userHeader";
 import AquaUserHead from "./head";
 import { useRouter } from "next/router";
-import { useEffect , useCallback} from "react";
+import { useEffect, useCallback } from "react";
 import UserOperations from "@/Services/user";
 
 const UserLayout = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
 
   const Router = useRouter();
