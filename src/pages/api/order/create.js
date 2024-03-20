@@ -13,13 +13,11 @@ handler.post(async (req, res) => {
     const savedOrder = await newOrder.save();
     res.status(201).json({ success: true, data: savedOrder });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Failed to create order",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Failed to create order",
+      error: error.message,
+    });
   }
 });
 

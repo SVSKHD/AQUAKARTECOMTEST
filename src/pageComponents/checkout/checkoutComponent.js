@@ -7,10 +7,10 @@ import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useRouter } from "next/router";
-import axios from "axios";
-import sha256 from "crypto-js/sha256";
-import Base64 from "crypto-js/enc-base64";
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios"
+import sha256 from 'crypto-js/sha256';
+import Base64 from 'crypto-js/enc-base64';
+import { v4 as uuidv4 } from 'uuid';
 import { verify } from "jsonwebtoken";
 
 const AquaCheckoutComponent = () => {
@@ -18,38 +18,42 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [deleteAll, setDeleteAll] = useState(false);
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
-  const router = useRouter();
-  const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
+  const router = useRouter()
 
-  useEffect(() => {
-    console.log("router", router.pathname);
-    if (router.pathname === "/checkout") {
-      dispatch({
-        type: "SET_CART_DRAWER_VISIBLE",
-        payload: false,
-      });
-    }
-    // Function to load Razorpay script
-    const loadRazorpayScript = () => {
-      if (window.Razorpay) {
-        // Razorpay is already loaded
-        setRazorpayLoaded(true);
-        return;
-      }
+  // razorpay gateway
+  // const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
 
-      // Create a new script element
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => {
-        // Script has been loaded
-        setRazorpayLoaded(true);
-      };
+  // useEffect(() => {
+  //   console.log("router", router.pathname)
+  //   if (router.pathname === "/checkout") {
+  //     dispatch({
+  //       type: "SET_CART_DRAWER_VISIBLE",
+  //       payload: false,
+  //     })
+  //   }
+  //   // Function to load Razorpay script
+  //   const loadRazorpayScript = () => {
+  //     if (window.Razorpay) {
+  //       // Razorpay is already loaded
+  //       setRazorpayLoaded(true);
+  //       return;
+  //     }
 
-      document.body.appendChild(script);
-    };
+  //     // Create a new script element
+  //     const script = document.createElement("script");
+  //     script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //     script.onload = () => {
+  //       // Script has been loaded
+  //       setRazorpayLoaded(true);
+  //     };
 
-    loadRazorpayScript();
-  }, [router]);
+  //     document.body.appendChild(script);
+  //   };
+
+  //   loadRazorpayScript();
+  // }, [router]);
+
+  
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
@@ -60,35 +64,34 @@ const AquaCheckoutComponent = () => {
   };
 
   const initiatePhonePePayment = async () => {
+    
     const transactionId = "AQTr-" + uuidv4().toString(36).slice(-6);
-    const merchantUserId = "MUID-" + uuidv4().toString(36).slice(-6);
-
+    const merchantUserId = 'MUID-' + uuidv4().toString(36).slice(-6);
+  
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
       merchantTransactionId: transactionId,
       merchantUserId: merchantUserId,
-      amount: (total - 1) * 100, // Example amount in paise
+      amount: (total-1)*100, // Example amount in paise
       redirectUrl: `/orders/${transactionId}`,
       redirectMode: "POST",
       callbackUrl: `/orders/${transactionId}`,
-      mobileNumber: "9999999999", // Example mobile number
+      mobileNumber: '9999999999', // Example mobile number
       paymentInstrument: {
         type: "PAY_PAGE",
       },
     };
-
+  
     const dataPayload = JSON.stringify(payload);
     const dataBase64 = Buffer.from(dataPayload).toString("base64");
-
-    const fullURL =
-      dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
+  
+    const fullURL = dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
     const dataSha256 = sha256(fullURL).toString();
-
+  
     const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
-
-    const UAT_PAY_API_URL =
-      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
-
+  
+    const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
+  
     try {
       const response = await axios.post(
         UAT_PAY_API_URL,
@@ -101,20 +104,20 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        },
+        }
       );
-
+  
       if (response) {
-        const redirect = response.data.data.instrumentResponse.redirectInfo.url;
-        router.push(redirect); // Redirect user to PhonePe payment page
+        const redirect=response.data.data.instrumentResponse.redirectInfo.url;
+        router.push(redirect)// Redirect user to PhonePe payment page
       }
     } catch (error) {
-      console.error("Payment initiation failed:", error);
+      console.error('Payment initiation failed:', error);
     }
   };
-
+  
   const handlePayment = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (!user) {
       dispatch({
         type: "SET_AUTH_DIALOG_VISIBLE",
@@ -124,6 +127,7 @@ const AquaCheckoutComponent = () => {
       initiatePhonePePayment();
     }
   };
+  
 
   return (
     <>

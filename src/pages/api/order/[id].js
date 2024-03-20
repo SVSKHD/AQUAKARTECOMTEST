@@ -27,13 +27,11 @@ handler.get(async (req, res) => {
     }
     res.status(200).json({ success: true, data: order });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Failed to fetch order",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch order",
+      error: error.message,
+    });
   }
 });
 

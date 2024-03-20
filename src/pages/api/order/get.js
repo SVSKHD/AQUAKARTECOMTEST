@@ -13,13 +13,11 @@ handler.get(async (req, res) => {
       .populate("items.productId");
     res.status(200).json({ success: true, data: orders });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Failed to fetch orders",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch orders",
+      error: error.message,
+    });
   }
 });
 
