@@ -35,7 +35,8 @@ const UserDashBoard = () => {
     if (user?.user?._id) {
       await userGetData(user.user._id)
         .then((res) => {
-          dispatch({ type: "LOGGED_IN_USER", payload: res?.data?.data });
+          console.log("user", res.data.data , user)
+          // dispatch({ type: "LOGGED_IN_USER", payload: res?.data?.data });
           setFormData((data) => ({ ...data, addresses: res.data.data.addresses || []}));
           console.log(res.data.data.addresses);
         })

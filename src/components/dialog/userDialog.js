@@ -55,6 +55,7 @@ const AquaUserDialog = () => {
           type: signupStatus ? "SET_AUTH_STATUS_VISIBLE" : "LOGGED_IN_USER",
           payload: signupStatus ? false : res.data,
         });
+        console.log("user" , res.data)
         dispatch({
           type: "SET_AUTH_DIALOG_VISIBLE",
           payload: false,
