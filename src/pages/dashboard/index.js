@@ -29,6 +29,7 @@ const UserDashBoard = () => {
   const { userGetData } = UserOperations();
   const [formData, setFormData] = useState(initialState);
   const [detailsStatus, setDetailStatus] = useState(false);
+  const [isDataFetched, setIsDataFetched] = useState(false);
   const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
 
   const getDataAndManipulateStore = useCallback(async () => {
@@ -37,6 +38,7 @@ const UserDashBoard = () => {
         .then((res) => {
           console.log("user", res.data.data , user)
           // dispatch({ type: "LOGGED_IN_USER", payload: res?.data?.data });
+          dispatch({ type: "UPDATE_USER_DETAILS", payload: res?.data?.data });
           setFormData((data) => ({ ...data, addresses: res.data.data.addresses || []}));
           console.log(res.data.data.addresses);
         })
@@ -48,9 +50,16 @@ const UserDashBoard = () => {
   }, [userGetData, user , dispatch]);
 
   useEffect(() => {
-    getDataAndManipulateStore();
-    console.log("user", user)
-  }, [getDataAndManipulateStore , user]);
+    const fetchData = async () => {
+      if (!isDataFetched && user?.user?._id) {
+        await getDataAndManipulateStore();
+        setIsDataFetched(true);
+      }
+    };
+  
+    fetchData();
+  }, [getDataAndManipulateStore, isDataFetched, user?.user?._id]);
+  
 
   return (
     <>

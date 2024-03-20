@@ -8,6 +8,9 @@ const nextConfig = {
     return config;
   },
   env: {
+    NEXT_PUBLIC_MERCHANT_ID:"PGTESTPAYUAT",
+    NEXT_PUBLIC_SALT_INDEX:1,
+    NEXT_PUBLIC_SALT_KEY:"099eb0cd-02cf-4e2a-8aca-3e6c6aff0399",
     apiKey: "https://aquakart.co.in",
   },
 };
