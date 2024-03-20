@@ -47,6 +47,7 @@ const OrderSchema = new mongoose.Schema({
   discounts: Number,
   taxes: Number,
   notes: String,
+  gst:Number,
   paymentGatewayResponse: {
     type: Map,
     of: String,
@@ -59,6 +60,6 @@ const OrderSchema = new mongoose.Schema({
   timestamps: true, // Add createdAt and updatedAt timestamps
 });
 
-const Order = mongoose.models.Order || mongoose.model("Order", OrderSchema);
+const AquaOrder = mongoose.models.AquaOrder || mongoose.model("AquaOrder", OrderSchema);
 
-export default Order;
+export default AquaOrder;

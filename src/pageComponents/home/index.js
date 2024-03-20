@@ -4,6 +4,7 @@ import AquaSubCategoryHolder from "./subCategoryHolder";
 import AquaProductHolder from "./productHolder";
 import { useRouter } from "next/router";
 import AquaLargeTitle from "@/reusables/largeTitle";
+import { useEffect } from "react";
 
 const AquaHomeComponent = () => {
   const router = useRouter();
@@ -18,6 +19,10 @@ const AquaHomeComponent = () => {
       "Aquakart Ecom Store , water softeners  , water Ro  , ro machines , Salt Free Water Softener , Water Softener System , Water Softener Installation",
     keyphrases: "Water Softener Salt Prices , Salt Water Softener",
   };
+
+  useEffect(() => {
+    console.log("api", process.env.NEXT_PUBLIC_API_URL)
+  }, [])
 
   return (
     <>

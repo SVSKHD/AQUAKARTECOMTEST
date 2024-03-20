@@ -79,21 +79,21 @@ const AquaFooter = () => {
               <div className="col">
                 <p className="footer-col-heading">Quick links</p>
                 {quickLinks.map((r, i) => (
-                  <>
-                    <p key={i} className="footer-item-adjust">
+                  <div key={i}>
+                    <p className="footer-item-adjust">
                       <a href={r.link} className="footer-item-adjust">
                         {r.title}
                       </a>
                     </p>
-                  </>
+                  </div>
                 ))}
               </div>
               <div className="col">
                 <p className="footer-col-heading">Sub Categories</p>
 
                 {subs.map((c, i) => (
-                  <>
-                    <p key={i} className="footer-item-adjust">
+                  <div key={i}>
+                    <p className="footer-item-adjust">
                       <a
                         href={`/category/${c.title}`}
                         className="footer-item-adjust"
@@ -101,15 +101,15 @@ const AquaFooter = () => {
                         {c.title}
                       </a>
                     </p>
-                  </>
+                  </div>
                 ))}
               </div>
               <div className="col">
                 <p className="footer-col-heading">Categories</p>
 
                 {categories.map((c, i) => (
-                  <>
-                    <p key={i} className="footer-item-adjust">
+                  <div key={i}>
+                    <p className="footer-item-adjust">
                       <a
                         href={`/category/${c.title}`}
                         className="footer-item-adjust"
@@ -117,7 +117,7 @@ const AquaFooter = () => {
                         {c.title}
                       </a>
                     </p>
-                  </>
+                  </div>
                 ))}
               </div>
               <div className="col">
