@@ -1,7 +1,7 @@
 // pages/api/order/get.js
 import { createRouter } from "next-connect";
 import db from "@/utils/db"; // Adjust the path according to your project structure
-import AquaOrder from "@/Backend/models/order"; // Adjust the path according to your project structure
+import AquaOrder from "@/Backend/models/orders"; // Adjust the path according to your project structure
 
 const router = createRouter();
 

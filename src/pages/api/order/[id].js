@@ -2,7 +2,7 @@
 import { createRouter } from "next-connect";
 import mongoose from "mongoose";
 import db from "@/utils/db"; // Adjust the path according to your project structure
-import AquaOrder from "@/Backend/models/order"; // Adjust the path according to your project structure
+import AquaOrder from "@/Backend/models/orders"; // Adjust the path according to your project structure
 
 const handler = createRouter();
 
