@@ -60,7 +60,7 @@ router.post(async (req, res) => {
         const newOrder = new AquaOrder(orderData);
         await newOrder.save();
 
-        res.writeHead(302, { Location: `/order/${transactionId}` });
+        res.writeHead(302, { Location: `/order/${newOrder._id}` });
         res.end();
       } else {
         res.status(400).json({ error: "Payment not successful" });
@@ -74,5 +74,14 @@ router.post(async (req, res) => {
     });
     await db.disconnectDb()
 });
+
+
+router.put(async(req,res)=>{
+  const {id} = req.query
+  const order = AquaOrder.findById(id)
+  
+})
+
+
 
 export default router.handler();
