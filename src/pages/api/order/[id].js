@@ -2,33 +2,44 @@ import { createRouter } from "next-connect";
 import axios from "axios";
 import { SHA256 } from "crypto-js";
 import AquaOrder from "@/Backend/models/orders"; // Adjust the import path as necessary
+import db from "@/utils/db";
 
 const router = createRouter();
 
+// Function to extract userId from transactionId
 function getUserIdFromTransactionId(transactionId) {
   const parts = transactionId.split('-');
-  const userId = parts[1]; // Adjust this based on your actual transactionId format
-  return userId;
+  return parts[1]; // Adjust this based on your actual transactionId format
 }
 
-
+// Mock function to retrieve product details, replace with your actual logic
+async function getProductDetails() {
+  // This function should retrieve product details,
+  // for example, from a shopping cart stored in the session or database
+  return [
+    { productId: "123", name: "Product 1", price: 100, quantity: 1 },
+    { productId: "456", name: "Product 2", price: 200, quantity: 2 },
+    // More products as necessary
+  ];
+}
 
 router.post(async (req, res) => {
+  await db.connectDb()
   const data = req.body;
-  const merchantId = data.merchantId;
   const transactionId = data.transactionId;
+  const userId = getUserIdFromTransactionId(transactionId);
 
-  const urlencode = SHA256(`/pg/v1/status/${merchantId}/${transactionId}` + process.env.NEXT_PUBLIC_SALT_KEY).toString();
-  const checksum = `${urlencode}###${process.env.NEXT_PUBLIC_SALT_INDEX}`;
+  // Retrieve product details for the order
+ 
 
   const options = {
     method: 'GET',
-    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${merchantId}/${transactionId}`,
+    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${data.merchantId}/${transactionId}`,
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",
-      "X-VERIFY": checksum,
-      "X-MERCHANT-ID": merchantId,
+      "X-VERIFY": `${SHA256(`/pg/v1/status/${data.merchantId}/${transactionId}` + process.env.NEXT_PUBLIC_SALT_KEY).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
+      "X-MERCHANT-ID": data.merchantId,
     },
   };
 
@@ -38,41 +49,30 @@ router.post(async (req, res) => {
       const response = apiResponse.data;
 
       if (response.success && response.code === 'PAYMENT_SUCCESS') {
-        // Extracting necessary data from the response
         const orderData = {
-          user: getUserIdFromTransactionId(transactionId), // Replace with actual user ID
-          items: "OrderItemsHere", // Replace with actual order items
-          totalAmount: response.data.amount/100,
-          paymentMethod: 'UPI', // Set based on your logic
+          user: userId,
+          totalAmount: response.data.amount / 100,
           transactionId: response.data.transactionId,
           paymentStatus: 'Paid',
-          paymentInstrument: {
-            type: response.data.paymentInstrument.type,
-            utr: response.data.paymentInstrument.utr,
-            upiTransactionId: response.data.paymentInstrument.upiTransactionId,
-            accountHolderName: response.data.paymentInstrument.accountHolderName,
-            cardNetwork: response.data.paymentInstrument.cardNetwork,
-            accountType: response.data.paymentInstrument.accountType,
-          },
-          // Include other fields as necessary
+          paymentInstrument: response.data.paymentInstrument,
         };
 
-        // Creating and saving the new order
         const newOrder = new AquaOrder(orderData);
         await newOrder.save();
 
-        // Redirect to the order details page
         res.writeHead(302, { Location: `/order/${transactionId}` });
         res.end();
       } else {
-        // Handle cases where payment is not successful
         res.status(400).json({ error: "Payment not successful" });
       }
     })
     .catch((error) => {
       console.error("Error calling PhonePe API:", error.message);
-      res.status(500).json({ error: "Failed to check transaction status" });
+      // res.status(500).json({ error: "Failed to check transaction status" });
+      res.writeHead(302, { Location: `/order/${transactionId}?info="FAILURE"` });
+      res.end();
     });
+    await db.disconnectDb()
 });
 
 export default router.handler();
