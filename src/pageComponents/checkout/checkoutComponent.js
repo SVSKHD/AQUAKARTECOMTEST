@@ -20,6 +20,15 @@ const AquaCheckoutComponent = () => {
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
   const router = useRouter()
 
+  useEffect(() => {
+    if (router.pathname === "/checkout") {
+      dispatch({
+        type: "SET_CART_DRAWER_VISIBLE",
+        payload: false,
+      })
+    }
+  }, [router , dispatch])
+
   // razorpay gateway
   // const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
 
@@ -53,7 +62,7 @@ const AquaCheckoutComponent = () => {
   //   loadRazorpayScript();
   // }, [router]);
 
-  
+
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
@@ -64,34 +73,34 @@ const AquaCheckoutComponent = () => {
   };
 
   const initiatePhonePePayment = async () => {
-    
-    const transactionId = "AQTr-" + uuidv4().toString(36).slice(-6);
+
+    const transactionId = `AQTr-${user.user._id}-${uuidv4().toString(36).slice(-6)}`;
     const merchantUserId = 'MUID-' + uuidv4().toString(36).slice(-6);
-  
+
     const payload = {
       merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
       merchantTransactionId: transactionId,
       merchantUserId: merchantUserId,
-      amount: (total-1)*100, // Example amount in paise
-      redirectUrl: `/orders/${transactionId}`,
+      amount: (total - 1) * 100, // Example amount in paise
+      redirectUrl: `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/order/${transactionId}`,
       redirectMode: "POST",
-      callbackUrl: `/orders/${transactionId}`,
+      callbackUrl: `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/order/${transactionId}`,
       mobileNumber: '9999999999', // Example mobile number
       paymentInstrument: {
         type: "PAY_PAGE",
       },
     };
-  
+
     const dataPayload = JSON.stringify(payload);
     const dataBase64 = Buffer.from(dataPayload).toString("base64");
-  
+
     const fullURL = dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
     const dataSha256 = sha256(fullURL).toString();
-  
+
     const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
-  
+
     const UAT_PAY_API_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
-  
+
     try {
       const response = await axios.post(
         UAT_PAY_API_URL,
@@ -106,16 +115,16 @@ const AquaCheckoutComponent = () => {
           },
         }
       );
-  
+
       if (response) {
-        const redirect=response.data.data.instrumentResponse.redirectInfo.url;
+        const redirect = response.data.data.instrumentResponse.redirectInfo.url;
         router.push(redirect)// Redirect user to PhonePe payment page
       }
     } catch (error) {
       console.error('Payment initiation failed:', error);
     }
   };
-  
+
   const handlePayment = (event) => {
     event.preventDefault()
     if (!user) {
@@ -127,7 +136,7 @@ const AquaCheckoutComponent = () => {
       initiatePhonePePayment();
     }
   };
-  
+
 
   return (
     <>

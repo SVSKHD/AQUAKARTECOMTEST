@@ -12,6 +12,23 @@ const OrderItemSchema = new mongoose.Schema({
   quantity: Number,
 });
 
+// Define PaymentInstrumentSchema
+const PaymentInstrumentSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
+    enum: ['UPI', 'Credit Card', 'Debit Card', 'Net Banking', 'Wallet', 'Other'] // Adjust based on your needs
+  },
+  utr: String,
+  upiTransactionId: String,
+  accountHolderName: String,
+  cardNetwork: String,
+  accountType: {
+    type: String,
+    enum: ['SAVINGS', 'CURRENT', 'OTHER'] // Adjust based on your needs
+  }
+});
+
 const OrderSchema = new mongoose.Schema(
   {
     user: {
@@ -28,6 +45,7 @@ const OrderSchema = new mongoose.Schema(
       enum: ["Paid", "Pending", "Failed"],
       default: "Pending",
     },
+    paymentInstrument: PaymentInstrumentSchema, // Use PaymentInstrumentSchema here
     currency: String,
     billingAddress: {
       type: Map,
@@ -63,7 +81,6 @@ const OrderSchema = new mongoose.Schema(
   },
 );
 
-const AquaOrder =
-  mongoose.models.AquaOrder || mongoose.model("AquaOrder", OrderSchema);
+const AquaOrder = mongoose.models.AquaOrder || mongoose.model("AquaOrder", OrderSchema);
 
 export default AquaOrder;
