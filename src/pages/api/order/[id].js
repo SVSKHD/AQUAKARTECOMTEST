@@ -76,11 +76,48 @@ router.post(async (req, res) => {
 });
 
 
-router.put(async(req,res)=>{
-  const {id} = req.query
-  const order = AquaOrder.findById(id)
-  
-})
+router.put(async (req, res) => {
+  await db.connectDb(); // Ensure the database connection is open
+
+  const {id , userId} = req.query
+
+  try {
+    // Find the order by orderId and userId to ensure the user has the right to update this order
+    const order = await AquaOrder.findOne({ _id: id, user: userId });
+
+    // Check if the order exists and belongs to the user
+    if (!order) {
+      return res.status(404).json({ error: "Order not found or you don't have permission to update this order" });
+    }
+
+    // Assuming the updated order items are sent in the request body
+    const { items } = req.body;
+   
+
+    // Transform incoming items to match the schema requirements
+    const updatedItems = items.map(item => ({
+      productId: item._id, // Assuming item._id is the productId you want to reference
+      name: item.title,
+      price: item.price,
+      quantity: item.quantity
+    }));
+
+    // Update the order's items with the new items
+    order.items = updatedItems;
+
+    // Save the updated order
+    await order.save();
+
+    // Send back the updated order as a response
+    res.json(order);
+  } catch (error) {
+    console.error("Error updating order:", error);
+    res.status(500).json({ error: "Failed to update order" });
+  } finally {
+    await db.disconnectDb(); // Close the database connection
+  }
+});
+
 
 
 
