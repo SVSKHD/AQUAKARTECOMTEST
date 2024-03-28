@@ -8,7 +8,7 @@ const router = createRouter();
 
 // Function to extract userId from transactionId
 function getUserIdFromTransactionId(transactionId) {
-  const parts = transactionId.split('-');
+  const parts = transactionId.split("-");
   return parts[1]; // Adjust this based on your actual transactionId format
 }
 
@@ -24,16 +24,15 @@ async function getProductDetails() {
 }
 
 router.post(async (req, res) => {
-  await db.connectDb()
+  await db.connectDb();
   const data = req.body;
   const transactionId = data.transactionId;
   const userId = getUserIdFromTransactionId(transactionId);
 
   // Retrieve product details for the order
- 
 
   const options = {
-    method: 'GET',
+    method: "GET",
     url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${data.merchantId}/${transactionId}`,
     headers: {
       accept: "application/json",
@@ -43,17 +42,18 @@ router.post(async (req, res) => {
     },
   };
 
-  axios.request(options)
+  axios
+    .request(options)
     .then(async (apiResponse) => {
       console.log("PhonePe API Response:", apiResponse.data);
       const response = apiResponse.data;
 
-      if (response.success && response.code === 'PAYMENT_SUCCESS') {
+      if (response.success && response.code === "PAYMENT_SUCCESS") {
         const orderData = {
           user: userId,
           totalAmount: response.data.amount / 100,
           transactionId: response.data.transactionId,
-          paymentStatus: 'Paid',
+          paymentStatus: "Paid",
           paymentInstrument: response.data.paymentInstrument,
         };
 
@@ -69,17 +69,18 @@ router.post(async (req, res) => {
     .catch((error) => {
       console.error("Error calling PhonePe API:", error.message);
       // res.status(500).json({ error: "Failed to check transaction status" });
-      res.writeHead(302, { Location: `/order/${transactionId}?info="FAILURE"` });
+      res.writeHead(302, {
+        Location: `/order/${transactionId}?info="FAILURE"`,
+      });
       res.end();
     });
-    await db.disconnectDb()
+  await db.disconnectDb();
 });
-
 
 router.put(async (req, res) => {
   await db.connectDb(); // Ensure the database connection is open
 
-  const {id , userId} = req.query
+  const { id, userId } = req.query;
 
   try {
     // Find the order by orderId and userId to ensure the user has the right to update this order
@@ -87,19 +88,23 @@ router.put(async (req, res) => {
 
     // Check if the order exists and belongs to the user
     if (!order) {
-      return res.status(404).json({ error: "Order not found or you don't have permission to update this order" });
+      return res
+        .status(404)
+        .json({
+          error:
+            "Order not found or you don't have permission to update this order",
+        });
     }
 
     // Assuming the updated order items are sent in the request body
     const { items } = req.body;
-   
 
     // Transform incoming items to match the schema requirements
-    const updatedItems = items.map(item => ({
+    const updatedItems = items.map((item) => ({
       productId: item._id, // Assuming item._id is the productId you want to reference
       name: item.title,
       price: item.price,
-      quantity: item.quantity
+      quantity: item.quantity,
     }));
 
     // Update the order's items with the new items
@@ -117,8 +122,5 @@ router.put(async (req, res) => {
     await db.disconnectDb(); // Close the database connection
   }
 });
-
-
-
 
 export default router.handler();

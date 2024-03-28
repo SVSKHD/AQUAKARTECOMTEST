@@ -6,7 +6,7 @@ import AquaOrder from "@/Backend/models/orders"; // Adjust the path according to
 const handler = nextConnect();
 
 handler.post(async (req, res) => {
-  console.log(req.formData())
+  console.log(req.formData());
   // await db.connectDb();
   // const newOrder = new AquaOrder(req.body);
 

@@ -56,9 +56,8 @@ const AquaHomeComponent = () => {
             </div>
           </div>
         </div>
-
+        <AquaProductHolder />
         {/* <AquaSubCategoryHolder /> */}
-        {/* <AquaProductHolder /> */}
       </AquaLayout>
     </>
   );

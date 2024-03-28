@@ -20,7 +20,7 @@ router.get(async (req, res) => {
     }
 
     // Find orders that match the provided userId
-    const orders = await AquaOrder.find({ user: userId }) 
+    const orders = await AquaOrder.find({ user: userId });
     // If no orders are found for the given userId, return a message
     if (orders.length === 0) {
       return res.status(404).json({
@@ -31,14 +31,14 @@ router.get(async (req, res) => {
 
     // Return the found orders
     res.status(200).json({ success: true, data: orders });
-    await db.disconnectDb()
+    await db.disconnectDb();
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to fetch orders",
       error: error.message,
     });
-    await db.disconnectDb()
+    await db.disconnectDb();
   }
 });
 
