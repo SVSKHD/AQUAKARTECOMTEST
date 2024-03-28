@@ -88,12 +88,10 @@ router.put(async (req, res) => {
 
     // Check if the order exists and belongs to the user
     if (!order) {
-      return res
-        .status(404)
-        .json({
-          error:
-            "Order not found or you don't have permission to update this order",
-        });
+      return res.status(404).json({
+        error:
+          "Order not found or you don't have permission to update this order",
+      });
     }
 
     // Assuming the updated order items are sent in the request body
