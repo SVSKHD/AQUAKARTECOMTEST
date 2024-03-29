@@ -38,7 +38,7 @@ const AquaNavBar = () => {
           sticky="top"
           expand={"md"}
           variant="light"
-          className="shadow-lg bg-transparent cus-nav pr-3 pl-3 mb-3"
+          className="shadow-sm bg-transparent cus-nav pr-3 pl-3 mb-5"
         >
           <Container>
             <Navbar.Brand href="/">
