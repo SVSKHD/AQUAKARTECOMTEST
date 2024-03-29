@@ -154,8 +154,8 @@ const AquaCheckoutComponent = () => {
                 <AquaHeading level={3} decorate={true} content={"Address"}/>
                 <div className="row">
                   {user.user.addresses.map((r, i) => (
-                    <div className="col">
-                      <div key={i} class="card mb-3" style={{ width: "5rem;" }}>
+                    <div key={i} className="col">
+                      <div  class="card mb-3" style={{ width: "5rem;" }}>
                         <div class="card-header">Address-{i + 1}</div>
                         <div class="card-body">
                           <h5 class="card-title">{r.city}</h5>
