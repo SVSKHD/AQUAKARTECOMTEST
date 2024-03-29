@@ -46,6 +46,17 @@ const DynamicProduct = () => {
       });
   }, [getProductById, id]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const isProductInCart = cartCount.some((item) => item._id === product?._id);
     const isProductInFav = favCount.some((item) => item._id === product?._id);
@@ -87,7 +98,7 @@ const DynamicProduct = () => {
     <>
       <AquaLayout seo={SeoData} container={true}>
         {loading ? (
-          <div className="text-center">
+          <div className="text-center m-5">
             {" "}
             <Spinner animation="border" variant="dark" />
           </div>
@@ -95,7 +106,11 @@ const DynamicProduct = () => {
           <div>
             <div className="dynamic-product">
               <div className="row mb-3">
-                <div className="fixed-column col-md-5 col-lg-5 col-xs-12 col-sm-12">
+                <div
+                  className={`${
+                    isMobile ? "" : "fixed-column"
+                  } col-md-5 col-lg-5 col-xs-12 col-sm-12`}
+                >
                   {product?.photos ? (
                     <>
                       <AquaProductUnControlledCarousel
@@ -114,7 +129,11 @@ const DynamicProduct = () => {
                     />
                   )}
                 </div>
-                <div className="scollable-column col-md-7 col-xs-12 col-sm-12 col-lg-7">
+                <div
+                  className={`${
+                    isMobile ? "" : "scollable-column"
+                  } col-md-7 col-xs-12 col-sm-12 col-lg-7`}
+                >
                   <h1 className="display-2 text-bold">{product?.title}</h1>
                   <span className="dynamic-product-price-brand">
                     <h4 className="price product-price-align">
@@ -176,7 +195,12 @@ const DynamicProduct = () => {
             {product?.relatedProducts?.length > 0 ? (
               <div className="row">
                 <>
-                  <AquaHeading level={3} decorate={true} children={"Related Products"}/>
+                  <AquaHeading
+                    level={3}
+                    decorate={true}
+                    children={"Related Products"}
+                    customclass={"text-center"}
+                  />
                   {product.relatedProducts.map((r, i) => (
                     <>
                       <div
