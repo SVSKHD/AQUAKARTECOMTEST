@@ -20,6 +20,7 @@ import AquaToast from "@/reusables/js/toast";
 import { useSelector, useDispatch } from "react-redux";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import AquaVerticalCard from "@/reusables/VerticalCard";
+import AquaHeading from "@/reusables/heading";
 
 const DynamicProduct = () => {
   const dispatch = useDispatch();
@@ -175,7 +176,7 @@ const DynamicProduct = () => {
             {product?.relatedProducts?.length > 0 ? (
               <div className="row">
                 <>
-                  <hr />
+                  <AquaHeading level={3} decorate={true} children={"Related Products"}/>
                   {product.relatedProducts.map((r, i) => (
                     <>
                       <div
