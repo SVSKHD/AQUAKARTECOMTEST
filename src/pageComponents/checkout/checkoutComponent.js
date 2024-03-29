@@ -165,10 +165,6 @@ const AquaCheckoutComponent = () => {
                           </p>
                         </div>
                       </div>
-
-                      <div className="card">
-                        <div className="card-body">{r.street}</div>
-                      </div>
                     </div>
                   ))}
                 </div>
