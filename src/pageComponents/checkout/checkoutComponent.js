@@ -151,7 +151,7 @@ const AquaCheckoutComponent = () => {
           <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
             <div className="card shadow-lg ,b-2">
               <div className="card-body">
-                <AquaHeading level={3} decorate={true} children={"Address"}/>
+                <AquaHeading level={3} decorate={true} content={"Address"}/>
                 <div className="row">
                   {user.user.addresses.map((r, i) => (
                     <div className="col">
