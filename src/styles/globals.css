@@ -563,3 +563,8 @@ body {
   width: 90%; /* Example width, adjust as needed */
   max-width: 500px; /* Example max-width, adjust as needed */
 }
+
+
+.address-card{
+  background-color: white!important;
+}

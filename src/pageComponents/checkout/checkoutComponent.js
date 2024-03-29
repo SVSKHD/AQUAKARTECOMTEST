@@ -14,6 +14,8 @@ import { v4 as uuidv4 } from "uuid";
 import { verify } from "jsonwebtoken";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
+import AquaButton from "@/reusables/button";
+import { FaUser } from "react-icons/fa";
 
 const AquaCheckoutComponent = () => {
   const dispatch = useDispatch();
@@ -149,27 +151,47 @@ const AquaCheckoutComponent = () => {
       <AquaLayout seo={seo} container={true}>
         <div className="row mb-3">
           <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
-            <div className="card shadow-lg ,b-2">
-              <div className="card-body">
-                <AquaHeading level={3} decorate={true} content={"Address"}/>
-                <div className="row">
-                  {user.user.addresses.map((r, i) => (
-                    <div key={i} className="col">
-                      <div  class="card mb-3" style={{ width: "5rem;" }}>
-                        <div class="card-header">Address-{i + 1}</div>
-                        <div class="card-body">
-                          <h5 class="card-title">{r.city}</h5>
-                          <h6 className="card-description">{r.state}</h6>
-                          <p class="text-muted">
-                            {r.street} {r.city}-{r.postalCode}
-                          </p>
+            {!user ? (
+              <>
+                <AquaButton
+                  variant={"normal"}
+                  onClick={() =>
+                    dispatch({
+                      type: "SET_AUTH_DIALOG_VISIBLE",
+                      payload: true,
+                    })
+                  }
+                >
+                  <FaUser size={60} />
+                </AquaButton>
+              </>
+            ) : (
+              <div className="card rounded-3 shadow-lg mb-2">
+                <div className="card-body">
+                  <AquaHeading level={3} decorate={true} content={"Address"} />
+                  <div className="row">
+                    {user.user.addresses.map((r, i) => (
+                      <div key={i} className="col">
+                        <div
+                          class="card address-card mb-3"
+                          style={{ width: "5rem;" }}
+                        >
+                          <div class="card-header">Address-{i + 1}</div>
+                          <div class="card-body">
+                            <h5 class="card-title">{r.city}</h5>
+                            <h6 className="card-description">{r.state}</h6>
+                            <p class="text-muted">
+                              {r.street} {r.city}-{r.postalCode}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="card shadow-lg">
               <div className="card-body">
                 <h3>Cart</h3>
