@@ -16,6 +16,7 @@ import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import AquaButton from "@/reusables/button";
 import { FaUser } from "react-icons/fa";
+import AquaRadio from "@/reusables/radio";
 
 const AquaCheckoutComponent = () => {
   const dispatch = useDispatch();
@@ -176,7 +177,7 @@ const AquaCheckoutComponent = () => {
                           class="card address-card mb-3"
                           style={{ width: "5rem;" }}
                         >
-                          <div class="card-header">Address-{i + 1}</div>
+                          <div class="card-header"><AquaRadio/> Address-{i + 1}</div>
                           <div class="card-body">
                             <h5 class="card-title">{r.city}</h5>
                             <h6 className="card-description">{r.state}</h6>
