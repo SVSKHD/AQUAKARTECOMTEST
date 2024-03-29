@@ -155,7 +155,7 @@ const AquaCheckoutComponent = () => {
                 <div className="row">
                   {user.user.addresses.map((r, i) => (
                     <div className="col">
-                      <div class="card mb-3" style={{ width: "5rem;" }}>
+                      <div key={i} class="card mb-3" style={{ width: "5rem;" }}>
                         <div class="card-header">Address-{i + 1}</div>
                         <div class="card-body">
                           <h5 class="card-title">{r.city}</h5>
