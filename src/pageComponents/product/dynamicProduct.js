@@ -198,7 +198,7 @@ const DynamicProduct = () => {
                   <AquaHeading
                     level={3}
                     decorate={true}
-                    children={"Related Products"}
+                    content={"Related Products"}
                     customclass={"text-center"}
                   />
                   {product.relatedProducts.map((r, i) => (

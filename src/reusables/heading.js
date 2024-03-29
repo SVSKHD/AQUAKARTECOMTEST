@@ -1,4 +1,4 @@
-const AquaHeading = ({ level, children, center, decorate , customclass}) => {
+const AquaHeading = ({ level, content, center, decorate , customclass}) => {
   const HeadingTag = `h${level}`;
 
   const divClassNames =
@@ -6,7 +6,7 @@ const AquaHeading = ({ level, children, center, decorate , customclass}) => {
   
   return (
     <div className={divClassNames}>
-      <HeadingTag className="mt-2">{children}</HeadingTag>
+      <HeadingTag className="mt-2">{content}</HeadingTag>
     </div>
   );
 };
