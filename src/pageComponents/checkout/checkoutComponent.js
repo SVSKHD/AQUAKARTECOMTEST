@@ -12,10 +12,13 @@ import sha256 from "crypto-js/sha256";
 import Base64 from "crypto-js/enc-base64";
 import { v4 as uuidv4 } from "uuid";
 import { verify } from "jsonwebtoken";
+import AquaToast from "@/reusables/js/toast";
+import AquaHeading from "@/reusables/heading";
 
 const AquaCheckoutComponent = () => {
   const dispatch = useDispatch();
   const seo = { title: "Aquakart | Checkout" };
+  const [selectedAddress, setSelectedAddress] = useState(false);
   const [deleteAll, setDeleteAll] = useState(false);
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
   const router = useRouter();
@@ -72,7 +75,9 @@ const AquaCheckoutComponent = () => {
   };
 
   const initiatePhonePePayment = async () => {
-    const transactionId = `AQTr-${user.user._id}-${uuidv4().toString(36).slice(-6)}`;
+    const transactionId = `AQTr-${user.user._id}-${uuidv4()
+      .toString(36)
+      .slice(-6)}`;
     const merchantUserId = "MUID-" + uuidv4().toString(36).slice(-6);
 
     const payload = {
@@ -113,7 +118,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        },
+        }
       );
 
       if (response) {
@@ -132,6 +137,8 @@ const AquaCheckoutComponent = () => {
         type: "SET_AUTH_DIALOG_VISIBLE",
         payload: true,
       });
+    } else if (!selectedAddress) {
+      AquaToast("please Select Address", "error");
     } else {
       initiatePhonePePayment();
     }
@@ -142,6 +149,31 @@ const AquaCheckoutComponent = () => {
       <AquaLayout seo={seo} container={true}>
         <div className="row mb-3">
           <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
+            <div className="card shadow-lg ,b-2">
+              <div className="card-body">
+                <AquaHeading level={3} decorate={true} children={"Address"}/>
+                <div className="row">
+                  {user.user.addresses.map((r, i) => (
+                    <div className="col">
+                      <div class="card mb-3" style={{ width: "5rem;" }}>
+                        <div class="card-header">Address-{i + 1}</div>
+                        <div class="card-body">
+                          <h5 class="card-title">{r.city}</h5>
+                          <h6 className="card-description">{r.state}</h6>
+                          <p class="text-muted">
+                            {r.street} {r.city}-{r.postalCode}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="card">
+                        <div className="card-body">{r.street}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="card shadow-lg">
               <div className="card-body">
                 <h3>Cart</h3>
