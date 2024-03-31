@@ -36,7 +36,7 @@ const ShippingPolicy = () => {
     },
   ];
   return (
-    <AquaLayout seo={seo}>
+    <AquaLayout seo={seo} container={true}>
       <div className="text-center">
         <AquaHeading level={1}>Shipping Policy</AquaHeading>
         <div className="row mb-5">

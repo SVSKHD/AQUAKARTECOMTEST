@@ -61,7 +61,7 @@ const AquaPrivacyPolicy = () => {
     canonical: `${process.env.apiKey}${router.pathname}`,
   };
   return (
-    <AquaLayout seo={seo}>
+    <AquaLayout seo={seo} container={true}>
       <h1>Privacy-Policy</h1>
       <hr />
       <div className="row mb-5">

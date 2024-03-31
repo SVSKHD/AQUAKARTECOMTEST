@@ -5,7 +5,7 @@ const AquaTermsAndConditions = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState("");
   const seo = {
-    title: "Aquakart | Tersm and Conditions",
+    title: "Aquakart | Terms and Conditions",
   };
 
   const termsAndConditons = [
@@ -77,7 +77,7 @@ const AquaTermsAndConditions = () => {
   };
 
   return (
-    <AquaLayout seo={seo}>
+    <AquaLayout seo={seo} container={true}>
       <h1>Terms And Conditions</h1>
       <hr />
       <div className="card shadow-lg mb-4 ">

@@ -23,7 +23,7 @@ const ReturnAndRefund = () => {
     // Add more items as needed
   ];
   return (
-    <AquaLayout seo={SeoData}>
+    <AquaLayout seo={SeoData} container={true}>
       <div className="card m-5">
         <div className="card-body">
           <AquaHeading level={1}>Return and Refund Policy</AquaHeading>
