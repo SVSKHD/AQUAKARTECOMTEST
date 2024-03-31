@@ -79,14 +79,13 @@ const AquaTermsAndConditions = () => {
   return (
     <AquaLayout seo={seo} container={true}>
       <h1>Terms And Conditions</h1>
-      <hr />
-      <div className="card shadow-lg mb-4 ">
+      <div className="card mb-4 rounded-5">
         <div className="card-body">
           <div className="row">
             <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12 terms-and-conditons-height  ">
               {termsAndConditons.map((r, i) => (
                 <>
-                  <div key={i} class="card mb-3 shadow-lg">
+                  <div key={i} class="card mb-2 rounded-4">
                     <div className="card-body">
                       <h5 className="card-title">
                         {i + 1}-{r.title}
@@ -109,9 +108,9 @@ const AquaTermsAndConditions = () => {
             <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
               {show ? (
                 <>
-                  <div className="card">
+                  <div className="card rounded-4">
                     <div className="card-body">
-                      <h5>
+                      <h5 className="display-3">
                         <b>{data.title}</b>
                       </h5>
                       <hr />
