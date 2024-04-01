@@ -27,7 +27,7 @@ const ShippingPolicy = () => {
     {
       title: "Shipping & Delivery out of Telangana",
       description:
-        "Orders from Telangana will be dispatched within 5-10 days. Please allow this time frame for shipping. We appreciate your patience and look forward to serving you!",
+        "Orders from Telangana will be dispatched within <b>5-10</b> days. Please allow this time frame for shipping. We appreciate your patience and look forward to serving you!",
     },
     {
       title: "Packing and Contents",
@@ -41,13 +41,13 @@ const ShippingPolicy = () => {
         <AquaHeading level={1}>Shipping Policy</AquaHeading>
         <div className="row mb-5">
           <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
-            <div className="card shadow-lg">
+            <div className="card shadow-lg rounded-4">
               <div className="card-body">
                 {shippingPolicy.map((r, i) => (
                   <>
                     <div
                       key={i}
-                      className="card mb-1 shadow-lg"
+                      className="card mb-1 shadow-lg rounded-3"
                       onClick={() => setData(r)}
                     >
                       <div className="card-body">{r.title}</div>
@@ -58,7 +58,7 @@ const ShippingPolicy = () => {
             </div>
           </div>
           <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
-            <div className="card shadow-lg mb-3">
+            <div className="card shadow-lg mb-3 rounded-4">
               <div className="card-body">
                 {data ? (
                   <>
