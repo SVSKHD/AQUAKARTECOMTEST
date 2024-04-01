@@ -22,7 +22,7 @@ const ShippingPolicy = () => {
     {
       title: "Shipping & Delivery out of Hyderabad",
       description:
-        "For shipments outside of Hyderabad, our delivery process involves a more extensive logistics network. While we strive to meet delivery timelines, the complexity of inter-city or inter-state transportation can sometimes lead to variations in delivery schedules. We work closely with our shipping partners to minimize delays and ensure your order reaches you as swiftly as possible. Our commitment to transparency means we'll keep you informed every step of the way, from dispatch to delivery.",
+        "For shipments outside of Hyderabad, our delivery process involves a more extensive logistics network. While we strive to meet delivery timelines, the complexity of inter-city or inter-state transportation can sometimes lead to variations in delivery schedules. We work closely with our shipping partners to minimize delays and ensure your order reaches you as swiftly as possible. Our commitment to transparency means we'll keep you informed every step of the way, from dispatch to delivery, <b class='text-danger'>for example : estimated + 2 days </b>",
     },
     {
       title: "Shipping & Delivery out of Telangana",
@@ -64,7 +64,7 @@ const ShippingPolicy = () => {
                   <>
                     <AquaLargeTitle level={2}>{data.title}</AquaLargeTitle>
                     <hr />
-                    <p className="text-muted">{data.description}</p>
+                    <p dangerouslySetInnerHTML={{ __html: data.description }} />
                   </>
                 ) : (
                   "Not yet selected"

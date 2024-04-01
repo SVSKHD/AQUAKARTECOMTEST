@@ -14,28 +14,36 @@ const AquaContactUs = () => {
   };
   return (
     <AquaLayout seo={seo} container={true}>
-      <div className="row">
+      <div className="row mb-5">
         <div className="col">
-          <div className="card rounded-4">
-            <div className="card-body"></div>
+          <div className="card contact-card rounded-4">
+            <div className="card-body text-center">
+              <button className="btn">
+                <FaLocationDot size={40} />
+              </button>
+              <p className="text-muted">streert-4 3-4-56/61 kokapet</p>
+            </div>
           </div>
         </div>
         <div className="col">
-          <div className="card rounded-4">
+          <div className="card contact-card rounded-4">
             <div className="card-body">
               <div className="text-center">
                 <div className="row">
                   <div className="col">
                     <div className="text-center">
-                      <button className="btn-base">
-                      <FaInstagram size={40}/> fowllow us
+                      <button className="btn">
+                        <FaInstagram size={40} /> follow us
                       </button>
                     </div>
                   </div>
                   <div className="col">
                     <div className="text-center">
-                      <button className="btn-base" href="mailto:customercare@aquakart.co.in">
-                        <FaEnvelope size={40}/> mail us
+                      <button
+                        className="btn"
+                        href="mailto:customercare@aquakart.co.in"
+                      >
+                        <FaEnvelope size={40} /> mail us
                       </button>
                     </div>
                   </div>
@@ -45,24 +53,18 @@ const AquaContactUs = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card rounded-4">
+          <div className="card contact-card rounded-4">
             <div className="card-body">
               <div className="text-center">
-                <FaPhone size={30} />
-                <button
-                  type="button"
-                  class="btn-base"
-                  href="tel:9014774667"
-                  style="padding:20px;background-color:rgba(0,0,238,.5)"
-                >
-                  Click to call <FaPhone size={10}/> 9014774667
+                <button class="btn" href="tel:9014774667">
+                  Click to call <FaPhone size={40} />
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {/* <div className="align-contact-card">
+      <div className="align-contact-card mb-5">
         <AquaStandardShadowCard width="400px">
           <p className="text-muted">
             We're committed to fostering a strong connection with our users and
@@ -71,7 +73,7 @@ const AquaContactUs = () => {
             swiftly as we can.
           </p>
         </AquaStandardShadowCard>
-      </div> */}
+      </div>
     </AquaLayout>
   );
 };

@@ -568,3 +568,8 @@ body {
 .address-card{
   background-color: white!important;
 }
+
+
+.contact-card{
+  height: 100px;
+}
