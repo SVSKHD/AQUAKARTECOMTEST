@@ -41,7 +41,7 @@ const ShippingPolicy = () => {
         <AquaHeading level={1}>Shipping Policy</AquaHeading>
         <div className="row mb-5">
           <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
-            <div className="card shadow-lg rounded-4">
+            <div className="card shadow-lg rounded-4 mb-2">
               <div className="card-body">
                 {shippingPolicy.map((r, i) => (
                   <>
