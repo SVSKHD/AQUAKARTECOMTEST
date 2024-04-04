@@ -8,12 +8,22 @@ import UserOperations from "@/Services/user";
 const UserLayout = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
-
   const Router = useRouter();
+  
+
   const createUserName = (email) => {
     const usernamePart = email?.split("@")[0]; // Get the part before '@'
     return usernamePart?.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
   };
+
+  useEffect(()=>{
+    if(!user){
+      dispatch({
+        type: "SET_AUTH_DIALOG_VISIBLE",
+        payload: true,
+      })
+    }
+  },[user , dispatch])
 
   const menu = [
     {
@@ -71,7 +81,6 @@ const UserLayout = (props) => {
                     name={createUserName(user?.user?.email)}
                     id={user?.user?.id}
                   />
-                  {JSON.stringify(user.data)}
                 </div>
               </div>
               <div className="card shadow-lg user-dashboard-height rounded-4">

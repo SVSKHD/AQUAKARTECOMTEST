@@ -70,6 +70,7 @@ const aquaUserSchema = new mongoose.Schema({
       addedDate: Date,
     },
   ],
+  selectedAddress:addressSchema,
   addresses: [addressSchema], // Store multiple addresses as an array of address objects
 });
 

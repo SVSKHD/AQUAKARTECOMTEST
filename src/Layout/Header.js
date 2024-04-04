@@ -72,14 +72,14 @@ const AquaNavBar = () => {
                     About Us
                   </Nav.Link>
                 </Nav>
-                <Form className="d-flex mr-1">
+                {/* <Form className="d-flex mr-1">
                   <Form.Control
                     type="search"
                     placeholder="Search Products"
                     className="me-2"
                     aria-label="Search"
                   />
-                </Form>
+                </Form> */}
                 <div className="position-relative">
                   <AquaButton
                     variant="normal"

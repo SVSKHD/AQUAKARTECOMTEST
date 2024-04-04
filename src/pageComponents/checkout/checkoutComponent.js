@@ -11,7 +11,6 @@ import axios from "axios";
 import sha256 from "crypto-js/sha256";
 import Base64 from "crypto-js/enc-base64";
 import { v4 as uuidv4 } from "uuid";
-import { verify } from "jsonwebtoken";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import AquaButton from "@/reusables/button";
@@ -19,12 +18,24 @@ import { FaUser } from "react-icons/fa";
 import AquaRadio from "@/reusables/radio";
 
 const AquaCheckoutComponent = () => {
+  const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
+  const [checkedStates, setCheckedStates] = useState(
+    user.user.addresses.map(() => false)
+  );
   const [deleteAll, setDeleteAll] = useState(false);
-  const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
+  
   const router = useRouter();
+
+  const handleCheckboxChange = (index) => {
+    const updatedCheckedStates = checkedStates.map((item, idx) =>
+      index === idx ? !item : item
+    );
+    setCheckedStates(updatedCheckedStates);
+    setSelectedAddress(updatedCheckedStates.some(Boolean));
+  };
 
   useEffect(() => {
     if (router.pathname === "/checkout") {
@@ -34,39 +45,6 @@ const AquaCheckoutComponent = () => {
       });
     }
   }, [router, dispatch]);
-
-  // razorpay gateway
-  // const [isRazorpayLoaded, setRazorpayLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   console.log("router", router.pathname)
-  //   if (router.pathname === "/checkout") {
-  //     dispatch({
-  //       type: "SET_CART_DRAWER_VISIBLE",
-  //       payload: false,
-  //     })
-  //   }
-  //   // Function to load Razorpay script
-  //   const loadRazorpayScript = () => {
-  //     if (window.Razorpay) {
-  //       // Razorpay is already loaded
-  //       setRazorpayLoaded(true);
-  //       return;
-  //     }
-
-  //     // Create a new script element
-  //     const script = document.createElement("script");
-  //     script.src = "https://checkout.razorpay.com/v1/checkout.js";
-  //     script.onload = () => {
-  //       // Script has been loaded
-  //       setRazorpayLoaded(true);
-  //     };
-
-  //     document.body.appendChild(script);
-  //   };
-
-  //   loadRazorpayScript();
-  // }, [router]);
 
   const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
@@ -177,7 +155,11 @@ const AquaCheckoutComponent = () => {
                           class="card address-card mb-3"
                           style={{ width: "5rem;" }}
                         >
-                          <div class="card-header"><AquaRadio/> Address-{i + 1}</div>
+                          <div class="card-header">   <input
+                type="checkbox"
+                checked={checkedStates[i]}
+                onChange={() => handleCheckboxChange(i)}
+              /> Address-{i + 1}</div>
                           <div class="card-body">
                             <h5 class="card-title">{r.city}</h5>
                             <h6 className="card-description">{r.state}</h6>
@@ -195,7 +177,7 @@ const AquaCheckoutComponent = () => {
 
             <div className="card rounded-3 shadow-sm">
               <div className="card-body">
-                <h3>Cart</h3>
+                <AquaHeading content={"Cart"} level={3}/>
                 <div>
                   {cartCount.length > 0 ? (
                     <>
@@ -251,7 +233,7 @@ const AquaCheckoutComponent = () => {
                     <>
                       <div className="mb-2" key={r}>
                         <a
-                          href="#"
+                          href={`/product/${r._id}`}
                           className="list-group-item list-group-item-action rounded"
                           aria-current="true"
                         >

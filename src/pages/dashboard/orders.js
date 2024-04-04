@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const UserOrder = () => {
-  const [orders, setOrders] = useState({});
+  const [orders, setOrders] = useState([]);
   const { getOrderById } = AquaOrderOperatrions();
   const { user } = useSelector((state) => ({ ...state }));
   const userId = user.user._id;
