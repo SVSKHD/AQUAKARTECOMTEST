@@ -564,12 +564,10 @@ body {
   max-width: 500px; /* Example max-width, adjust as needed */
 }
 
-
-.address-card{
-  background-color: white!important;
+.address-card {
+  background-color: white !important;
 }
 
-
-.contact-card{
+.contact-card {
   height: 100px;
 }

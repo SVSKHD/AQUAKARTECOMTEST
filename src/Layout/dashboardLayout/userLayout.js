@@ -9,21 +9,20 @@ const UserLayout = (props) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
   const Router = useRouter();
-  
 
   const createUserName = (email) => {
     const usernamePart = email?.split("@")[0]; // Get the part before '@'
     return usernamePart?.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
   };
 
-  useEffect(()=>{
-    if(!user){
+  useEffect(() => {
+    if (!user) {
       dispatch({
         type: "SET_AUTH_DIALOG_VISIBLE",
         payload: true,
-      })
+      });
     }
-  },[user , dispatch])
+  }, [user, dispatch]);
 
   const menu = [
     {

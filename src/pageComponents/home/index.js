@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useEffect } from "react";
 
-
 const AquaHomeComponent = () => {
   const router = useRouter();
   const SeoData = {
@@ -58,8 +57,8 @@ const AquaHomeComponent = () => {
           </div>
         </div>
         <div className="container">
-         <h2 className="index-second text-center">Featured</h2>
-        <AquaProductHolder />
+          <h2 className="index-second text-center">Featured</h2>
+          <AquaProductHolder />
         </div>
         {/* <AquaSubCategoryHolder /> */}
       </AquaLayout>

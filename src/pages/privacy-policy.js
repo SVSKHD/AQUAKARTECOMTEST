@@ -74,7 +74,9 @@ const AquaPrivacyPolicy = () => {
             >
               <div className="card-body">
                 <div className="card-title">
-                  <b>{i + 1} - {r.title}</b>
+                  <b>
+                    {i + 1} - {r.title}
+                  </b>
                 </div>
               </div>
             </div>

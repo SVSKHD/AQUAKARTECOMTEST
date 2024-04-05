@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form } from 'react-bootstrap';
+import React from "react";
+import { Form } from "react-bootstrap";
 
-const AquaRadio = ({ handleChange, name, value, checked, label , type }) => {
+const AquaRadio = ({ handleChange, name, value, checked, label, type }) => {
   return (
-    <Form.Check 
+    <Form.Check
       type={type}
       name={name} // Name of the radio group, important for grouping radios together
       value={value} // Value of this radio button

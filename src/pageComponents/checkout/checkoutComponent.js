@@ -9,7 +9,6 @@ import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useRouter } from "next/router";
 import axios from "axios";
 import sha256 from "crypto-js/sha256";
-import Base64 from "crypto-js/enc-base64";
 import { v4 as uuidv4 } from "uuid";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
@@ -23,19 +22,22 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false)
+    user.user.addresses.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
-  
+
   const router = useRouter();
 
-  const handleCheckboxChange = (index) => {
-    const updatedCheckedStates = checkedStates.map((item, idx) =>
-      index === idx ? !item : item
-    );
-    setCheckedStates(updatedCheckedStates);
-    setSelectedAddress(updatedCheckedStates.some(Boolean));
+  const handleAddressSelect = (selectedAddressIndex) => {
+    const selectedAddress = user.user.addresses[selectedAddressIndex];
+    setSelectedAddress(true)
+    dispatch({
+      type: "UPDATE_SELECTED_ADDRESS",
+      payload: { selectedAddress }, 
+    });
+    console.log("user", user)
   };
+  
 
   useEffect(() => {
     if (router.pathname === "/checkout") {
@@ -99,7 +101,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        }
+        },
       );
 
       if (response) {
@@ -155,11 +157,15 @@ const AquaCheckoutComponent = () => {
                           class="card address-card mb-3"
                           style={{ width: "5rem;" }}
                         >
-                          <div class="card-header">   <input
-                type="checkbox"
-                checked={checkedStates[i]}
-                onChange={() => handleCheckboxChange(i)}
-              /> Address-{i + 1}</div>
+                          <div class="card-header">
+                            {" "}
+                            <input
+            type="radio"
+            name="addressSelection" // All radio buttons share the same 'name' to group them
+            onChange={() => handleAddressSelect(i)}
+          />{" "}
+                            Address-{i + 1}
+                          </div>
                           <div class="card-body">
                             <h5 class="card-title">{r.city}</h5>
                             <h6 className="card-description">{r.state}</h6>
@@ -177,7 +183,7 @@ const AquaCheckoutComponent = () => {
 
             <div className="card rounded-3 shadow-sm">
               <div className="card-body">
-                <AquaHeading content={"Cart"} level={3}/>
+                <AquaHeading content={"Cart"} level={3} />
                 <div>
                   {cartCount.length > 0 ? (
                     <>
