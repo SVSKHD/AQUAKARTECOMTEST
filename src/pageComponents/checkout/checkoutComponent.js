@@ -146,7 +146,7 @@ const AquaCheckoutComponent = () => {
                 </AquaButton>
               </>
             ) : (
-              <div className="card rounded-3 shadow-sm mb-2">
+              <div className="card rounded-4 mb-2">
                 <div className="card-body">
                   <AquaHeading level={3} decorate={true} content={"Address"} />
                   <div className="row">
@@ -180,7 +180,7 @@ const AquaCheckoutComponent = () => {
               </div>
             )}
 
-            <div className="card rounded-3 shadow-sm">
+            <div className="card rounded-4 ">
               <div className="card-body">
                 <AquaHeading content={"Cart"} level={3} />
                 <div>
@@ -231,8 +231,12 @@ const AquaCheckoutComponent = () => {
             </div>
           </div>
           <div className="col-md-5 col-lg-5 col-xs-12 col-sm-12">
-            <div className="card rounded-3 shadow-sm rounded">
+            <div className="card rounded-4">
+              
               <div className="card-body">
+                <div className="mb-2">
+              <AquaHeading level={3} content={"Summary"}/>
+                </div>
                 <ul className="conatiner list-group list-group-flush">
                   {cartCount.map((r) => (
                     <>

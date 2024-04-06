@@ -21,6 +21,7 @@ const AquaShopComponent = () => {
     setProductLoading(true);
     getProducts()
       .then((res) => {
+        console.log(res.data)
         setProducts(res.data);
         setProductLoading(false);
       })
@@ -47,7 +48,6 @@ const AquaShopComponent = () => {
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
           <AquaCard>
-            <AquaHeading level={1}>
               <div className="row">
                 {products.map((r, i) => (
                   <div key={i} className="col">
@@ -61,7 +61,6 @@ const AquaShopComponent = () => {
                   </div>
                 ))}
               </div>
-            </AquaHeading>
           </AquaCard>
         </div>
       </div>
