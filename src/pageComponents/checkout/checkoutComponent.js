@@ -290,13 +290,13 @@ const AquaCheckoutComponent = () => {
                   </button>
                 </div>
                 <div class="d-grid checkout-margin">
-                  <button
+                  <Link
                     class="btn btn-outline-dark"
                     href="/shop"
                     type="button"
                   >
                     Continue to Shop
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
