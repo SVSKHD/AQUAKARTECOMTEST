@@ -12,9 +12,11 @@ import {
 } from "react-bootstrap";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import {useRouter} from "next/router"
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
+  const router = useRouter()
   const { cartCount, user } = useSelector((state) => ({ ...state }));
 
   const [cartLength, setCartLength] = useState(0);
@@ -22,12 +24,35 @@ const AquaNavBar = () => {
     setCartLength(cartCount.length);
   }, [cartCount]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   function createUserName(email) {
     if (email) {
       const usernamePart = email.split("@")[0]; // Get the part before '@'
       return usernamePart.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
     }
   }
+
+  const handleCart = () => {
+    if (isMobile) {
+      router.push("/checkout");
+    } else {
+      dispatch({
+        type: "SET_CART_DRAWER_VISIBLE",
+        payload: true,
+      });
+    }
+  };
+  
 
   return (
     <>
@@ -82,12 +107,7 @@ const AquaNavBar = () => {
                 <div className="position-relative">
                   <AquaButton
                     variant="normal"
-                    onClick={() =>
-                      dispatch({
-                        type: "SET_CART_DRAWER_VISIBLE",
-                        payload: true,
-                      })
-                    }
+                    onClick={handleCart}
                   >
                     <FaCartPlus size={25} />
                   </AquaButton>

@@ -285,7 +285,7 @@ const AquaCheckoutComponent = () => {
                     Proceed to Pay
                   </button>
                 </div>
-                <div class="d-grid">
+                <div class="d-grid checkout-margin">
                   <button
                     class="btn btn-outline-dark"
                     href="/shop"

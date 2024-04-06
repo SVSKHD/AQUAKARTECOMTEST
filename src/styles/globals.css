@@ -571,3 +571,9 @@ body {
 .contact-card {
   height: 100px;
 }
+
+
+.checkout-margin{
+  margin-right: 11px;
+  margin-left: 11px;
+}
