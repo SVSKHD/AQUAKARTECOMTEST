@@ -30,14 +30,13 @@ const AquaCheckoutComponent = () => {
 
   const handleAddressSelect = (selectedAddressIndex) => {
     const selectedAddress = user.user.addresses[selectedAddressIndex];
-    setSelectedAddress(true)
+    setSelectedAddress(true);
     dispatch({
       type: "UPDATE_SELECTED_ADDRESS",
-      payload: { selectedAddress }, 
+      payload: { selectedAddress },
     });
-    console.log("user", user)
+    console.log("user", user);
   };
-  
 
   useEffect(() => {
     if (router.pathname === "/checkout") {
@@ -160,10 +159,10 @@ const AquaCheckoutComponent = () => {
                           <div class="card-header">
                             {" "}
                             <input
-            type="radio"
-            name="addressSelection" // All radio buttons share the same 'name' to group them
-            onChange={() => handleAddressSelect(i)}
-          />{" "}
+                              type="radio"
+                              name="addressSelection" // All radio buttons share the same 'name' to group them
+                              onChange={() => handleAddressSelect(i)}
+                            />{" "}
                             Address-{i + 1}
                           </div>
                           <div class="card-body">
@@ -274,17 +273,25 @@ const AquaCheckoutComponent = () => {
                   <h4 className="text-center">Add items to cart </h4>
                 )}
 
-                <div class="row">
-                  <Link href="/shop" className="btn col m-2 btn btn-light">
-                    Continue To Shop
-                  </Link>
-
+                <div class="row m-1">
+                  <button className="col m-2 btn btn-outline-secondary">
+                    Cash on Delivery
+                  </button>
                   <button
                     onClick={handlePayment}
                     class="col m-2 btn btn-dark"
                     type="button"
                   >
                     Proceed to Pay
+                  </button>
+                </div>
+                <div class="d-grid">
+                  <button
+                    class="btn btn-outline-dark"
+                    href="/shop"
+                    type="button"
+                  >
+                    Continue to Shop
                   </button>
                 </div>
               </div>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   Button,
   Container,
-  Form,
   Nav,
   Navbar,
   Offcanvas,
@@ -99,7 +98,7 @@ const AquaNavBar = () => {
                 {user ? (
                   <>
                     <Dropdown className="ms-3" as={ButtonGroup}>
-                      <Button variant="dark">
+                      <Button variant="dark" href="/dashboard">
                         {" "}
                         Hello {createUserName(user?.user?.email)}
                       </Button>
