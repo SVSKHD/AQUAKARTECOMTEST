@@ -16,10 +16,10 @@ const AquaShopFilters = () => {
       </label>
       <input type="range" class="form-range" id="customRange1"></input>
       <AquaAccordian
-        title={<AquaHeading level={5}>categories</AquaHeading>}
+        title={<AquaHeading level={5} content={"Categories"}/>}
       ></AquaAccordian>
       <AquaAccordian
-        title={<AquaHeading level={5}>sub-categories</AquaHeading>}
+        title={<AquaHeading level={5} content={"Sub-Categories"}/>}
       ></AquaAccordian>
     </>
   );

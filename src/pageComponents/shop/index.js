@@ -36,13 +36,13 @@ const AquaShopComponent = () => {
 
   return (
     <AquaLayout seo={SeoData} container={true}>
-      <AquaHeading level={1}>Shop here</AquaHeading>
-      <hr />
+      <div className="text-center mb-2">
+      <AquaHeading level={1} content={"Shop Here"} decorate={true}/>
+      </div>
       <div className="row mb-4">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaCard>
-            <AquaHeading level={3}>Shop Filters</AquaHeading>
-            <hr />
+            <AquaHeading level={3}  content={"Apply filters"} decorate={true}/>
             <AquaShopFilters />
           </AquaCard>
         </div>
