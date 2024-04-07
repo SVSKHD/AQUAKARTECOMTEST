@@ -1,8 +1,8 @@
-const AquaCompare = () => {
+const AquaCompareComponent = () => {
   return (
     <>
       <h1>Add Products to compare</h1>
     </>
   );
 };
-export default AquaCompare;
+export default AquaCompareComponent
