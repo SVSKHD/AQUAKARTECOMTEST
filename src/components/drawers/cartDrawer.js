@@ -28,13 +28,21 @@ const AquaCartDrawer = () => {
               {cartCount.length > 0 ? "CART TOTAL -- " : ""}
             </AquaHeading>
             <div className="flex-fill text-end text-success text-end">
-              <AquaHeading level={3}>
-                {cartCount.length > 0 ? (
-                  <AquaCurrencyFormat amount={total} adjust={true} />
-                ) : (
-                  ""
-                )}
-              </AquaHeading>
+              <AquaHeading
+                level={3}
+                content={
+                  <>
+                    {cartCount.length > 0 ? (
+                      <>
+                        Total -
+                        <AquaCurrencyFormat amount={total} adjust={true} />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                }
+              />
             </div>
           </div>
         }

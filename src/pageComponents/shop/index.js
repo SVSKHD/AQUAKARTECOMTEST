@@ -34,6 +34,11 @@ const AquaShopComponent = () => {
     LoadProducts();
   }, [LoadProducts]);
 
+  const handleRange = (newRange) => {
+    console.log("New range value", newRange);
+    // You can now use newRange value to filter products or perform any other action
+  };
+
   return (
     <AquaLayout seo={SeoData} container={true}>
       <div className="text-center mb-2">
@@ -43,7 +48,7 @@ const AquaShopComponent = () => {
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaCard>
             <AquaHeading level={3} content={"Apply filters"} decorate={true} />
-            <AquaShopFilters />
+            <AquaShopFilters onRangeChange={handleRange} />
           </AquaCard>
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">

@@ -11,4 +11,4 @@ const AquaAccordian = ({ eventKey, title, content }) => {
   );
 };
 
-export default AquaAccordian
+export default AquaAccordian;
