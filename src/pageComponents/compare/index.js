@@ -3,6 +3,7 @@ import AquaHeading from "@/reusables/heading";
 import AquaTabs from "@/reusables/tabs";
 import AquaCartComponent from "./cartComponent";
 import AquaWishComponent from "./wishListComponent";
+import AquaCompare from "./compareComponent";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -26,7 +27,7 @@ const AquaComparePageComponent = () => {
     },
     {
       title: "Compare",
-      component: <h1>Compare</h1>,
+      component: <h1>hello</h1>,
     },
   ];
   return (

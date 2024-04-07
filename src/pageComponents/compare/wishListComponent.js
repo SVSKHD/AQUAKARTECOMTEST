@@ -7,7 +7,9 @@ const AquaWishComponent = () => {
       {cartCount.length > 0 ? (
         <>
           {cartCount.map((r) => (
-            <div key={r}></div>
+            <div key={r}>
+              <AquaCompareCard data={r} />
+            </div>
           ))}
         </>
       ) : (
