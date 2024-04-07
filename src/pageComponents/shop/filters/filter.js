@@ -61,8 +61,8 @@ const AquaShopFilters = () => {
         </div>
       </div>
       <div>
-        <AquaAccordian title={<AquaHeading level={5} content={"Categories"} />}>
-          <ol>
+        <AquaAccordian title={<AquaHeading level={5} content={"Categories"} />}
+        content={(  <ol>
             {categories.map((c, i) => (
               <li
                 key={i}
@@ -72,15 +72,14 @@ const AquaShopFilters = () => {
                 {c.title}
               </li>
             ))}
-          </ol>
-        </AquaAccordian>
+          </ol>)}
+        />
       </div>
 
       <div>
         <AquaAccordian
           title={<AquaHeading level={5} content={"Sub-Categories"} />}
-        >
-          <ol>
+          content={( <ol>
             {subs.map((c, i) => (
               <li
                 key={i}
@@ -90,8 +89,8 @@ const AquaShopFilters = () => {
                 {c.title}
               </li>
             ))}
-          </ol>
-        </AquaAccordian>
+          </ol>)}
+        />
       </div>
     </>
   );
