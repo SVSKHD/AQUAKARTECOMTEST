@@ -1,7 +1,7 @@
 import { Accordion } from "react-bootstrap";
 
 const AquaAccordian = (props) => {
-  const { title, description, key, children } = props;
+  const { title, description, key, content } = props;
   return (
     <>
       <Accordion
@@ -10,7 +10,7 @@ const AquaAccordian = (props) => {
       >
         <Accordion.Item>
           <Accordion.Header>{title}</Accordion.Header>
-          <Accordion.Body>{description}</Accordion.Body>
+          <Accordion.Body>{content}</Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </>
