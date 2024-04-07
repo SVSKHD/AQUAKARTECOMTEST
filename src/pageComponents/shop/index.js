@@ -21,7 +21,7 @@ const AquaShopComponent = () => {
     setProductLoading(true);
     getProducts()
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         setProducts(res.data);
         setProductLoading(false);
       })
@@ -37,30 +37,30 @@ const AquaShopComponent = () => {
   return (
     <AquaLayout seo={SeoData} container={true}>
       <div className="text-center mb-2">
-      <AquaHeading level={1} content={"Shop Here"} decorate={true}/>
+        <AquaHeading level={1} content={"Shop Here"} decorate={true} />
       </div>
       <div className="row mb-4">
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaCard>
-            <AquaHeading level={3}  content={"Apply filters"} decorate={true}/>
+            <AquaHeading level={3} content={"Apply filters"} decorate={true} />
             <AquaShopFilters />
           </AquaCard>
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
           <AquaCard>
-              <div className="row">
-                {products.map((r, i) => (
-                  <div key={i} className="col">
-                    <AquaVerticalCard
-                      title={r.title}
-                      images={r.photos}
-                      price={r.price}
-                      description={r.description}
-                      data={r}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="row">
+              {products.map((r, i) => (
+                <div key={i} className="col">
+                  <AquaVerticalCard
+                    title={r.title}
+                    images={r.photos}
+                    price={r.price}
+                    description={r.description}
+                    data={r}
+                  />
+                </div>
+              ))}
+            </div>
           </AquaCard>
         </div>
       </div>

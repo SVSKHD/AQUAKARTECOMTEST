@@ -12,11 +12,11 @@ import {
 } from "react-bootstrap";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
   const { cartCount, user } = useSelector((state) => ({ ...state }));
 
   const [cartLength, setCartLength] = useState(0);
@@ -52,7 +52,6 @@ const AquaNavBar = () => {
       });
     }
   };
-  
 
   return (
     <>
@@ -105,10 +104,7 @@ const AquaNavBar = () => {
                   />
                 </Form> */}
                 <div className="position-relative">
-                  <AquaButton
-                    variant="normal"
-                    onClick={handleCart}
-                  >
+                  <AquaButton variant="normal" onClick={handleCart}>
                     <FaCartPlus size={25} />
                   </AquaButton>
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

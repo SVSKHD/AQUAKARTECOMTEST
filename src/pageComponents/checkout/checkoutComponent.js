@@ -232,10 +232,9 @@ const AquaCheckoutComponent = () => {
           </div>
           <div className="col-md-5 col-lg-5 col-xs-12 col-sm-12">
             <div className="card rounded-4">
-              
               <div className="card-body">
                 <div className="mb-2">
-              <AquaHeading level={3} content={"Summary"}/>
+                  <AquaHeading level={3} content={"Summary"} />
                 </div>
                 <ul className="conatiner list-group list-group-flush">
                   {cartCount.map((r) => (
@@ -290,11 +289,7 @@ const AquaCheckoutComponent = () => {
                   </button>
                 </div>
                 <div class="d-grid checkout-margin">
-                  <Link
-                    class="btn btn-outline-dark"
-                    href="/shop"
-                    type="button"
-                  >
+                  <Link class="btn btn-outline-dark" href="/shop" type="button">
                     Continue to Shop
                   </Link>
                 </div>
