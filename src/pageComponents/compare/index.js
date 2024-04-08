@@ -29,11 +29,7 @@ const AquaComparePageComponent = () => {
   return (
     <>
       <AquaLayout seo={SeoData} container={true}>
-      {compareTabs.map((r,i)=>(
-        <>
-        {r.component}
-        </>
-      ))}
+      <AquaTabs tabData={compareTabs}/>
       </AquaLayout>
     </>
   );
