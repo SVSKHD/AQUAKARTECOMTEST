@@ -19,6 +19,11 @@ const OrderSchema = new mongoose.Schema(
       ref: "User", // Assuming you have a User model
       required: true,
     },
+    orderType: {
+      type: String,
+      enum: ["Cash On Delivery", "Payment Method"], // Allowed values
+      required: true, // Making this field required; adjust as necessary
+    },
     items: [OrderItemSchema],
     totalAmount: Number,
     paymentMethod: String,
@@ -63,7 +68,7 @@ const OrderSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Add createdAt and updatedAt timestamps
+    timestamps: true,
   },
 );
 
