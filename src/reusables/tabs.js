@@ -1,27 +1,28 @@
-import { Card, Tabs, Tab } from "react-bootstrap";
-const AquaTabs = ({ tabData }) => {
-  if (!Array.isArray(tabData) || tabData.length === 0) {
-    return null;
-  }
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
+const AquaTabs = () => {
   return (
-    <Card className="shadow-lg mb-3">
-      <Card.Body>
-        {JSON.stringify(tabData)}
-        <Tabs defaultActiveKey={tabs[0]?.title} id="aqua-tabs" className="mb-3">
-          {tabData.map((tab, index) => (
-            <Tab
-              key={tab.title || index} // Ensure this key is unique for each tab
-              eventKey={tab.title || `tab-${index}`} // This also needs to be unique
-              title={tab.title}
-            >
-              {tab.component}
-            </Tab>
-          ))}
-        </Tabs>
-      </Card.Body>
-    </Card>
+    <Tabs
+      defaultActiveKey="profile"
+      id="fill-tab-example"
+      className="mb-3"
+      fill
+    >
+      <Tab eventKey="home" title="Home">
+        Tab content for Home
+      </Tab>
+      <Tab eventKey="profile" title="Profile">
+        Tab content for Profile
+      </Tab>
+      <Tab eventKey="longer-tab" title="Loooonger Tab">
+        Tab content for Loooonger Tab
+      </Tab>
+      <Tab eventKey="contact" title="Contact" disabled>
+        Tab content for Contact
+      </Tab>
+    </Tabs>
   );
-};
+}
 
-export default AquaTabs
+export default AquaTabs;

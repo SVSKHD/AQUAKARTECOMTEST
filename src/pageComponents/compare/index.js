@@ -12,9 +12,10 @@ const AquaComparePageComponent = () => {
   const SeoData = {
     title: "Aquakart | Compare",
     canonical: `${process.env.apiKey}${router.asPath}`,
-    image: "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
+    image:
+      "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
   };
-  
+
   const compareTabs = [
     {
       title: "Wishlist",
@@ -23,13 +24,14 @@ const AquaComparePageComponent = () => {
     {
       title: "Cart",
       component: <h1>hello cart</h1>,
-    }
+    },
   ];
 
   return (
     <>
       <AquaLayout seo={SeoData} container={true}>
-      <AquaTabs tabData={compareTabs}/>
+        <h1>Hello</h1>
+        <AquaTabs />
       </AquaLayout>
     </>
   );
