@@ -74,17 +74,18 @@ const AquaShopFilters = ({ onRangeChange }) => {
           eventKey="0" // Unique key for this accordion item
           title={<AquaHeading level={5} content={"Categories"} />}
           content={
-            <ol>
+            <div className="list-group">
               {categories.map((c, i) => (
-                <li
-                  key={i}
-                  onClick={() => console.log(`Selected category: ${c.title}`)}
-                  style={{ cursor: "pointer" }}
-                >
+                <label className="list-group-item" key={i}>
+                  <input
+                    className="form-check-input me-1"
+                    type="checkbox"
+                    value=""
+                  />
                   {c.title}
-                </li>
+                </label>
               ))}
-            </ol>
+            </div>
           }
         />
       </div>
@@ -93,19 +94,18 @@ const AquaShopFilters = ({ onRangeChange }) => {
           eventKey="1" // Ensure this key is unique and different from the above
           title={<AquaHeading level={5} content={"Sub-Categories"} />}
           content={
-            <ol>
+            <div className="list-group">
               {subs.map((c, i) => (
-                <li
-                  key={i}
-                  onClick={() =>
-                    console.log(`Selected sub-category: ${c.title}`)
-                  }
-                  style={{ cursor: "pointer" }}
-                >
+                <label className="list-group-item" key={i}>
+                  <input
+                    className="form-check-input me-1"
+                    type="checkbox"
+                    value=""
+                  />
                   {c.title}
-                </li>
+                </label>
               ))}
-            </ol>
+            </div>
           }
         />
       </div>
