@@ -5,4 +5,4 @@ const AquaCompareComponent = () => {
     </>
   );
 };
-export default AquaCompareComponent
+export default AquaCompareComponent;

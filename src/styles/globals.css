@@ -164,7 +164,7 @@ body {
 .tabs-background {
   padding: 0.5rem;
   background-color: #053b50 !important;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   color: #f8f0e5;
   margin: 0.5rem;
 }

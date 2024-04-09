@@ -1,28 +1,25 @@
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
+import { useState } from "react";
+import { Tab, Tabs } from "react-bootstrap";
 
-const AquaTabs = () => {
+const AquaTabs = ({ tabData }) => {
+  const [key, setKey] = useState(tabData[0].title);
+
   return (
     <Tabs
-      defaultActiveKey="profile"
-      id="fill-tab-example"
-      className="mb-3"
-      fill
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="tabs-background mb-3"
     >
-      <Tab eventKey="home" title="Home">
-        Tab content for Home
-      </Tab>
-      <Tab eventKey="profile" title="Profile">
-        Tab content for Profile
-      </Tab>
-      <Tab eventKey="longer-tab" title="Loooonger Tab">
-        Tab content for Loooonger Tab
-      </Tab>
-      <Tab eventKey="contact" title="Contact" disabled>
-        Tab content for Contact
-      </Tab>
+      {tabData.map((r, i) => (
+        <Tab eventKey={r.title} title={r.title} key={i} className="m-2">
+          <div className="card rounded-4 mb-4">
+            <div className="card-body">{r.component}</div>
+          </div>
+        </Tab>
+      ))}
     </Tabs>
   );
-}
+};
 
 export default AquaTabs;

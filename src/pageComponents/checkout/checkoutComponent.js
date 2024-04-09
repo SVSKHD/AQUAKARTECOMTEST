@@ -112,9 +112,7 @@ const AquaCheckoutComponent = () => {
     }
   };
 
-  const handleCashOnDelivery = () =>{
-
-  }
+  const handleCashOnDelivery = () => {};
 
   const handlePayment = (event) => {
     event.preventDefault();
@@ -281,7 +279,10 @@ const AquaCheckoutComponent = () => {
                 )}
 
                 <div class="row m-1">
-                  <button className="col m-2 btn btn-outline-secondary" onClick={handleCashOnDelivery}>
+                  <button
+                    className="col m-2 btn btn-outline-secondary"
+                    onClick={handleCashOnDelivery}
+                  >
                     Cash on Delivery
                   </button>
                   <button
