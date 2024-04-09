@@ -10,18 +10,20 @@ const UserCart = () => {
       <UserLayout>
         {cartCount.length > 0 ? (
           <>
-            {cartCount.map((r, i) => (
-              <>
-                <div key={i}>
-                  <UserDashboardCartCard r={r} />
-                </div>
-              </>
-            ))}
+            <div className="row">
+              {cartCount.map((r, i) => (
+                <>
+                  <div key={i} className="col">
+                    <UserDashboardCartCard r={r} />
+                  </div>
+                </>
+              ))}
+            </div>
           </>
         ) : (
           ""
         )}
-        <div class="d-grid gap-2">
+        <div class="mt-1 d-grid gap-2">
           <Link class="btn btn-primary" href="/shop" type="button">
             {cartCount.length > 0
               ? "Continue to Shop"

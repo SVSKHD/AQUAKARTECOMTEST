@@ -1,6 +1,5 @@
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaToast from "@/reusables/js/toast";
-import Image from "next/image";
 import { useState } from "react";
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { FaMinus, FaPlus } from "react-icons/fa";
@@ -34,34 +33,27 @@ const UserDashboardCartCard = ({ r }) => {
   const { title, photos } = r;
   return (
     <>
-      <div className="card mb-3 dashboard-cart-card">
-        <div className="row g-0">
-          <div className="col-md-2">
-            <Image
-              src={photos[0].secure_url}
-              className="img-fluid rounded-start"
-              alt={title}
-              width={100}
-              height={100}
-            />
-          </div>
-          <div className="col-md-10">
-            <div className="card-body">
-              <h5 className="card-title">{title}</h5>
-              <InputGroup className="mb-3 width-adjust">
-                <Button variant="outline-dark" onClick={stockSub}>
-                  <FaMinus size={25} />
-                </Button>
-                <Form.Control
-                  aria-label="Example text with two button addons"
-                  className="text-center"
-                  value={r.quantity}
-                />
-                <Button variant="outline-dark" onClick={stockAdd}>
-                  <FaPlus size={25} />
-                </Button>
-              </InputGroup>
-            </div>
+      <div class="card rounded-4">
+        <div className="card-body">
+          <img
+            src={photos[0].secure_url}
+            class="card-img-top rounded-4"
+            alt={title}
+          />
+          <div>
+            <InputGroup className="mt-2 mb-3 width-adjust">
+              <Button variant="outline-dark" onClick={stockSub}>
+                <FaMinus size={25} />
+              </Button>
+              <Form.Control
+                aria-label="Example text with two button addons"
+                className="text-center"
+                value={r.quantity}
+              />
+              <Button variant="outline-dark" onClick={stockAdd}>
+                <FaPlus size={25} />
+              </Button>
+            </InputGroup>
           </div>
         </div>
       </div>
