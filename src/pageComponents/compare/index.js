@@ -24,7 +24,7 @@ const AquaComparePageComponent = () => {
     },
     {
       title: "Cart",
-      component: <AquaCompareComponent />,
+      component: <AquaCartComponent />,
     },
   ];
 
