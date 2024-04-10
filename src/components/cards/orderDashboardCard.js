@@ -20,7 +20,7 @@ const OrderDashboardCard = ({ data }) => {
   };
 
   return (
-    <div className="card shadow-lg mb-3">
+    <div className="card rounded-4 mb-3">
       <div className="card-body">
         <h3
           className={paymentStatus === "Paid" ? "text-success" : "text-danger"}
@@ -43,6 +43,7 @@ const OrderDashboardCard = ({ data }) => {
             </div>
           ))}
         </div>
+        <button className="btn btn-dark rounded-pill">Download Invoice</button>
       </div>
     </div>
   );

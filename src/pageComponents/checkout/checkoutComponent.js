@@ -76,9 +76,9 @@ const AquaCheckoutComponent = () => {
       merchantTransactionId: transactionId,
       merchantUserId: merchantUserId,
       amount: (total - 1) * 100, // Example amount in paise
-      redirectUrl: `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/order/${transactionId}`,
+      redirectUrl: `${process.env. NEXT_PUBLIC_PROD_URL}/api/order/${transactionId}`,
       redirectMode: "POST",
-      callbackUrl: `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/order/${transactionId}`,
+      callbackUrl: `${process.env. NEXT_PUBLIC_PROD_URL}/api/order/${transactionId}`,
       mobileNumber: "9999999999", // Example mobile number
       paymentInstrument: {
         type: "PAY_PAGE",
