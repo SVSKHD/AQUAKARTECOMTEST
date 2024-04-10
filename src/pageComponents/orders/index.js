@@ -6,11 +6,11 @@ import AquaOrderOperations from "@/Services/order";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import { FaCheck } from "react-icons/fa";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaOrdersComponent = () => {
   const { user, cartCount } = useSelector((state) => ({ ...state }));
   const [loading, setLoading] = useState(true);
-  const [toastShown, setToastShown] = useState(false); // State to track if toast has been shown
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
   const router = useRouter();
@@ -18,44 +18,28 @@ const AquaOrdersComponent = () => {
   const { id } = router.query;
   const { UpdateOrder, getOrderByTrasactionId } = AquaOrderOperations();
 
-  const updateOrder = useCallback(() => {
-    if (!toastShown) {
-      // Only proceed if toast has not been shown yet
-      UpdateOrder(id, { products: cartCount })
-        .then((res) => {
-          if (res.data.paymentStatus === "Paid") {
-            AquaToast("Order Created", "success");
-            setToastShown(true); // Update state to indicate toast has been shown
-            setLoading(false);
-            dispatch({
-              type: "EMPTY_CART",
-            });
-            getOrderByTrasactionId(id)
-              .then((res) => {
-                setProduct(res.data);
-              })
-              .catch(() => {
-                AquaToast("please try again", "error");
-              });
-          }
-        })
-        .catch(() => {
-          if (!toastShown) {
-            // Check again in case of error
-            AquaToast("please try again", "error");
-            setToastShown(true); // Update state to indicate toast has been shown
-          }
-          setLoading(false);
-        });
+  const updateOrder = useCallback(async () => {
+    try {
+      const updateRes = await UpdateOrder(id, { products: cartCount });
+      if (updateRes.data.paymentStatus === "Paid") {
+        AquaToast("Order Created", "success");
+
+        try {
+          const productRes = await getOrderByTrasactionId(id);
+          setProduct(productRes.data);
+        } catch (err) {
+          AquaToast("Failed to load order details, please try again", "error");
+        }
+
+      } else {
+        AquaToast("Order update failed, please try again", "error");
+      }
+    } catch (err) {
+      AquaToast("Failed to update order, please try again", "error");
+    } finally {
+      setLoading(false);
     }
-  }, [
-    UpdateOrder,
-    id,
-    cartCount,
-    dispatch,
-    toastShown,
-    getOrderByTrasactionId,
-  ]);
+  }, [UpdateOrder, id, cartCount, getOrderByTrasactionId]);
 
   useEffect(() => {
     updateOrder();
@@ -75,30 +59,33 @@ const AquaOrdersComponent = () => {
             </>
           ) : (
             <>
+           
               <AquaHeading
                 decorate={true}
-                content={"Order Details"}
+                customclass={"text-success"}
+                content={`Order Details-${product.order.paymentStatus==="Paid"?"Order Placed":"Awaiting Confirmation"}`}
                 level={3}
-              />
+              /> 
               <div class="card border-success mb-3" style={{maxWidth: "18rem;"}}>
                 <div class="card-body">
-                  <h5 class="card-title text-success">{product.order.paymentStatus}</h5>
+                 
+                  <h5 class="card-title text-success">{product.order?.paymentStatus} - <AquaCurrencyFormat amount={product.order.totalAmount} /></h5>
+                  <h6>Order-Status:-{product.order.orderStatus}</h6>
                   <AquaHeading level={5} decorate={true} content={"Ordered Items"}/>
-                  {product.order.items.map((r,i)=>(
-                    <p key={i}>{r.title}</p>
+                  {product.order?.items.map((r,i)=>(
+                    <p key={i}>{r.name}</p>
                   ))}
                   <p class="card-text">
                     
                   </p>
                 </div>
                 </div>
-              {JSON.stringify(product)}
             </>
           )}
-          <button className="btn btn-dark">
+          <button className="btn btn-dark rounded-pill">
             Dashboard 
           </button>
-          <button className="btn btn-outline-dark">
+          <button className="ms-2 btn btn-outline-dark rounded-pill">
             Download Invoice
           </button>
         </div>

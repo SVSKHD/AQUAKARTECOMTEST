@@ -31,8 +31,8 @@ const OrderSchema = new mongoose.Schema(
     transactionId: String,
     paymentStatus: {
       type: String,
-      enum: ["Paid", "Pending", "Failed"],
-      default: "Pending",
+      enum: ["Paid", "Pending", "Failed", "Processing"],
+      default: "Processing",
     },
     paymentInstrument: {
       type: Map,
@@ -53,7 +53,7 @@ const OrderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       enum: ["Pending", "Processing", "Shipped", "Completed", "Cancelled"],
-      default: "Pending",
+      default: "Processing",
     },
     discounts: Number,
     taxes: Number,

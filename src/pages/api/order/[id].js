@@ -81,7 +81,7 @@ router.put(async (req, res) => {
     // Transform incoming products to match the schema requirements for 'items'
     const updatedItems = products.map((product) => ({
       productId: product._id,  // Assuming product._id is the productId you want to reference
-      name: product.name, // Use 'name' from the product
+      name: product.title, // Use 'name' from the product
       price: product.price, // Use 'price' from the product
       quantity: product.quantity, // Use 'quantity' from the product
     }));
