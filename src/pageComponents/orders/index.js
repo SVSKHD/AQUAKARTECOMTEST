@@ -41,7 +41,7 @@ const AquaOrdersComponent = () => {
         setLoading(false);
       }
     }
-  }, [UpdateOrder, id, cartCount, dispatch, toastShown]);
+  }, [UpdateOrder, id, cartCount, toastShown]);
 
   useEffect(() => {
     updateOrder();
@@ -64,7 +64,7 @@ const AquaOrdersComponent = () => {
       fetchOrderDetails();
       dispatch({type:"EMPTY_CART"})
     }
-  }, [orderUpdated, getOrderByTrasactionId, id, toastShown]);
+  }, [orderUpdated, getOrderByTrasactionId, id, toastShown , dispatch]);
   const seo = {
     title: "Aquakart | Order Confirmation",
   };
