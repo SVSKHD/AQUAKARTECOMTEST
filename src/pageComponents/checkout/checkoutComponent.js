@@ -55,6 +55,15 @@ const AquaCheckoutComponent = () => {
       type: "EMPTY_CART",
     });
   };
+  
+  const items = cartCount.map(item => ({
+    productId: item.id,
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity,
+    // Include any other necessary fields required by PhonePe or your backend
+  }));
+
 
   const initiatePhonePePayment = async () => {
     const transactionId = `AQTr-${user.user._id}-${uuidv4()
@@ -74,6 +83,7 @@ const AquaCheckoutComponent = () => {
       paymentInstrument: {
         type: "PAY_PAGE",
       },
+      items:items
     };
 
     const dataPayload = JSON.stringify(payload);

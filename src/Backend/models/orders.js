@@ -24,6 +24,7 @@ const OrderSchema = new mongoose.Schema(
       enum: ["Cash On Delivery", "Payment Method"], // Allowed values
       required: true, // Making this field required; adjust as necessary
     },
+    transactionId:{type:String},
     items: [OrderItemSchema],
     totalAmount: Number,
     paymentMethod: String,
