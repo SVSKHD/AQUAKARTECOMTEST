@@ -5,7 +5,6 @@ import AquaLayout from "@/Layout/Layout";
 import AquaOrderOperations from "@/Services/order";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
-import { FaCheck } from "react-icons/fa";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import Link from "next/link";
 
