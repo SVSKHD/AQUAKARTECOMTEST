@@ -14,7 +14,6 @@ import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import AquaButton from "@/reusables/button";
 import { FaUser } from "react-icons/fa";
-import AquaRadio from "@/reusables/radio";
 
 const AquaCheckoutComponent = () => {
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
