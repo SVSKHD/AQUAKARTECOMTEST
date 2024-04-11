@@ -4,7 +4,6 @@ import { SHA256 } from "crypto-js";
 import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
 
-
 const router = createRouter();
 
 function getUserIdFromTransactionId(transactionId) {
@@ -15,7 +14,7 @@ function getUserIdFromTransactionId(transactionId) {
 router.post(async (req, res) => {
   await db.connectDb();
   const data = req.body;
-  console.log("req" , data)
+  console.log("req", data);
   const transactionId = data.transactionId;
   const userId = getUserIdFromTransactionId(transactionId);
 
@@ -27,7 +26,7 @@ router.post(async (req, res) => {
       "Content-Type": "application/json",
       "X-VERIFY": `${SHA256(
         `/pg/v1/status/${data.merchantId}/${transactionId}` +
-          process.env.NEXT_PUBLIC_SALT_KEY
+          process.env.NEXT_PUBLIC_SALT_KEY,
       ).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
       "X-MERCHANT-ID": data.merchantId,
     },
@@ -47,7 +46,7 @@ router.post(async (req, res) => {
           paymentStatus: "Paid",
           paymentInstrument: response.data.paymentInstrument,
           orderType: "Payment Method",
-          transactionId:transactionId
+          transactionId: transactionId,
         };
 
         const newOrder = new AquaOrder(orderData);
@@ -77,10 +76,10 @@ router.put(async (req, res) => {
   const { id } = req.query; // This is transactionId based on your setup
   try {
     const { products } = req.body; // Assuming you're sending a 'products' array in the body
-    console.log()
+    console.log();
     // Transform incoming products to match the schema requirements for 'items'
     const updatedItems = products.map((product) => ({
-      productId: product._id,  // Assuming product._id is the productId you want to reference
+      productId: product._id, // Assuming product._id is the productId you want to reference
       name: product.title, // Use 'name' from the product
       price: product.price, // Use 'price' from the product
       quantity: product.quantity, // Use 'quantity' from the product
@@ -90,7 +89,7 @@ router.put(async (req, res) => {
     const updatedOrder = await AquaOrder.findOneAndUpdate(
       { transactionId: id }, // Use the transactionId to find the order
       { $set: { items: updatedItems } }, // Update the 'items' field
-      { new: true, runValidators: true } // Return the updated document and run schema validators
+      { new: true, runValidators: true }, // Return the updated document and run schema validators
     );
 
     if (!updatedOrder) {
@@ -109,14 +108,13 @@ router.put(async (req, res) => {
   }
 });
 
-
 router.get(async (req, res) => {
   try {
     await db.connectDb(); // Ensure database connection is established
 
     const { id } = req.query; // Correctly extract the 'id' from request parameters
     console.log("id", id);
-    const order = await AquaOrder.findOne({transactionId:id}); // Await the async operation to get the order
+    const order = await AquaOrder.findOne({ transactionId: id }); // Await the async operation to get the order
 
     // Check if order exists
     if (!order) {
@@ -129,13 +127,11 @@ router.get(async (req, res) => {
     res.json({ success: true, order: order });
   } catch (error) {
     // Handle any errors that occur during the process
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Internal Server Error",
-        error: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
   } finally {
     await db.disconnectDb(); // Disconnect the database in finally block to ensure it always executes
   }
