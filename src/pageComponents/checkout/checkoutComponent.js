@@ -136,9 +136,18 @@ const AquaCheckoutComponent = () => {
     }
   };
 
+
+  const handleAddressDialog = () =>{
+    
+  }
+
+  const handleAddressUpdate = () =>{
+
+  }
+
   return (
     <>
-      <AquaLayout seo={seo} container={true}>
+    {user?(<AquaLayout seo={seo} container={true}>
         <div className="row mb-3">
           <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
             {!user ? (
@@ -314,7 +323,15 @@ const AquaCheckoutComponent = () => {
             </div>
           </div>
         </div>
-      </AquaLayout>
+      </AquaLayout>) : (
+        <button className="btn btn-dark"  onClick={() =>
+          dispatch({
+            type: "SET_AUTH_DIALOG_VISIBLE",
+            payload: true,
+          })
+        }><FaUser/> Login to proceed to cart</button>
+      )}
+      
     </>
   );
 };
