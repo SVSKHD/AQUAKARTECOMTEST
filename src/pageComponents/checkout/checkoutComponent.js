@@ -24,7 +24,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false)
+    user.user.addresses.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressFill, setAddressFill] = useState(false);
@@ -122,7 +122,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        }
+        },
       );
 
       if (response) {
@@ -155,7 +155,7 @@ const AquaCheckoutComponent = () => {
       shippingMethod: "Standard",
       shippingCost: 50, // Example fixed cost
       estimatedDelivery: new Date(
-        new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
       ).toISOString(), // Adding 7 days for delivery
       orderStatus: "Processing",
     };
@@ -250,7 +250,7 @@ const AquaCheckoutComponent = () => {
                           <div key={i} className="col">
                             <div>
                               <div
-                                class="card rounded-4"
+                                class="card rounded-4 mb-3"
                                 style={{ width: "18rem" }}
                               >
                                 <div class="card-body">
@@ -261,7 +261,8 @@ const AquaCheckoutComponent = () => {
                                       value={i}
                                       name="addressSelection" // All radio buttons share the same 'name' to group them
                                       checked={
-                                        user.user.selectedAddress._id === r._id
+                                        user?.user?.selectedAddress?._id ===
+                                        r._id
                                       }
                                       onChange={() => handleAddressSelect(i)}
                                     />{" "}
