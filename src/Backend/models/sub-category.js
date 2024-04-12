@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { ObjectId } = mongoose.Types;
+import AquaCategory from "./category";
 
 const AquaSubCategorySchema = new mongoose.Schema(
   {
@@ -9,15 +9,19 @@ const AquaSubCategorySchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    image: {
-      type: String,
-    },
+    photos: [
+      {
+        id: String,
+        secure_url: String,
+      },
+    ],
     keywords: {
       type: String,
     },
     category: {
-      type: ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "AquaCategory",
+      required: true,
     },
   },
   {

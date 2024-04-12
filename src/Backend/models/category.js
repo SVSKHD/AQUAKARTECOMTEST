@@ -8,10 +8,10 @@ const AquaCategorySchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    images: [
+    photos: [
       {
-        publicId: String, // Public ID of the image in Cloudinary
-        url: String, // URL of the image in Cloudinary
+        id: String,
+        secure_url: String,
       },
     ],
     keywords: {

@@ -1,30 +1,18 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 
-const AquaProductSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "please provide product name"],
     trim: true,
     maxlength: [120, "Product name should not be more than 120 characters"],
   },
-  discountPriceStatus: {
-    type: Boolean,
-    default: false,
-  },
-  discountPrice: {
-    type: Number,
-  },
-  keywords: {
-    type: String,
-  },
-  price: {
-    type: Number,
-    required: [true, "please provide product price"],
-    maxlength: [6, "Product price should not be more than 6 digits"],
-  },
   description: {
     type: String,
     required: [true, "please provide product description"],
+  },
+  keywords: {
+    type: String,
   },
   notes: {
     type: String,
@@ -50,10 +38,6 @@ const AquaProductSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "AquaSubCategory",
   },
-  blog: {
-    type: mongoose.Schema.ObjectId,
-    ref: "AquaBlog",
-  },
   //this field was updated in order videos later
   stock: {
     type: Number,
@@ -71,35 +55,41 @@ const AquaProductSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  // reviews: [
-  //     {
-  //         user: {
-  //             type: mongoose.Schema.ObjectId,
-  //             ref: "User",
-  //         },
-  //         name: {
-  //             type: String,
-  //         },
-  //         rating: {
-  //             type: Number,
-  //         },
-  //         comment: {
-  //             type: String,
-  //         },
-  //     },
-  // ],
-  // user: {
-  //     type: mongoose.Schema.ObjectId,
-  //     ref: "User",
-  // },
+  product: {
+    type: mongoose.Schema.ObjectId,
+    ref: "AquaProduct",
+  },
+  reviews: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+      comment: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
-const AquaProduct =
-  mongoose.models.AquaProduct ||
-  mongoose.model("AquaProduct", AquaProductSchema);
-
-export default AquaProduct;
+module.exports =
+  mongoose.models.AquaBlog || mongoose.model("AquaBlog", BlogSchema);
