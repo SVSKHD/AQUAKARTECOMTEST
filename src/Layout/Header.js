@@ -43,12 +43,6 @@ const AquaNavBar = () => {
   }
 
   const handleCart = () => {
-    if (!user) {
-      dispatch({
-        type: "SET_AUTH_DIALOG_VISIBLE",
-        payload: true,
-      });
-    }
     if (isMobile) {
       router.push("/checkout");
     } else {
