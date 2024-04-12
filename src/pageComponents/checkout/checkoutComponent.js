@@ -210,36 +210,41 @@ const AquaCheckoutComponent = () => {
                       <div className="row">
                         {user.user.addresses.map((r, i) => (
                           <div key={i} className="col">
-                            <div
-                              class="card address-card mb-3"
-                              style={{ width: "5rem;" }}
-                            >
-                              <div class="card-header">
-                                {" "}
-                                <input
-                                  type="radio"
-                                  value={i}
-                                  name="addressSelection" // All radio buttons share the same 'name' to group them
-                                  checked={
-                                    user.user.selectedAddress._id === r._id
-                                  }
-                                  onChange={() => handleAddressSelect(i)}
-                                />{" "}
-                                Address-{i + 1}
-                              </div>
-                              <div class="card-body">
-                                <h5 class="card-title">{r.city}</h5>
-                                <h6 className="card-description">{r.state}</h6>
-                                <p class="text-muted">
-                                  {r.street} {r.city}-{r.postalCode}
-                                </p>
-                              </div>
-                              <button
-                                className="btn btn-base"
-                                onClick={handleAddressEdit}
+                            <div>
+                              <div
+                                class="card rounded-4"
+                                style={{ width: "18rem" }}
                               >
-                                <FaPen size={20} />
-                              </button>
+                                <div class="card-body">
+                                  <span>
+                                    {" "}
+                                    <input
+                                      type="radio"
+                                      value={i}
+                                      name="addressSelection" // All radio buttons share the same 'name' to group them
+                                      checked={
+                                        user.user.selectedAddress._id === r._id
+                                      }
+                                      onChange={() => handleAddressSelect(i)}
+                                    />{" "}
+                                    - Address-{i + 1}{" "}
+                                  </span>
+                                  <hr />
+                                  <h5 class="card-title">{r.city}</h5>
+                                  <h6 className="card-description">
+                                    {r.state}
+                                  </h6>
+                                  <p class="text-muted">
+                                    {r.street} {r.city}-{r.postalCode}
+                                  </p>
+                                  <button
+                                    className="btn btn-base"
+                                    onClick={handleAddressEdit}
+                                  >
+                                    <FaPen size={15} />
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         ))}
