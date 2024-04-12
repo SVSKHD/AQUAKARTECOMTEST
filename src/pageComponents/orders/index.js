@@ -20,7 +20,8 @@ const AquaOrdersComponent = () => {
   const { UpdateOrder, getOrderByTrasactionId } = AquaOrderOperations();
 
   const updateOrder = useCallback(async () => {
-    if (!toastShown) { // Only proceed if the toast has not been shown yet
+    if (!toastShown) {
+      // Only proceed if the toast has not been shown yet
       try {
         const res = await UpdateOrder(id, { products: cartCount });
         if (res.data.paymentStatus === "Paid") {
@@ -32,7 +33,8 @@ const AquaOrdersComponent = () => {
           setToastShown(true); // Update state to indicate toast has been shown
         }
       } catch (error) {
-        if (!toastShown) { // Check again in case of error
+        if (!toastShown) {
+          // Check again in case of error
           AquaToast("Failed to update order, please try again", "error");
           setToastShown(true); // Update state to indicate toast has been shown
         }
@@ -52,7 +54,8 @@ const AquaOrdersComponent = () => {
         const productRes = await getOrderByTrasactionId(id);
         setProduct(productRes.data);
       } catch (err) {
-        if (!toastShown) { // Check again in case of fetching error
+        if (!toastShown) {
+          // Check again in case of fetching error
           AquaToast("Failed to load order details, please try again", "error");
           setToastShown(true); // Update state to indicate toast has been shown
         }
@@ -61,9 +64,9 @@ const AquaOrdersComponent = () => {
 
     if (orderUpdated) {
       fetchOrderDetails();
-      dispatch({type:"EMPTY_CART"})
+      dispatch({ type: "EMPTY_CART" });
     }
-  }, [orderUpdated, getOrderByTrasactionId, id, toastShown , dispatch]);
+  }, [orderUpdated, getOrderByTrasactionId, id, toastShown, dispatch]);
   const seo = {
     title: "Aquakart | Order Confirmation",
   };
@@ -78,31 +81,37 @@ const AquaOrdersComponent = () => {
             </>
           ) : (
             <>
-           
               <AquaHeading
                 decorate={true}
                 customclass={"text-success"}
-                content={`Order Details-${product.order?.paymentStatus==="Paid"?"Order Placed":"Awaiting Confirmation"}`}
+                content={`Order Details-${product.order?.paymentStatus === "Paid" ? "Order Placed" : "Awaiting Confirmation"}`}
                 level={3}
-              /> 
-              <div class="card border-success mb-3" style={{maxWidth: "18rem;"}}>
+              />
+              <div
+                class="card border-success mb-3"
+                style={{ maxWidth: "18rem;" }}
+              >
                 <div class="card-body">
-                 
-                  <h5 class="card-title text-success">{product.order?.paymentStatus} - <AquaCurrencyFormat amount={product.order?.totalAmount} /></h5>
+                  <h5 class="card-title text-success">
+                    {product.order?.paymentStatus} -{" "}
+                    <AquaCurrencyFormat amount={product.order?.totalAmount} />
+                  </h5>
                   <h6>Order-Status:-{product.order?.orderStatus}</h6>
-                  <AquaHeading level={5} decorate={true} content={"Ordered Items"}/>
-                  {product.order?.items.map((r,i)=>(
+                  <AquaHeading
+                    level={5}
+                    decorate={true}
+                    content={"Ordered Items"}
+                  />
+                  {product.order?.items.map((r, i) => (
                     <p key={i}>{r.name}</p>
                   ))}
-                  <p class="card-text">
-                    
-                  </p>
+                  <p class="card-text"></p>
                 </div>
-                </div>
+              </div>
             </>
           )}
           <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
-            Dashboard 
+            Dashboard
           </Link>
           <button className="ms-2 btn btn-outline-dark rounded-pill">
             Download Invoice
