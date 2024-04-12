@@ -74,9 +74,9 @@ const AquaCheckoutComponent = () => {
       merchantTransactionId: transactionId,
       merchantUserId: merchantUserId,
       amount: (total - 1) * 100, // Example amount in paise
-      redirectUrl: `/api/order/${transactionId}`,
+      redirectUrl: `https://aquakart.co.in/api/order/${transactionId}`,
       redirectMode: "POST",
-      callbackUrl: `/api/order/${transactionId}`,
+      callbackUrl: `https://aquakart.co.in/api/order/${transactionId}`,
       mobileNumber: "9999999999", // Example mobile number
       paymentInstrument: {
         type: "PAY_PAGE",
