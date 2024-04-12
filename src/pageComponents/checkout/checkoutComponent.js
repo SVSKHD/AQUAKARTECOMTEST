@@ -152,6 +152,7 @@ const AquaCheckoutComponent = () => {
       currency: "INR",
       billingAddress: user.user.selectedAddress, // Ensure this is correctly assigned
       shippingAddress: user.user.selectedAddress, // Ensure this is correctly assigned
+      orderType:"Cash On Delivery",
       shippingMethod: "Standard",
       shippingCost: 50, // Example fixed cost
       estimatedDelivery: new Date(
