@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AquaCartPageCard from "@/components/cards/cartPageCard";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import { useState, useEffect } from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaPen, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useRouter } from "next/router";
@@ -14,6 +14,8 @@ import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import AquaButton from "@/reusables/button";
 import { FaUser } from "react-icons/fa";
+import UserOperations from "@/Services/user";
+import AquaOrderOperatrions from "@/Services/order";
 
 const AquaCheckoutComponent = () => {
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
@@ -24,7 +26,12 @@ const AquaCheckoutComponent = () => {
     user.user.addresses.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
+  const [addressFill, setAddressFill] = useState(false);
+  const [addressEdit, setAddressEdit] = useState(false);
 
+  const { cartTotal } = ProductFunctions();
+  const { userDataUpdate } = UserOperations();
+  const { CreateCodOrder } = AquaOrderOperatrions();
   const router = useRouter();
 
   const handleAddressSelect = (selectedAddressIndex) => {
@@ -34,7 +41,13 @@ const AquaCheckoutComponent = () => {
       type: "UPDATE_SELECTED_ADDRESS",
       payload: { selectedAddress },
     });
-    console.log("user", user);
+    userDataUpdate(user.user._id, user.user.selectedAddress)
+      .then((res) => {
+        AquaToast("Updated the Selected Address", "success");
+      })
+      .catch(() => {
+        AquaToast("Please Try again", "error");
+      });
   };
 
   useEffect(() => {
@@ -46,7 +59,6 @@ const AquaCheckoutComponent = () => {
     }
   }, [router, dispatch]);
 
-  const { cartTotal } = ProductFunctions();
   const total = cartTotal(cartCount);
 
   const handleDeleteAll = () => {
@@ -136,10 +148,16 @@ const AquaCheckoutComponent = () => {
     }
   };
 
-  const handleAddressDialog = () => {};
+  const handleAddressFillDialog = () => {
+    setAddressFill(true);
+  };
 
-  const handleAddressUpdate = () => {};
+  const handleAddressSave = () => {};
 
+  const handleAddressEdit = (i) => {
+    console.log("i", i);
+    setAddressEdit(true);
+  };
   return (
     <>
       {!user ? (
@@ -158,6 +176,7 @@ const AquaCheckoutComponent = () => {
         <AquaLayout seo={seo} container={true}>
           <div className="row mb-3">
             <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
+              {JSON.stringify(user.user.selectedAddress)}
               {!user ? (
                 <>
                   <AquaButton
@@ -181,7 +200,12 @@ const AquaCheckoutComponent = () => {
                       content={"Address"}
                     />
                     {user.user.addresses.length === 0 ? (
-                      <button className="btn btn-dark">Add Address</button>
+                      <button
+                        className="btn btn-dark"
+                        onClick={handleAddressFillDialog}
+                      >
+                        Add Address
+                      </button>
                     ) : (
                       <div className="row">
                         {user.user.addresses.map((r, i) => (
@@ -194,7 +218,11 @@ const AquaCheckoutComponent = () => {
                                 {" "}
                                 <input
                                   type="radio"
+                                  value={i}
                                   name="addressSelection" // All radio buttons share the same 'name' to group them
+                                  checked={
+                                    user.user.selectedAddress._id === r._id
+                                  }
                                   onChange={() => handleAddressSelect(i)}
                                 />{" "}
                                 Address-{i + 1}
@@ -206,6 +234,12 @@ const AquaCheckoutComponent = () => {
                                   {r.street} {r.city}-{r.postalCode}
                                 </p>
                               </div>
+                              <button
+                                className="btn btn-base"
+                                onClick={handleAddressEdit}
+                              >
+                                <FaPen size={20} />
+                              </button>
                             </div>
                           </div>
                         ))}

@@ -59,6 +59,16 @@ const AquaNavBar = () => {
     }
   };
 
+  const handleLogout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    if (router.asPath === "/checkout") {
+      router.push("/");
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -137,12 +147,7 @@ const AquaNavBar = () => {
                         <Dropdown.Item>
                           <Button
                             variant="danger"
-                            onClick={() =>
-                              dispatch({
-                                type: "LOGOUT",
-                                payload: null,
-                              })
-                            }
+                            onClick={() => handleLogout()}
                           >
                             logout
                           </Button>
