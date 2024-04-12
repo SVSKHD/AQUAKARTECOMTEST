@@ -7,8 +7,8 @@ const router = createRouter();
 router.put(async (req, res) => {
   await db.connectDb();
 
-  const { id } = req.query; 
-  const { addresses, email, alternativeEmail, phoneNo, gstDetails } = req.body; 
+  const { id } = req.query;
+  const { addresses, email, alternativeEmail, phoneNo, gstDetails } = req.body;
   try {
     const updated = await AquaEcomUser.findById(id);
     const updatedUser = await AquaEcomUser.findByIdAndUpdate(

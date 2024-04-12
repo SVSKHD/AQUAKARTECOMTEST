@@ -21,7 +21,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false)
+    user.user.addresses.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
 
@@ -108,7 +108,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        }
+        },
       );
 
       if (response) {
