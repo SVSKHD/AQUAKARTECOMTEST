@@ -16,6 +16,7 @@ import AquaButton from "@/reusables/button";
 import { FaUser } from "react-icons/fa";
 import UserOperations from "@/Services/user";
 import AquaOrderOperatrions from "@/Services/order";
+import AquaAddressDialog from "@/components/dialog/addressDialog";
 
 const AquaCheckoutComponent = () => {
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
@@ -176,7 +177,6 @@ const AquaCheckoutComponent = () => {
         <AquaLayout seo={seo} container={true}>
           <div className="row mb-3">
             <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
-              {JSON.stringify(user.user.selectedAddress)}
               {!user ? (
                 <>
                   <AquaButton
@@ -373,6 +373,14 @@ const AquaCheckoutComponent = () => {
               </div>
             </div>
           </div>
+          <AquaAddressDialog
+            show={addressFill}
+            hide={() => setAddressFill(false)}
+          />
+          <AquaAddressDialog
+            show={addressEdit}
+            hide={() => setAddressEdit(false)}
+          />
         </AquaLayout>
       )}
     </>
