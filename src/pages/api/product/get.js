@@ -1,5 +1,5 @@
 import { createRouter } from "next-connect";
-import db from "@/Backend/Db/mongoose";
+import db from "@/utils/db";
 import AquaProduct from "@/Backend/models/product";
 
 
