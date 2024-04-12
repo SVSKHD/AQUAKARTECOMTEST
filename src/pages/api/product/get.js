@@ -2,7 +2,6 @@ import { createRouter } from "next-connect";
 import db from "@/utils/db";
 import AquaProduct from "@/Backend/models/product";
 
-
 const Router = createRouter();
 
 Router.get(async (req, res) => {
