@@ -60,7 +60,7 @@ const AquaCartPageCard = ({ data }) => {
                   {title}
                 </h5>
                 <p class="card-text">
-                  <small class="text-success">
+                  <small class="text-success text-bold">
                     <AquaCurrencyFormat amount={price} />
                   </small>
                 </p>

@@ -21,7 +21,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false),
+    user.user.addresses.map(() => false)
   );
   const [deleteAll, setDeleteAll] = useState(false);
 
@@ -108,7 +108,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        },
+        }
       );
 
       if (response) {
@@ -159,33 +159,37 @@ const AquaCheckoutComponent = () => {
               <div className="card rounded-4 mb-2">
                 <div className="card-body">
                   <AquaHeading level={3} decorate={true} content={"Address"} />
-                  <div className="row">
-                    {user.user.addresses.map((r, i) => (
-                      <div key={i} className="col">
-                        <div
-                          class="card address-card mb-3"
-                          style={{ width: "5rem;" }}
-                        >
-                          <div class="card-header">
-                            {" "}
-                            <input
-                              type="radio"
-                              name="addressSelection" // All radio buttons share the same 'name' to group them
-                              onChange={() => handleAddressSelect(i)}
-                            />{" "}
-                            Address-{i + 1}
-                          </div>
-                          <div class="card-body">
-                            <h5 class="card-title">{r.city}</h5>
-                            <h6 className="card-description">{r.state}</h6>
-                            <p class="text-muted">
-                              {r.street} {r.city}-{r.postalCode}
-                            </p>
+                  {user.user.addresses.length === 0 ? (
+                    <button className="btn btn-dark">Add Address</button>
+                  ) : (
+                    <div className="row">
+                      {user.user.addresses.map((r, i) => (
+                        <div key={i} className="col">
+                          <div
+                            class="card address-card mb-3"
+                            style={{ width: "5rem;" }}
+                          >
+                            <div class="card-header">
+                              {" "}
+                              <input
+                                type="radio"
+                                name="addressSelection" // All radio buttons share the same 'name' to group them
+                                onChange={() => handleAddressSelect(i)}
+                              />{" "}
+                              Address-{i + 1}
+                            </div>
+                            <div class="card-body">
+                              <h5 class="card-title">{r.city}</h5>
+                              <h6 className="card-description">{r.state}</h6>
+                              <p class="text-muted">
+                                {r.street} {r.city}-{r.postalCode}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -257,7 +261,7 @@ const AquaCheckoutComponent = () => {
                         >
                           <div className="d-flex w-100 justify-content-between">
                             <p className="card-subtitle">{r.title}</p>
-                            <p className="cart-text-price">
+                            <p className="cart-text-price text-bold">
                               <AquaCurrencyFormat amount={r.price} /> *{" "}
                               {r.quantity} ={" "}
                               <AquaCurrencyFormat
