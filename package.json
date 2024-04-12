@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "cloudinary": "^2.1.0",
@@ -32,7 +33,9 @@
     "react-spinners": "^0.13.8",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "uuid": "^9.0.1",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "eslint": "^8",
