@@ -1,6 +1,6 @@
 import { createRouter } from "next-connect";
 import AquaSubCategory from "@/Backend/models/sub-category";
-import db from "@/Backend/Db/mongoose";
+import db from "@/utils/db";
 
 const Router = createRouter();
 Router.get(async (req, res) => {

@@ -1,7 +1,7 @@
 import { createRouter } from "next-connect";
 import db from "@/Backend/Db/mongoose";
 import AquaProduct from "@/Backend/models/product";
-import AquaCategory from "@/Backend/models/category";
+
 
 const Router = createRouter();
 
