@@ -24,12 +24,13 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false),
+    user.user.addresses.map(() => false)
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressFill, setAddressFill] = useState(false);
   const [addressEdit, setAddressEdit] = useState(false);
 
+  const [cod, setCod] = useState({});
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
   const { CreateCodOrder } = AquaOrderOperatrions();
@@ -121,7 +122,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        },
+        }
       );
 
       if (response) {
@@ -133,7 +134,44 @@ const AquaCheckoutComponent = () => {
     }
   };
 
-  const handleCashOnDelivery = () => {};
+  const handleCashOnDelivery = () => {
+    const calculatedTotal = cartTotal(cartCount); // Assuming cartTotal correctly computes the total
+
+    const newOrder = {
+      user: user.user._id, // Actual ObjectId from the user data
+      orderType: "Cash On Delivery",
+      items: cartCount.map((item) => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      totalAmount: calculatedTotal,
+      paymentMethod: "Cash On Delivery",
+      paymentStatus: "Pending",
+      currency: "INR",
+      billingAddress: user.user.selectedAddress, // Ensure this is correctly assigned
+      shippingAddress: user.user.selectedAddress, // Ensure this is correctly assigned
+      shippingMethod: "Standard",
+      shippingCost: 50, // Example fixed cost
+      estimatedDelivery: new Date(
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+      ).toISOString(), // Adding 7 days for delivery
+      orderStatus: "Processing",
+    };
+
+    // Update local state to reflect the new order setup
+    setCod(newOrder);
+    CreateCodOrder(cod)
+      .then((res) => {
+        console.log(res.data);
+        AquaToast("successfully created COD order", "success");
+      })
+      .catch(() => {
+        AquaToast("please try again", "error");
+      });
+    console.log("user", cod);
+  };
 
   const handlePayment = (event) => {
     event.preventDefault();
