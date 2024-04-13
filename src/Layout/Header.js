@@ -98,9 +98,9 @@ const AquaNavBar = () => {
                   <Nav.Link className="text-bold" href="/shop">
                     Shop
                   </Nav.Link>
-                  <Nav.Link className="text-bold" href="/compare">
+                  {/* <Nav.Link className="text-bold" href="/compare">
                     Compare
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link className="text-bold" href="/about">
                     About Us
                   </Nav.Link>

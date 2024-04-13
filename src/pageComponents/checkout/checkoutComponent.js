@@ -44,7 +44,7 @@ const AquaCheckoutComponent = () => {
       payload: { selectedAddress },
     });
     userDataUpdate(user.user._id, {
-      selectedAddress: user.user.selectedAddress,
+      selectedAddress: selectedAddress,
     })
       .then((res) => {
         AquaToast("Updated the Selected Address", "success");
@@ -165,7 +165,7 @@ const AquaCheckoutComponent = () => {
 
     // Update local state to reflect the new order setup
     setCod(newOrder);
-    CreateCodOrder(cod)
+    CreateCodOrder(newOrder)
       .then((res) => {
         console.log(res.data);
         AquaToast("successfully created COD order", "success");
@@ -211,7 +211,7 @@ const AquaCheckoutComponent = () => {
               dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: true })
             }
           >
-            Please Login
+            Please Login To access cart
           </button>
           </div>
         ) : (
