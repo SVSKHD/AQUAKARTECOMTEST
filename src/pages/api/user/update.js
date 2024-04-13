@@ -8,7 +8,14 @@ router.put(async (req, res) => {
   await db.connectDb();
 
   const { id } = req.query;
-  const { addresses, email, alternativeEmail, phoneNo, gstDetails } = req.body;
+  const {
+    addresses,
+    email,
+    alternativeEmail,
+    phoneNo,
+    gstDetails,
+    selectedAddress,
+  } = req.body;
   try {
     const updated = await AquaEcomUser.findById(id);
     const updatedUser = await AquaEcomUser.findByIdAndUpdate(
@@ -20,6 +27,7 @@ router.put(async (req, res) => {
           alternativeEmail,
           phoneNo,
           gstDetails,
+          selectedAddress,
         },
       },
       { new: true }, // Return the updated document

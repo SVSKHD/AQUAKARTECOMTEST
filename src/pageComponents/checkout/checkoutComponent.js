@@ -24,7 +24,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user.user.addresses.map(() => false),
+    user?.user?.addresses?.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressFill, setAddressFill] = useState(false);
@@ -203,208 +203,233 @@ const AquaCheckoutComponent = () => {
   return (
     <>
       <AquaLayout seo={seo} container={true}>
-        <div className="row mb-3">
-          <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
-            {!user ? (
-              <>
-                <AquaButton
-                  variant={"normal"}
-                  onClick={() =>
-                    dispatch({
-                      type: "SET_AUTH_DIALOG_VISIBLE",
-                      payload: true,
-                    })
-                  }
-                >
-                  <FaUser size={25} />
-                </AquaButton>
-              </>
-            ) : (
-              <div className="card rounded-4 mb-2">
-                <div className="card-body">
-                  <AquaHeading level={3} decorate={true} content={"Address"} />
-                  {user.user.addresses.length === 0 ? (
-                    <button
-                      className="btn btn-dark"
-                      onClick={handleAddressFillDialog}
+        {!user ? (
+          <div className="text-center mb-5">
+          <button
+            className="btn btn-base"
+            onClick={() =>
+              dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: true })
+            }
+          >
+            Please Login
+          </button>
+          </div>
+        ) : (
+          <>
+            <div className="row mb-3">
+              <div className="col-md-7 col-md-7 col-xs-12 col-sm-12">
+                {!user ? (
+                  <>
+                    <AquaButton
+                      variant={"normal"}
+                      onClick={() =>
+                        dispatch({
+                          type: "SET_AUTH_DIALOG_VISIBLE",
+                          payload: true,
+                        })
+                      }
                     >
-                      Add Address
-                    </button>
-                  ) : (
-                    <div className="row">
-                      {user.user.addresses.map((r, i) => (
-                        <div key={i} className="col">
-                          <div>
-                            <div
-                              class="card rounded-4 mb-3"
-                              style={{ width: "18rem" }}
-                            >
-                              <div class="card-body">
-                                <span>
-                                  {" "}
-                                  <input
-                                    type="radio"
-                                    value={i}
-                                    name="addressSelection" // All radio buttons share the same 'name' to group them
-                                    checked={
-                                      user?.user?.selectedAddress?._id ===
-                                      r?._id
-                                    }
-                                    onChange={() => handleAddressSelect(i)}
-                                  />{" "}
-                                  - Address-{i + 1}{" "}
-                                </span>
-                                <hr />
-                                <h5 class="card-title">{r.city}</h5>
-                                <h6 className="card-description">{r.state}</h6>
-                                <p class="text-muted">
-                                  {r.street} {r.city}-{r.postalCode}
-                                </p>
-                                <button
-                                  className="btn btn-base"
-                                  onClick={handleAddressEdit}
+                      <FaUser size={25} />
+                    </AquaButton>
+                  </>
+                ) : (
+                  <div className="card rounded-4 mb-2">
+                    <div className="card-body">
+                      <AquaHeading
+                        level={3}
+                        decorate={true}
+                        content={"Address"}
+                      />
+                      {user.user.addresses.length === 0 ? (
+                        <button
+                          className="btn btn-dark"
+                          onClick={handleAddressFillDialog}
+                        >
+                          Add Address
+                        </button>
+                      ) : (
+                        <div className="row">
+                          {user.user.addresses.map((r, i) => (
+                            <div key={i} className="col">
+                              <div>
+                                <div
+                                  class="card rounded-4 mb-3"
+                                  style={{ width: "18rem" }}
                                 >
-                                  <FaPen size={15} />
-                                </button>
+                                  <div class="card-body">
+                                    <span>
+                                      {" "}
+                                      <input
+                                        type="radio"
+                                        value={i}
+                                        name="addressSelection" // All radio buttons share the same 'name' to group them
+                                        checked={
+                                          user?.user?.selectedAddress?._id ===
+                                          r?._id
+                                        }
+                                        onChange={() => handleAddressSelect(i)}
+                                      />{" "}
+                                      - Address-{i + 1}{" "}
+                                    </span>
+                                    <hr />
+                                    <h5 class="card-title">{r.city}</h5>
+                                    <h6 className="card-description">
+                                      {r.state}
+                                    </h6>
+                                    <p class="text-muted">
+                                      {r.street} {r.city}-{r.postalCode}
+                                    </p>
+                                    <button
+                                      className="btn btn-base"
+                                      onClick={handleAddressEdit}
+                                    >
+                                      <FaPen size={15} />
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
+                  </div>
+                )}
+
+                <div className="card rounded-4 ">
+                  <div className="card-body">
+                    <AquaHeading content={"Cart"} level={3} />
+                    <div>
+                      {cartCount.length > 0 ? (
+                        <>
+                          <div className=" container row">
+                            <div className="col form-check mb-3">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value={deleteAll}
+                                onChange={() => setDeleteAll(!deleteAll)}
+                                id="flexCheckDefault"
+                              />
+                              <label
+                                className="form-check-label"
+                                for="flexCheckDefault"
+                              >
+                                Select All
+                              </label>
+                            </div>
+                            <div className="col text-end p-0 ">
+                              {deleteAll ? (
+                                <button
+                                  className="btn btn-dark"
+                                  onClick={handleDeleteAll}
+                                >
+                                  <FaTrash size={20} />
+                                </button>
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          </div>
+                          {cartCount.map((r) => (
+                            <>
+                              <div>
+                                <AquaCartPageCard data={r} />
+                              </div>
+                            </>
+                          ))}
+                        </>
+                      ) : (
+                        <h5>No Products yet in cart</h5>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
-
-            <div className="card rounded-4 ">
-              <div className="card-body">
-                <AquaHeading content={"Cart"} level={3} />
-                <div>
-                  {cartCount.length > 0 ? (
-                    <>
-                      <div className=" container row">
-                        <div className="col form-check mb-3">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value={deleteAll}
-                            onChange={() => setDeleteAll(!deleteAll)}
-                            id="flexCheckDefault"
-                          />
-                          <label
-                            className="form-check-label"
-                            for="flexCheckDefault"
-                          >
-                            Select All
-                          </label>
-                        </div>
-                        <div className="col text-end p-0 ">
-                          {deleteAll ? (
-                            <button
-                              className="btn btn-dark"
-                              onClick={handleDeleteAll}
-                            >
-                              <FaTrash size={20} />
-                            </button>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
+              <div className="col-md-5 col-lg-5 col-xs-12 col-sm-12">
+                <div className="card rounded-4">
+                  <div className="card-body">
+                    <div className="mb-2">
+                      <AquaHeading level={3} content={"Summary"} />
+                    </div>
+                    <ul className="conatiner list-group list-group-flush">
                       {cartCount.map((r) => (
                         <>
-                          <div>
-                            <AquaCartPageCard data={r} />
+                          <div className="mb-2" key={r}>
+                            <a
+                              href={`/product/${r._id}`}
+                              className="list-group-item list-group-item-action rounded"
+                              aria-current="true"
+                            >
+                              <div className="d-flex w-100 justify-content-between">
+                                <p className="card-subtitle">{r.title}</p>
+                                <p className="cart-text-price text-bold">
+                                  <AquaCurrencyFormat amount={r.price} /> *{" "}
+                                  {r.quantity} ={" "}
+                                  <AquaCurrencyFormat
+                                    amount={r.price * r.quantity}
+                                  />
+                                </p>
+                              </div>
+                            </a>
                           </div>
                         </>
                       ))}
-                    </>
-                  ) : (
-                    <h5>No Products yet in cart</h5>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-5 col-lg-5 col-xs-12 col-sm-12">
-            <div className="card rounded-4">
-              <div className="card-body">
-                <div className="mb-2">
-                  <AquaHeading level={3} content={"Summary"} />
-                </div>
-                <ul className="conatiner list-group list-group-flush">
-                  {cartCount.map((r) => (
-                    <>
-                      <div className="mb-2" key={r}>
-                        <a
-                          href={`/product/${r._id}`}
-                          className="list-group-item list-group-item-action rounded"
-                          aria-current="true"
-                        >
-                          <div className="d-flex w-100 justify-content-between">
-                            <p className="card-subtitle">{r.title}</p>
-                            <p className="cart-text-price text-bold">
-                              <AquaCurrencyFormat amount={r.price} /> *{" "}
-                              {r.quantity} ={" "}
-                              <AquaCurrencyFormat
-                                amount={r.price * r.quantity}
-                              />
-                            </p>
-                          </div>
-                        </a>
-                      </div>
-                    </>
-                  ))}
-                </ul>
+                    </ul>
 
-                {cartCount.length > 0 ? (
-                  <div class="d-flex">
-                    <div class="p-2 flex-fill">
-                      <h4>Total</h4>
+                    {cartCount.length > 0 ? (
+                      <div class="d-flex">
+                        <div class="p-2 flex-fill">
+                          <h4>Total</h4>
+                        </div>
+                        <div class="p-2 flex-fill text-end text-success">
+                          <h4>
+                            <AquaCurrencyFormat amount={total} adjust={true} />
+                          </h4>
+                        </div>
+                      </div>
+                    ) : (
+                      <h4 className="text-center">Add items to cart </h4>
+                    )}
+
+                    <div class="row m-1">
+                      <button
+                        className="col m-2 btn btn-outline-secondary"
+                        onClick={handleCashOnDelivery}
+                      >
+                        Cash on Delivery
+                      </button>
+                      <button
+                        onClick={handlePayment}
+                        class="col m-2 btn btn-dark"
+                        type="button"
+                      >
+                        Proceed to Pay
+                      </button>
                     </div>
-                    <div class="p-2 flex-fill text-end text-success">
-                      <h4>
-                        <AquaCurrencyFormat amount={total} adjust={true} />
-                      </h4>
+                    <div class="d-grid checkout-margin">
+                      <Link
+                        class="btn btn-outline-dark"
+                        href="/shop"
+                        type="button"
+                      >
+                        Continue to Shop
+                      </Link>
                     </div>
                   </div>
-                ) : (
-                  <h4 className="text-center">Add items to cart </h4>
-                )}
-
-                <div class="row m-1">
-                  <button
-                    className="col m-2 btn btn-outline-secondary"
-                    onClick={handleCashOnDelivery}
-                  >
-                    Cash on Delivery
-                  </button>
-                  <button
-                    onClick={handlePayment}
-                    class="col m-2 btn btn-dark"
-                    type="button"
-                  >
-                    Proceed to Pay
-                  </button>
-                </div>
-                <div class="d-grid checkout-margin">
-                  <Link class="btn btn-outline-dark" href="/shop" type="button">
-                    Continue to Shop
-                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <AquaAddressDialog
-          show={addressFill}
-          hide={() => setAddressFill(false)}
-        />
-        <AquaAddressDialog
-          show={addressEdit}
-          hide={() => setAddressEdit(false)}
-        />
+            <AquaAddressDialog
+              show={addressFill}
+              hide={() => setAddressFill(false)}
+            />
+            <AquaAddressDialog
+              show={addressEdit}
+              hide={() => setAddressEdit(false)}
+            />
+          </>
+        )}
       </AquaLayout>
     </>
   );
