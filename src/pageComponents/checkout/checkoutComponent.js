@@ -205,7 +205,7 @@ const AquaCheckoutComponent = () => {
         {!user ? (
           <div className="text-center mb-5">
           <button
-            className="btn btn-base"
+            className="btn btn-outline-dark"
             onClick={() =>
               dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: true })
             }
