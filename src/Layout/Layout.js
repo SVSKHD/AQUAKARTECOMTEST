@@ -36,6 +36,11 @@ const AquaLayout = (props) => {
         setHasShownDialog(true); // Update state to reflect the dialog has been shown
         localStorage.setItem("hasShownDialog", "true"); // Store the state in localStorage
       }, 10000); // Adjust the timeout as needed
+    } else if (user) {
+      dispatch({
+        type: "SET_AUTH_DIALOG_VISIBLE",
+        payload: false,
+      });
     }
   }, [user, dispatch, router.pathname, hasShownDialog]);
 
