@@ -11,7 +11,7 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { FaUser, FaCartPlus, FaCar } from "react-icons/fa";
+import { FaUser, FaCartPlus, FaHome} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -98,6 +98,7 @@ const AquaNavBar = () => {
                 {isMobile ? (
                   <div className="d-grid">
                   <ButtonGroup>
+                    <Button href="/" className="btn btn-dark"><FaHome size={20}/></Button>
                     <Button href="/shop" className="btn btn-dark">Shop</Button>
                     <Button href="/checkout" className="btn btn-dark">Cart</Button>
                     {user ? (
