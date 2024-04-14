@@ -96,11 +96,13 @@ const AquaNavBar = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 {isMobile ? (
+                  <div className="d-grid">
                   <ButtonGroup>
-                    <Button className="btn btn-dark">1</Button>
-                    <Button className="btn btn-dark">Cart</Button>
+                    <Button Link="/shop" className="btn btn-dark">Shop</Button>
+                    <Button Link="/cart" className="btn btn-dark">Cart</Button>
                     {user ? (
                       <DropdownButton
+                        variant="dark"
                         as={ButtonGroup}
                         title={`Hello ${createUserName(user?.user?.email)}`}
                         id="bg-nested-dropdown"
@@ -127,10 +129,11 @@ const AquaNavBar = () => {
                           })
                         }
                       >
-                        <FaUser />
+                        <FaUser /> Login
                       </Button>
                     )}
                   </ButtonGroup>
+                  </div>
                 ) : (
                   <>
                     <Nav className="justify-content-end flex-grow-1 pe-3">

@@ -4,18 +4,18 @@ const OrderDashboardCard = ({ data }) => {
   const { paymentStatus, paymentInstrument, totalAmount, items } = data;
 
   const renderPaymentInstrument = (instrument) => {
-    switch (instrument.type) {
+    switch (instrument?.type) {
       case "CARD":
         return (
           <div>
-            <p>Card Type: {instrument.cardType}</p>
-            <p>ARN: {instrument.arn}</p>
-            <p>BRN: {instrument.brn}</p>
+            <p>Card Type: {instrument?.cardType}</p>
+            <p>ARN: {instrument?.arn}</p>
+            <p>BRN: {instrument?.brn}</p>
           </div>
         );
       // Add cases for other payment instrument types if needed
       default:
-        return <p>Payment Method: {instrument.type}</p>;
+        return <p>Payment Method: {instrument?.type}</p>;
     }
   };
 
