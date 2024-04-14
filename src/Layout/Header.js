@@ -9,8 +9,9 @@ import {
   Offcanvas,
   ButtonGroup,
   Dropdown,
+  DropdownButton,
 } from "react-bootstrap";
-import { FaUser, FaCartPlus } from "react-icons/fa";
+import { FaUser, FaCartPlus, FaCar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -94,47 +95,16 @@ const AquaNavBar = () => {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link className="text-bold" href="/shop">
-                    Shop
-                  </Nav.Link>
-                  {/* <Nav.Link className="text-bold" href="/compare">
-                    Compare
-                  </Nav.Link> */}
-                  <Nav.Link className="text-bold" href="/about">
-                    About Us
-                  </Nav.Link>
-                </Nav>
-                {/* <Form className="d-flex mr-1">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search Products"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                </Form> */}
-                <div className="position-relative">
-                  <AquaButton variant="normal" onClick={handleCart}>
-                    <FaCartPlus size={25} />
-                  </AquaButton>
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartLength}
-                  </span>
-                </div>
-                {user ? (
-                  <>
-                    <Dropdown className="ms-3" as={ButtonGroup}>
-                      <Button variant="dark" href="/dashboard">
-                        {" "}
-                        Hello {createUserName(user?.user?.email)}
-                      </Button>
-
-                      <Dropdown.Toggle
-                        variant="dark"
-                        id="dropdown-split-basic"
-                      />
-
-                      <Dropdown.Menu>
+                {isMobile ? (
+                  <ButtonGroup>
+                    <Button className="btn btn-dark">1</Button>
+                    <Button className="btn btn-dark">Cart</Button>
+                    {user ? (
+                      <DropdownButton
+                        as={ButtonGroup}
+                        title={`Hello ${createUserName(user?.user?.email)}`}
+                        id="bg-nested-dropdown"
+                      >
                         <Dropdown.Item href="/dashboard">
                           Dashboard
                         </Dropdown.Item>
@@ -146,22 +116,85 @@ const AquaNavBar = () => {
                             logout
                           </Button>
                         </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </>
+                      </DropdownButton>
+                    ) : (
+                      <Button
+                        className="btn btn-dark"
+                        onClick={() =>
+                          dispatch({
+                            type: "SET_AUTH_DIALOG_VISIBLE",
+                            payload: true,
+                          })
+                        }
+                      >
+                        <FaUser />
+                      </Button>
+                    )}
+                  </ButtonGroup>
                 ) : (
                   <>
-                    <AquaButton
-                      variant={"normal"}
-                      onClick={() =>
-                        dispatch({
-                          type: "SET_AUTH_DIALOG_VISIBLE",
-                          payload: true,
-                        })
-                      }
-                    >
-                      <FaUser size={25} />
-                    </AquaButton>
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                      <Nav.Link className="text-bold" href="/shop">
+                        Shop
+                      </Nav.Link>
+                      {/* <Nav.Link className="text-bold" href="/compare">
+                    Compare
+                  </Nav.Link> */}
+                      <Nav.Link className="text-bold" href="/about">
+                        About Us
+                      </Nav.Link>
+                    </Nav>
+                    <div className="position-relative">
+                      <AquaButton variant="normal" onClick={handleCart}>
+                        <FaCartPlus size={25} />
+                      </AquaButton>
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {cartLength}
+                      </span>
+                    </div>
+                    {user ? (
+                      <>
+                        <Dropdown className="ms-3" as={ButtonGroup}>
+                          <Button variant="dark" href="/dashboard">
+                            {" "}
+                            Hello {createUserName(user?.user?.email)}
+                          </Button>
+
+                          <Dropdown.Toggle
+                            variant="dark"
+                            id="dropdown-split-basic"
+                          />
+
+                          <Dropdown.Menu>
+                            <Dropdown.Item href="/dashboard">
+                              Dashboard
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                              <Button
+                                variant="danger"
+                                onClick={() => handleLogout()}
+                              >
+                                logout
+                              </Button>
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </>
+                    ) : (
+                      <>
+                        <AquaButton
+                          variant={"normal"}
+                          onClick={() =>
+                            dispatch({
+                              type: "SET_AUTH_DIALOG_VISIBLE",
+                              payload: true,
+                            })
+                          }
+                        >
+                          <FaUser size={25} />
+                        </AquaButton>
+                      </>
+                    )}
                   </>
                 )}
               </Offcanvas.Body>

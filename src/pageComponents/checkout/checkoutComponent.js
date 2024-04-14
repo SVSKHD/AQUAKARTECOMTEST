@@ -140,40 +140,40 @@ const AquaCheckoutComponent = () => {
     const calculatedTotal = cartTotal(cartCount); // Assuming cartTotal correctly computes the total
 
     const newOrder = {
-        user: user?.user?._id, // Safe access and also make sure user exists
-        orderType: "Cash On Delivery",
-        items: cartCount.map((item) => ({
-            productId: item.id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-        })),
-        totalAmount: calculatedTotal,
-        paymentMethod: "Cash On Delivery",
-        paymentStatus: "Pending",
-        currency: "INR",
-        billingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
-        shippingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
-        shippingMethod: "Standard",
-        shippingCost: 50, // Example fixed cost
-        estimatedDelivery: new Date(
-            new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
-        ).toISOString(), // Adding 7 days for delivery
-        orderStatus: "Processing",
+      user: user?.user?._id, // Safe access and also make sure user exists
+      orderType: "Cash On Delivery",
+      items: cartCount.map((item) => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      totalAmount: calculatedTotal,
+      paymentMethod: "Cash On Delivery",
+      paymentStatus: "Pending",
+      currency: "INR",
+      billingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+      shippingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+      shippingMethod: "Standard",
+      shippingCost: 50, // Example fixed cost
+      estimatedDelivery: new Date(
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+      ).toISOString(), // Adding 7 days for delivery
+      orderStatus: "Processing",
     };
 
     // Since we need to use `newOrder` immediately, we use it directly instead of `cod`
     CreateCodOrder(newOrder) // Use newOrder directly here
-        .then((res) => {
-            console.log(res.data);
-            setCod(newOrder); // Update state after successful API call
-            AquaToast("successfully created COD order", "success");
-        })
-        .catch((error) => {
-            console.error("Error creating COD order:", error);
-            AquaToast("please try again", "error");
-        });
-};
+      .then((res) => {
+        console.log(res.data);
+        setCod(newOrder); // Update state after successful API call
+        AquaToast("successfully created COD order", "success");
+      })
+      .catch((error) => {
+        console.error("Error creating COD order:", error);
+        AquaToast("please try again", "error");
+      });
+  };
 
   const handlePayment = (event) => {
     event.preventDefault();
@@ -204,14 +204,14 @@ const AquaCheckoutComponent = () => {
       <AquaLayout seo={seo} container={true}>
         {!user ? (
           <div className="text-center mb-5">
-          <button
-            className="btn btn-outline-dark"
-            onClick={() =>
-              dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: true })
-            }
-          >
-            Please Login To access cart
-          </button>
+            <button
+              className="btn btn-outline-dark"
+              onClick={() =>
+                dispatch({ type: "SET_AUTH_DIALOG_VISIBLE", payload: true })
+              }
+            >
+              Please Login To access cart
+            </button>
           </div>
         ) : (
           <>
