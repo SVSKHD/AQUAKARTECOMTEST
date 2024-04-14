@@ -11,7 +11,7 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { FaUser, FaCartPlus, FaHome} from "react-icons/fa";
+import { FaUser, FaCartPlus, FaHome } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -97,43 +97,49 @@ const AquaNavBar = () => {
               <Offcanvas.Body>
                 {isMobile ? (
                   <div className="d-grid">
-                  <ButtonGroup>
-                    <Button href="/" className="btn btn-dark"><FaHome size={20}/></Button>
-                    <Button href="/shop" className="btn btn-dark">Shop</Button>
-                    <Button href="/checkout" className="btn btn-dark">Cart</Button>
-                    {user ? (
-                      <DropdownButton
-                        variant="dark"
-                        as={ButtonGroup}
-                        title={`Hello ${createUserName(user?.user?.email)}`}
-                        id="bg-nested-dropdown"
-                      >
-                        <Dropdown.Item href="/dashboard">
-                          Dashboard
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                          <Button
-                            variant="danger"
-                            onClick={() => handleLogout()}
-                          >
-                            logout
-                          </Button>
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    ) : (
-                      <Button
-                        className="btn btn-dark"
-                        onClick={() =>
-                          dispatch({
-                            type: "SET_AUTH_DIALOG_VISIBLE",
-                            payload: true,
-                          })
-                        }
-                      >
-                        <FaUser /> Login
+                    <ButtonGroup>
+                      <Button href="/" className="btn btn-dark">
+                        <FaHome size={20} />
                       </Button>
-                    )}
-                  </ButtonGroup>
+                      <Button href="/shop" className="btn btn-dark">
+                        Shop
+                      </Button>
+                      <Button href="/checkout" className="btn btn-dark">
+                        Cart
+                      </Button>
+                      {user ? (
+                        <DropdownButton
+                          variant="dark"
+                          as={ButtonGroup}
+                          title={`Hello ${createUserName(user?.user?.email)}`}
+                          id="bg-nested-dropdown"
+                        >
+                          <Dropdown.Item href="/dashboard">
+                            Dashboard
+                          </Dropdown.Item>
+                          <Dropdown.Item>
+                            <Button
+                              variant="danger"
+                              onClick={() => handleLogout()}
+                            >
+                              logout
+                            </Button>
+                          </Dropdown.Item>
+                        </DropdownButton>
+                      ) : (
+                        <Button
+                          className="btn btn-dark"
+                          onClick={() =>
+                            dispatch({
+                              type: "SET_AUTH_DIALOG_VISIBLE",
+                              payload: true,
+                            })
+                          }
+                        >
+                          <FaUser /> Login
+                        </Button>
+                      )}
+                    </ButtonGroup>
                   </div>
                 ) : (
                   <>

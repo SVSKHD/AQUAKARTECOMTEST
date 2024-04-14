@@ -38,10 +38,6 @@ const UserLayout = (props) => {
       path: "/dashboard/wishlist",
     },
     {
-      title: "Saved-Cards",
-      path: "/dashboard/saved-cards",
-    },
-    {
       title: "cart",
       path: "/dashboard/cart",
     },
