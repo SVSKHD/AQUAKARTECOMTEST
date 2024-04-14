@@ -20,27 +20,24 @@ const AquaOrdersComponent = () => {
   const { UpdateOrder, getOrderByTrasactionId } = AquaOrderOperations();
 
   const updateOrder = useCallback(async () => {
-    if (!toastShown) {
-      // Only proceed if the toast has not been shown yet
-      try {
-        const res = await UpdateOrder(id, { products: cartCount });
-        if (res.data.paymentStatus === "Paid") {
-          AquaToast("Order Created", "success");
-          setOrderUpdated(true); // Set to true to trigger the next useEffect to fetch order details
-          setToastShown(true); // Update state to indicate toast has been shown
-        } else {
-          AquaToast("Awaiting confirmation", "error");
-          setToastShown(true); // Update state to indicate toast has been shown
-        }
-      } catch (error) {
-        if (!toastShown) {
-          // Check again in case of error
-          AquaToast("Failed to update order, please try again", "error");
-          setToastShown(true); // Update state to indicate toast has been shown
-        }
-      } finally {
-        setLoading(false);
+    if (toastShown) return; // Exit if the toast has already been shown
+
+    try {
+      const res = await UpdateOrder(id, { products: cartCount });
+      if (res.data.paymentStatus === "Paid") {
+        AquaToast("Order Created", "success");
+        setOrderUpdated(true); // Trigger the next useEffect to fetch order details
+      } else if (res.data.paymentStatus === "Pending") {
+        setOrderUpdated(false); // Ensure no further actions if pending
+        AquaToast("Payment is pending", "info"); // Provide a more specific message
+      } else {
+        AquaToast("Awaiting confirmation", "error");
       }
+    } catch (error) {
+      AquaToast("Failed to update order, please try again", "error");
+    } finally {
+      setToastShown(true); // Update state to indicate toast has been shown
+      setLoading(false); // Set loading to false in all cases
     }
   }, [UpdateOrder, id, cartCount, toastShown]);
 
@@ -50,23 +47,20 @@ const AquaOrdersComponent = () => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
+      if (!orderUpdated) return; // Exit if order is not updated
+
       try {
         const productRes = await getOrderByTrasactionId(id);
         setProduct(productRes.data);
+        dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
       } catch (err) {
-        if (!toastShown) {
-          // Check again in case of fetching error
-          AquaToast("Failed to load order details, please try again", "error");
-          setToastShown(true); // Update state to indicate toast has been shown
-        }
+        AquaToast("Failed to load order details, please try again", "error");
       }
     };
 
-    if (orderUpdated) {
-      fetchOrderDetails();
-      dispatch({ type: "EMPTY_CART" });
-    }
-  }, [orderUpdated, getOrderByTrasactionId, id, toastShown, dispatch]);
+    fetchOrderDetails();
+  }, [orderUpdated, getOrderByTrasactionId, id, dispatch]);
+
   const seo = {
     title: "Aquakart | Order Confirmation",
   };
@@ -76,9 +70,7 @@ const AquaOrdersComponent = () => {
       <div className="card rounded-4 mb-3">
         <div className="card-body">
           {loading ? (
-            <>
-              <div class="spinner-border text-dark" role="status" />
-            </>
+            <div className="spinner-border text-dark" role="status" />
           ) : (
             <>
               <AquaHeading
@@ -87,35 +79,26 @@ const AquaOrdersComponent = () => {
                 content={`Order Details-${product.order?.paymentStatus === "Paid" ? "Order Placed" : "Awaiting Confirmation"}`}
                 level={3}
               />
-              <div
-                class="card border-success mb-3"
-                style={{ maxWidth: "18rem;" }}
-              >
-                <div class="card-body">
-                  <h5 class="card-title text-success">
-                    {product.order?.paymentStatus} -{" "}
-                    <AquaCurrencyFormat amount={product.order?.totalAmount} />
-                  </h5>
-                  <h6>Order-Status:-{product.order?.orderStatus}</h6>
-                  <AquaHeading
-                    level={5}
-                    decorate={true}
-                    content={"Ordered Items"}
-                  />
-                  {product.order?.items.map((r, i) => (
-                    <p key={i}>{r.name}</p>
-                  ))}
-                  <p class="card-text"></p>
+              {orderUpdated ? (
+                <div className="card border-success mb-3" style={{ maxWidth: "18rem;" }}>
+                  <div className="card-body">
+                    <h5 className="card-title text-success">
+                      {product.order?.paymentStatus} - <AquaCurrencyFormat amount={product.order?.totalAmount} />
+                    </h5>
+                    <h6>Order-Status:-{product.order?.orderStatus}</h6>
+                    <AquaHeading level={5} decorate={true} content={"Ordered Items"} />
+                    {product.order?.items.map((item, index) => (
+                      <p key={index}>{item.name}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <h1>COD</h1>
+              )}
             </>
           )}
-          <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
-            Dashboard
-          </Link>
-          <button className="ms-2 btn btn-outline-dark rounded-pill">
-            Download Invoice
-          </button>
+          <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">Dashboard</Link>
+          <button className="ms-2 btn btn-outline-dark rounded-pill">Download Invoice</button>
         </div>
       </div>
     </AquaLayout>
@@ -123,3 +106,4 @@ const AquaOrdersComponent = () => {
 };
 
 export default AquaOrdersComponent;
+
