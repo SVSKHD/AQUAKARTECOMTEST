@@ -98,8 +98,8 @@ const AquaNavBar = () => {
                 {isMobile ? (
                   <div className="d-grid">
                   <ButtonGroup>
-                    <Button Link="/shop" className="btn btn-dark">Shop</Button>
-                    <Button Link="/cart" className="btn btn-dark">Cart</Button>
+                    <Button href="/shop" className="btn btn-dark">Shop</Button>
+                    <Button href="/checkout" className="btn btn-dark">Cart</Button>
                     {user ? (
                       <DropdownButton
                         variant="dark"
