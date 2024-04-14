@@ -38,7 +38,7 @@ const AquaCartDrawer = () => {
                         <AquaCurrencyFormat amount={total} adjust={true} />
                       </>
                     ) : (
-                      ""
+                      "Pleaase Add Items to Cart"
                     )}
                   </>
                 }

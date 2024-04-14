@@ -15,7 +15,7 @@ const AquaProductUnControlledCarousel = (props) => {
           <img
             src={image.secure_url}
             alt={image.alt}
-            className="card-img-top  custom-image"
+            className="card-img-top  custom-image rounded"
           />
         </Carousel.Item>
       ))}

@@ -168,6 +168,7 @@ const AquaCheckoutComponent = () => {
         console.log(res.data);
         setCod(newOrder); // Update state after successful API call
         AquaToast("successfully created COD order", "success");
+        router.push(`/order/${res.data.newOrder._id}`);
       })
       .catch((error) => {
         console.error("Error creating COD order:", error);
@@ -253,7 +254,7 @@ const AquaCheckoutComponent = () => {
                               <div>
                                 <div
                                   class="card rounded-4 mb-3"
-                                  style={{ width: "18rem" }}
+                                  style={{ width: "21rem" }}
                                 >
                                   <div class="card-body">
                                     <span>
