@@ -208,7 +208,7 @@ const AquaCheckoutComponent = () => {
       .slice(0, i)
       .concat(user.user.addresses.slice(i + 1));
     dispatch({
-      type: "UPADTE_ADDRESS",
+      type: "UPDATE_ADDRESSES",
       payload: slicedAddress,
     });
     userDataUpdate(user.user._id, {
