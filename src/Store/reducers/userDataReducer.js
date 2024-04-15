@@ -1,7 +1,6 @@
 export const userReducer = (state = null, action) => {
   switch (action.type) {
     case "LOGGED_IN_USER":
-      return action.payload;
     case "LOGOUT":
       return action.payload;
     case "UPDATE_USER_DETAILS":
@@ -20,7 +19,7 @@ export const userReducer = (state = null, action) => {
           selectedAddress: action.payload.selectedAddress,
         },
       };
-    case "UPDATE_ADDRESSES":
+    case "UPDATE_USER_ADDRESSES": // This is your new case for updating addresses
       console.log('Current state:', state);
       console.log('Received action:', action);
       return {
