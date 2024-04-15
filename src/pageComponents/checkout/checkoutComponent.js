@@ -261,7 +261,7 @@ const AquaCheckoutComponent = () => {
                         decorate={true}
                         content={"Address"}
                       />
-                      {user.user.addresses.length === 0 ? (
+                      {user.user.addresses?.length === 0 ? (
                         <button
                           className="btn btn-dark"
                           onClick={handleAddressFillDialog}
