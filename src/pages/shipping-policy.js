@@ -3,7 +3,9 @@ import AquaHeading from "@/reusables/heading";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useState } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import {useRouter} from "next/router"
 const ShippingPolicy = () => {
+  const router = useRouter()
   const [data, setData] = useState("");
   const seo = {
     title: "Aquakart | Shipping and delivery policy",
@@ -12,6 +14,9 @@ const ShippingPolicy = () => {
     keywords:
       "Aquakart shipping-policy , shipping rates , national-shipping AquaKart Shipping Policy, Free Shipping Hyderabad,Quick Delivery Service ,Cash on Delivery Hyderabad ,Andhra Pradesh Shipping , Telangana Shipping Services ,Rayalaseema Product Delivery , Nationwide Shipping India , Fast Shipping AquaKart , Online Shopping Delivery , Business Days Shipping , E-commerce Shipping India , Secure Packaging AquaKart , Customer Service AquaKart , Order Tracking AquaKart",
     keyphrases: "charges regarding aquakart",
+    canonical: `${process.env.apiKey}${router.pathname}`,
+    image:
+      "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
   };
   const shippingPolicy = [
     {
@@ -62,7 +67,7 @@ const ShippingPolicy = () => {
               <div className="card-body">
                 {data ? (
                   <>
-                    <AquaLargeTitle level={2}>{data.title}</AquaLargeTitle>
+                    <AquaLargeTitle level={1}>{data.title}</AquaLargeTitle>
                     <hr />
                     <p dangerouslySetInnerHTML={{ __html: data.description }} />
                   </>
