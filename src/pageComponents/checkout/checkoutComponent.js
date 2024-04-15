@@ -200,6 +200,7 @@ const AquaCheckoutComponent = () => {
     console.log("i", data);
     setAddressEdit(true);
     setPassAddress(data)
+    console.log("data", data)
   };
   return (
     <>
@@ -294,17 +295,11 @@ const AquaCheckoutComponent = () => {
                                       </button>
                                       <button
                                         type="button"
-                                        class="btn btn-base"
+                                        class="btn btn-danger"
                                       >
                                         <FaTrash size={15} />
                                       </button>
                                     </div>
-                                    {/* <button
-                                      className="btn btn-base"
-                                      onClick={handleAddressEdit}
-                                    >
-                                      <FaPen size={15} />
-                                    </button> */}
                                   </div>
                                 </div>
                               </div>
