@@ -29,7 +29,7 @@ const AquaCheckoutComponent = () => {
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressFill, setAddressFill] = useState(false);
   const [addressEdit, setAddressEdit] = useState(false);
-  const [passAddress, setPassAddress] = useState({})
+  const [passAddress, setPassAddress] = useState({});
   const [cod, setCod] = useState({});
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
@@ -194,13 +194,20 @@ const AquaCheckoutComponent = () => {
     setAddressFill(true);
   };
 
-  const handleAddressSave = () => { };
+  const handleAddressSave = () => {};
 
   const handleAddressEdit = (data) => {
     console.log("i", data);
     setAddressEdit(true);
-    setPassAddress(data)
-    console.log("data", data)
+    setPassAddress(data);
+    console.log("data", data);
+  };
+
+  const handleDeleteAddress = (i) => {
+    const slicedAddress = user.user.addresses
+      .slice(0, i)
+      .concat(user.user.addresses.slice(i + 1));
+    console.log("sliced", slicedAddress);
   };
   return (
     <>
@@ -289,13 +296,14 @@ const AquaCheckoutComponent = () => {
                                       <button
                                         type="button"
                                         class="btn btn-base"
-                                        onClick={()=>handleAddressEdit(r)}
+                                        onClick={() => handleAddressEdit(r)}
                                       >
                                         <FaPen size={15} />
                                       </button>
                                       <button
                                         type="button"
                                         class="btn btn-danger"
+                                        onClick={() => handleDeleteAddress(i)}
                                       >
                                         <FaTrash size={15} />
                                       </button>

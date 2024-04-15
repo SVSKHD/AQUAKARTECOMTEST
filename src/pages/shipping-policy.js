@@ -3,9 +3,9 @@ import AquaHeading from "@/reusables/heading";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useState } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
-import {useRouter} from "next/router"
+import { useRouter } from "next/router";
 const ShippingPolicy = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [data, setData] = useState("");
   const seo = {
     title: "Aquakart | Shipping and delivery policy",
