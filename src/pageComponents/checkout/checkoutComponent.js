@@ -29,7 +29,7 @@ const AquaCheckoutComponent = () => {
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressFill, setAddressFill] = useState(false);
   const [addressEdit, setAddressEdit] = useState(false);
-
+  const [passAddress, setPassAddress] = useState({})
   const [cod, setCod] = useState({});
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
@@ -194,11 +194,12 @@ const AquaCheckoutComponent = () => {
     setAddressFill(true);
   };
 
-  const handleAddressSave = () => {};
+  const handleAddressSave = () => { };
 
-  const handleAddressEdit = (i) => {
-    console.log("i", i);
+  const handleAddressEdit = (data) => {
+    console.log("i", data);
     setAddressEdit(true);
+    setPassAddress(data)
   };
   return (
     <>
@@ -287,7 +288,7 @@ const AquaCheckoutComponent = () => {
                                       <button
                                         type="button"
                                         class="btn btn-base"
-                                        onClick={handleAddressEdit}
+                                        onClick={handleAddressEdit(r)}
                                       >
                                         <FaPen size={15} />
                                       </button>
@@ -442,6 +443,7 @@ const AquaCheckoutComponent = () => {
             <AquaAddressDialog
               show={addressFill}
               hide={() => setAddressFill(false)}
+              address={passAddress}
             />
             <AquaAddressDialog
               show={addressEdit}
