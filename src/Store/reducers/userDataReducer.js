@@ -20,6 +20,14 @@ export const userReducer = (state = null, action) => {
           selectedAddress: action.payload.selectedAddress,
         },
       };
+    case "UPDATE_ADDRESSES":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          addresses: action.payload.addresses,
+        },
+      };
     default:
       return state;
   }

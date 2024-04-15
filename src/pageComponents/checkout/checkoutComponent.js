@@ -207,7 +207,19 @@ const AquaCheckoutComponent = () => {
     const slicedAddress = user.user.addresses
       .slice(0, i)
       .concat(user.user.addresses.slice(i + 1));
-    console.log("sliced", slicedAddress);
+    dispatch({
+      type: "UPADTE_ADDRESS",
+      payload: slicedAddress,
+    });
+    userDataUpdate(user.user._id, {
+      selectedAddress: selectedAddress,
+    })
+      .then((res) => {
+        AquaToast("Updated the Selected Address", "success");
+      })
+      .catch(() => {
+        AquaToast("Please Try again", "error");
+      });
   };
   return (
     <>
