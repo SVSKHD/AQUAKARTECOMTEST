@@ -80,13 +80,21 @@ const AquaOrdersComponent = () => {
                 level={3}
               />
               {orderUpdated ? (
-                <div className="card border-success mb-3" style={{ maxWidth: "18rem;" }}>
+                <div
+                  className="card border-success mb-3"
+                  style={{ maxWidth: "18rem;" }}
+                >
                   <div className="card-body">
                     <h5 className="card-title text-success">
-                      {product.order?.paymentStatus} - <AquaCurrencyFormat amount={product.order?.totalAmount} />
+                      {product.order?.paymentStatus} -{" "}
+                      <AquaCurrencyFormat amount={product.order?.totalAmount} />
                     </h5>
                     <h6>Order-Status:-{product.order?.orderStatus}</h6>
-                    <AquaHeading level={5} decorate={true} content={"Ordered Items"} />
+                    <AquaHeading
+                      level={5}
+                      decorate={true}
+                      content={"Ordered Items"}
+                    />
                     {product.order?.items.map((item, index) => (
                       <p key={index}>{item.name}</p>
                     ))}
@@ -97,8 +105,12 @@ const AquaOrdersComponent = () => {
               )}
             </>
           )}
-          <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">Dashboard</Link>
-          <button className="ms-2 btn btn-outline-dark rounded-pill">Download Invoice</button>
+          <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
+            Dashboard
+          </Link>
+          <button className="ms-2 btn btn-outline-dark rounded-pill">
+            Download Invoice
+          </button>
         </div>
       </div>
     </AquaLayout>
@@ -106,4 +118,3 @@ const AquaOrdersComponent = () => {
 };
 
 export default AquaOrdersComponent;
-
