@@ -279,12 +279,16 @@ const AquaCheckoutComponent = () => {
                                     <p class="text-muted">
                                       {r.street} {r.city}-{r.postalCode}
                                     </p>
-                                    <button
+                                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-base" onClick={handleAddressEdit}><FaPen size={15}/></button>
+    <button type="button" class="btn btn-base"><FaTrash size={15}/></button>
+  </div>
+                                    {/* <button
                                       className="btn btn-base"
                                       onClick={handleAddressEdit}
                                     >
                                       <FaPen size={15} />
-                                    </button>
+                                    </button> */}
                                   </div>
                                 </div>
                               </div>
