@@ -21,6 +21,8 @@ export const userReducer = (state = null, action) => {
         },
       };
     case "UPDATE_ADDRESSES":
+      console.log('Current state:', state);
+      console.log('Received action:', action);
       return {
         ...state,
         user: {
