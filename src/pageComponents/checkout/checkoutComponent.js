@@ -289,7 +289,7 @@ const AquaCheckoutComponent = () => {
                                       <button
                                         type="button"
                                         class="btn btn-base"
-                                        onClick={handleAddressEdit(r)}
+                                        onClick={()=>handleAddressEdit(r)}
                                       >
                                         <FaPen size={15} />
                                       </button>
