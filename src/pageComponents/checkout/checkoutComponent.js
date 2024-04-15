@@ -212,10 +212,10 @@ const AquaCheckoutComponent = () => {
       payload: slicedAddress,
     });
     userDataUpdate(user.user._id, {
-      selectedAddress: selectedAddress,
+      addresses: selectedAddress,
     })
       .then((res) => {
-        AquaToast("Updated the Selected Address", "success");
+        AquaToast("Updated the Addresses", "success");
       })
       .catch(() => {
         AquaToast("Please Try again", "error");
