@@ -137,43 +137,48 @@ const AquaCheckoutComponent = () => {
   };
 
   const handleCashOnDelivery = () => {
-    const calculatedTotal = cartTotal(cartCount); // Assuming cartTotal correctly computes the total
+    if(!selectedAddress){
+      AquaToast("Please Select the Address", "error")
+    }else{
+      const calculatedTotal = cartTotal(cartCount); // Assuming cartTotal correctly computes the total
 
-    const newOrder = {
-      user: user?.user?._id, // Safe access and also make sure user exists
-      orderType: "Cash On Delivery",
-      items: cartCount.map((item) => ({
-        productId: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      totalAmount: calculatedTotal,
-      paymentMethod: "Cash On Delivery",
-      paymentStatus: "Pending",
-      currency: "INR",
-      billingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
-      shippingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
-      shippingMethod: "Standard",
-      shippingCost: 50, // Example fixed cost
-      estimatedDelivery: new Date(
-        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
-      ).toISOString(), // Adding 7 days for delivery
-      orderStatus: "Processing",
-    };
-
-    // Since we need to use `newOrder` immediately, we use it directly instead of `cod`
-    CreateCodOrder(newOrder) // Use newOrder directly here
-      .then((res) => {
-        console.log(res.data);
-        setCod(newOrder); // Update state after successful API call
-        AquaToast("successfully created COD order", "success");
-        router.push(`/order/${res.data.newOrder._id}`);
-      })
-      .catch((error) => {
-        console.error("Error creating COD order:", error);
-        AquaToast("please try again", "error");
-      });
+      const newOrder = {
+        user: user?.user?._id, // Safe access and also make sure user exists
+        orderType: "Cash On Delivery",
+        items: cartCount.map((item) => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+        totalAmount: calculatedTotal,
+        paymentMethod: "Cash On Delivery",
+        paymentStatus: "Pending",
+        currency: "INR",
+        billingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+        shippingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+        shippingMethod: "Standard",
+        shippingCost: 50, // Example fixed cost
+        estimatedDelivery: new Date(
+          new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+        ).toISOString(), // Adding 7 days for delivery
+        orderStatus: "Processing",
+      };
+  
+      // Since we need to use `newOrder` immediately, we use it directly instead of `cod`
+      CreateCodOrder(newOrder) // Use newOrder directly here
+        .then((res) => {
+          console.log(res.data);
+          setCod(newOrder); // Update state after successful API call
+          AquaToast("successfully created COD order", "success");
+          router.push(`/order/${res.data.newOrder._id}`);
+        })
+        .catch((error) => {
+          console.error("Error creating COD order:", error);
+          AquaToast("please try again", "error");
+        });
+    }
+   
   };
 
   const handlePayment = (event) => {
@@ -206,28 +211,28 @@ const AquaCheckoutComponent = () => {
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
     const updatedAddresses = user.user.addresses.filter((_, idx) => idx !== index);
+    console.log("updated" , updatedAddresses)
+    // try {
+    //   // Update the user's addresses in the database
+    //   const res = await userDataUpdate(user.user._id, {
+    //     addresses: updatedAddresses,
+    //   });
   
-    try {
-      // Update the user's addresses in the database
-      const res = await userDataUpdate(user.user._id, {
-        addresses: updatedAddresses,
-      });
-  
-      if (res.success) {
-        // If the database update is successful, update local state using the new action type
-        dispatch({
-          type: "UPDATE_USER_ADDRESSES",
-          payload: { addresses: updatedAddresses },
-        });
-        AquaToast("Address deleted successfully", "success");
-      } else {
-        // If the database update fails, notify the user
-        AquaToast("Failed to delete address, please try again", "error");
-      }
-    } catch (error) {
-      console.error("Error deleting address:", error);
-      AquaToast("An error occurred, please try again", "error");
-    }
+    //   if (res.success) {
+    //     // If the database update is successful, update local state using the new action type
+    //     dispatch({
+    //       type: "UPDATE_USER_ADDRESSES",
+    //       payload: { addresses: updatedAddresses },
+    //     });
+    //     AquaToast("Address deleted successfully", "success");
+    //   } else {
+    //     // If the database update fails, notify the user
+    //     AquaToast("Failed to delete address, please try again", "error");
+    //   }
+    // } catch (error) {
+    //   console.error("Error deleting address:", error);
+    //   AquaToast("An error occurred, please try again", "error");
+    // }
   };
   
   return (
