@@ -212,27 +212,27 @@ const AquaCheckoutComponent = () => {
     // Create a new array excluding the address at the specified index
     const updatedAddresses = user.user.addresses.filter((_, idx) => idx !== index);
     console.log("updated" , updatedAddresses)
-    // try {
-    //   // Update the user's addresses in the database
-    //   const res = await userDataUpdate(user.user._id, {
-    //     addresses: updatedAddresses,
-    //   });
+    try {
+      // Update the user's addresses in the database
+      const res = await userDataUpdate(user.user._id, {
+        addresses: updatedAddresses,
+      });
   
-    //   if (res.success) {
-    //     // If the database update is successful, update local state using the new action type
-    //     dispatch({
-    //       type: "UPDATE_USER_ADDRESSES",
-    //       payload: { addresses: updatedAddresses },
-    //     });
-    //     AquaToast("Address deleted successfully", "success");
-    //   } else {
-    //     // If the database update fails, notify the user
-    //     AquaToast("Failed to delete address, please try again", "error");
-    //   }
-    // } catch (error) {
-    //   console.error("Error deleting address:", error);
-    //   AquaToast("An error occurred, please try again", "error");
-    // }
+      if (res.success) {
+        // If the database update is successful, update local state using the new action type
+        dispatch({
+          type: "UPDATE_USER_ADDRESSES",
+          payload: { addresses: updatedAddresses },
+        });
+        AquaToast("Address deleted successfully", "success");
+      } else {
+        // If the database update fails, notify the user
+        AquaToast("Failed to delete address, please try again", "error");
+      }
+    } catch (error) {
+      console.error("Error deleting address:", error);
+      AquaToast("An error occurred, please try again", "error");
+    }
   };
   
   return (
