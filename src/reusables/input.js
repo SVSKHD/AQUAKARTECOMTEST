@@ -9,54 +9,61 @@ const AquaInput = ({
   value,
   size,
   name,
+  required,
+  requiredMessage
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);  // Track if the input has been touched
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  // Function to handle blur event
+  const handleBlur = () => {
+    setIsTouched(true);
+  };
+
+  // Determine if the input should show an error
+  const showError = required && isTouched && !value;
+
   return (
     <>
       {type === "password" ? (
         <div className="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">
+          <label htmlFor="exampleFormControlInput1" className="form-label">
             {label}
           </label>
-          <div class="form-group position-relative">
+          <div className="form-group position-relative">
             <input
               type={showPassword ? "text" : type}
-              className={`form-control form-control-${
-                size === "lg" ? "lg" : "sm"
-              }`}
+              className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? 'is-invalid' : ''}`}
               value={value}
               name={name}
               aria-label={placeholder}
               placeholder={placeholder}
               onChange={handleChange}
+              onBlur={handleBlur}  // Add blur event handler
+              required={required}
             />
             <span
-              class="viewpass"
+              className="viewpass"
               onClick={togglePasswordVisibility}
               style={{ cursor: "pointer" }}
             >
-              {showPassword ? (
-                <FaEyeSlash size={25} /> // Font Awesome closed eye icon
-              ) : (
-                <FaEye size={25} /> // Font Awesome open eye icon
-              )}
+              {showPassword ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
             </span>
+            {showError && <div className="invalid-feedback">{requiredMessage}</div>}
           </div>
         </div>
       ) : (
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="validationCustom03" className="form-label">
             {label}
           </label>
           <input
             type={type}
-            className={`form-control form-control-${
-              size === "lg" ? "lg" : "sm"
-            }`}
+            className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? 'is-invalid' : ''}`}
             size={size}
             name={name}
             aria-label={placeholder}
@@ -64,10 +71,14 @@ const AquaInput = ({
             value={value}
             placeholder={placeholder}
             onChange={handleChange}
+            onBlur={handleBlur}  // Add blur event handler
+            required={required}
           />
+          {showError && <div className="invalid-feedback">{requiredMessage ? requiredMessage : "Field is Empty"}</div>}
         </div>
       )}
     </>
   );
 };
+
 export default AquaInput;

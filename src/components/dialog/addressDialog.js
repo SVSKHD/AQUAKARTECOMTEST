@@ -33,7 +33,6 @@ const AquaAddressDialog = ({ show, hide, onSave, address }) => {
 
   const handleSave = () => {
     onSave(localAddress);
-    hide();
   };
 
   return (
@@ -48,25 +47,33 @@ const AquaAddressDialog = ({ show, hide, onSave, address }) => {
         name="street"
         label="Street or Apartment"
         value={localAddress.street}
-        onChange={handleChange}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please fill street or Appartment full address"}
       />
       <AquaInput
         name="city"
         label="City"
         value={localAddress.city}
-        onChange={handleChange}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please fill your city-name"}
       />
       <AquaInput
         name="state"
         label="State"
         value={localAddress.state}
-        onChange={handleChange}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please fill your state-name"}
       />
       <AquaInput
         name="postalCode"
         label="Postal Code"
         value={localAddress.postalCode}
-        onChange={handleChange}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"please fill your postal-code"}
       />
       <button className="btn btn-primary" onClick={handleSave}>
         Save Address
