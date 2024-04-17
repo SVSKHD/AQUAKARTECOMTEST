@@ -24,7 +24,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user?.user?.addresses?.map(() => false)
+    user?.user?.addresses?.map(() => false),
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressAdd, setAddressAdd] = useState(false);
@@ -125,7 +125,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        }
+        },
       );
 
       if (response) {
@@ -161,7 +161,7 @@ const AquaCheckoutComponent = () => {
         shippingMethod: "Standard",
         shippingCost: 50, // Example fixed cost
         estimatedDelivery: new Date(
-          new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+          new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
         ).toISOString(), // Adding 7 days for delivery
         orderStatus: "Processing",
       };
@@ -202,13 +202,14 @@ const AquaCheckoutComponent = () => {
   const handleAddressSave = async (address) => {
     await userDataUpdate(user.user._id, { addresses: [address] })
       .then((res) => {
-        console.log("address", res.data.addresses)
+        console.log("address", res.data.data.addresses);
+        const addressData = res.data.data.addresses;
         dispatch({
           type: "UPDATE_USER_ADDRESSES",
-          payload: { addresses: [address] },
+          payload: { addresses: addressData },
         });
         AquaToast("Addresses Added Successfully", "success");
-        setAddressAdd(false)
+        setAddressAdd(false);
       })
       .catch(() => {
         AquaToast("Sorry Please Try again", "error");
@@ -222,10 +223,12 @@ const AquaCheckoutComponent = () => {
     console.log("data", data);
   };
 
+  const handleAddressEditSave = () => {};
+
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
     const updatedAddresses = user.user.addresses.filter(
-      (_, idx) => idx !== index
+      (_, idx) => idx !== index,
     );
     await userDataUpdate(user.user._id, { addresses: updatedAddresses })
       .then(() => {
@@ -352,7 +355,7 @@ const AquaCheckoutComponent = () => {
 
                 <div className="card rounded-4 ">
                   <div className="card-body">
-                    <AquaHeading content={"Cart"} level={3} />
+                    <AquaHeading content={"Cart"} decorate={true} level={3} />
                     <div>
                       {cartCount.length > 0 ? (
                         <>

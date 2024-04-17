@@ -10,10 +10,10 @@ const AquaInput = ({
   size,
   name,
   required,
-  requiredMessage
+  requiredMessage,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isTouched, setIsTouched] = useState(false);  // Track if the input has been touched
+  const [isTouched, setIsTouched] = useState(false); // Track if the input has been touched
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -37,13 +37,13 @@ const AquaInput = ({
           <div className="form-group position-relative">
             <input
               type={showPassword ? "text" : type}
-              className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? 'is-invalid' : ''}`}
+              className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? "is-invalid" : ""}`}
               value={value}
               name={name}
               aria-label={placeholder}
               placeholder={placeholder}
               onChange={handleChange}
-              onBlur={handleBlur}  // Add blur event handler
+              onBlur={handleBlur} // Add blur event handler
               required={required}
             />
             <span
@@ -53,7 +53,9 @@ const AquaInput = ({
             >
               {showPassword ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
             </span>
-            {showError && <div className="invalid-feedback">{requiredMessage}</div>}
+            {showError && (
+              <div className="invalid-feedback">{requiredMessage}</div>
+            )}
           </div>
         </div>
       ) : (
@@ -63,7 +65,7 @@ const AquaInput = ({
           </label>
           <input
             type={type}
-            className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? 'is-invalid' : ''}`}
+            className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? "is-invalid" : ""}`}
             size={size}
             name={name}
             aria-label={placeholder}
@@ -71,10 +73,14 @@ const AquaInput = ({
             value={value}
             placeholder={placeholder}
             onChange={handleChange}
-            onBlur={handleBlur}  // Add blur event handler
+            onBlur={handleBlur} // Add blur event handler
             required={required}
           />
-          {showError && <div className="invalid-feedback">{requiredMessage ? requiredMessage : "Field is Empty"}</div>}
+          {showError && (
+            <div className="invalid-feedback">
+              {requiredMessage ? requiredMessage : "Field is Empty"}
+            </div>
+          )}
         </div>
       )}
     </>

@@ -18,6 +18,8 @@ const AquaSignup = ({ onDataChanged }) => {
         name="email"
         value={data.email}
         handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please Enter Email"}
       />
       <AquaInput
         label="Password"
@@ -27,6 +29,8 @@ const AquaSignup = ({ onDataChanged }) => {
         placeholder="please enter your password"
         value={data.password}
         handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please Enter Password"}
       />
     </>
   );
