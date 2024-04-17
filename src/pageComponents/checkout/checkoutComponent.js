@@ -24,7 +24,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user?.user?.addresses?.map(() => false),
+    user?.user?.addresses?.map(() => false)
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressAdd, setAddressAdd] = useState(false);
@@ -125,7 +125,7 @@ const AquaCheckoutComponent = () => {
             "Content-Type": "application/json",
             "X-VERIFY": checksum,
           },
-        },
+        }
       );
 
       if (response) {
@@ -161,7 +161,7 @@ const AquaCheckoutComponent = () => {
         shippingMethod: "Standard",
         shippingCost: 50, // Example fixed cost
         estimatedDelivery: new Date(
-          new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+          new Date().getTime() + 7 * 24 * 60 * 60 * 1000
         ).toISOString(), // Adding 7 days for delivery
         orderStatus: "Processing",
       };
@@ -228,7 +228,7 @@ const AquaCheckoutComponent = () => {
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
     const updatedAddresses = user.user.addresses.filter(
-      (_, idx) => idx !== index,
+      (_, idx) => idx !== index
     );
     await userDataUpdate(user.user._id, { addresses: updatedAddresses })
       .then(() => {
