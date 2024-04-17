@@ -465,11 +465,11 @@ const AquaCheckoutComponent = () => {
             <AquaAddressDialog
               show={addressFill}
               hide={() => setAddressFill(false)}
-              address={passAddress}
             />
             <AquaAddressDialog
               show={addressEdit}
               hide={() => setAddressEdit(false)}
+              address={passAddress}
             />
           </>
         )}

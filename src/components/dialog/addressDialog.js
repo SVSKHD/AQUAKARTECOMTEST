@@ -15,6 +15,17 @@ const AquaAddressDialog = ({ show, hide, onSave, address }) => {
     if (address) setLocalAddress(address);
   }, [address]);
 
+  useEffect(() => {
+    if (show === false) {
+      setLocalAddress({
+        street: "",
+        city: "",
+        state: "",
+        postalCode: "",
+      });
+    }
+  }, [show]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLocalAddress((prev) => ({ ...prev, [name]: value }));
