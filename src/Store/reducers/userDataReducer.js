@@ -20,8 +20,8 @@ export const userReducer = (state = null, action) => {
         },
       };
     case "UPDATE_USER_ADDRESSES": // This is your new case for updating addresses
-      console.log('Current state:', state);
-      console.log('Received action:', action);
+      console.log("Current state:", state);
+      console.log("Received action:", action);
       return {
         ...state,
         user: {

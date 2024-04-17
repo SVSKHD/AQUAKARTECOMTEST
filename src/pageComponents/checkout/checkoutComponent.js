@@ -137,9 +137,9 @@ const AquaCheckoutComponent = () => {
   };
 
   const handleCashOnDelivery = () => {
-    if(!selectedAddress){
-      AquaToast("Please Select the Address", "error")
-    }else{
+    if (!selectedAddress) {
+      AquaToast("Please Select the Address", "error");
+    } else {
       const calculatedTotal = cartTotal(cartCount); // Assuming cartTotal correctly computes the total
 
       const newOrder = {
@@ -164,7 +164,7 @@ const AquaCheckoutComponent = () => {
         ).toISOString(), // Adding 7 days for delivery
         orderStatus: "Processing",
       };
-  
+
       // Since we need to use `newOrder` immediately, we use it directly instead of `cod`
       CreateCodOrder(newOrder) // Use newOrder directly here
         .then((res) => {
@@ -178,7 +178,6 @@ const AquaCheckoutComponent = () => {
           AquaToast("please try again", "error");
         });
     }
-   
   };
 
   const handlePayment = (event) => {
@@ -210,31 +209,24 @@ const AquaCheckoutComponent = () => {
 
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
-    const updatedAddresses = user.user.addresses.filter((_, idx) => idx !== index);
-    console.log("updated" , updatedAddresses)
-    try {
-      // Update the user's addresses in the database
-      const res = await userDataUpdate(user.user._id, {
-        addresses: updatedAddresses,
-      });
-  
-      if (res.success) {
-        // If the database update is successful, update local state using the new action type
+    const updatedAddresses = user.user.addresses.filter(
+      (_, idx) => idx !== index,
+    );
+    console.log("updated", updatedAddresses);
+
+    await userDataUpdate(user.user._id, { addresses: updatedAddresses })
+      .then(() => {
         dispatch({
           type: "UPDATE_USER_ADDRESSES",
           payload: { addresses: updatedAddresses },
         });
-        AquaToast("Address deleted successfully", "success");
-      } else {
-        // If the database update fails, notify the user
-        AquaToast("Failed to delete address, please try again", "error");
-      }
-    } catch (error) {
-      console.error("Error deleting address:", error);
-      AquaToast("An error occurred, please try again", "error");
-    }
+        AquaToast("Addresses Updated Successfully");
+      })
+      .catch(() => {
+        AquaToast("!failed, Please Try again", "error");
+      });
   };
-  
+
   return (
     <>
       <AquaLayout seo={seo} container={true}>
@@ -370,15 +362,16 @@ const AquaCheckoutComponent = () => {
                             <div className="col text-end p-0 ">
                               {deleteAll ? (
                                 <button
-                                  className="btn btn-dark"
+                                  className="btn btn-base"
                                   onClick={handleDeleteAll}
                                 >
-                                  <FaTrash size={20} />
+                                  <FaTrash size={25} className="text-danger" />
                                 </button>
                               ) : (
                                 ""
                               )}
                             </div>
+                            <hr />
                           </div>
                           {cartCount.map((r) => (
                             <>
