@@ -30,18 +30,18 @@ router.post(async (req, res) => {
       password: password, // Store the hashed password
     });
 
-    await fetch(`https://aquakart.co.in/api/send-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: user.email,
-        subject: "Welcome To Aquakart",
-        message: "Welcome To Aquakart",
-        content: signupEmail(user.email),
-      }),
-    });
+    // await fetch(`https://aquakart.co.in/api/send-email`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: user.email,
+    //     subject: "Welcome To Aquakart",
+    //     message: "Welcome To Aquakart",
+    //     content: signupEmail(user.email),
+    //   }),
+    // });
 
     res
       .status(201)

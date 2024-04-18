@@ -29,18 +29,18 @@ router.post(async (req, res) => {
     await user.save();
 
     // Send OTP via email using the generic send-email API endpoint
-    await fetch(`https://aquakart.co.in/api/send-email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: user.email,
-        subject: "Your Password Reset Code",
-        message: "Aquakart Password Reset Otp",
-        content: forgotPasword(user.email, otp),
-      }),
-    });
+    // await fetch(`https://aquakart.co.in/api/send-email`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: user.email,
+    //     subject: "Your Password Reset Code",
+    //     message: "Aquakart Password Reset Otp",
+    //     content: forgotPasword(user.email, otp),
+    //   }),
+    // });
 
     res
       .status(200)
