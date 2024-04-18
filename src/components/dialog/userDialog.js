@@ -43,6 +43,7 @@ const AquaUserDialog = () => {
 
     operation(formData)
       .then((res) => {
+        console.log(res.data)
         const message = signupStatus
           ? "succefully signed you up"
           : "succefully logged in";
@@ -61,13 +62,14 @@ const AquaUserDialog = () => {
         });
         console.log("user", res.data);
         dispatch({
-          type: "SET_AUTH_DIALOG_VISIBLE",
-          payload: false,
-        });
+          type: "SET_AUTH_STATUS_VISIBLE",
+          payload: !signupStatus,
+        })
       })
       .catch((err) => {
+        console.log("err",err.response.data.message)
         const errorMessage =
-          err.message || (signupStatus ? "Signup failed!" : "Signin failed!");
+        err.response.data.message || (signupStatus ? "Signup failed!" : "Signin failed!");
         AquaToast(errorMessage, "error");
         setStatus((prevStatus) => ({
           ...prevStatus,
