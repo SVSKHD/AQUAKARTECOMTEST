@@ -1,9 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 import nodemailer from "nodemailer";
 
+
 export default async (req, res) => {
   // Destructure and default values ensure no undefined errors
-  const { email = "", subject = "", message = "" } = req.body;
+  const { email = "", subject = "", message = "" , content =""} = req.body;
 
   // Using environment variables for sensitive information
   const transporter = nodemailer.createTransport({
@@ -16,11 +17,11 @@ export default async (req, res) => {
 
   try {
     const info = await transporter.sendMail({
-      from: `"Fred Foo 👻" aquakart8@gmail.com>`, // Use your actual email
+      from: `"AquaKart" aquakart8@gmail.com>`, // Use your actual email
       to: email,
       subject: subject,
       text: message,
-      html: `<b>${message}</b>`, // Consider sanitizing message to prevent HTML injection
+      html: content, // Consider sanitizing message to prevent HTML injection
     });
 
     console.log("Message sent: %s", info.messageId); // Logging the messageId which is useful for debugging

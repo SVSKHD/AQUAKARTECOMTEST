@@ -12,7 +12,7 @@ router.post(async (req, res) => {
   db.connectDb();
   try {
     // Check if the user already exists
-    const userExists = await AquaEcomUser.findOne({ normalizedEmail });
+    const userExists = await AquaEcomUser.findOne({ email: normalizedEmail });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
