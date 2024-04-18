@@ -29,7 +29,7 @@ router.post(async (req, res) => {
     await user.save();
 
     // Send OTP via email using the generic send-email API endpoint
-    await fetch(`http://localhost:3000/api/send-email`, {
+    await fetch(`http://aquakart.co.in/api/send-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ router.post(async (req, res) => {
       body: JSON.stringify({
         email: user.email,
         subject: "Your Password Reset Code",
-        message: "hello  test message",
+        message: "Aquakart Password Reset Otp",
         content: forgotPasword(user.email, otp),
       }),
     });

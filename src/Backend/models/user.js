@@ -12,7 +12,7 @@ const addressSchema = new mongoose.Schema({
 // Define the User schema
 const aquaUserSchema = new mongoose.Schema({
   id: { type: String },
-  otp:{type:Number},
+  otp: { type: Number },
   username: String, // You can add other user-related fields as needed
   email: {
     type: String,
@@ -75,19 +75,18 @@ const aquaUserSchema = new mongoose.Schema({
   addresses: [addressSchema], // Store multiple addresses as an array of address objects
 });
 
-aquaUserSchema.pre('save', async function(next) {
-  if (this.isModified('email')) {
+aquaUserSchema.pre("save", async function (next) {
+  if (this.isModified("email")) {
     const user = await AquaEcomUser.findOne({ email: this.email });
     if (user) {
-      throw new Error('This email is already in use.');
+      throw new Error("This email is already in use.");
     }
   }
-  if (this.isModified('password')) {
+  if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
   next();
 });
-
 
 const AquaEcomUser =
   mongoose.models.AquaEcomUser ||

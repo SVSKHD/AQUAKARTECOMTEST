@@ -3,6 +3,7 @@ import { createRouter } from "next-connect";
 import bcrypt from "bcryptjs";
 import db from "@/utils/db";
 import shortid from "shortid";
+import signupEmail from "../emailTemplates/signup";
 
 const router = createRouter();
 
@@ -27,6 +28,19 @@ router.post(async (req, res) => {
       id: uniqueId,
       email: normalizedEmail,
       password: password, // Store the hashed password
+    });
+
+    await fetch(`http://aquakart.co.in/api/send-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        subject: "Welcome To Aquakart",
+        message: "Welcome To Aquakart",
+        content: signupEmail(user.email),
+      }),
     });
 
     res

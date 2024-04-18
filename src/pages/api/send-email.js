@@ -1,10 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import nodemailer from "nodemailer";
 
-
 export default async (req, res) => {
   // Destructure and default values ensure no undefined errors
-  const { email = "", subject = "", message = "" , content =""} = req.body;
+  const { email = "", subject = "", message = "", content = "" } = req.body;
 
   // Using environment variables for sensitive information
   const transporter = nodemailer.createTransport({
@@ -29,11 +28,11 @@ export default async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*"); // Or specify your client's URL
     res.setHeader(
       "Access-Control-Allow-Methods",
-      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT",
     );
     res.setHeader(
       "Access-Control-Allow-Headers",
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
     );
 
     res
