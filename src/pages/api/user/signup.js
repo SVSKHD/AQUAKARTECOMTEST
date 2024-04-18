@@ -30,7 +30,7 @@ router.post(async (req, res) => {
       password: password, // Store the hashed password
     });
 
-    await fetch(`http://aquakart.co.in/api/send-email`, {
+    await fetch(`https://aquakart.co.in/api/send-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
