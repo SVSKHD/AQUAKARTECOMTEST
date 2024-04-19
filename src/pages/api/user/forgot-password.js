@@ -4,7 +4,7 @@ import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessar
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
 import forgotPassword from "@/utils/emailTemplates/forgotPassword";
-import { sendEmail } from "@/utils/emailTemplates/sendEmail";
+// import { sendEmail } from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 

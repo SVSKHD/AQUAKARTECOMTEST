@@ -3,8 +3,8 @@ import { createRouter } from "next-connect";
 import bcrypt from "bcryptjs";
 import db from "@/utils/db";
 import shortid from "shortid";
-import signupEmail from "@/utils/emailTemplates/signup";
-import { sendEmail } from "@/utils/emailTemplates/sendEmail";
+// import signupEmail from "@/utils/emailTemplates/signup";
+// import { sendEmail } from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 
@@ -31,14 +31,14 @@ router.post(async (req, res) => {
       password: password, // Store the hashed password
     });
 
-    const emailDetails = {
-      email: user.email,
-      subject: "Signup Confirmtaion",
-      content: signupEmail(user.email),
-    };
+    // const emailDetails = {
+    //   email: user.email,
+    //   subject: "Signup Confirmtaion",
+    //   content: signupEmail(user.email),
+    // };
 
     // Sending the OTP via email
-    await sendEmail({ body: emailDetails }, res);
+    // await sendEmail({ body: emailDetails }, res);
 
     res
       .status(201)
