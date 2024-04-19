@@ -3,8 +3,8 @@ import { createRouter } from "next-connect";
 import bcrypt from "bcryptjs";
 import db from "@/utils/db";
 import shortid from "shortid";
-import signupEmail from "../emailTemplates/signup";
-import { sendEmail } from "../emailTemplates/sendEmail";
+import signupEmail from "@/utils/emailTemplates/signup";
+import { sendEmail } from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 

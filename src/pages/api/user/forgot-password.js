@@ -3,8 +3,8 @@
 import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessary
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
-import forgotPassword from "../emailTemplates/forgotPassword";
-import { sendEmail } from "../emailTemplates/sendEmail";
+import forgotPassword from "@/utils/emailTemplates/forgotPassword";
+import { sendEmail } from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 
