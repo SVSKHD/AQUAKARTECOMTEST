@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import db from "@/utils/db";
 import shortid from "shortid";
 import signupEmail from "../emailTemplates/signup";
+import { sendEmail } from "../emailTemplates/sendEmail";
 
 const router = createRouter();
 
@@ -30,18 +31,14 @@ router.post(async (req, res) => {
       password: password, // Store the hashed password
     });
 
-    // await fetch(`https://aquakart.co.in/api/send-email`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: user.email,
-    //     subject: "Welcome To Aquakart",
-    //     message: "Welcome To Aquakart",
-    //     content: signupEmail(user.email),
-    //   }),
-    // });
+    const emailDetails = {
+      email: user.email,
+      subject: "Signup Confirmtaion",
+      content: signupEmail(user.email),
+    };
+
+    // Sending the OTP via email
+    await sendEmail({ body: emailDetails }, res);
 
     res
       .status(201)

@@ -12,7 +12,9 @@ const addressSchema = new mongoose.Schema({
 // Define the User schema
 const aquaUserSchema = new mongoose.Schema({
   id: { type: String },
-  otp: { type: Number },
+  confirmationOtp: { type: Number },
+  resetPasswordExpires: { type: Number },
+  resetPasswordOtp: { type: Number },
   username: String, // You can add other user-related fields as needed
   email: {
     type: String,

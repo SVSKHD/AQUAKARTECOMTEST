@@ -3,7 +3,8 @@
 import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessary
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
-import forgotPasword from "../emailTemplates/forgotPassword";
+import forgotPassword from "../emailTemplates/forgotPassword";
+import { sendEmail } from "../emailTemplates/sendEmail";
 
 const router = createRouter();
 
@@ -20,27 +21,22 @@ router.post(async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
     const tokenExpireTime = Date.now() + 3600000; // 1 hour from now
 
-    user.resetPasswordToken = otp; // Store OTP instead of a reset token
-    user.resetPasswordExpires = tokenExpireTime; // Expire time for the OTP
+    user.resetPasswordOtp = otp;
+    user.resetPasswordExpires = tokenExpireTime;
     await user.save();
 
-    // Send OTP via email using the generic send-email API endpoint
-    // await fetch(`https://aquakart.co.in/api/send-email`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: user.email,
-    //     subject: "Your Password Reset Code",
-    //     message: "Aquakart Password Reset Otp",
-    //     content: forgotPasword(user.email, otp),
-    //   }),
-    // });
+    const emailDetails = {
+      email: user.email,
+      subject: "Your Password Reset Code",
+      text: "Please use the following code to reset your password.",
+      content: forgotPassword(user.email, otp),
+    };
+
+    // Sending the OTP via email
+    await sendEmail({ body: emailDetails }, res);
 
     res
       .status(200)
