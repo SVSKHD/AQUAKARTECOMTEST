@@ -1,42 +1,55 @@
-import AquaEcomUser from "@/Backend/models/user"; 
+import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessary
 import { createRouter } from "next-connect";
-import bcrypt from "bcryptjs";
 import db from "@/utils/db";
-import jwt from "jsonwebtoken";
+import CustomError from "@/Backend/utils/customError";
+const jwt = require("jsonwebtoken");
 
 const router = createRouter();
 
-router.post(async (req, res) => {
-  const { email, password } = req.body;
-  const normalizedEmail = email.toLowerCase();
-
-  await db.connectDb();
-
+router.post(async (req, res, next) => {
+  db.connectDb();
   try {
-    const userWithPassword = await AquaEcomUser.findOne({ email: normalizedEmail })
-      .select("+password");
+    const { email, password } = req.body;
 
-    if (!userWithPassword) {
-      return res.status(404).json({ message: "User not found" });
+    // check for presence of email and password
+    if (!email || !password) {
+      return next(new CustomError("please provide email and password", 400));
     }
 
-    const isMatch = await bcrypt.compare(password, userWithPassword.password);
+    // get user from DB
+    const user = await AquaEcomUser.findOne({ email }).select("+password");
 
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+    // if user not found in DB
+    if (!user) {
+      return next(
+        new CustomError("Email or password does not match or exist", 400),
+      );
     }
 
+    // match the password
+    const isPasswordCorrect = await user.isValidatedPassword(password);
+
+    //if password do not match
+    if (!isPasswordCorrect) {
+      return next(
+        new CustomError("Email or password does not match or exist", 400),
+      );
+    }
+
+    // If password matches, proceed to generate the JWT token
     const token = jwt.sign(
-      { id: userWithPassword._id },
+      { id: user._id },
       process.env.NEXT_PUBLIC_JWT_SECRET,
-      { expiresIn: process.env.NEXT_JWT_EXPIRES_IN }
+      { expiresIn: process.env.NEXT_JWT_EXPIRES_IN },
     );
+    const sanitizedUser = user.toObject();
+    delete sanitizedUser.password;
 
-    const user = userWithPassword.toObject();
-    delete user.password;
-
-    res.status(200).json({ message: "User signed in successfully", user, token });
+    res
+      .status(200)
+      .json({ message: "User signed in successfully", sanitizedUser, token });
   } catch (error) {
+    console.error("Error during sign in:", error);
     res.status(500).json({ message: "Error signing in", error: error.message });
   } finally {
     await db.disconnectDb();

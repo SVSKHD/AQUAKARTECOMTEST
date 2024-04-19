@@ -1,7 +1,7 @@
 import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessary
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 import shortid from "shortid";
 import signupEmail from "@/utils/emailTemplates/signup";
 import { sendEmail } from "@/utils/emailTemplates/sendEmail";
@@ -19,21 +19,17 @@ router.post(async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Generate a salt and hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     const uniqueId = `AQC-${shortid.generate()}`;
     const user = await AquaEcomUser.create({
       id: uniqueId,
       email: normalizedEmail,
-      password: hashedPassword,  // Store the hashed password, not the plain one
+      password: password, // Store the hashed password, not the plain one
     });
 
     // Optionally send confirmation email or any other post-creation process
     // await sendEmail(user.email, signupEmail());
 
-        const emailDetails = {
+    const emailDetails = {
       email: user.email,
       subject: "Signup Confirmtaion",
       content: signupEmail(user.email),
@@ -41,10 +37,14 @@ router.post(async (req, res) => {
 
     await sendEmail({ body: emailDetails }, res);
 
-    res.status(201).json({ message: "User created successfully", userId: user.id });
+    res
+      .status(201)
+      .json({ message: "User created successfully", userId: user.id });
   } catch (error) {
     console.error("Signup error:", error);
-    res.status(500).json({ message: "Error signing up user", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error signing up user", error: error.message });
   } finally {
     await db.disconnectDb();
   }

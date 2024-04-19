@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+const jwt = require("jsonwebtoken");
 // Define the Address schema
 const addressSchema = new mongoose.Schema({
   street: String,
@@ -77,6 +78,41 @@ const aquaUserSchema = new mongoose.Schema({
   addresses: [addressSchema], // Store multiple addresses as an array of address objects
 });
 
+aquaUserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
+// validate the password with passed on user password
+aquaUserSchema.methods.isValidatedPassword = async function (usersendPassword) {
+  return await bcrypt.compare(usersendPassword, this.password);
+};
+
+//create and return jwt token
+aquaUserSchema.methods.getJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.NEXT_PUBLIC_JWT_SECRET, {
+    expiresIn: process.env.NEXT_JWT_EXPIRES_IN,
+  });
+};
+
+//generate forgot password token (string)
+aquaUserSchema.methods.getForgotPasswordToken = function () {
+  // generate a long and randomg string
+  const forgotToken = crypto.randomBytes(20).toString("hex");
+
+  // getting a hash - make sure to get a hash on backend
+  this.forgotPasswordToken = crypto
+    .createHash("sha256")
+    .update(forgotToken)
+    .digest("hex");
+
+  //time of token
+  this.forgotPasswordExpiry = Date.now() + 20 * 60 * 1000;
+
+  return forgotToken;
+};
 
 const AquaEcomUser =
   mongoose.models.AquaEcomUser ||
