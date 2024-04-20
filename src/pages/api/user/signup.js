@@ -78,10 +78,11 @@ router.post(async (req, res) => {
   });
 
   await user.save(); // This will automatically hash the password because of pre save hook
-  await db.disconnectDb()
+ 
 
   const token = user.getJwtToken(); // Get JWT token after saving
   res.status(201).json({ message: "User created successfully", token });
+  await db.disconnectDb()
 });
 
 export default router.handler() ;
