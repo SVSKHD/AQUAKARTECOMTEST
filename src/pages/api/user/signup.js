@@ -35,11 +35,12 @@ router.post(async (req, res) => {
       content: signupEmail(user.email),
     };
 
-    await sendEmail({ body: emailDetails }, res);
+   
 
     res
       .status(201)
       .json({ message: "User created successfully", userId: user.id });
+      await sendEmail({ body: emailDetails }, res);
   } catch (error) {
     console.error("Signup error:", error);
     res
