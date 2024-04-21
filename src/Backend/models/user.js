@@ -43,8 +43,8 @@ const UserSchema = new mongoose.Schema({
   otp: {
     type: Number,
   },
-  phoneNo: {
-    type: String,
+  phone: {
+    type: Number,
     unique: true,
     trim: true,
     index: true,
