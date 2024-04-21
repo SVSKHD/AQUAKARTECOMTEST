@@ -14,10 +14,7 @@ async function connectDb() {
     }
     await mongoose.disconnect();
   }
-  const db = await mongoose.connect(process.env.NEXT_PUBLIC_API_DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const db = await mongoose.connect(process.env.NEXT_PUBLIC_API_DB);
   console.log("Database Connected");
   connection.isConnected = db.connections[0].readyState;
 }

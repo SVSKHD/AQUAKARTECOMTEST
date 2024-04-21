@@ -35,8 +35,6 @@
 //       content: signupEmail(user.email),
 //     };
 
-   
-
 //     res
 //       .status(201)
 //       .json({ message: "User created successfully", userId: user.id });
@@ -53,37 +51,145 @@
 
 // export default router.handler();
 
+// import AquaEcomUser from "@/Backend/models/user";
+// import db from "@/utils/db";
+// import {createRouter} from "next-connect";
 
+// const router = createRouter();
 
-import AquaEcomUser from "@/Backend/models/user";
+// router.post(async (req, res) => {
+//   const { email, password, username } = req.body;
+//   await db.connectDb();
+
+//   const userExists = await AquaEcomUser.findOne({ email });
+//   if (userExists) {
+//     await db.disconnectDb();
+//     return res.status(409).json({ message: "Email already in use" });
+//   }
+
+//   const user = new AquaEcomUser({
+//     email,
+//     password,
+//     username,
+//   });
+
+//   await user.save(); // This will automatically hash the password because of pre save hook
+
+//   const token = user.getJwtToken(); // Get JWT token after saving
+//   res.status(201).json({ message: "User created successfully", token });
+//   await db.disconnectDb()
+// });
+
+// export default router.handler() ;
+
+// import { createRouter } from "next-connect";
+// import AquaEcomUser from "@/Backend/models/user"; // Adjust the import path as necessary
+// import bcrypt from "bcryptjs";
+// import jwt from "jsonwebtoken";
+// import db from "@/utils/db";
+
+// const App = createRouter();
+
+// App.post(async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     // Connect to MongoDB
+//     await db.connectDb();
+
+//     // Check if user already exists
+//     let user = await AquaEcomUser.findOne({ email: email.toLowerCase() });
+
+//     if (user) {
+//       return res.status(409).send("User already exists.");
+//     }
+
+//     // Hash password
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     // Create a new user
+//     user = new AquaEcomUser({
+//       email,
+//       password: hashedPassword,
+//     });
+
+//     await user.save();
+
+//     // Create JWT payload
+//     const payload = {
+//       user: {
+//         id: user.id,
+//       },
+//     };
+
+//     // Sign the token
+//     const token = jwt.sign(payload, process.env.NEXT_PUBLIC_JWT_SECRET, {
+//       expiresIn: "1d",
+//     });
+//     res.status(200).json({ success: true, user: payload.user, token: token });
+//     await db.disconnectDb();
+//   } catch (error) {
+//     await db.connectDb();
+//     console.error(error.message);
+//     res.status(500).send("please send valid details");
+//     await db.disconnectDb();
+//   }
+// });
+
+// export default App.handler();
+
+import { createRouter } from "next-connect";
+import AquaEcomUser from "@/Backend/models/user"; // Adjust the import path as necessary
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import db from "@/utils/db";
-import {createRouter} from "next-connect";
 
-const router = createRouter();
+const App = createRouter();
 
-router.post(async (req, res) => {
-  const { email, password, username } = req.body;
-  await db.connectDb();
+App.post(async (req, res) => {
+  const { email, password } = req.body;
 
-  const userExists = await AquaEcomUser.findOne({ email });
-  if (userExists) {
+  try {
+    // Connect to MongoDB
+    await db.connectDb();
+
+    // Check if user already exists
+    let user = await AquaEcomUser.findOne({ email: email.toLowerCase() });
+
+    if (user) {
+      return res.status(409).send("User already exists.");
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    user = new AquaEcomUser({
+      email,
+      password: hashedPassword,
+    });
+
+    await user.save();
+
+    // Create JWT payload
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    // Sign the token
+    const token = jwt.sign(payload, process.env.NEXT_PUBLIC_JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    res.status(200).json({ success: true, user: payload.user, token: token });
     await db.disconnectDb();
-    return res.status(409).json({ message: "Email already in use" });
+  } catch (error) {
+    await db.connectDb();
+    console.error(error.message);
+    res.status(500).send("please send valid details");
+    await db.disconnectDb();
   }
-
-  const user = new AquaEcomUser({
-    email,
-    password,
-    username,
-  });
-
-  await user.save(); // This will automatically hash the password because of pre save hook
- 
-
-  const token = user.getJwtToken(); // Get JWT token after saving
-  res.status(201).json({ message: "User created successfully", token });
-  await db.disconnectDb()
 });
 
-export default router.handler() ;
-
+export default App.handler();
