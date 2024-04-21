@@ -70,7 +70,7 @@ const AquaFooter = () => {
     <>
       <div>
         <div className="footer-aqua">
-          <div className="mt-2">
+          <div className="mt-2 container">
             <div className="row">
               <div className="col text-center">
                 <Image src={AQ} alt="Aquakart" height="150" width="150" />
