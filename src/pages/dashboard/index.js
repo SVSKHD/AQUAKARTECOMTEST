@@ -4,6 +4,8 @@ import UserLayout from "@/Layout/dashboardLayout/userLayout";
 import UserOperations from "@/Services/user";
 import UserForm from "@/components/forms/userUpdateForm";
 import UserPasswordForm from "@/components/forms/userpasswordForm";
+import { FaTrash, FaPen } from "react-icons/fa";
+import AquaHeading from "@/reusables/heading";
 
 const initialState = {
   phoneNo: "",
@@ -66,26 +68,47 @@ const UserDashBoard = () => {
   return (
     <>
       <UserLayout>
-        <div className="row">
-          <div className="col">
-            <div className="d-grid gap-2">
-              <button
-                className="btn btn-dark btn-block"
-                onClick={() => setDetailStatus(!detailsStatus)}
-              >
-                Update Details
-              </button>
-            </div>
-          </div>
-          <div className="col">
-            <div className="d-grid gap-2">
-              <button
-                className="btn btn-dark btn-block"
-                onClick={() => setNewPasswordStatus(!NewPasswordStatus)}
-              >
-                Update Password
-              </button>
-            </div>
+        <div>
+          <AquaHeading level={3} decorate={true} content={"Address"} />
+          <div className="row">
+            {user?.user?.addresses?.map((r, i) => (
+              <div key={i} className="col">
+                <div>
+                  <div class="card rounded-4 mb-3" style={{ width: "21rem" }}>
+                    <div class="card-body">
+                      <span>
+                        {" "}
+                        <input
+                          type="radio"
+                          value={i}
+                          name="addressSelection" // All radio buttons share the same 'name' to group them
+                          checked={user?.user?.selectedAddress?._id === r?._id}
+                        />{" "}
+                        - Address-{i + 1}{" "}
+                      </span>
+                      <hr />
+                      <h5 class="card-title">{r.city}</h5>
+                      <h6 className="card-description">{r.state}</h6>
+                      <p class="text-muted">
+                        {r.street} {r.city}-{r.postalCode}
+                      </p>
+                      <div
+                        class="btn-group mr-2"
+                        role="group"
+                        aria-label="Second group"
+                      >
+                        <button type="button" class="btn btn-base">
+                          <FaPen size={15} />
+                        </button>
+                        <button type="button" class="btn btn-danger">
+                          <FaTrash size={15} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

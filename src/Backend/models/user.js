@@ -100,4 +100,3 @@ const AquaEcomUser =
   mongoose.models.AquaEcomUser || mongoose.model("AquaEcomUser", UserSchema);
 
 export default AquaEcomUser;
-

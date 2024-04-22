@@ -61,10 +61,9 @@ const AquaOrdersComponent = () => {
     fetchOrderDetails();
   }, [orderUpdated, getOrderByTrasactionId, id, dispatch]);
 
-
-  const handleCLickInvoice = (data) =>{
-    console.log("invoice")
-  }
+  const handleCLickInvoice = (data) => {
+    console.log("invoice");
+  };
   const seo = {
     title: "Aquakart | Order Confirmation",
   };
@@ -112,7 +111,10 @@ const AquaOrdersComponent = () => {
           <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
             Dashboard
           </Link>
-          <button className="ms-2 btn btn-outline-dark rounded-pill" onClick={()=>handleCLickInvoice(r)}>
+          <button
+            className="ms-2 btn btn-outline-dark rounded-pill"
+            onClick={() => handleCLickInvoice(r)}
+          >
             Download Invoice
           </button>
         </div>

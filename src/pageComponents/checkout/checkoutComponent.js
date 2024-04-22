@@ -165,8 +165,6 @@ const AquaCheckoutComponent = () => {
         ).toISOString(), // Adding 7 days for delivery
         orderStatus: "Processing",
       };
-
-      // Since we need to use `newOrder` immediately, we use it directly instead of `cod`
       CreateCodOrder(newOrder) // Use newOrder directly here
         .then((res) => {
           console.log(res.data);
@@ -242,6 +240,14 @@ const AquaCheckoutComponent = () => {
         AquaToast("!failed, Please Try again", "error");
       });
   };
+
+  useEffect(() => {
+    if (user?.user?.selectedAddress?._id === r?._id) {
+      setSelectedAddress(true);
+    } else {
+      setSelectedAddress(false);
+    }
+  }, [user]);
 
   return (
     <>
