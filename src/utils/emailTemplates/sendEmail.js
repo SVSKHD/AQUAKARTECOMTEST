@@ -4,8 +4,8 @@ async function sendEmail({ email, subject, message, content }) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "aquakart8@gmail.com", // Use environment variable
-      pass: "vpyzejrvgbhkjdbe", // Use environment variable
+      user: "aquakart8@gmail.com", 
+      pass: "vpyzejrvgbhkjdbe", 
     },
   });
 
@@ -24,4 +24,4 @@ async function sendEmail({ email, subject, message, content }) {
   }
 }
 
-export default sendEmail; // Exporting as default since only one function is here
+export default sendEmail; 
