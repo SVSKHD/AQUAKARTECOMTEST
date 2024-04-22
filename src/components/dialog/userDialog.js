@@ -44,8 +44,8 @@ const AquaUserDialog = () => {
     operation(formData)
       .then((res) => {
         const message = signupStatus
-          ? "succefully signed you up"
-          : "succefully logged in";
+          ? "succesfully signed you up"
+          : "succesfully logged in";
         AquaToast(message, "success");
         setStatus((prevStatus) => ({
           ...prevStatus,
@@ -100,13 +100,21 @@ const AquaUserDialog = () => {
           </AquaHeading>
         }
         footerButtons={
-          <AquaButton onClick={handleSubmit}>
-            {status.loading ? (
-              <Spinner animation="border" variant="light" />
-            ) : (
-              <>{signupStatus ? "Signup" : "Signin"}</>
-            )}
-          </AquaButton>
+          <div className="text-center">
+            <span
+              className="text-primary clickable-text"
+              onClick={() =>
+                dispatch({
+                  type: "SET_AUTH_STATUS_VISIBLE",
+                  payload: !signupStatus,
+                })
+              }
+            >
+              {signupStatus
+                ? "Already have an account? Sign In"
+                : "Don't have an account? Sign Up"}
+            </span>
+          </div>
         }
       >
         <div className="text-center" onKeyDownCapture={handleKeyDown}>
@@ -118,19 +126,28 @@ const AquaUserDialog = () => {
           ) : (
             <AquaSignin onDataChanged={handleSigninDataChanged} />
           )}
-          <span
-            className="text-center text-primary"
-            onClick={() =>
-              dispatch({
-                type: "SET_AUTH_STATUS_VISIBLE",
-                payload: !signupStatus,
-              })
-            }
-          >
-            {signupStatus
-              ? "Already Have An Account..? Signin"
-              : "Don't Have Account..? Signup"}
-          </span>
+
+          <div className="row">
+            <div className="col"></div>
+            <div className="col">
+              <span>Forgot Password</span>
+            </div>
+          </div>
+          <hr />
+          <div class="d-grid gap-2">
+            <button
+              onClick={handleSubmit}
+              class="btn btn-lg btn-primary"
+              type="button"
+            >
+              {status.loading ? (
+                <Spinner animation="border" variant="light" />
+              ) : (
+                <>{signupStatus ? "Signup" : "Signin"}</>
+              )}
+            </button>
+          </div>
+          <br />
         </div>
       </AquaDialog>
     </>
