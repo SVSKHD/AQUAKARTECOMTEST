@@ -27,7 +27,7 @@ const AquaDialog = (props) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>{props.children}</Modal.Body>
-          <Modal.Footer className="aqua-boder-none">
+          <Modal.Footer className="d-flex justify-content-center aqua-boder-none">
             {footerButtons}
           </Modal.Footer>
         </div>

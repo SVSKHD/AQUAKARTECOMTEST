@@ -100,7 +100,7 @@ const AquaUserDialog = () => {
           </AquaHeading>
         }
         footerButtons={
-          <div className="text-center">
+          <div className="signup-status text-center">
             <span
               className="text-primary clickable-text"
               onClick={() =>
