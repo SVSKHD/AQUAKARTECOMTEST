@@ -242,11 +242,13 @@ const AquaCheckoutComponent = () => {
   };
 
   useEffect(() => {
+    if(user){
     if (user?.user?.selectedAddress?._id === r?._id) {
       setSelectedAddress(true);
     } else {
       setSelectedAddress(false);
     }
+  }
   }, [user]);
 
   return (
