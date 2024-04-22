@@ -6,6 +6,7 @@ import UserForm from "@/components/forms/userUpdateForm";
 import UserPasswordForm from "@/components/forms/userpasswordForm";
 import { FaTrash, FaPen } from "react-icons/fa";
 import AquaHeading from "@/reusables/heading";
+import AquaAddressDialog from "@/components/dialog/addressDialog";
 
 const initialState = {
   phoneNo: "",
@@ -28,11 +29,13 @@ const initialState = {
 const UserDashBoard = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-  const { userGetData } = UserOperations();
+  const { userGetData , userDataUpdate} = UserOperations();
   const [formData, setFormData] = useState(initialState);
   const [detailsStatus, setDetailStatus] = useState(false);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
+  const [addressAdd, setAddressAdd] = useState(false);
+  const [addressAddPass, setAddressAddPass] = useState({});
 
   const getDataAndManipulateStore = useCallback(async () => {
     if (user?.user?._id) {
@@ -45,7 +48,6 @@ const UserDashBoard = () => {
             ...data,
             addresses: res.data.data.addresses || [],
           }));
-          console.log(res.data.data.addresses);
         })
         .catch((err) => {
           console.log("err", err);
@@ -65,51 +67,88 @@ const UserDashBoard = () => {
     fetchData();
   }, [getDataAndManipulateStore, isDataFetched, user?.user?._id]);
 
+  const handleAddressAddDialog = () => {
+    setAddressAdd(true);
+  };
+
+  const handleAddressSave = async (address) => {
+    await userDataUpdate(user.user._id, { addresses: [address] })
+      .then((res) => {
+        console.log("address", res.data.data.addresses);
+        const addressData = res.data.data.addresses;
+        dispatch({
+          type: "UPDATE_USER_ADDRESSES",
+          payload: { addresses: addressData },
+        });
+        AquaToast("Addresses Added Successfully", "success");
+        setAddressAdd(false);
+      })
+      .catch(() => {
+        AquaToast("Sorry Please Try again", "error");
+      });
+  };
   return (
     <>
       <UserLayout>
-        <div>
+        <div className="card-body">
           <AquaHeading level={3} decorate={true} content={"Address"} />
-          <div className="row">
-            {user?.user?.addresses?.map((r, i) => (
-              <div key={i} className="col">
-                <div>
-                  <div class="card rounded-4 mb-3" style={{ width: "21rem" }}>
-                    <div class="card-body">
-                      <span>
-                        {" "}
-                        <input
-                          type="radio"
-                          value={i}
-                          name="addressSelection" // All radio buttons share the same 'name' to group them
-                          checked={user?.user?.selectedAddress?._id === r?._id}
-                        />{" "}
-                        - Address-{i + 1}{" "}
-                      </span>
-                      <hr />
-                      <h5 class="card-title">{r.city}</h5>
-                      <h6 className="card-description">{r.state}</h6>
-                      <p class="text-muted">
-                        {r.street} {r.city}-{r.postalCode}
-                      </p>
-                      <div
-                        class="btn-group mr-2"
-                        role="group"
-                        aria-label="Second group"
-                      >
-                        <button type="button" class="btn btn-base">
-                          <FaPen size={15} />
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                          <FaTrash size={15} />
-                        </button>
+          {user.user.addresses?.length === 0 ? (
+            <button className="btn btn-dark" onClick={handleAddressAddDialog}>
+              Add Address
+            </button>
+          ) : (
+            <div className="row">
+              {user?.user?.addresses?.map((r, i) => (
+                <div key={i} className="col">
+                  <div>
+                    <div class="card rounded-4 mb-3" style={{ width: "21rem" }}>
+                      <div class="card-body">
+                        <span>
+                          {" "}
+                          <input
+                            type="radio"
+                            value={i}
+                            name="addressSelection" // All radio buttons share the same 'name' to group them
+                            checked={
+                              user?.user?.selectedAddress?._id === r?._id
+                            }
+                            onChange={() => handleAddressSelect(i)}
+                          />{" "}
+                          - Address-{i + 1}{" "}
+                        </span>
+                        <hr />
+                        <h5 class="card-title">{r.city}</h5>
+                        <h6 className="card-description">{r.state}</h6>
+                        <p class="text-muted">
+                          {r.street} {r.city}-{r.postalCode}
+                        </p>
+                        <div
+                          class="btn-group mr-2"
+                          role="group"
+                          aria-label="Second group"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-base"
+                            onClick={() => handleAddressEdit(r)}
+                          >
+                            <FaPen size={15} />
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            onClick={() => handleDeleteAddress(i)}
+                          >
+                            <FaTrash size={15} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <hr />
@@ -117,6 +156,12 @@ const UserDashBoard = () => {
           {detailsStatus ? <UserForm data={formData} /> : null}
           {NewPasswordStatus ? <UserPasswordForm /> : null}
         </div>
+        <AquaAddressDialog
+          show={addressAdd}
+          hide={() => setAddressAdd(false)}
+          address={addressAddPass}
+          onSave={handleAddressSave}
+        />
       </UserLayout>
     </>
   );

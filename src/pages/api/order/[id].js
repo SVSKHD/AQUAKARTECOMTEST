@@ -20,7 +20,7 @@ router.post(async (req, res) => {
 
   const options = {
     method: "GET",
-    url: `https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/${data.merchantId}/${transactionId}`,
+    url: `https://api.phonepe.com/apis/hermes/${data.merchantId}/${transactionId}`,
     headers: {
       accept: "application/json",
       "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import AquaUserHead from "./head";
 import { useRouter } from "next/router";
 import { useEffect, useCallback } from "react";
 import UserOperations from "@/Services/user";
-import moment from "moment"
+import moment from "moment";
 
 const UserLayout = (props) => {
   const dispatch = useDispatch();
@@ -43,12 +43,12 @@ const UserLayout = (props) => {
       path: "/dashboard/cart",
     },
   ];
-  const userSince = (userData) =>{
-   const date = moment(userData)
-   const year = date.year()
-   const month = date.month()
-   return `Year:${year} - Month:${month}`
-  }
+  const userSince = (userData) => {
+    const date = moment(userData);
+    const year = date.year();
+    const month = date.month();
+    return `Year : ${year} - Month : ${month}`;
+  };
   return (
     <>
       <div>
@@ -63,7 +63,9 @@ const UserLayout = (props) => {
                       <a
                         key={i}
                         href={r.path}
-                        className={`list-group-item list-group-item-action dashboard-list-item ${Router.pathname === r.path ? "active rounded-4" : ""}`}
+                        className={`list-group-item list-group-item-action dashboard-list-item ${
+                          Router.pathname === r.path ? "active rounded-4" : ""
+                        }`}
                       >
                         <div className="d-flex w-100 justify-content-between">
                           <h5 className="mb-1 dashboard-menu-item">
