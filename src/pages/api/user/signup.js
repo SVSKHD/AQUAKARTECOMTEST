@@ -19,10 +19,10 @@ App.post(async (req, res) => {
     // Check if user already exists
     let user = await AquaEcomUser.findOne({ email: email.toLowerCase() });
 
-    // if (user) {
-    //   await db.disconnectDb();
-    //   return res.status(409).send("User already exists.");
-    // }
+    if (user) {
+      await db.disconnectDb();
+      return res.status(409).send("User already exists.");
+    }
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);

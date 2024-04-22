@@ -4,7 +4,7 @@ import AquaEcomUser from "@/Backend/models/user"; // Adjust the path as necessar
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
 import forgotPassword from "@/utils/emailTemplates/forgotPassword";
-// import { sendEmail } from "@/utils/emailTemplates/sendEmail";
+import sendEmail from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 
@@ -18,7 +18,7 @@ router.post(async (req, res) => {
     const user = await AquaEcomUser.findOne({ email: normalizedEmail });
     if (!user) {
       await db.disconnectDb();
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Email not found" });
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
@@ -28,19 +28,22 @@ router.post(async (req, res) => {
     user.resetPasswordExpires = tokenExpireTime;
     await user.save();
 
-    const emailDetails = {
+    const emailContent = forgotPassword(user.email, otp);
+    // Sending the OTP via email
+    const emailResult = await sendEmail({
       email: user.email,
       subject: "Your Password Reset Code",
       text: "Please use the following code to reset your password.",
-      content: forgotPassword(user.email, otp),
-    };
-
-    // Sending the OTP via email
-    await sendEmail({ body: emailDetails }, res);
+      content: emailContent,
+    });
 
     res
       .status(200)
-      .json({ message: "OTP for password reset has been sent to your email." });
+      .json({
+        message: "OTP for password reset has been sent to your email.",
+        emailSent: emailResult.success,
+        emailMessage: emailResult.emailMessage,
+      });
   } catch (error) {
     console.error("Forgot Password Error: ", error);
     res.status(500).json({

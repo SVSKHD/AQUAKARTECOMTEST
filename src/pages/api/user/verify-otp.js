@@ -15,8 +15,7 @@ router.post(async (req, res) => {
   try {
     const user = await AquaEcomUser.findOne({
       email: email.toLowerCase(),
-      resetPasswordToken: otp,
-      resetPasswordExpires: { $gt: Date.now() },
+      resetPasswordOtp: otp,
     });
 
     if (!user) {
@@ -24,10 +23,9 @@ router.post(async (req, res) => {
     }
 
     // Hash the new password
-    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
+    user.resetPasswordOtp = undefined;
     await user.save();
 
     res.status(200).json({ message: "Password has been reset successfully" });
