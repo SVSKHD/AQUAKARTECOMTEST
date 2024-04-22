@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import db from "@/utils/db";
 import signupEmail from "@/utils/emailTemplates/signup";
 import sendEmail from "@/utils/emailTemplates/sendEmail";
-import axios from "axios";
+import {nanoid} from "nanoid"
 
 const App = createRouter();
 
@@ -26,9 +26,10 @@ App.post(async (req, res) => {
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    const id = `AQC-${nanoid(8)}`
     // Create a new user
     user = new AquaEcomUser({
+      id:id,
       email,
       password: hashedPassword,
     });
