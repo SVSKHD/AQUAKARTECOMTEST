@@ -4,6 +4,7 @@ import AquaUserHead from "./head";
 import { useRouter } from "next/router";
 import { useEffect, useCallback } from "react";
 import UserOperations from "@/Services/user";
+import moment from "moment"
 
 const UserLayout = (props) => {
   const dispatch = useDispatch();
@@ -42,6 +43,12 @@ const UserLayout = (props) => {
       path: "/dashboard/cart",
     },
   ];
+  const userSince = (userData) =>{
+   const date = moment(userData)
+   const year = date.year()
+   const month = date.month()
+   return `Year:${year} - Month:${month}`
+  }
   return (
     <>
       <div>
@@ -75,6 +82,7 @@ const UserLayout = (props) => {
                   <UserHeader
                     name={createUserName(user?.user?.email)}
                     id={user?.user?.id}
+                    date={userSince(user?.user?.userSignedupDate)}
                   />
                 </div>
               </div>

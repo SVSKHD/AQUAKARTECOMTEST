@@ -508,6 +508,11 @@ body {
   font-weight: 600;
 }
 
+.user-since{
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .dashboard-list-item {
   border-style: none;
 }
