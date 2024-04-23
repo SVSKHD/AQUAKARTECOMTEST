@@ -111,7 +111,7 @@ const AquaCheckoutComponent = () => {
     const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
 
     const UAT_PAY_API_URL =
-      "https://api.phonepe.com/apis/hermes/pg/v1/pay";
+      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
 
     try {
       const response = await axios.post(
