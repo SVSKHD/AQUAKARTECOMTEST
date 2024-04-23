@@ -14,6 +14,19 @@ function getUserIdFromTransactionId(transactionId) {
 router.post(async (req, res) => {
   await db.connectDb();
   const data = req.body;
+  const allowedOrigins = [
+    "https://www.aquakart.co.in",
+    "http://localhost:3000",
+  ];
+  const origin = req.headers.origin;
+
+  // If the request's origin is in our list of allowed origins, set the header.
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   console.log("req", data);
   const transactionId = data.transactionId;
   const userId = getUserIdFromTransactionId(transactionId);
