@@ -29,7 +29,7 @@ const initialState = {
 const UserDashBoard = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-  const { userGetData , userDataUpdate} = UserOperations();
+  const { userGetData, userDataUpdate } = UserOperations();
   const [formData, setFormData] = useState(initialState);
   const [detailsStatus, setDetailStatus] = useState(false);
   const [isDataFetched, setIsDataFetched] = useState(false);

@@ -37,13 +37,11 @@ router.post(async (req, res) => {
       content: emailContent,
     });
 
-    res
-      .status(200)
-      .json({
-        message: "OTP for password reset has been sent to your email.",
-        emailSent: emailResult.success,
-        emailMessage: emailResult.emailMessage,
-      });
+    res.status(200).json({
+      message: "OTP for password reset has been sent to your email.",
+      emailSent: emailResult.success,
+      emailMessage: emailResult.emailMessage,
+    });
   } catch (error) {
     console.error("Forgot Password Error: ", error);
     res.status(500).json({

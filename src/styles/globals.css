@@ -57,8 +57,6 @@ body {
   background-color: #053885;
 }
 
-
-
 .index-section1-p {
   color: white;
   font-family: Poppins;
@@ -508,7 +506,7 @@ body {
   font-weight: 600;
 }
 
-.user-since{
+.user-since {
   font-size: 0.8rem;
   font-weight: 600;
 }

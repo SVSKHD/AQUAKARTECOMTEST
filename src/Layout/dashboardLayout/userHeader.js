@@ -1,4 +1,4 @@
-const UserHeader = ({ name, id , date}) => {
+const UserHeader = ({ name, id, date }) => {
   return (
     <>
       <div className="card-body">

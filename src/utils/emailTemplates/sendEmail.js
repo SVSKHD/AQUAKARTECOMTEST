@@ -4,8 +4,8 @@ async function sendEmail({ email, subject, message, content }) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "aquakart8@gmail.com", 
-      pass: "vpyzejrvgbhkjdbe", 
+      user: "aquakart8@gmail.com",
+      pass: "vpyzejrvgbhkjdbe",
     },
   });
 
@@ -17,11 +17,19 @@ async function sendEmail({ email, subject, message, content }) {
       text: message,
       html: content,
     });
-    return { success: true, message: "Email Sent Successfully", messageId: info.messageId };
+    return {
+      success: true,
+      message: "Email Sent Successfully",
+      messageId: info.messageId,
+    };
   } catch (error) {
     console.error("Failed to send email:", error);
-    return { success: false, message: "Failed to Send Email", error: error.message };
+    return {
+      success: false,
+      message: "Failed to Send Email",
+      error: error.message,
+    };
   }
 }
 
-export default sendEmail; 
+export default sendEmail;

@@ -9,7 +9,8 @@ import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useRouter } from "next/router";
 import axios from "axios";
 import sha256 from "crypto-js/sha256";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
+import moment from "moment";
 import AquaToast from "@/reusables/js/toast";
 import AquaHeading from "@/reusables/heading";
 import AquaButton from "@/reusables/button";
@@ -80,61 +81,174 @@ const AquaCheckoutComponent = () => {
     // Include any other necessary fields required by PhonePe or your backend
   }));
 
-  const initiatePhonePePayment = async () => {
-    const transactionId = `AQTr-${user.user._id}-${uuidv4()
-      .toString(36)
-      .slice(-6)}`;
-    const merchantUserId = "MUID-" + uuidv4().toString(36).slice(-6);
+  // const initiatePhonePePayment = async () => {
+  //   const transactionId = `AQTr-${user.user._id}-${uuidv4()
+  //     .toString(36)
+  //     .slice(-6)}`;
+  //   const merchantUserId = "MUID-" + uuidv4().toString(36).slice(-6);
+  //   axios.post("/api/pg/phonepe");
 
-    const payload = {
-      merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
-      merchantTransactionId: transactionId,
-      merchantUserId: merchantUserId,
-      amount: (total - 1) * 100, // Example amount in paise
-      redirectUrl: `https://aquakart.co.in/api/order/${transactionId}`,
-      redirectMode: "POST",
-      callbackUrl: `https://aquakart.co.in/api/order/${transactionId}`,
-      mobileNumber: "9999999999", // Example mobile number
-      paymentInstrument: {
-        type: "PAY_PAGE",
-      },
-      items: items,
+  //   // const payload = {
+  //   //   merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
+  //   //   merchantTransactionId: transactionId,
+  //   //   merchantUserId: merchantUserId,
+  //   //   amount: (total - 1) * 100, // Example amount in paise
+  //   //   redirectUrl: `https://aquakart.co.in/api/order/${transactionId}`,
+  //   //   redirectMode: "POST",
+  //   //   callbackUrl: `https://aquakart.co.in/api/order/${transactionId}`,
+  //   //   mobileNumber: "9999999999", // Example mobile number
+  //   //   paymentInstrument: {
+  //   //     type: "PAY_PAGE",
+  //   //   },
+  //   //   items: items,
+  //   // };
+
+  //   // const dataPayload = JSON.stringify(payload);
+  //   // const dataBase64 = Buffer.from(dataPayload).toString("base64");
+
+  //   // const fullURL =
+  //   //   dataBase64 + "/pg/v1/pay" + "fb0244a9-34b5-48ae-a7a3-741d3de823d3";
+  //   // const dataSha256 = sha256(fullURL).toString();
+
+  //   // const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
+
+  //   // const UAT_PAY_API_URL =
+  //   //   `${process.env.NEXT_PUBLIC_PG_API}/pg/v1/pay`;
+
+  //   //   const options = {
+  //   //     method: 'post',
+  //   //     url: 'https://api.phonepe.com/apis/hermes/pg/v1/pay',
+  //   //     headers: {
+  //   //           accept: 'text/plain',
+  //   //           'Content-Type': 'application/json',
+  //   //           'X-VERIFY': checksum,
+  //   //           },
+  //   //   };
+  //   //   axios
+  //   //     .request(options)
+  //   //         .then(function (response) {
+  //   //         console.log(response.data);
+  //   //     })
+  //   //     .catch(function (error) {
+  //   //       console.error(error);
+  //   //     });
+  //   // try {
+  //   //   const response = await axios.post(
+  //   //     UAT_PAY_API_URL,
+  //   //     {
+  //   //       request: dataBase64,
+  //   //     },
+  //   //     {
+  //   //       headers: {
+  //   //         accept: "application/json",
+  //   //         "Content-Type": "application/json",
+  //   //         "X-VERIFY": checksum,
+  //   //       },
+  //   //     },
+  //   //   );
+
+  //   //   if (response) {
+  //   //     const redirect = response.data.data.instrumentResponse.redirectInfo.url;
+  //   //     router.push(redirect); // Redirect user to PhonePe payment page
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.error("Payment initiation failed:", error);
+  //   // }
+  // };
+  // const initiatePhonePePayment1 = async () => {
+  //   const transactionId = `AQTr-${user.user._id}-${uuidv4()
+  //     .toString(36)
+  //     .slice(-6)}`;
+  //   const merchantUserId = "MUID-" + uuidv4().toString(36).slice(-6);
+
+  //   const payload = {
+  //     merchantId: process.env.NEXT_PUBLIC_MERCHANT_ID,
+  //     merchantTransactionId: transactionId,
+  //     merchantUserId: merchantUserId,
+  //     amount: (total - 1) * 100, // Example amount in paise
+  //     redirectUrl: `https://aquakart.co.in/api/order/${transactionId}`,
+  //     redirectMode: "POST",
+  //     callbackUrl: `https://aquakart.co.in/api/order/${transactionId}`,
+  //     mobileNumber: "9999999999", // Example mobile number
+  //     paymentInstrument: {
+  //       type: "PAY_PAGE",
+  //     },
+  //     items: items,
+  //   };
+
+  //   const dataPayload = JSON.stringify(payload);
+  //   const dataBase64 = Buffer.from(dataPayload).toString("base64");
+
+  //   const fullURL =
+  //     dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
+  //   const dataSha256 = sha256(fullURL).toString();
+
+  //   const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
+
+  //   const UAT_PAY_API_URL =
+  //     `${process.env.NEXT_PUBLIC_PG_API}/pg/v1/pay`;
+
+  //   try {
+  //     const response = await axios.post(
+  //       UAT_PAY_API_URL,
+  //       {
+  //         request: dataBase64,
+  //       },
+  //       {
+  //         headers: {
+  //           accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           "X-VERIFY": checksum,
+  //         },
+  //       },
+  //     );
+
+  //     if (response) {
+  //       const redirect = response.data.data.instrumentResponse.redirectInfo.url;
+  //       router.push(redirect); // Redirect user to PhonePe payment page
+  //     }
+  //   } catch (error) {
+  //     console.error("Payment initiation failed:", error);
+  //   }
+  // };
+
+  const handlePhonePeGateway = () => {
+    const transactionId = `AQTR-${nanoid(5).toUpperCase()}D${moment(
+      new Date(),
+    ).format("DDMMYYYY")}`;
+    const calculatedTotal = cartTotal(cartCount);
+    const newOrder = {
+      user: user?.user?._id, // Safe access and also make sure user exists
+      transactionId: transactionId,
+      orderType: "OTHER THAN CASH",
+      items: cartCount.map((item) => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      totalAmount: calculatedTotal,
+      paymentMethod: "OTHER THAN CASH",
+      paymentStatus: "Pending",
+      currency: "INR",
+      billingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+      shippingAddress: user?.user?.selectedAddress, // Ensure this is correctly assigned using safe access
+      shippingMethod: "Standard",
+      shippingCost: 50, // Example fixed cost
+      estimatedDelivery: new Date(
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+      ).toISOString(), // Adding 7 days
     };
-
-    const dataPayload = JSON.stringify(payload);
-    const dataBase64 = Buffer.from(dataPayload).toString("base64");
-
-    const fullURL =
-      dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
-    const dataSha256 = sha256(fullURL).toString();
-
-    const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
-
-    const UAT_PAY_API_URL =
-      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";
-
-    try {
-      const response = await axios.post(
-        UAT_PAY_API_URL,
-        {
-          request: dataBase64,
-        },
-        {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-            "X-VERIFY": checksum,
-          },
-        },
-      );
-
-      if (response) {
-        const redirect = response.data.data.instrumentResponse.redirectInfo.url;
-        router.push(redirect); // Redirect user to PhonePe payment page
-      }
-    } catch (error) {
-      console.error("Payment initiation failed:", error);
-    }
+    console.log("phonepe", newOrder);
+    axios
+      .post("/api/pg/phonepe", newOrder)
+      .then((res) => {
+        console.log("res", res.data);
+        window.location.href = res.data;
+      })
+      .catch(() => {
+        AquaToast("please Try again", "error");
+      });
   };
 
   const handleCashOnDelivery = () => {
@@ -189,7 +303,7 @@ const AquaCheckoutComponent = () => {
     } else if (!selectedAddress) {
       AquaToast("please Select Address", "error");
     } else {
-      initiatePhonePePayment();
+      handlePhonePeGateway();
     }
   };
 
