@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AquaDialog from "@/reusables/dialog";
 import AquaHeading from "@/reusables/heading";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import AquaButton from "@/reusables/button";
 import { Spinner } from "react-bootstrap";
 import UserOperations from "@/Services/user";
 import AquaToast from "@/reusables/js/toast";
+import AquaInput from "@/reusables/input";
 
 const AquaUserDialog = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ const AquaUserDialog = () => {
   const { authDialog, signupStatus } = useSelector((state) => ({ ...state }));
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
+  const [forgotPassword, setForgotPassword] = useState({
+    email: false,
+    submit: false,
+  });
 
   const handleSignupDataChange = (data) => {
     setSignupData(data);
@@ -100,55 +105,89 @@ const AquaUserDialog = () => {
           </AquaHeading>
         }
         footerButtons={
-          <div className="signup-status text-center">
-            <span
-              className="text-primary clickable-text"
-              onClick={() =>
-                dispatch({
-                  type: "SET_AUTH_STATUS_VISIBLE",
-                  payload: !signupStatus,
-                })
-              }
-            >
-              {signupStatus
-                ? "Already have an account? Sign In"
-                : "Don't have an account? Sign Up"}
-            </span>
-          </div>
+          <>
+            {forgotPassword.email ? (
+              <>
+                <span
+                  onClick={(forgotPassword) =>
+                    setForgotPassword({ ...forgotPassword, email: false })
+                  }
+                >
+                  Remember the password
+                </span>
+              </>
+            ) : (
+              <>
+                <div className="signup-status text-center">
+                  <span
+                    className="text-primary clickable-text"
+                    onClick={() =>
+                      dispatch({
+                        type: "SET_AUTH_STATUS_VISIBLE",
+                        payload: !signupStatus,
+                      })
+                    }
+                  >
+                    {signupStatus
+                      ? "Already have an account? Sign In"
+                      : "Don't have an account? Sign Up"}
+                  </span>
+                </div>
+              </>
+            )}
+          </>
         }
       >
         <div className="text-center" onKeyDownCapture={handleKeyDown}>
           <Image src={LOGO} alt="Aquakart" height="80" width="80" />
         </div>
-        <div className="padd-inner-content" onKeyDown={handleKeyDown}>
-          {signupStatus ? (
-            <AquaSignup onDataChanged={handleSignupDataChange} />
-          ) : (
-            <AquaSignin onDataChanged={handleSigninDataChanged} />
-          )}
-
-          <div className="row">
-            <div className="col"></div>
-            <div className="col">
-              <span>Forgot Password</span>
+        {forgotPassword.email ? (
+          <>
+            <div className="padd-inner-content">
+              <AquaInput
+                label="email"
+                placeholder={"fill your email id"}
+                size="lg"
+              />
             </div>
+          </>
+        ) : (
+          <div className="padd-inner-content" onKeyDown={handleKeyDown}>
+            {signupStatus ? (
+              <AquaSignup onDataChanged={handleSignupDataChange} />
+            ) : (
+              <AquaSignin onDataChanged={handleSigninDataChanged} />
+            )}
+
+            <div className="row">
+              <div className="col"></div>
+              <div className="col">
+                <span
+                  onClick={(forgotPassword) =>
+                    setForgotPassword({ ...forgotPassword, email: true })
+                  }
+                >
+                  Forgot Password
+                </span>
+              </div>
+            </div>
+            <hr />
+            <div class="d-grid gap-2">
+              <button
+                onClick={handleSubmit}
+                class="btn btn-lg btn-primary"
+                type="button"
+              >
+                {status.loading ? (
+                  <Spinner animation="border" variant="light" />
+                ) : (
+                  <>{signupStatus ? "Signup" : "Signin"}</>
+                )}
+              </button>
+            </div>
+            <br />
           </div>
-          <hr />
-          <div class="d-grid gap-2">
-            <button
-              onClick={handleSubmit}
-              class="btn btn-lg btn-primary"
-              type="button"
-            >
-              {status.loading ? (
-                <Spinner animation="border" variant="light" />
-              ) : (
-                <>{signupStatus ? "Signup" : "Signin"}</>
-              )}
-            </button>
-          </div>
-          <br />
-        </div>
+        )}
       </AquaDialog>
     </>
   );
