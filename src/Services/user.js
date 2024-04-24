@@ -11,7 +11,9 @@ const userDataUpdate = (id, data) =>
 
 const userGetData = (id) => axios.get(`/api/user/get?id=${id}`);
 
-const ForgotPassword = () => {};
+const ForgotPassword = (email) => axios.post(`/api/user/forgot-password`, email)
+
+const VerifyData = (data) => axios.post(`/api/user/verify-otp` , data) 
 
 const UserOperations = () => {
   return {
@@ -20,6 +22,7 @@ const UserOperations = () => {
     ForgotPassword,
     userDataUpdate,
     userGetData,
+    VerifyData
   };
 };
 export default UserOperations;

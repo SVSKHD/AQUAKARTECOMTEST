@@ -14,14 +14,17 @@ import AquaInput from "@/reusables/input";
 
 const AquaUserDialog = () => {
   const dispatch = useDispatch();
-  const { UserLogin, UserSignup } = UserOperations();
+  const { UserLogin, UserSignup , ForgotPassword , VerifyData} = UserOperations();
   const { authDialog, signupStatus } = useSelector((state) => ({ ...state }));
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
   const [forgotPassword, setForgotPassword] = useState({
     email: false,
+    otp:false,
     submit: false,
+    disable:false
   });
+  const [forgotpasswordData , setForgotPasswordData] = useState({email:"", otp :"" , password:"" , passwordConfirm:""})
 
   const handleSignupDataChange = (data) => {
     setSignupData(data);
@@ -83,6 +86,36 @@ const AquaUserDialog = () => {
       });
   };
 
+  const handleForgotPasswordSubmit = () =>{
+    console.log("load" , forgotpasswordData)
+    if(forgotPassword.email===true){
+      ForgotPassword({email:forgotpasswordData.email}).then((res)=>{
+        console.log("res", res.data.emailSent)
+        if(res.data.emailSent===true){
+          AquaToast("Otp has sent to email" , "success")
+          setForgotPassword({...forgotPassword, disable:true , otp:true})
+        }
+      })
+    }else if(forgotPassword.otp===true){
+      console.log("verify-data" , forgotpasswordData)
+    }
+  }
+  
+  const handleForgotPasswordChange = (event) => {
+    const { name, value } = event.target;
+    setForgotPasswordData(prevData => ({
+      ...prevData,
+      [name]: value
+    }), () => {
+      // Check if the passwords match (after state update)
+      const passwordsMatch = forgotpasswordData.password === forgotpasswordData.passwordConfirm;
+      setForgotPassword(prevState => ({
+        ...prevState,
+        disable: !passwordsMatch  // Enable reset button only if passwords match
+      }));
+    });
+  };
+  
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -109,6 +142,7 @@ const AquaUserDialog = () => {
             {forgotPassword.email ? (
               <>
                 <span
+                  className="text-primary"
                   onClick={(forgotPassword) =>
                     setForgotPassword({ ...forgotPassword, email: false })
                   }
@@ -148,7 +182,48 @@ const AquaUserDialog = () => {
                 label="email"
                 placeholder={"fill your email id"}
                 size="lg"
+                name="email"
+                value={forgotpasswordData.email}
+                handleChange={handleForgotPasswordChange}
               />
+              {forgotPassword.otp && (
+                <>
+                <AquaInput
+                size="lg"
+                label="otp"
+                name="otp"
+                placeholder="enter otp"
+                value={forgotpasswordData.otp}
+                handleChange={handleForgotPasswordChange}
+                />
+                <AquaInput
+                size="lg"
+                label="Enter your desired password"
+                name="password"
+                placeholder="enter password"
+                value={forgotpasswordData.password}
+                handleChange={handleForgotPasswordChange}
+                />
+                <AquaInput
+                size="lg"
+                label="ReEnter the password"
+                name="passwordConfirm"
+                placeholder="Re enter the password"
+                value={forgotpasswordData.passwordConfirm}
+                handleChange={handleForgotPasswordChange}
+                />
+                </>
+              ) }
+              <div class="d-grid gap-2">
+              <button
+                onClick={handleForgotPasswordSubmit}
+                class="btn btn-lg btn-primary"
+                type="button"
+                disabled={forgotPassword.disable}
+              >
+                Submit you Email
+              </button>
+            </div>
             </div>
           </>
         ) : (
@@ -163,6 +238,7 @@ const AquaUserDialog = () => {
               <div className="col"></div>
               <div className="col">
                 <span
+                  className="ms-4 text-primary"
                   onClick={(forgotPassword) =>
                     setForgotPassword({ ...forgotPassword, email: true })
                   }
