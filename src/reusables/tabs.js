@@ -11,14 +11,14 @@ const AquaTabs = ({ tabs }) => {
         <Col sm={3} md={3} lg={3} xs={12}>
           <div className="card rounded-4">
             <div className="card-body">
-          <Nav variant="pills" className="flex-column">
-            {tabs.map((tab, index) => (
-              <Nav.Item key={index} className="text-bold">
-                <Nav.Link eventKey={tab.title}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-          </div>
+              <Nav variant="pills" className="flex-column">
+                {tabs.map((tab, index) => (
+                  <Nav.Item key={index} className="text-bold">
+                    <Nav.Link eventKey={tab.title}>{tab.title}</Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+            </div>
           </div>
         </Col>
         <Col sm={9} md={3} lg={9} xs={12}>

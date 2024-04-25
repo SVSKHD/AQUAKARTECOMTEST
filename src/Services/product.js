@@ -8,11 +8,15 @@ const getProductById = async (query) =>
 const getProductByCategory = async (query) =>
   await axios.get(`/api/product/get?categoryId=${query}`);
 
+const getProductsByFIlter = async (type, query) =>
+  await axios.get(`/api/product/get?${type}=${query}`);
+
 const AquaProductOperations = () => {
   return {
     getProducts,
     getProductById,
     getProductByCategory,
+    getProductsByFIlter,
   };
 };
 

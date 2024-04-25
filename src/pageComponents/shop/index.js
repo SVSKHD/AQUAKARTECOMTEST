@@ -14,7 +14,7 @@ const AquaShopComponent = () => {
     title: "Aquakart | Shop",
     canonical: `${process.env.apiKey}${router.asPath}`,
   };
-  const { getProducts } = AquaProductOperations();
+  const { getProducts, getProductsByFIlter } = AquaProductOperations();
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
   const LoadProducts = useCallback(() => {
@@ -36,7 +36,10 @@ const AquaShopComponent = () => {
 
   const handleRange = (newRange) => {
     console.log("New range value", newRange);
-    // You can now use newRange value to filter products or perform any other action
+  };
+
+  const ReloadAndClear = () => {
+    LoadProducts();
   };
 
   return (
@@ -54,17 +57,37 @@ const AquaShopComponent = () => {
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
           <AquaCard>
             <div className="row">
-              {products.map((r, i) => (
-                <div key={i} className="col">
-                  <AquaVerticalCard
-                    title={r.title}
-                    images={r.photos}
-                    price={r.price}
-                    description={r.description}
-                    data={r}
-                  />
-                </div>
-              ))}
+              {products.length <= 0 ? (
+                <>
+                  <div className="text-center">
+                    <AquaHeading
+                      level={2}
+                      content={"No Products yet in the selected filter"}
+                      decorate={true}
+                    />
+                    <button
+                      className="btn btn-base btn-lg"
+                      onClick={ReloadAndClear}
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {products.map((r, i) => (
+                    <div key={i} className="col">
+                      <AquaVerticalCard
+                        title={r.title}
+                        images={r.photos}
+                        price={r.price}
+                        description={r.description}
+                        data={r}
+                      />
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
           </AquaCard>
         </div>

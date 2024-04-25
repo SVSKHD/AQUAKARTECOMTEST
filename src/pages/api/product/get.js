@@ -11,7 +11,7 @@ Router.get(async (req, res) => {
   ];
   const origin = req.headers.origin;
 
-  // If the request's origin is in our list of allowed origins, set the header.
+  // Set CORS headers if the origin is allowed
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
@@ -20,26 +20,41 @@ Router.get(async (req, res) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   await db.connectDb();
 
-  const { categoryId, id } = req.query;
+  const { categoryId, subCategoryId, id, maxPrice } = req.query;
+  const minPrice = req.query.minPrice || 0; // Default minPrice to 0 if not provided
+
+  const priceFilter = {
+    price: {
+      $gte: Number(minPrice),
+      ...(maxPrice && { $lte: Number(maxPrice) }),
+    },
+  };
 
   if (id) {
     const productById = await AquaProduct.findById(id);
-    // Find related products by category, excluding the current product by ID
     const relatedProducts = await AquaProduct.find({
       category: productById.category,
       _id: { $ne: id },
-    });
+      ...priceFilter,
+    }).lean();
+
     const productWithRelated = {
-      ...productById.toObject(), // Convert the Mongoose document to a plain JavaScript object
+      ...productById.toObject(),
       relatedProducts,
     };
     res.status(200).json(productWithRelated);
-  } else if (categoryId) {
-    const productByCategory = await AquaProduct.find({ category: categoryId });
-    res.status(200).json(productByCategory);
   } else {
-    const allProducts = await AquaProduct.find();
-    res.status(200).json(allProducts);
+    const query = { ...priceFilter };
+
+    if (categoryId) {
+      query.category = categoryId;
+    }
+    if (subCategoryId) {
+      query.subCategory = subCategoryId;
+    }
+
+    const products = await AquaProduct.find(query).lean();
+    res.status(200).json(products);
   }
 
   db.disconnectDb();

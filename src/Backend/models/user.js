@@ -8,12 +8,20 @@ const addressSchema = new mongoose.Schema({
 });
 
 const UserSchema = new mongoose.Schema({
+  //user id unique for every one
   id: { type: String },
+  // reset info and required info
   resetPasswordOtp: { type: Number },
   resetPasswordDate: { type: Date },
   confirmationOtp: { type: Number },
   confirmationOtpDate: { type: Date },
+  //mobile confirmation
+  mobileOtp: { type: Number },
+  ismobileLoginConfirmation: { type: Boolean },
+  isMobileConfirmationDate: { type: Date },
+  //user signedup date
   userSignedupDate: { type: Date, default: Date.now },
+  //login creds info
   email: {
     type: String,
     required: true,
