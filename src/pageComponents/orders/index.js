@@ -12,6 +12,7 @@ const AquaOrdersComponent = () => {
   const { cartCount } = useSelector((state) => state);
   const [loading, setLoading] = useState(true);
   const [orderUpdated, setOrderUpdated] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
   const [toastShown, setToastShown] = useState(false); // State to track if the toast has been shown
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
@@ -19,42 +20,44 @@ const AquaOrdersComponent = () => {
   const { id } = router.query;
   const { UpdateOrder, getOrderByTrasactionId } = AquaOrderOperations();
 
-  const updateOrder = useCallback(async () => {
-    if (toastShown) return; // Exit if the toast has already been shown
+  // const updateOrder = useCallback(async () => {
+  //   if (toastShown) return; // Exit if the toast has already been shown
 
-    try {
-      const res = await UpdateOrder(id, { products: cartCount });
-      if (res.data.paymentStatus === "Paid") {
-        AquaToast("Order Created", "success");
-        setOrderUpdated(true); // Trigger the next useEffect to fetch order details
-      } else if (res.data.paymentStatus === "Pending") {
-        setOrderUpdated(false); // Ensure no further actions if pending
-        AquaToast("Payment is pending", "info"); // Provide a more specific message
-      } else {
-        AquaToast("Awaiting confirmation", "error");
-      }
-    } catch (error) {
-      AquaToast("Failed to update order, please try again", "error");
-    } finally {
-      setToastShown(true); // Update state to indicate toast has been shown
-      setLoading(false); // Set loading to false in all cases
-    }
-  }, [UpdateOrder, id, cartCount, toastShown]);
+  //   try {
+  //     const res = await UpdateOrder(id, { products: cartCount });
+  //     if (res.data.paymentStatus === "Paid") {
+  //       AquaToast("Order Created", "success");
+  //       setOrderUpdated(true); // Trigger the next useEffect to fetch order details
+  //     } else if (res.data.paymentStatus === "Pending") {
+  //       setOrderUpdated(false); // Ensure no further actions if pending
+  //       AquaToast("Payment is pending", "info"); // Provide a more specific message
+  //     } else {
+  //       AquaToast("Awaiting confirmation", "error");
+  //     }
+  //   } catch (error) {
+  //     AquaToast("Failed to update order, please try again", "error");
+  //   } finally {
+  //     setToastShown(true); // Update state to indicate toast has been shown
+  //     setLoading(false); // Set loading to false in all cases
+  //   }
+  // }, [UpdateOrder, id, cartCount, toastShown]);
 
-  useEffect(() => {
-    updateOrder();
-  }, [updateOrder]);
+  // useEffect(() => {
+  //   updateOrder();
+  // }, [updateOrder]);
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
-      if (!orderUpdated) return; // Exit if order is not updated
-
       try {
+        setLoading(true);
         const productRes = await getOrderByTrasactionId(id);
         setProduct(productRes.data);
+        console.log("product", productRes.data);
         dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
+        setLoading(false);
       } catch (err) {
-        AquaToast("Failed to load order details, please try again", "error");
+        // AquaToast("Failed to load order details, please try again", "error");
+        setLoading(false);
       }
     };
 
@@ -79,7 +82,7 @@ const AquaOrdersComponent = () => {
               <AquaHeading
                 decorate={true}
                 customclass={"text-success"}
-                content={`Order Details-${product.order?.paymentStatus === "Paid" ? "Order Placed" : "Awaiting Confirmation"}`}
+                content={`Order Details-${product.order?.orderStatus}`}
                 level={3}
               />
               {orderUpdated ? (
@@ -104,7 +107,38 @@ const AquaOrdersComponent = () => {
                   </div>
                 </div>
               ) : (
-                <h1>COD</h1>
+                <>
+                  <AquaHeading
+                    content={`COD - ${product.order.paymentMethod}`}
+                    decorate={true}
+                    level={1}
+                  />
+                  <h5 className="text-muted">
+                    Ordered Items -{" "}
+                    <span className="text-success">
+                      {
+                        <AquaCurrencyFormat
+                          amount={product.order.totalAmount}
+                        />
+                      }
+                    </span>
+                  </h5>
+
+                  <div className="list-group">
+                    {product.order?.items.map((item, index) => (
+                      <a
+                        key={index} // It's important to use `key` here for React list rendering
+                        onMouseEnter={() => setActiveIndex(index)} // Set active index on mouse enter
+                        onMouseLeave={() => setActiveIndex(null)} // Remove active index on mouse leave
+                        href={`/product/${item.productId}`}
+                        className={`list-group-item list-group-item-action mb-3 ${activeIndex === index ? "active" : ""}`} // Apply 'active' class conditionally
+                        aria-current={activeIndex === index ? "true" : "false"}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </>
               )}
             </>
           )}

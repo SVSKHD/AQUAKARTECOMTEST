@@ -251,7 +251,6 @@ const AquaCheckoutComponent = () => {
       });
   };
 
-
   const handleCashOnDelivery = () => {
     if (!selectedAddress) {
       AquaToast("Please Select the Address", "error");
@@ -262,7 +261,7 @@ const AquaCheckoutComponent = () => {
         user: user?.user?._id, // Safe access and also make sure user exists
         orderType: "Cash On Delivery",
         items: cartCount.map((item) => ({
-          productId: item.id,
+          productId: item._id,
           name: item.title,
           price: item.price,
           quantity: item.quantity,
@@ -285,7 +284,7 @@ const AquaCheckoutComponent = () => {
           console.log(res.data);
           setCod(newOrder); // Update state after successful API call
           AquaToast("successfully created COD order", "success");
-          // router.push(`/order/${res.data.newOrder._id}`);
+          router.push(`/order/${res.data.newOrder._id}`);
         })
         .catch((error) => {
           console.error("Error creating COD order:", error);

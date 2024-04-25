@@ -127,7 +127,7 @@ router.get(async (req, res) => {
 
     const { id } = req.query; // Correctly extract the 'id' from request parameters
     console.log("id", id);
-    const order = await AquaOrder.findOne({ transactionId: id }); // Await the async operation to get the order
+    const order = await AquaOrder.findById(id); // Await the async operation to get the order
 
     // Check if order exists
     if (!order) {
