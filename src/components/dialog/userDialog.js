@@ -88,7 +88,7 @@ const AquaUserDialog = () => {
 
   const handleForgotPasswordSubmit = () =>{
     console.log("load" , forgotpasswordData)
-    if(forgotPassword.email===true){
+    if(forgotPassword.email===true && !forgotPassword.otp){
       ForgotPassword({email:forgotpasswordData.email}).then((res)=>{
         console.log("res", res.data.emailSent)
         if(res.data.emailSent===true){
@@ -96,25 +96,51 @@ const AquaUserDialog = () => {
           setForgotPassword({...forgotPassword, disable:true , otp:true})
         }
       })
-    }else if(forgotPassword.otp===true){
-      console.log("verify-data" , forgotpasswordData)
+    }else if(forgotPassword.email && forgotPassword.otp===true){
+   
+      const sanitizedPayload = {
+        email:forgotpasswordData.email,
+        otp:forgotpasswordData.otp,
+        newPassword:forgotpasswordData.password
+      }
+      VerifyData(sanitizedPayload).then((res)=>{
+        AquaToast("Password has been changed successfully" , "success")
+        setForgotPassword({
+          email:false,
+          otp:false,
+          submit:false,
+          disable:false
+        })
+        dispatch({
+          type: "SET_AUTH_STATUS_VISIBLE",
+          payload: !signupStatus,
+        })
+      })
     }
   }
   
   const handleForgotPasswordChange = (event) => {
     const { name, value } = event.target;
-    setForgotPasswordData(prevData => ({
-      ...prevData,
-      [name]: value
-    }), () => {
-      // Check if the passwords match (after state update)
-      const passwordsMatch = forgotpasswordData.password === forgotpasswordData.passwordConfirm;
+  
+    // Update the forgotPasswordData state first
+    setForgotPasswordData(prevData => {
+      // Calculate the new data first
+      const newData = { ...prevData, [name]: value };
+  
+      // Check if the passwords match
+      const passwordsMatch = newData.password === newData.passwordConfirm;
+  
+      // Then update the forgotPassword state based on the new data
       setForgotPassword(prevState => ({
         ...prevState,
-        disable: !passwordsMatch  // Enable reset button only if passwords match
+        disable: !passwordsMatch  
       }));
+  
+      // Return the new data to update forgotPasswordData
+      return newData;
     });
   };
+  
   
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
