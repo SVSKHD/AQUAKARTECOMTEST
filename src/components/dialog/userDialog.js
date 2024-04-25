@@ -6,7 +6,6 @@ import AquaSignup from "../Auth/Signup";
 import AquaSignin from "../Auth/Signin";
 import LOGO from "../../assests/logo.png";
 import Image from "next/image";
-import AquaButton from "@/reusables/button";
 import { Spinner } from "react-bootstrap";
 import UserOperations from "@/Services/user";
 import AquaToast from "@/reusables/js/toast";
@@ -14,17 +13,23 @@ import AquaInput from "@/reusables/input";
 
 const AquaUserDialog = () => {
   const dispatch = useDispatch();
-  const { UserLogin, UserSignup , ForgotPassword , VerifyData} = UserOperations();
+  const { UserLogin, UserSignup, ForgotPassword, VerifyData } =
+    UserOperations();
   const { authDialog, signupStatus } = useSelector((state) => ({ ...state }));
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [signinData, setSigninData] = useState({ email: "", password: "" });
   const [forgotPassword, setForgotPassword] = useState({
     email: false,
-    otp:false,
+    otp: false,
     submit: false,
-    disable:false
+    disable: false,
   });
-  const [forgotpasswordData , setForgotPasswordData] = useState({email:"", otp :"" , password:"" , passwordConfirm:""})
+  const [forgotpasswordData, setForgotPasswordData] = useState({
+    email: "",
+    otp: "",
+    password: "",
+    passwordConfirm: "",
+  });
 
   const handleSignupDataChange = (data) => {
     setSignupData(data);
@@ -86,62 +91,51 @@ const AquaUserDialog = () => {
       });
   };
 
-  const handleForgotPasswordSubmit = () =>{
-    console.log("load" , forgotpasswordData)
-    if(forgotPassword.email===true && !forgotPassword.otp){
-      ForgotPassword({email:forgotpasswordData.email}).then((res)=>{
-        console.log("res", res.data.emailSent)
-        if(res.data.emailSent===true){
-          AquaToast("Otp has sent to email" , "success")
-          setForgotPassword({...forgotPassword, disable:true , otp:true})
+  const handleForgotPasswordSubmit = () => {
+    console.log("load", forgotpasswordData);
+    if (forgotPassword.email === true && !forgotPassword.otp) {
+      ForgotPassword({ email: forgotpasswordData.email }).then((res) => {
+        console.log("res", res.data.emailSent);
+        if (res.data.emailSent === true) {
+          AquaToast("Otp has sent to email", "success");
+          setForgotPassword({ ...forgotPassword, disable: true, otp: true });
         }
-      })
-    }else if(forgotPassword.email && forgotPassword.otp===true){
-   
+      });
+    } else if (forgotPassword.email && forgotPassword.otp === true) {
       const sanitizedPayload = {
-        email:forgotpasswordData.email,
-        otp:forgotpasswordData.otp,
-        newPassword:forgotpasswordData.password
-      }
-      VerifyData(sanitizedPayload).then((res)=>{
-        AquaToast("Password has been changed successfully" , "success")
+        email: forgotpasswordData.email,
+        otp: forgotpasswordData.otp,
+        newPassword: forgotpasswordData.password,
+      };
+      VerifyData(sanitizedPayload).then((res) => {
+        AquaToast("Password has been changed successfully", "success");
         setForgotPassword({
-          email:false,
-          otp:false,
-          submit:false,
-          disable:false
-        })
+          email: false,
+          otp: false,
+          submit: false,
+          disable: false,
+        });
         dispatch({
           type: "SET_AUTH_STATUS_VISIBLE",
           payload: !signupStatus,
-        })
-      })
+        });
+      });
     }
-  }
-  
+  };
+
   const handleForgotPasswordChange = (event) => {
     const { name, value } = event.target;
-  
-    // Update the forgotPasswordData state first
-    setForgotPasswordData(prevData => {
-      // Calculate the new data first
+    setForgotPasswordData((prevData) => {
       const newData = { ...prevData, [name]: value };
-  
-      // Check if the passwords match
       const passwordsMatch = newData.password === newData.passwordConfirm;
-  
-      // Then update the forgotPassword state based on the new data
-      setForgotPassword(prevState => ({
+      setForgotPassword((prevState) => ({
         ...prevState,
-        disable: !passwordsMatch  
+        disable: !passwordsMatch,
       }));
-  
-      // Return the new data to update forgotPasswordData
       return newData;
     });
   };
-  
-  
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -214,42 +208,42 @@ const AquaUserDialog = () => {
               />
               {forgotPassword.otp && (
                 <>
-                <AquaInput
-                size="lg"
-                label="otp"
-                name="otp"
-                placeholder="enter otp"
-                value={forgotpasswordData.otp}
-                handleChange={handleForgotPasswordChange}
-                />
-                <AquaInput
-                size="lg"
-                label="Enter your desired password"
-                name="password"
-                placeholder="enter password"
-                value={forgotpasswordData.password}
-                handleChange={handleForgotPasswordChange}
-                />
-                <AquaInput
-                size="lg"
-                label="ReEnter the password"
-                name="passwordConfirm"
-                placeholder="Re enter the password"
-                value={forgotpasswordData.passwordConfirm}
-                handleChange={handleForgotPasswordChange}
-                />
+                  <AquaInput
+                    size="lg"
+                    label="otp"
+                    name="otp"
+                    placeholder="enter otp"
+                    value={forgotpasswordData.otp}
+                    handleChange={handleForgotPasswordChange}
+                  />
+                  <AquaInput
+                    size="lg"
+                    label="Enter your desired password"
+                    name="password"
+                    placeholder="enter password"
+                    value={forgotpasswordData.password}
+                    handleChange={handleForgotPasswordChange}
+                  />
+                  <AquaInput
+                    size="lg"
+                    label="ReEnter the password"
+                    name="passwordConfirm"
+                    placeholder="Re enter the password"
+                    value={forgotpasswordData.passwordConfirm}
+                    handleChange={handleForgotPasswordChange}
+                  />
                 </>
-              ) }
+              )}
               <div class="d-grid gap-2">
-              <button
-                onClick={handleForgotPasswordSubmit}
-                class="btn btn-lg btn-primary"
-                type="button"
-                disabled={forgotPassword.disable}
-              >
-                Submit you Email
-              </button>
-            </div>
+                <button
+                  onClick={handleForgotPasswordSubmit}
+                  class="btn btn-lg btn-primary"
+                  type="button"
+                  disabled={forgotPassword.disable}
+                >
+                  Submit you Email
+                </button>
+              </div>
             </div>
           </>
         ) : (

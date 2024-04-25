@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
 import AquaCompareCard from "./cartComponent";
+import AquaHeading from "@/reusables/heading";
+
 const AquaCartComponent = () => {
   const { cartCount } = useSelector((state) => ({ ...state }));
   return (
     <div>
+      <AquaHeading level={2} decorate={true} content={"Cart"} />
       {cartCount.length > 0 ? (
         <>
           <div className="row">

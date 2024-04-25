@@ -5,7 +5,7 @@ const AquaWishComponent = () => {
   const { cartCount } = useSelector((state) => ({ ...state }));
   return (
     <div>
-      <AquaHeading level={2} decorate={true} content={"Cart"} />
+      <AquaHeading level={2} decorate={true} content={"WishList"} />
       <div className="row">
         {cartCount?.map((r, i) => (
           <div key={i} className="col">
