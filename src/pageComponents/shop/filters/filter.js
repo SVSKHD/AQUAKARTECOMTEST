@@ -2,13 +2,14 @@ import AquaCategoryOperations from "@/Services/category";
 import AquaSubCategoryOperations from "@/Services/subCategory";
 import AquaAccordian from "@/reusables/accrodian";
 import AquaHeading from "@/reusables/heading";
-import AquaToast from "@/reusables/js/toast"; // Ensure this import is correct
+import AquaToast from "@/reusables/js/toast";
 import { useCallback, useEffect, useState } from "react";
 
-const AquaShopFilters = ({ onRangeChange }) => {
-  // Assuming onRangeChange is passed as a prop
+const AquaShopFilters = ({ onSelectionChange }) => {
   const [categories, setCategories] = useState([]);
   const [subs, setSubs] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedSubs, setSelectedSubs] = useState([]);
   const [range, setRange] = useState({ min: 0, max: 1000000, value: 100 });
   const { getCategories } = AquaCategoryOperations();
   const { getSubCategories } = AquaSubCategoryOperations();
@@ -17,9 +18,37 @@ const AquaShopFilters = ({ onRangeChange }) => {
     const newValue = event.target.value;
     setRange((prevRange) => {
       const updatedRange = { ...prevRange, value: newValue };
-      onRangeChange(updatedRange); // Make sure this function is passed as a prop
+      onSelectionChange({ ...updatedRange, selectedCategories, selectedSubs });
       return updatedRange;
     });
+  };
+
+  const toggleCategorySelection = (category) => {
+    const currentIndex = selectedCategories.indexOf(category);
+    const newSelected = [...selectedCategories];
+
+    if (currentIndex === -1) {
+      newSelected.push(category);
+    } else {
+      newSelected.splice(currentIndex, 1);
+    }
+
+    setSelectedCategories(newSelected);
+    onSelectionChange({ range, selectedCategories: newSelected, selectedSubs });
+  };
+
+  const toggleSubCategorySelection = (subcategory) => {
+    const currentIndex = selectedSubs.indexOf(subcategory);
+    const newSelected = [...selectedSubs];
+
+    if (currentIndex === -1) {
+      newSelected.push(subcategory);
+    } else {
+      newSelected.splice(currentIndex, 1);
+    }
+
+    setSelectedSubs(newSelected);
+    onSelectionChange({ range, selectedCategories, selectedSubs: newSelected });
   };
 
   const loadCategories = useCallback(() => {
@@ -28,7 +57,7 @@ const AquaShopFilters = ({ onRangeChange }) => {
         setCategories(res.data);
       })
       .catch((err) => {
-        console.error(err); // Using console.error for simplicity
+        console.error(err);
         AquaToast("something went wrong", "error");
       });
   }, [getCategories]);
@@ -39,7 +68,7 @@ const AquaShopFilters = ({ onRangeChange }) => {
         setSubs(res.data);
       })
       .catch((err) => {
-        console.error(err); // Using console.error for simplicity
+        console.error(err);
         AquaToast("something went wrong", "error");
       });
   }, [getSubCategories]);
@@ -47,7 +76,7 @@ const AquaShopFilters = ({ onRangeChange }) => {
   useEffect(() => {
     loadCategories();
     loadSubCategories();
-  }, [loadCategories, loadSubCategories]); // Removed categories and subs from the dependency array
+  }, [loadCategories, loadSubCategories]);
 
   return (
     <>
@@ -71,18 +100,19 @@ const AquaShopFilters = ({ onRangeChange }) => {
       </div>
       <div>
         <AquaAccordian
-          eventKey="0" // Unique key for this accordion item
+          eventKey="0"
           title={<AquaHeading level={5} content={"Categories"} />}
           content={
             <div className="list-group">
-              {categories.map((c, i) => (
-                <label className="list-group-item" key={i}>
+              {categories.map((category, index) => (
+                <label className="list-group-item" key={index}>
                   <input
                     className="form-check-input me-1"
                     type="checkbox"
-                    value=""
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => toggleCategorySelection(category)}
                   />
-                  {c.title}
+                  {category.title}
                 </label>
               ))}
             </div>
@@ -91,18 +121,19 @@ const AquaShopFilters = ({ onRangeChange }) => {
       </div>
       <div>
         <AquaAccordian
-          eventKey="1" // Ensure this key is unique and different from the above
+          eventKey="1"
           title={<AquaHeading level={5} content={"Sub-Categories"} />}
           content={
             <div className="list-group">
-              {subs.map((c, i) => (
-                <label className="list-group-item" key={i}>
+              {subs.map((sub, index) => (
+                <label className="list-group-item" key={index}>
                   <input
                     className="form-check-input me-1"
                     type="checkbox"
-                    value=""
+                    checked={selectedSubs.includes(sub)}
+                    onChange={() => toggleSubCategorySelection(sub)}
                   />
-                  {c.title}
+                  {sub.title}
                 </label>
               ))}
             </div>
