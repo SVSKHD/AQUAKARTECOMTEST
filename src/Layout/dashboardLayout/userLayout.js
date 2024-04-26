@@ -12,8 +12,8 @@ const UserLayout = (props) => {
   const Router = useRouter();
 
   const createUserName = (email) => {
-    const usernamePart = email?.split("@")[0]; 
-    return usernamePart?.split(".")[0] + "."; 
+    const usernamePart = email?.split("@")[0];
+    return usernamePart?.split(".")[0] + ".";
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const UserLayout = (props) => {
   ];
   const userSince = (userData) => {
     const date = moment(userData).fromNow();
-    return date
+    return date;
   };
   return (
     <>

@@ -86,11 +86,12 @@ const AquaOrdersComponent = () => {
                 content={`Order Details-${product.order?.orderStatus}-${product.order.paymentMethod}`}
                 level={3}
               />
-              {product.order.paymentMethod==="Cash On Delivery" ? (
+              {product.order.paymentMethod === "Cash On Delivery" ? (
                 <>
                   <h6 className="text-muted">
                     Ordered Items -{" "}
-                    <span className="text-success">Total Amount - 
+                    <span className="text-success">
+                      Total Amount -
                       {
                         <AquaCurrencyFormat
                           amount={product.order.totalAmount}
@@ -114,7 +115,6 @@ const AquaOrdersComponent = () => {
                     ))}
                   </div>
                 </>
-               
               ) : (
                 <div
                   className="card border-success mb-3"

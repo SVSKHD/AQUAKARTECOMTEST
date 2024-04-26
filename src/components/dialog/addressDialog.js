@@ -13,7 +13,7 @@ const AquaAddressDialog = ({ show, hide, onSave, address }) => {
 
   useEffect(() => {
     if (show && address) setLocalAddress(address);
-  }, [address , show]);
+  }, [address, show]);
 
   useEffect(() => {
     if (show === false) {

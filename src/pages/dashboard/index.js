@@ -7,6 +7,7 @@ import UserPasswordForm from "@/components/forms/userpasswordForm";
 import { FaTrash, FaPen } from "react-icons/fa";
 import AquaHeading from "@/reusables/heading";
 import AquaAddressDialog from "@/components/dialog/addressDialog";
+import AquaToast from "@/reusables/js/toast";
 
 const initialState = {
   phoneNo: "",
@@ -35,9 +36,10 @@ const UserDashBoard = () => {
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
   const [addressAdd, setAddressAdd] = useState(false);
-  const [addressEdit , setAddressEdit] = useState(false)
+  const [addressEdit, setAddressEdit] = useState(false);
   const [addressAddPass, setAddressAddPass] = useState({});
-  const [AddressEditPass , setAddressEditPass] = useState({})
+  const [AddressEditPass, setAddressEditPass] = useState({});
+  const [selectedAddress, setSelectedAddress] = useState(false);
 
   const getDataAndManipulateStore = useCallback(async () => {
     if (user?.user?._id) {
@@ -73,30 +75,85 @@ const UserDashBoard = () => {
     setAddressAdd(true);
   };
 
-  const handleAddressEditDialog = (r) =>{
-    setAddressEdit(true)
-    setAddressEditPass(r)
-  }
+  const handleAddressEditDialog = (r) => {
+    setAddressEdit(true);
+    setAddressEditPass(r);
+  };
 
-  const handleAddressSave = async (address) => {
-    await userDataUpdate(user.user._id, { addresses: [address] })
+  const handleAddressSave = async (newAddress) => {
+    const updatedAddresses = [...user?.user?.addresses, newAddress];
+    await userDataUpdate(user.user._id, { addresses: updatedAddresses })
       .then((res) => {
         console.log("address", res.data.data.addresses);
-        const addressData = res.data.data.addresses;
         dispatch({
           type: "UPDATE_USER_ADDRESSES",
-          payload: { addresses: addressData },
+          payload: { addresses: res.data.data.addresses },
         });
-        AquaToast("Addresses Added Successfully", "success");
+        AquaToast("Address Added Successfully", "success");
         setAddressAdd(false);
       })
       .catch(() => {
-        AquaToast("Sorry Please Try again", "error");
+        AquaToast("Sorry, please try again", "error");
       });
   };
-  const handleAddressEditSave = () =>{
+  const handleAddressEditSave = async (editedAddress) => {
+    const updatedAddresses = user?.user?.addresses.map((addr) =>
+      addr._id === editedAddress._id ? editedAddress : addr,
+    );
+    console.log("updated", updatedAddresses);
+    await userDataUpdate(user.user._id, { addresses: updatedAddresses })
+      .then((res) => {
+        console.log("address", res.data.data.addresses);
+        dispatch({
+          type: "UPDATE_USER_ADDRESSES",
+          payload: { addresses: res.data.data.addresses },
+        });
+        AquaToast("Address Added Successfully", "success");
+        setAddressEdit(false);
+      })
+      .catch(() => {
+        AquaToast("Sorry, please try again", "error");
+      });
+  };
+  const handleDeleteAddress = async (index) => {
+    // Create a new array without the address at the given index
+    const updatedAddresses = user?.user?.addresses.filter(
+      (_, i) => i !== index,
+    );
 
-  }
+    // Update user data on the server with the new list of addresses
+    await userDataUpdate(user.user._id, { addresses: updatedAddresses })
+      .then((res) => {
+        console.log("Deleted address", res.data.data.addresses);
+        dispatch({
+          type: "UPDATE_USER_ADDRESSES",
+          payload: { addresses: res.data.data.addresses },
+        });
+        AquaToast("Address Deleted Successfully", "success");
+      })
+      .catch((error) => {
+        console.error("Failed to delete address", error);
+        AquaToast("Deletion failed, please try again", "error");
+      });
+  };
+
+  const handleAddressSelect = (selectedAddressIndex) => {
+    const selectedAddress = user.user.addresses[selectedAddressIndex];
+    setSelectedAddress(true);
+    dispatch({
+      type: "UPDATE_SELECTED_ADDRESS",
+      payload: { selectedAddress },
+    });
+    userDataUpdate(user.user._id, {
+      selectedAddress: selectedAddress,
+    })
+      .then((res) => {
+        AquaToast("Updated the Selected Address", "success");
+      })
+      .catch(() => {
+        AquaToast("Please Try again", "error");
+      });
+  };
   return (
     <>
       <UserLayout>
@@ -161,7 +218,9 @@ const UserDashBoard = () => {
           )}
         </div>
 
-       <button className="btn btn-primary" onClick={handleAddressAddDialog}>Add Address</button>
+        <button className="btn btn-primary" onClick={handleAddressAddDialog}>
+          Add Address
+        </button>
         <div>
           {detailsStatus ? <UserForm data={formData} /> : null}
           {NewPasswordStatus ? <UserPasswordForm /> : null}
@@ -173,10 +232,10 @@ const UserDashBoard = () => {
           onSave={handleAddressSave}
         />
         <AquaAddressDialog
-        show={addressEdit}
-        hide={()=>setAddressEdit(false)}
-        address={AddressEditPass}
-        onSave={handleAddressEditSave}
+          show={addressEdit}
+          hide={() => setAddressEdit(false)}
+          address={AddressEditPass}
+          onSave={handleAddressEditSave}
         />
       </UserLayout>
     </>

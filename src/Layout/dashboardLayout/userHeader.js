@@ -5,7 +5,7 @@ const UserHeader = ({ name, id, date }) => {
         <h1>
           Hello <span className="aqua-username">{name}</span>
           <p className="text-muted user-dahsboard-id">id:{id}</p>
-          <p className="text-muted user-since">Since : {date}</p>
+          <p className="text-muted user-since">User Since : {date}</p>
         </h1>
       </div>
     </>
