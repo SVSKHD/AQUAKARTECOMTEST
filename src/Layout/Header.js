@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 const AquaNavBar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { cartCount, user } = useSelector((state) => ({ ...state }));
+  const { cartCount, user , signupStatus} = useSelector((state) => ({ ...state }));
 
   const [cartLength, setCartLength] = useState(0);
   useEffect(() => {
@@ -63,6 +63,18 @@ const AquaNavBar = () => {
       router.push("/");
     }
   };
+
+
+  const handleClickLogin = () =>{
+    dispatch({
+      type: "SET_AUTH_DIALOG_VISIBLE",
+      payload: true,
+    })
+    dispatch({
+      type: "SET_AUTH_STATUS_VISIBLE",
+      payload: !signupStatus,
+    })
+  }
 
   return (
     <>
@@ -194,12 +206,7 @@ const AquaNavBar = () => {
                       <>
                         <AquaButton
                           variant={"normal"}
-                          onClick={() =>
-                            dispatch({
-                              type: "SET_AUTH_DIALOG_VISIBLE",
-                              payload: true,
-                            })
-                          }
+                          onClick={handleClickLogin}
                         >
                           <FaUser size={25} />
                         </AquaButton>
