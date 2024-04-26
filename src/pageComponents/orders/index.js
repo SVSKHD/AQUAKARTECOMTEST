@@ -20,32 +20,6 @@ const AquaOrdersComponent = () => {
   const { id } = router.query;
   const { UpdateOrder, getOrderByTrasactionId } = AquaOrderOperations();
 
-  // const updateOrder = useCallback(async () => {
-  //   if (toastShown) return; // Exit if the toast has already been shown
-
-  //   try {
-  //     const res = await UpdateOrder(id, { products: cartCount });
-  //     if (res.data.paymentStatus === "Paid") {
-  //       AquaToast("Order Created", "success");
-  //       setOrderUpdated(true); // Trigger the next useEffect to fetch order details
-  //     } else if (res.data.paymentStatus === "Pending") {
-  //       setOrderUpdated(false); // Ensure no further actions if pending
-  //       AquaToast("Payment is pending", "info"); // Provide a more specific message
-  //     } else {
-  //       AquaToast("Awaiting confirmation", "error");
-  //     }
-  //   } catch (error) {
-  //     AquaToast("Failed to update order, please try again", "error");
-  //   } finally {
-  //     setToastShown(true); // Update state to indicate toast has been shown
-  //     setLoading(false); // Set loading to false in all cases
-  //   }
-  // }, [UpdateOrder, id, cartCount, toastShown]);
-
-  // useEffect(() => {
-  //   updateOrder();
-  // }, [updateOrder]);
-
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {

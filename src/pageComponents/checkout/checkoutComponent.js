@@ -335,7 +335,25 @@ const AquaCheckoutComponent = () => {
     console.log("data", data);
   };
 
-  const handleAddressEditSave = () => {};
+  const handleAddressEditSave = async (editedAddress) => {
+    const updatedAddresses = user?.user?.addresses.map((addr) =>
+      addr._id === editedAddress._id ? editedAddress : addr,
+    );
+    console.log("updated", updatedAddresses);
+    await userDataUpdate(user.user._id, { addresses: updatedAddresses })
+      .then((res) => {
+        console.log("address", res.data.data.addresses);
+        dispatch({
+          type: "UPDATE_USER_ADDRESSES",
+          payload: { addresses: res.data.data.addresses },
+        });
+        AquaToast("Address Added Successfully", "success");
+        setAddressEdit(false);
+      })
+      .catch(() => {
+        AquaToast("Sorry, please try again", "error");
+      });
+  };
 
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
@@ -609,6 +627,7 @@ const AquaCheckoutComponent = () => {
               show={addressEdit}
               hide={() => setAddressEdit(false)}
               address={passAddress}
+              onSave={handleAddressEditSave}
             />
           </>
         )}
