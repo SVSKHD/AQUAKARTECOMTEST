@@ -1,5 +1,6 @@
 import UserLayout from "@/Layout/dashboardLayout/userLayout";
 import UserDashboardFavCard from "@/components/cards/userDashboardFavCard";
+import AquaHeading from "@/reusables/heading";
 import { useSelector } from "react-redux";
 
 const UserWishList = () => {
@@ -7,8 +8,7 @@ const UserWishList = () => {
   return (
     <>
       <UserLayout>
-        <h1>Wish list</h1>
-        <hr />
+        <AquaHeading content={"Wish-List"} decorate={true} level={1} />
         {favCount.length ? (
           <>
             {favCount.map((r, i) => (

@@ -31,15 +31,15 @@ const UserLayout = (props) => {
       path: "/dashboard",
     },
     {
-      title: "orders",
+      title: "Orders",
       path: "/dashboard/orders",
     },
     {
-      title: "wish-list",
+      title: "Wish-list",
       path: "/dashboard/wishlist",
     },
     {
-      title: "cart",
+      title: "Cart",
       path: "/dashboard/cart",
     },
   ];

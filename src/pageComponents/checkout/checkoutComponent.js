@@ -488,6 +488,12 @@ const AquaCheckoutComponent = () => {
                           ))}
                         </div>
                       )}
+                      <button
+                        className="btn btn-dark"
+                        onClick={handleAddressAddDialog}
+                      >
+                        Add Address
+                      </button>
                     </div>
                   </div>
                 )}

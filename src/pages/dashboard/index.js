@@ -158,6 +158,7 @@ const UserDashBoard = () => {
     <>
       <UserLayout>
         <div className="card-body mb-2">
+          <AquaHeading content={"Manage Profile"} decorate={true} level={1} />
           <AquaHeading level={3} decorate={true} content={"Address"} />
           {user.user.addresses?.length === 0 ? (
             <button className="btn btn-dark" onClick={handleAddressAddDialog}>

@@ -3,6 +3,7 @@ import AquaOrderOperatrions from "@/Services/order";
 import OrderDashboardCard from "@/components/cards/orderDashboardCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import AquaHeading from "@/reusables/heading";
 
 const UserOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -21,7 +22,7 @@ const UserOrder = () => {
   return (
     <>
       <UserLayout>
-        <h1>orders</h1>
+        <AquaHeading content={"Orders"} decorate={true} level={1} />
         <div className="row">
           {orders.map((r, i) => (
             <div key={i} className="col">
