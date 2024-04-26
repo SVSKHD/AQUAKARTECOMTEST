@@ -8,7 +8,7 @@ const UserOrder = () => {
   const [orders, setOrders] = useState([]);
   const { getOrderById } = AquaOrderOperatrions();
   const { user } = useSelector((state) => ({ ...state }));
-  const userId = user.user._id;
+  const userId = user?.user?._id;
   useEffect(() => {
     getOrderById(userId)
       .then((res) => {

@@ -78,9 +78,7 @@ const AquaUserDialog = () => {
         });
       })
       .catch((err) => {
-        const errorMessage =
-          err.response.data
-          // (signupStatus ? "Signup failed!" : "Signin failed!");
+        const errorMessage = err.response.data;
         AquaToast(errorMessage, "error");
         setStatus((prevStatus) => ({
           ...prevStatus,

@@ -75,6 +75,7 @@ const AquaOrdersComponent = () => {
     <AquaLayout seo={seo} container={true}>
       <div className="card rounded-4 mb-3">
         <div className="card-body">
+          {JSON.stringify(product)}
           {loading ? (
             <div className="spinner-border text-dark" role="status" />
           ) : (
@@ -82,47 +83,21 @@ const AquaOrdersComponent = () => {
               <AquaHeading
                 decorate={true}
                 customclass={"text-success"}
-                content={`Order Details-${product.order?.orderStatus}`}
+                content={`Order Details-${product.order?.orderStatus}-${product.order.paymentMethod}`}
                 level={3}
               />
-              {orderUpdated ? (
-                <div
-                  className="card border-success mb-3"
-                  style={{ maxWidth: "18rem;" }}
-                >
-                  <div className="card-body">
-                    <h5 className="card-title text-success">
-                      {product.order?.paymentStatus} -{" "}
-                      <AquaCurrencyFormat amount={product.order?.totalAmount} />
-                    </h5>
-                    <h6>Order-Status:-{product.order?.orderStatus}</h6>
-                    <AquaHeading
-                      level={5}
-                      decorate={true}
-                      content={"Ordered Items"}
-                    />
-                    {product.order?.items.map((item, index) => (
-                      <p key={index}>{item.name}</p>
-                    ))}
-                  </div>
-                </div>
-              ) : (
+              {product.order.paymentMethod==="Cash On Delivery" ? (
                 <>
-                  <AquaHeading
-                    content={`COD - ${product.order.paymentMethod}`}
-                    decorate={true}
-                    level={1}
-                  />
-                  <h5 className="text-muted">
+                  <h6 className="text-muted">
                     Ordered Items -{" "}
-                    <span className="text-success">
+                    <span className="text-success">Total Amount - 
                       {
                         <AquaCurrencyFormat
                           amount={product.order.totalAmount}
                         />
                       }
                     </span>
-                  </h5>
+                  </h6>
 
                   <div className="list-group">
                     {product.order?.items.map((item, index) => (
@@ -139,6 +114,27 @@ const AquaOrdersComponent = () => {
                     ))}
                   </div>
                 </>
+               
+              ) : (
+                <div
+                  className="card border-success mb-3"
+                  style={{ maxWidth: "18rem;" }}
+                >
+                  <div className="card-body">
+                    <h5 className="card-title text-success">
+                      {product.order?.paymentStatus} -{" "}
+                      <AquaCurrencyFormat amount={product.order?.totalAmount} />
+                    </h5>
+                    <AquaHeading
+                      level={5}
+                      decorate={true}
+                      content={"Ordered Items"}
+                    />
+                    {product.order?.items.map((item, index) => (
+                      <p key={index}>{item.name}</p>
+                    ))}
+                  </div>
+                </div>
               )}
             </>
           )}

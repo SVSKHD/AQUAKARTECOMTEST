@@ -5,7 +5,7 @@ const { ObjectId } = mongoose.Schema.Types;
 const OrderItemSchema = new mongoose.Schema({
   productId: {
     type: ObjectId,
-    ref: "AquaProduct"
+    ref: "AquaProduct",
   },
   name: String,
   price: Number,
