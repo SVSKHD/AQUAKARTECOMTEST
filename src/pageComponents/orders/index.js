@@ -75,7 +75,6 @@ const AquaOrdersComponent = () => {
     <AquaLayout seo={seo} container={true}>
       <div className="card rounded-4 mb-3">
         <div className="card-body">
-          {JSON.stringify(product)}
           {loading ? (
             <div className="spinner-border text-dark" role="status" />
           ) : (
