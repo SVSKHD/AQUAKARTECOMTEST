@@ -35,7 +35,9 @@ const UserDashBoard = () => {
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [NewPasswordStatus, setNewPasswordStatus] = useState(false);
   const [addressAdd, setAddressAdd] = useState(false);
+  const [addressEdit , setAddressEdit] = useState(false)
   const [addressAddPass, setAddressAddPass] = useState({});
+  const [AddressEditPass , setAddressEditPass] = useState({})
 
   const getDataAndManipulateStore = useCallback(async () => {
     if (user?.user?._id) {
@@ -71,6 +73,11 @@ const UserDashBoard = () => {
     setAddressAdd(true);
   };
 
+  const handleAddressEditDialog = (r) =>{
+    setAddressEdit(true)
+    setAddressEditPass(r)
+  }
+
   const handleAddressSave = async (address) => {
     await userDataUpdate(user.user._id, { addresses: [address] })
       .then((res) => {
@@ -87,10 +94,13 @@ const UserDashBoard = () => {
         AquaToast("Sorry Please Try again", "error");
       });
   };
+  const handleAddressEditSave = () =>{
+
+  }
   return (
     <>
       <UserLayout>
-        <div className="card-body">
+        <div className="card-body mb-2">
           <AquaHeading level={3} decorate={true} content={"Address"} />
           {user.user.addresses?.length === 0 ? (
             <button className="btn btn-dark" onClick={handleAddressAddDialog}>
@@ -130,7 +140,7 @@ const UserDashBoard = () => {
                           <button
                             type="button"
                             class="btn btn-base"
-                            onClick={() => handleAddressEdit(r)}
+                            onClick={() => handleAddressEditDialog(r)}
                           >
                             <FaPen size={15} />
                           </button>
@@ -151,7 +161,7 @@ const UserDashBoard = () => {
           )}
         </div>
 
-        <hr />
+       <button className="btn btn-primary" onClick={handleAddressAddDialog}>Add Address</button>
         <div>
           {detailsStatus ? <UserForm data={formData} /> : null}
           {NewPasswordStatus ? <UserPasswordForm /> : null}
@@ -161,6 +171,12 @@ const UserDashBoard = () => {
           hide={() => setAddressAdd(false)}
           address={addressAddPass}
           onSave={handleAddressSave}
+        />
+        <AquaAddressDialog
+        show={addressEdit}
+        hide={()=>setAddressEdit(false)}
+        address={AddressEditPass}
+        onSave={handleAddressEditSave}
         />
       </UserLayout>
     </>

@@ -12,8 +12,8 @@ const UserLayout = (props) => {
   const Router = useRouter();
 
   const createUserName = (email) => {
-    const usernamePart = email?.split("@")[0]; // Get the part before '@'
-    return usernamePart?.split(".")[0] + "."; // Get the part before the first '.' and add '.' back
+    const usernamePart = email?.split("@")[0]; 
+    return usernamePart?.split(".")[0] + "."; 
   };
 
   useEffect(() => {
@@ -44,10 +44,8 @@ const UserLayout = (props) => {
     },
   ];
   const userSince = (userData) => {
-    const date = moment(userData);
-    const year = date.year();
-    const month = date.month();
-    return `Year : ${year} - Month : ${month}`;
+    const date = moment(userData).fromNow();
+    return date
   };
   return (
     <>
