@@ -511,6 +511,10 @@ body {
   font-weight: 400;
 }
 
+.text-welcome{
+  color:#1679AB
+}
+
 .dashboard-list-item {
   border-style: none;
 }

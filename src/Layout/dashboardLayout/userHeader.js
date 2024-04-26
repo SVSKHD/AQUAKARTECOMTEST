@@ -3,7 +3,7 @@ const UserHeader = ({ name, id, date }) => {
     <>
       <div className="card-body">
         <h1>
-          Hello <span className="aqua-username">{name}</span>
+          Hello <span className="aqua-username text-welcome">"{name}"</span>
           <p className="text-muted user-dahsboard-id">id:{id}</p>
           <p className="text-muted user-since">
             You've been with us since <b>{date}</b>
