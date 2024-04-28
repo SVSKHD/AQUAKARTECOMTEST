@@ -19,31 +19,41 @@ const AquaInput = ({
     setShowPassword(!showPassword);
   };
 
-  // Function to handle blur event
   const handleBlur = () => {
     setIsTouched(true);
   };
 
-  // Determine if the input should show an error
   const showError = required && isTouched && !value;
+
+  // Handle phone input change to restrict to 10 digits
+  const handlePhoneInputChange = (event) => {
+    const inputValue = event.target.value;
+    // Only update state if the input is numeric and <= 10 digits
+    if (inputValue.length <= 10 && /^\d*$/.test(inputValue)) {
+      handleChange(event);
+    }
+  };
+
+  // Decide which onChange handler to use based on the input type
+  const inputChangeHandler =
+    type === "phone" ? handlePhoneInputChange : handleChange;
 
   return (
     <>
       {type === "password" ? (
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor={name} className="form-label">
             {label}
           </label>
           <div className="form-group position-relative">
             <input
-              type={showPassword ? "text" : type}
-              className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? "is-invalid" : ""}`}
-              value={value}
+              type={showPassword ? "text" : "password"}
+              className={`form-control form-control-${size} ${showError ? "is-invalid" : ""}`}
               name={name}
-              aria-label={placeholder}
+              value={value}
               placeholder={placeholder}
               onChange={handleChange}
-              onBlur={handleBlur} // Add blur event handler
+              onBlur={handleBlur}
               required={required}
             />
             <span
@@ -60,20 +70,18 @@ const AquaInput = ({
         </div>
       ) : (
         <div className="mb-3">
-          <label htmlFor="validationCustom03" className="form-label">
+          <label htmlFor={name} className="form-label">
             {label}
           </label>
           <input
             type={type}
-            className={`form-control form-control-${size === "lg" ? "lg" : "sm"} ${showError ? "is-invalid" : ""}`}
-            size={size}
+            className={`form-control form-control-${size} ${showError ? "is-invalid" : ""}`}
+            id={name}
             name={name}
-            aria-label={placeholder}
-            id="exampleFormControlInput1"
             value={value}
             placeholder={placeholder}
-            onChange={handleChange}
-            onBlur={handleBlur} // Add blur event handler
+            onChange={inputChangeHandler}
+            onBlur={handleBlur}
             required={required}
           />
           {showError && (

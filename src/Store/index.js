@@ -8,6 +8,7 @@ import { userReducer } from "./reducers/userDataReducer";
 import { cartReducer } from "./reducers/cartCountReducer";
 import { CODReducer } from "./reducers/CODreducer";
 import { favReducer } from "./reducers/favouritesReducer";
+import { userDialogReducer } from "./reducers/userPhoneDialog";
 
 const rootReducer = combineReducers({
   authDialog: authDialogReducer, // Combine your reducers here
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   favCount: favReducer,
   COD: CODReducer,
   user: userReducer,
+  userPhone: userDialogReducer,
 });
 
 export default rootReducer;

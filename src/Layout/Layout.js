@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Container } from "react-bootstrap";
+import AquaUserPhoneDialogUpdate from "@/components/dialog/userPhoneDialog";
 
 const AquaLayout = (props) => {
   const dispatch = useDispatch();
@@ -41,6 +42,12 @@ const AquaLayout = (props) => {
         type: "SET_AUTH_DIALOG_VISIBLE",
         payload: false,
       });
+      if (user.user.phone === undefined || null) {
+        dispatch({
+          type: "SET_USER_PHONE_DIALOG_VISIBLE",
+          payload: true,
+        });
+      }
     }
   }, [user, dispatch, router.pathname, hasShownDialog]);
 
@@ -49,6 +56,7 @@ const AquaLayout = (props) => {
       <AquaNavBar />
       <AquaCartDrawer />
       <AquaUserDialog />
+      <AquaUserPhoneDialogUpdate />
       <AquaPageWrapper>
         <AquaSeo seo={props.seo} />
         {props.container ? (

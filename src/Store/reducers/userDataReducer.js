@@ -19,14 +19,20 @@ export const userReducer = (state = null, action) => {
           selectedAddress: action.payload.selectedAddress,
         },
       };
-    case "UPDATE_USER_ADDRESSES": // This is your new case for updating addresses
-      console.log("Current state:", state);
-      console.log("Received action:", action);
+    case "UPDATE_USER_ADDRESSES":
       return {
         ...state,
         user: {
           ...state.user,
           addresses: action.payload.addresses,
+        },
+      };
+    case "UPDATE_USER_PHONE":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          phone: action.payload.phone,
         },
       };
     default:

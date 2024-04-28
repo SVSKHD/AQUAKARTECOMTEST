@@ -15,6 +15,7 @@ router.put(async (req, res) => {
     phoneNo,
     gstDetails,
     selectedAddress,
+    phone,
   } = req.body;
   try {
     const updated = await AquaEcomUser.findById(id);
@@ -22,6 +23,7 @@ router.put(async (req, res) => {
       id,
       {
         $set: {
+          phone,
           addresses,
           email,
           alternativeEmail,

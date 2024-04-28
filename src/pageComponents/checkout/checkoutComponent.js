@@ -32,6 +32,10 @@ const AquaCheckoutComponent = () => {
   const [addressAddPass, setAddressAddPass] = useState({});
   const [addressEdit, setAddressEdit] = useState(false);
   const [passAddress, setPassAddress] = useState({});
+  const [loadingStatus, setLoadingStatus] = useState({
+    codStatus: false,
+    phonepeGateway: false,
+  });
   const [cod, setCod] = useState({});
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
@@ -121,6 +125,7 @@ const AquaCheckoutComponent = () => {
   };
 
   const handleCashOnDelivery = () => {
+    setLoadingStatus({ phonepeGateway: false, codStatus: true });
     if (!selectedAddress) {
       AquaToast("Please Select the Address", "error");
     } else {
@@ -153,9 +158,11 @@ const AquaCheckoutComponent = () => {
           console.log(res.data);
           setCod(newOrder); // Update state after successful API call
           AquaToast("successfully created COD order", "success");
+          setLoadingStatus({ codStatus: false, phonepeGateway: false });
           router.push(`/order/${res.data.newOrder._id}`);
         })
         .catch((error) => {
+          setLoadingStatus({ cod: false, phonepeGateway: false });
           console.error("Error creating COD order:", error);
           AquaToast("please try again", "error");
         });
@@ -290,52 +297,74 @@ const AquaCheckoutComponent = () => {
                         content={"Address"}
                       />
                       {user.user.addresses?.length === 0 ? (
-      <button
-        className="btn btn-dark"
-        onClick={handleAddressAddDialog}
-      >
-        Add Address
-      </button>
-    ) : (
-      <>
-        <div className="row">
-          {user?.user?.addresses?.map((r, i) => (
-            <div key={i} className="col">
-              <div className="card rounded-4 mb-3" style={{ width: "21rem" }}>
-                <div className="card-body">
-                  <input
-                    type="radio"
-                    value={i}
-                    name="addressSelection"
-                    checked={user?.user?.selectedAddress?._id === r?._id}
-                    onChange={() => handleAddressSelect(i)}
-                  /> - Address-{i + 1}
-                  <hr />
-                  <h5 className="card-title">{r.city}</h5>
-                  <h6 className="card-description">{r.state}</h6>
-                  <p className="text-muted">{r.street} {r.city}-{r.postalCode}</p>
-                  <div className="btn-group mr-2" role="group" aria-label="Second group">
-                    <button type="button" className="btn btn-base" onClick={() => handleAddressEdit(r)}>
-                      <FaPen size={15} />
-                    </button>
-                    <button type="button" className="btn btn-danger" onClick={() => handleDeleteAddress(i)}>
-                      <FaTrash size={15} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <button
-          className="btn btn-dark"
-          onClick={handleAddressAddDialog}
-        >
-          Add Address
-        </button>
-      </>
-    )}
-                   
+                        <button
+                          className="btn btn-dark"
+                          onClick={handleAddressAddDialog}
+                        >
+                          Add Address
+                        </button>
+                      ) : (
+                        <>
+                          <div className="row">
+                            {user?.user?.addresses?.map((r, i) => (
+                              <div key={i} className="col">
+                                <div
+                                  className="card rounded-4 mb-3"
+                                  style={{ width: "21rem" }}
+                                >
+                                  <div className="card-body">
+                                    <input
+                                      type="radio"
+                                      value={i}
+                                      name="addressSelection"
+                                      checked={
+                                        user?.user?.selectedAddress?._id ===
+                                        r?._id
+                                      }
+                                      onChange={() => handleAddressSelect(i)}
+                                    />{" "}
+                                    - Address-{i + 1}
+                                    <hr />
+                                    <h5 className="card-title">{r.city}</h5>
+                                    <h6 className="card-description">
+                                      {r.state}
+                                    </h6>
+                                    <p className="text-muted">
+                                      {r.street} {r.city}-{r.postalCode}
+                                    </p>
+                                    <div
+                                      className="btn-group mr-2"
+                                      role="group"
+                                      aria-label="Second group"
+                                    >
+                                      <button
+                                        type="button"
+                                        className="btn btn-base"
+                                        onClick={() => handleAddressEdit(r)}
+                                      >
+                                        <FaPen size={15} />
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        onClick={() => handleDeleteAddress(i)}
+                                      >
+                                        <FaTrash size={15} />
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <button
+                            className="btn btn-dark"
+                            onClick={handleAddressAddDialog}
+                          >
+                            Add Address
+                          </button>
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
@@ -442,7 +471,16 @@ const AquaCheckoutComponent = () => {
                         className="col m-2 btn btn-outline-secondary"
                         onClick={handleCashOnDelivery}
                       >
-                        Cash on Delivery
+                        {loadingStatus.codStatus ? (
+                          <div
+                            class="spinner-border text-primary"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        ) : (
+                          "Cash on Delivery"
+                        )}
                       </button>
                       <button
                         onClick={handlePayment}
