@@ -473,11 +473,10 @@ const AquaCheckoutComponent = () => {
                       >
                         {loadingStatus.codStatus ? (
                           <div
-                            class="spinner-border text-primary"
+                            class="spinner-border text-light"
                             role="status"
-                          >
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
+                          />
+                          
                         ) : (
                           "Cash on Delivery"
                         )}
@@ -486,7 +485,10 @@ const AquaCheckoutComponent = () => {
                         onClick={handlePayment}
                         class="col m-2 btn btn-dark"
                         type="button"
-                      >
+                      >{loadingStatus.phonepeGateway ? ( <div
+                            class="spinner-border text-light"
+                            role="status"
+                          />) : "Proceed to Pay"}
                         Proceed to Pay
                       </button>
                     </div>
