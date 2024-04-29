@@ -1,6 +1,9 @@
 import { createRouter } from "next-connect";
 import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
+import sendEmail from "@/utils/emailTemplates/sendEmail";
+import orderEmail from "@/utils/emailTemplates/orderEmail";
+
 
 const router = createRouter();
 
@@ -16,6 +19,15 @@ router.post(async (req, res) => {
         .status(400)
         .json({ success: false, message: "Please try again" });
     }
+
+     // Send email
+     const emailContent = signupEmail(user.email); // This function should return the HTML content of the email
+     const emailResult = await sendEmail({
+       email: user.email,
+       subject: `Thank You for Your Order!  - Aquakart`,
+       message: "Happy Shopping",
+       content: emailContent,
+     });
     res.status(200).json({ success: true, newOrder: savedOrder }); // Respond with the saved order
   } catch (error) {
     console.error("Server Error:", error); // Log the error to the server console
