@@ -67,10 +67,17 @@ const OrderSchema = new mongoose.Schema(
       type: Map,
       of: String,
     },
+    offerApplied: {
+      type: false,
+    },
+    offerAppliedDetails: {
+      code: { type: String },
+      validity: { type: Date },
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const AquaOrder =

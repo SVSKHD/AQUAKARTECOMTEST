@@ -7,14 +7,18 @@ import AquaCategoryOperations from "@/Services/category";
 import { FaInstagram, FaWhatsapp, FaTelegram } from "react-icons/fa";
 import AquaSubCategoryOperations from "@/Services/subCategory";
 import AquaToast from "@/reusables/js/toast";
+import AquaSubscriberOperations from "@/Services/subscriber";
 
 const AquaFooter = () => {
   const date = new Date();
   const Year = date.getFullYear();
   const [categories, setCategories] = useState([]);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [subs, setSubs] = useState([]);
   const { getCategories } = AquaCategoryOperations();
   const { getSubCategories } = AquaSubCategoryOperations();
+  const { getSubscribed } = AquaSubscriberOperations();
 
   const loadCategories = useCallback(() => {
     getCategories()
@@ -36,6 +40,16 @@ const AquaFooter = () => {
       });
   }, [getSubCategories, setSubs]);
 
+  const handleEmailSubmit = () => {
+    console.log("email", email);
+    getSubscribed({email:email})
+      .then(() => {
+        AquaToast("Successfully Subscribed", "success");
+      })
+      .catch((err) => {
+        AquaToast(err.response.data.message, "error");
+      });
+  };
   useEffect(() => {
     loadCategories();
     loadSubCategories();
@@ -129,16 +143,23 @@ const AquaFooter = () => {
                     <input
                       type="text"
                       class="form-control"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your Email"
                       aria-label="Recipient's username"
                       aria-describedby="button-addon2"
                     />
                     <button
                       class="btn btn-light"
+                      onClick={handleEmailSubmit}
                       type="button"
                       id="button-addon2"
                     >
-                      <FaTelegram size={20} />
+                      {loading ? (
+                        <div class="spinner-border" role="status" />
+                      ) : (
+                        <FaTelegram size={20} />
+                      )}
                     </button>
                   </div>
                 </div>
