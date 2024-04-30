@@ -10,7 +10,7 @@ import { nanoid } from "nanoid";
 const App = createRouter();
 
 App.post(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password , firstName , phone } = req.body;
 
   try {
     // Connect to MongoDB
@@ -31,6 +31,8 @@ App.post(async (req, res) => {
     user = new AquaEcomUser({
       id: id,
       email,
+      phone:phone,
+      firstName:firstName,
       password: hashedPassword,
     });
 

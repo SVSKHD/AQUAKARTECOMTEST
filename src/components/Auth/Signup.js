@@ -1,7 +1,7 @@
 import AquaInput from "@/reusables/input";
 import { useState } from "react";
 const AquaSignup = ({ onDataChanged }) => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "" , firstName:"" , phone:"" });
   const handleChange = (e) => {
     const updatedData = { ...data, [e.target.name]: e.target.value };
     setData(updatedData);
@@ -20,6 +20,27 @@ const AquaSignup = ({ onDataChanged }) => {
         handleChange={handleChange}
         required={true}
         requiredMessage={"Please Enter Email"}
+      />
+      <AquaInput
+        label="First Name"
+        size="lg"
+        placeholder="please enter your first name"
+        name="firstName"
+        value={data.firstName}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please Enter Your First Name"}
+      />
+      <AquaInput
+        type="phone"
+        label="Phone"
+        size="lg"
+        placeholder="please enter your phone:no"
+        name="firstName"
+        value={data.phone}
+        handleChange={handleChange}
+        required={true}
+        requiredMessage={"Please Enter Your Phone No"}
       />
       <AquaInput
         label="Password"
