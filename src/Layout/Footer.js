@@ -41,7 +41,7 @@ const AquaFooter = () => {
   }, [getSubCategories, setSubs]);
 
   const handleEmailSubmit = () => {
-    getSubscribed({email:email})
+    getSubscribed({ email: email })
       .then(() => {
         AquaToast("Successfully Subscribed", "success");
       })

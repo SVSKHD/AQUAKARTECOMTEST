@@ -14,7 +14,7 @@ const AquaSubscriberSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const AquaSubscribers =

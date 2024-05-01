@@ -5,15 +5,22 @@ const router = createRouter();
 
 // Create a new coupon
 router.post(async (req, res) => {
-  const { code, description, discountPercentage, validity, conditions } = req.body;
-  
+  const { code, description, discountPercentage, validity, conditions } =
+    req.body;
+
   try {
     const existingCoupon = await AquaCoupon.findOne({ code });
     if (existingCoupon) {
       return res.status(400).json({ message: "Coupon code already exists." });
     }
 
-    const newCoupon = new AquaCoupon({ code, description, discountPercentage, validity, conditions });
+    const newCoupon = new AquaCoupon({
+      code,
+      description,
+      discountPercentage,
+      validity,
+      conditions,
+    });
     await newCoupon.save();
     res.status(201).json(newCoupon);
   } catch (error) {
@@ -32,16 +39,14 @@ router.get(async (req, res) => {
 });
 
 // Update a coupon
-router.put('/:code', async (req, res) => {
+router.put("/:code", async (req, res) => {
   const { code } = req.params;
   const updates = req.body;
 
   try {
-    const updatedCoupon = await AquaCoupon.findOneAndUpdate(
-      { code },
-      updates,
-      { new: true }
-    );
+    const updatedCoupon = await AquaCoupon.findOneAndUpdate({ code }, updates, {
+      new: true,
+    });
     if (!updatedCoupon) {
       return res.status(404).json({ message: "Coupon not found." });
     }
@@ -52,7 +57,7 @@ router.put('/:code', async (req, res) => {
 });
 
 // Delete a coupon
-router.delete('/:code', async (req, res) => {
+router.delete("/:code", async (req, res) => {
   const { code } = req.params;
 
   try {

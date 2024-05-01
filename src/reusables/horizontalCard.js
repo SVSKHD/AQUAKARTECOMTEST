@@ -3,34 +3,24 @@ import AQ from "../assests/Default.png";
 const AquaHorizontalCard = () => {
   return (
     <>
-      <div
-        className="card mb-3 aq-card shadow-lg rounded-25"
-        styles={{ maxWidth: "540px" }}
-      >
-        <div className="row g-0">
-          <div className="col-md-6">
-            <div className="gradient-1">
-              <Image
-                src={AQ}
-                className="img-fluid rounded-start shadow-lg custom-image"
-                alt="..."
-              />
-            </div>
+      <div class="card dark rounded-4">
+        <img
+          src="https://aquakart.co.in/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Faquakartproducts%2Fimage%2Fupload%2Fv1697875761%2Fcategories%2Fhnmzlrucnmpxyirsujx0.png&w=256&q=75"
+          className="m-3 rounded-4 img-fluid shadow-md"
+          alt="..."
+        />
+        <div class="card-body">
+          <div class="text-section">
+            <h5 class="card-title fw-bold">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card's content.
+            </p>
           </div>
-          <div className="col-md-6">
-            <div className="card-body">
-              <h5 className="card-title">Card title horizontal</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-body-secondary">
-                  Last updated 3 mins ago
-                </small>
-              </p>
-            </div>
+          <div class="cta-section">
+            <div>$129.00</div>
+            <a href="#" class="btn btn-light">
+              Buy Now
+            </a>
           </div>
         </div>
       </div>

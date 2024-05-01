@@ -25,7 +25,7 @@ const AquaUserPhoneDialogUpdate = () => {
             type: "UPDATE_USER_PHONE",
             payload: { phone: phone },
           });
-            dispatch({ type: "SET_USER_PHONE_DIALOG_VISIBLE", payload: false });
+          dispatch({ type: "SET_USER_PHONE_DIALOG_VISIBLE", payload: false });
           setLoading(false);
         }
       })

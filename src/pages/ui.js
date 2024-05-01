@@ -11,6 +11,7 @@ import AquaToast from "@/reusables/js/toast";
 import AquaTabs from "@/reusables/tabs";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaHorizontalCard from "@/reusables/horizontalCard";
+import AquaHoverCards from "@/reusables/hoverCards";
 
 const UIPage = () => {
   const drawerPositions = ["start", "end", "top", "bottom"];
@@ -103,16 +104,28 @@ const UIPage = () => {
           info
         </AquaButton>
         <hr />
-        <AquaHeading level={1} content="Tabs" decorate={true} customclass={"mb-3"}/>
+        <AquaHeading
+          level={1}
+          content="Tabs"
+          decorate={true}
+          customclass={"mb-3"}
+        />
         {/* <AquaTabs /> */}
-       
-        <AquaHeading level={1} content="Cards" decorate={true} customclass={"mb-2"}/>
+
+        <AquaHeading
+          level={1}
+          content="Cards"
+          decorate={true}
+          customclass={"mb-2"}
+        />
         <div className="row">
           <div className="col"></div>
           <div className="col">
             <AquaHorizontalCard />
           </div>
         </div>
+        <AquaHeading content="Hover Cards" level={1} decorate={true} customclass="mb-3"/>
+        <AquaHoverCards/>
         <div className="mb-5" />
       </Container>
     </>

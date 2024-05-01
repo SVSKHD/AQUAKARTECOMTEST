@@ -161,64 +161,75 @@ const UserDashBoard = () => {
           <AquaHeading content={"Manage Profile"} decorate={true} level={1} />
           <AquaHeading level={3} decorate={true} content={"Address"} />
           {user.user.addresses && user.user.addresses.length === 0 ? (
-  <button className="btn btn-dark" onClick={handleAddressAddDialog}>
-    Add Address
-  </button>
-) : (
-  <div className="row">
-  {user.user.addresses && user.user.addresses.length === 0 ? (
-  <button className="btn btn-dark" onClick={handleAddressAddDialog}>
-    Add Address
-  </button>
-) : (
-  <div className="row">
-    {user?.user?.addresses?.map((r, i) => (
-      <div key={i} className="col">
-        <div>
-          <div className="card rounded-4 mb-3" style={{ width: "21rem" }}>
-            <div className="card-body">
-              <span>
-                <input
-                  type="radio"
-                  value={i}
-                  name="addressSelection"
-                  checked={user?.user?.selectedAddress?._id === r?._id}
-                  onChange={() => handleAddressSelect(i)}
-                /> - Address-{i + 1}
-              </span>
-              <hr />
-              <h5 className="card-title">{r.city}</h5>
-              <h6 className="card-description">{r.state}</h6>
-              <p className="text-muted">
-                {r.street} {r.city}-{r.postalCode}
-              </p>
-              <div className="btn-group mr-2" role="group" aria-label="Second group">
+            <button className="btn btn-dark" onClick={handleAddressAddDialog}>
+              Add Address
+            </button>
+          ) : (
+            <div className="row">
+              {user.user.addresses && user.user.addresses.length === 0 ? (
                 <button
-                  type="button"
-                  className="btn btn-base"
-                  onClick={() => handleAddressEditDialog(r)}
+                  className="btn btn-dark"
+                  onClick={handleAddressAddDialog}
                 >
-                  <FaPen size={15} />
+                  Add Address
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => handleDeleteAddress(i)}
-                >
-                  <FaTrash size={15} />
-                </button>
-              </div>
+              ) : (
+                <div className="row">
+                  {user?.user?.addresses?.map((r, i) => (
+                    <div key={i} className="col">
+                      <div>
+                        <div
+                          className="card rounded-4 mb-3"
+                          style={{ width: "21rem" }}
+                        >
+                          <div className="card-body">
+                            <span>
+                              <input
+                                type="radio"
+                                value={i}
+                                name="addressSelection"
+                                checked={
+                                  user?.user?.selectedAddress?._id === r?._id
+                                }
+                                onChange={() => handleAddressSelect(i)}
+                              />{" "}
+                              - Address-{i + 1}
+                            </span>
+                            <hr />
+                            <h5 className="card-title">{r.city}</h5>
+                            <h6 className="card-description">{r.state}</h6>
+                            <p className="text-muted">
+                              {r.street} {r.city}-{r.postalCode}
+                            </p>
+                            <div
+                              className="btn-group mr-2"
+                              role="group"
+                              aria-label="Second group"
+                            >
+                              <button
+                                type="button"
+                                className="btn btn-base"
+                                onClick={() => handleAddressEditDialog(r)}
+                              >
+                                <FaPen size={15} />
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => handleDeleteAddress(i)}
+                              >
+                                <FaTrash size={15} />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
-
-  </div>
-)}
-
+          )}
         </div>
 
         <div>

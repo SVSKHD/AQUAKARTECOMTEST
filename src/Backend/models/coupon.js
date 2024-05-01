@@ -32,7 +32,7 @@ const AquaCouponSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const AquaCoupon =
