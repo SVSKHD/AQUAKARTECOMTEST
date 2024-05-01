@@ -363,16 +363,20 @@ body {
   border-radius: 3rem !important;
   margin-top: -20px;
 }
-.aqua-horizontal-custom-card{
-  margin:24%;
+.aqua-horizontal-custom-card {
+  margin: 24%;
 }
 
-.aqua-vertical-revamp-card{
-  width:400px
+.aqua-vertical-revamp-card {
+  width: 16rem;
 }
 
-.aqua-vertical-fav-button{
-  margin-left: 180px;
+.aqua-vertical-fav-button-align {
+  margin-left: 150px;
+}
+
+.aqua-vertical-fav-button {
+  border-radius: 130px !important;
 }
 
 .card-text {

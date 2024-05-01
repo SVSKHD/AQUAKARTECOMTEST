@@ -121,7 +121,7 @@ const UIPage = () => {
         />
         <div className="row">
           <div className="col">
-            <AquaVerticalCardRevamp data={{ title: "Product", amount: 3000 }}/>
+            <AquaVerticalCardRevamp data={{ title: "Product", amount: 3000 }} />
           </div>
           <div className="col">
             <AquaHorizontalCard data={{ title: "Product", amount: 3000 }} />
@@ -133,7 +133,7 @@ const UIPage = () => {
           decorate={true}
           customclass="mb-3"
         />
-      
+
         <div className="mb-5" />
       </Container>
     </>
