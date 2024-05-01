@@ -363,8 +363,9 @@ body {
   border-radius: 3rem !important;
   margin-top: -20px;
 }
-
-
+.aqua-horizontal-custom-card{
+  margin:24%;
+}
 .card-text {
   letter-spacing: 0.1em;
 }

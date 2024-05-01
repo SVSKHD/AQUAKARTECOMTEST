@@ -130,7 +130,7 @@ const UIPage = () => {
           decorate={true}
           customclass="mb-3"
         />
-        <AquaHoverCards />
+      
         <div className="mb-5" />
       </Container>
     </>
