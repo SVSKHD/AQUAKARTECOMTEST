@@ -121,11 +121,16 @@ const UIPage = () => {
         <div className="row">
           <div className="col"></div>
           <div className="col">
-            <AquaHorizontalCard />
+            <AquaHorizontalCard data={{ title: "Product", amount: 3000 }} />
           </div>
         </div>
-        <AquaHeading content="Hover Cards" level={1} decorate={true} customclass="mb-3"/>
-        <AquaHoverCards/>
+        <AquaHeading
+          content="Hover Cards"
+          level={1}
+          decorate={true}
+          customclass="mb-3"
+        />
+        <AquaHoverCards />
         <div className="mb-5" />
       </Container>
     </>
