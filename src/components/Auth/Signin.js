@@ -13,7 +13,7 @@ const AquaSignin = ({ onDataChanged }) => {
     <>
       <AquaInput
         label="Email"
-        size="lg"
+        size="md"
         name="email"
         placeholder="please enter your email"
         value={data.email}
@@ -23,7 +23,7 @@ const AquaSignin = ({ onDataChanged }) => {
       />
       <AquaInput
         label="Password"
-        size="lg"
+        size="md"
         name="password"
         type="password"
         placeholder="please enter your password"

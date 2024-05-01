@@ -13,7 +13,7 @@ const AquaSignup = ({ onDataChanged }) => {
     <>
       <AquaInput
         label="Email"
-        size="lg"
+        size="md"
         placeholder="please enter your email"
         name="email"
         value={data.email}
@@ -23,7 +23,7 @@ const AquaSignup = ({ onDataChanged }) => {
       />
       <AquaInput
         label="First Name"
-        size="lg"
+        size="md"
         placeholder="please enter your first name"
         name="firstName"
         value={data.firstName}
@@ -34,7 +34,7 @@ const AquaSignup = ({ onDataChanged }) => {
       <AquaInput
         type="phone"
         label="Phone"
-        size="lg"
+        size="md"
         placeholder="please enter your phone:no"
         name="firstName"
         value={data.phone}
@@ -44,7 +44,7 @@ const AquaSignup = ({ onDataChanged }) => {
       />
       <AquaInput
         label="Password"
-        size="lg"
+        size="md"
         type="password"
         name="password"
         placeholder="please enter your password"

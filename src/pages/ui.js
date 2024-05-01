@@ -103,10 +103,10 @@ const UIPage = () => {
           info
         </AquaButton>
         <hr />
-        <AquaHeading level={1}>Tabs</AquaHeading>
-        <AquaTabs />
-        <hr />
-        <AquaHeading level={1}>Cards</AquaHeading>
+        <AquaHeading level={1} content="Tabs" decorate={true} customclass={"mb-3"}/>
+        {/* <AquaTabs /> */}
+       
+        <AquaHeading level={1} content="Cards" decorate={true} customclass={"mb-2"}/>
         <div className="row">
           <div className="col"></div>
           <div className="col">
