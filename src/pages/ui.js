@@ -13,6 +13,7 @@ import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaHorizontalCard from "@/reusables/horizontalCard";
 import AquaHoverCards from "@/reusables/hoverCards";
 import AquaVerticalCardRevamp from "@/reusables/verticalCardRevamp";
+import TestVerticalcard from "@/reusables/testverticalcard";
 
 const UIPage = () => {
   const drawerPositions = ["start", "end", "top", "bottom"];
@@ -133,7 +134,7 @@ const UIPage = () => {
           decorate={true}
           customclass="mb-3"
         />
-
+        <TestVerticalcard/>
         <div className="mb-5" />
       </Container>
     </>

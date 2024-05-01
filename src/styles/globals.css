@@ -613,3 +613,150 @@ body {
   margin-right: 11px;
   margin-left: 11px;
 }
+
+
+.hovercard {
+  width: 300px;
+  height: 500px;
+  background: white;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0;
+  transform: scale(0.95);
+  transition: box-shadow 0.5s, transform 0.5s;
+}
+.hovercard:hover {
+  transform: scale(1);
+  box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
+}
+.hovercard .container1 {
+  width: 100%;
+  height: 100%;
+}
+.hovercard .container1 .top {
+  height: 80%;
+  width: 100%;
+  background: url(https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg) no-repeat center center;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+}
+.hovercard .container1 .bottom {
+  width: 200%;
+  height: 20%;
+  transition: transform 0.5s;
+}
+.hovercard .container1 .bottom.clicked {
+  transform: translateX(-50%);
+}
+.hovercard .container1 .bottom h1 {
+  margin: 0;
+  padding: 0;
+}
+.hovercard .container1 .bottom p {
+  margin: 0;
+  padding: 0;
+}
+.hovercard .container1 .bottom .left {
+  height: 100%;
+  width: 50%;
+  background: #f4f4f4;
+  position: relative;
+  float: left;
+}
+.hovercard .container1 .bottom .left .details {
+  padding: 20px;
+  float: left;
+  width: calc(70% - 40px);
+}
+.hovercard .container1 .bottom .left .buy {
+  float: right;
+  width: calc(30% - 2px);
+  height: 100%;
+  background: #f1f1f1;
+  transition: background 0.5s;
+  border-left: solid thin rgba(0, 0, 0, 0.1);
+}
+.hovercard .container1 .bottom .left .buy i {
+  font-size: 30px;
+  padding: 30px;
+  color: #254053;
+  transition: transform 0.5s;
+}
+.hovercard .container1 .bottom .left .buy:hover {
+  background: #A6CDDE;
+}
+.hovercard .container1 .bottom .left .buy:hover i {
+  transform: translateY(5px);
+  color: #00394B;
+}
+.hovercard .container1 .bottom .right {
+  width: 50%;
+  background: #A6CDDE;
+  color: white;
+  float: right;
+  height: 200%;
+  overflow: hidden;
+}
+.hovercard .container1 .bottom .right .details {
+  padding: 20px;
+  float: right;
+  width: calc(70% - 40px);
+}
+.hovercard .container1 .bottom .right .done {
+  width: calc(30% - 2px);
+  float: left;
+  transition: transform 0.5s;
+  border-right: solid thin rgba(255, 255, 255, 0.3);
+  height: 50%;
+}
+.hovercard .container1 .bottom .right .done i {
+  font-size: 30px;
+  padding: 30px;
+  color: white;
+}
+.hovercard .container1 .bottom .right .remove {
+  width: calc(30% - 1px);
+  clear: both;
+  border-right: solid thin rgba(255, 255, 255, 0.3);
+  height: 50%;
+  background: #BC3B59;
+  transition: transform 0.5s, background 0.5s;
+}
+.hovercard .container1 .bottom .right .remove:hover {
+  background: #9B2847;
+}
+.hovercard .container1 .bottom .right .remove:hover i {
+  transform: translateY(5px);
+}
+.hovercard .container1 .bottom .right .remove i {
+  transition: transform 0.5s;
+  font-size: 30px;
+  padding: 30px;
+  color: white;
+}
+.hovercard .container1 .bottom .right:hover .remove, .hovercard .container .bottom .right:hover .done {
+  transform: translateY(-100%);
+}
+.hovercard .inside {
+  z-index: 9;
+  background: #92879B;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  border-radius: 0px 0px 200px 200px;
+  transition: all 0.5s, border-radius 2s, top 1s;
+  overflow: hidden;
+}
+.hovercard .inside .icon {
+  position: absolute;
+  right: 85px;
+  top: 85px;
+  color: white;
+  opacity: 1;
+}
