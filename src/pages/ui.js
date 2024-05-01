@@ -134,7 +134,7 @@ const UIPage = () => {
           decorate={true}
           customclass="mb-3"
         />
-        <TestVerticalcard/>
+        <TestVerticalcard />
         <div className="mb-5" />
       </Container>
     </>
