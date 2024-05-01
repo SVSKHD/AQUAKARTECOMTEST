@@ -41,7 +41,7 @@ const AquaSignup = ({ onDataChanged }) => {
         label="Phone"
         size="md"
         placeholder="please enter your phone:no"
-        name="firstName"
+        name="phone"
         value={data.phone}
         handleChange={handleChange}
         required={true}
