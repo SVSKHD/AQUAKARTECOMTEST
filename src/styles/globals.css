@@ -366,6 +366,15 @@ body {
 .aqua-horizontal-custom-card{
   margin:24%;
 }
+
+.aqua-vertical-revamp-card{
+  width:400px
+}
+
+.aqua-vertical-fav-button{
+  margin-left: 180px;
+}
+
 .card-text {
   letter-spacing: 0.1em;
 }

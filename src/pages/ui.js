@@ -12,6 +12,7 @@ import AquaTabs from "@/reusables/tabs";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaHorizontalCard from "@/reusables/horizontalCard";
 import AquaHoverCards from "@/reusables/hoverCards";
+import AquaVerticalCardRevamp from "@/reusables/verticalCardRevamp";
 
 const UIPage = () => {
   const drawerPositions = ["start", "end", "top", "bottom"];
@@ -119,7 +120,9 @@ const UIPage = () => {
           customclass={"mb-2"}
         />
         <div className="row">
-          <div className="col"></div>
+          <div className="col">
+            <AquaVerticalCardRevamp data={{ title: "Product", amount: 3000 }}/>
+          </div>
           <div className="col">
             <AquaHorizontalCard data={{ title: "Product", amount: 3000 }} />
           </div>
