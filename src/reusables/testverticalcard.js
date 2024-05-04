@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaHeart,
   FaRegHeart,
@@ -9,14 +9,36 @@ import {
   FaCross,
   FaCheck,
 } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import AquaCurrencyFormat from "./currencyFormatter";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import ProductFunctions from "@/reusableUtils/poroductFunctions";
+
 const TestVerticalcard = ({ data }) => {
-  const router = useRouter();
   const { title, price, photos } = data;
+  const { cartCount, favCount } = useSelector((state) => ({ ...state }));
+  const [quickView, setQuickView] = useState(false);
+  const [cartAdd, setCartAdd] = useState(false);
+  const [favAdd, setFavAdd] = useState(false);
+  const router = useRouter();
+  const { addProductToCart, addProductToFav } = ProductFunctions();
   const [buyStateAnimation, setBuyStateAnimation] = useState(false);
+
+  useEffect(() => {
+    const isProductInCart = cartCount.some((item) => item._id === data?._id);
+    const isProductInFav = favCount.some((item) => item._id === data?._id);
+    setCartAdd(isProductInCart);
+    setFavAdd(isProductInFav);
+  }, [cartCount, data?._id, favCount]);
+
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
+  };
+
+  const handleAddToCart = () => {
+    setBuyStateAnimation(!buyStateAnimation);
+    addProductToCart(data, setCartAdd);
   };
   return (
     <>
@@ -37,10 +59,7 @@ const TestVerticalcard = ({ data }) => {
                 </a>
                 <AquaCurrencyFormat amount={price} />
               </div>
-              <div
-                class="buy"
-                onClick={() => setBuyStateAnimation(!buyStateAnimation)}
-              >
+              <div class="buy" onClick={handleAddToCart}>
                 <FaCartArrowDown size={30} />
               </div>
             </div>
@@ -50,17 +69,29 @@ const TestVerticalcard = ({ data }) => {
               </div>
               <div class="details">
                 <h6 onClick={() => redirectProduct(data._id)}>{title}</h6>
-                <p>Added to your cart</p>
+                <p>Added to cart</p>
               </div>
               <div class="remove" onClick={() => setBuyStateAnimation(false)}>
-                <FaCross />
+                <MdClose size={30} />
               </div>
             </div>
           </div>
         </div>
         <div class="inside">
           <div class="icon">
-            <FaRegHeart />
+            {favAdd ? (
+              <FaHeart
+                onClick={() => addProductToFav(data, setFavAdd)}
+                size={25}
+                className="text-light"
+              />
+            ) : (
+              <FaRegHeart
+                onClick={() => addProductToFav(data, setFavAdd)}
+                size={25}
+                className="text-light"
+              />
+            )}
           </div>
         </div>
       </div>
