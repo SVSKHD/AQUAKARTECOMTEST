@@ -5,6 +5,8 @@ import AquaCartCard from "../cards/cartCard";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import AquaButton from "@/reusables/button";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
+import EC from "../../assests/ec.jpg";
+import Image from "next/image";
 
 const AquaCartDrawer = () => {
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ const AquaCartDrawer = () => {
                         <AquaCurrencyFormat amount={total} adjust={true} />
                       </>
                     ) : (
-                      "Pleaase Add Items to Cart"
+                      "Your Cart"
                     )}
                   </>
                 }
@@ -49,19 +51,34 @@ const AquaCartDrawer = () => {
         size={"md"}
         position="bottom"
       >
-        <div className="row mb-1">
-          {cartCount.map((r, i) => (
-            <div className="col-md-3 col-lg-3 col-xs-12 col-sm-12" key={i}>
-              <AquaCartCard data={r} />
-            </div>
-          ))}
-        </div>
-        {cartCount.length ? (
+        {cartCount.length > 0 ? (
           <>
-            <AquaButton href="/checkout">Go to Cart</AquaButton>
+            {" "}
+            <div className="row mb-1">
+              {cartCount.map((r, i) => (
+                <div className="col-md-3 col-lg-3 col-xs-12 col-sm-12" key={i}>
+                  <AquaCartCard data={r} />
+                </div>
+              ))}
+            </div>
+            {cartCount.length ? (
+              <>
+                <AquaButton href="/checkout">Go to Cart</AquaButton>
+              </>
+            ) : (
+              ""
+            )}
           </>
         ) : (
-          ""
+          <>
+            <Image
+              height={300}
+              src={EC}
+              alt="Aquakart Empty Cart"
+              className="d-block mx-auto"
+            />
+            <h6 className="text-center text-muted">Your Cart is Empty!</h6>
+          </>
         )}
       </AquaDrawer>
     </>

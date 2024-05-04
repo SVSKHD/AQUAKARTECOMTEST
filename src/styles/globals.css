@@ -436,7 +436,7 @@ body {
 }
 
 .product-price-align {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .dynamic-product-price-brand {
@@ -616,14 +616,15 @@ body {
 
 .hovercard {
   width: 300px;
-  height: 500px;
+  height: 405px;
   background: white;
   margin: auto;
   position: relative;
   overflow: hidden;
   border-radius: 10px 10px 10px 10px;
-  box-shadow: 0;
+  box-shadow: 4px 4px 12px 2px #09090914;
   transform: scale(0.95);
+  margin-bottom: 2rem;
   transition:
     box-shadow 0.5s,
     transform 0.5s;
@@ -637,10 +638,8 @@ body {
   height: 100%;
 }
 .hovercard .container1 .top {
-  height: 80%;
+  height: auto;
   width: 100%;
-  background: url(https://s-media-cache-ak0.pinimg.com/736x/49/80/6f/49806f3f1c7483093855ebca1b8ae2c4.jpg)
-    no-repeat center center;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
@@ -648,7 +647,7 @@ body {
 }
 .hovercard .container1 .bottom {
   width: 200%;
-  height: 20%;
+  height: 26%;
   transition: transform 0.5s;
 }
 .hovercard .container1 .bottom.clicked {
@@ -700,7 +699,7 @@ body {
 }
 .hovercard .container1 .bottom .right {
   width: 50%;
-  background: #a6cdde;
+  background: #198754;
   color: white;
   float: right;
   height: 200%;
@@ -709,7 +708,7 @@ body {
 .hovercard .container1 .bottom .right .details {
   padding: 20px;
   float: right;
-  width:70%;
+  width: 70%;
 }
 .hovercard .container1 .bottom .right .done {
   width: calc(30% - 2px);
@@ -733,9 +732,9 @@ body {
   height: 65%;
   background: #bc3b59;
   transition: transform 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hovercard .container1 .bottom .right .remove:hover {
   background: #9b2847;
@@ -755,7 +754,7 @@ body {
 }
 .hovercard .inside {
   z-index: 9;
-  background: #92879b;
+  background: #043885;
   width: 140px;
   height: 140px;
   position: absolute;
@@ -774,4 +773,8 @@ body {
   top: 85px;
   color: white;
   opacity: 1;
+}
+.hovercard .details a {
+  line-height: 17px;
+  margin-bottom: 0.6rem;
 }

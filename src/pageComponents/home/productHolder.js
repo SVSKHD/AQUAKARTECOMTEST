@@ -33,7 +33,7 @@ const AquaProductHolder = () => {
               {products.map((r, i) => (
                 <>
                   <div key={i}>
-                    <TestVerticalcard data={r}/>
+                    <TestVerticalcard data={r} />
                     {/* <AquaVerticalCardRevamp data={r} /> */}
                     {/* <AquaVerticalCard
                       title={r.title}

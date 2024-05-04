@@ -135,18 +135,14 @@ const DynamicProduct = () => {
                     isMobile ? "" : "scollable-column"
                   } col-md-7 col-xs-12 col-sm-12 col-lg-7`}
                 >
-                  <h1 className="display-2 text-bold">{product?.title}</h1>
-                  <span className="dynamic-product-price-brand">
-                    <h4 className="price product-price-align">
-                      <Badge bg="success">
-                        {" "}
-                        <AquaCurrencyFormat amount={product?.price} />
-                      </Badge>
-                    </h4>
-                    <h4 className="dynamic-product-brand">
-                      Brand : {product?.brand}
-                    </h4>
-                  </span>
+                  <h1>{product?.title}</h1>
+                  <h5 className="price product-price-align fw-semibold">
+                    <span className="text-success">
+                      {" "}
+                      <AquaCurrencyFormat amount={product?.price} />
+                    </span>
+                  </h5>
+                  <h6 className="mb-3">Brand : {product?.brand}</h6>
                   <InputGroup className="mb-3 width-adjust">
                     <Button variant="outline-dark" onClick={stockSub}>
                       <FaMinus size={25} />
@@ -181,7 +177,7 @@ const DynamicProduct = () => {
                         <FaRegHeart size={25} className="text-danger" />
                       )}
                     </AquaButton>
-                    <AquaButton href="/checkout">Checkout</AquaButton>
+                    <AquaButton href="/checkout">Go To Cart</AquaButton>
                   </div>
                   <hr />
                   <div className="container">

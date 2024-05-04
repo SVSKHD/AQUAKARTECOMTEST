@@ -9,7 +9,7 @@ const AquaButton = (props) => {
         </Button>
       ) : (
         <Button
-          className="custom-button ms-1 me-1"
+          className="custom-button ms-1 me-1 rounded-pill"
           variant={props.variant}
           {...props}
         >

@@ -11,24 +11,31 @@ import {
 } from "react-icons/fa";
 import AquaCurrencyFormat from "./currencyFormatter";
 import { useRouter } from "next/router";
-const TestVerticalcard = ({data}) => {
-  const router = useRouter
-  const {title , price} = data
+const TestVerticalcard = ({ data }) => {
+  const router = useRouter();
+  const { title, price, photos } = data;
   const [buyStateAnimation, setBuyStateAnimation] = useState(false);
-  const [removeStateAnimation, setRemoveStateAnimation] = useState(false);
   const redirectProduct = (id) => {
     router.push(`/product/${id}`);
   };
   return (
     <>
-      <div onClick={redirectProduct} class="hovercard">
+      <div class="hovercard">
         <div class="container1">
-          <div class="top"></div>
+          <div class="top">
+            <img src={photos[0].secure_url} className="top" />
+          </div>
           <div class={buyStateAnimation ? "bottom clicked" : "bottom"}>
             <div class="left">
               <div class="details">
-                <h6>{title}</h6>
-                <AquaCurrencyFormat amount={price}/>
+                <a
+                  href="##"
+                  className="d-block fw-medium text-dark text-decoration-none"
+                  onClick={() => redirectProduct(data._id)}
+                >
+                  {title}
+                </a>
+                <AquaCurrencyFormat amount={price} />
               </div>
               <div
                 class="buy"
@@ -42,7 +49,7 @@ const TestVerticalcard = ({data}) => {
                 <FaCheck />
               </div>
               <div class="details">
-                <h6>{title}</h6>
+                <h6 onClick={() => redirectProduct(data._id)}>{title}</h6>
                 <p>Added to your cart</p>
               </div>
               <div class="remove" onClick={() => setBuyStateAnimation(false)}>
@@ -53,7 +60,7 @@ const TestVerticalcard = ({data}) => {
         </div>
         <div class="inside">
           <div class="icon">
-            <FaRegHeart  />
+            <FaRegHeart />
           </div>
         </div>
       </div>

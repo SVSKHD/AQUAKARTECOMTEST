@@ -49,7 +49,7 @@ const AquaHomeComponent = () => {
           </div>
         </div>
         <div className="container">
-          <h2 className="index-second text-center">Featured</h2>
+          <div className="h2 text-center mb-4">Featured Products</div>
           <AquaProductHolder />
         </div>
         {/* <AquaSubCategoryHolder /> */}
