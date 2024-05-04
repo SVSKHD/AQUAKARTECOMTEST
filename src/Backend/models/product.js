@@ -7,6 +7,12 @@ const AquaProductSchema = new mongoose.Schema({
     trim: true,
     maxlength: [120, "Product name should not be more than 120 characters"],
   },
+  ShortName:{
+   type:String
+  },
+  code:{
+    type:String
+  },
   discountPriceStatus: {
     type: Boolean,
     default: false,

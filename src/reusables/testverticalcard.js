@@ -10,19 +10,25 @@ import {
   FaCheck,
 } from "react-icons/fa";
 import AquaCurrencyFormat from "./currencyFormatter";
-const TestVerticalcard = () => {
+import { useRouter } from "next/router";
+const TestVerticalcard = ({data}) => {
+  const router = useRouter
+  const {title , price} = data
   const [buyStateAnimation, setBuyStateAnimation] = useState(false);
   const [removeStateAnimation, setRemoveStateAnimation] = useState(false);
+  const redirectProduct = (id) => {
+    router.push(`/product/${id}`);
+  };
   return (
     <>
-      <div class="hovercard">
+      <div onClick={redirectProduct} class="hovercard">
         <div class="container1">
           <div class="top"></div>
           <div class={buyStateAnimation ? "bottom clicked" : "bottom"}>
             <div class="left">
               <div class="details">
-                <h1>Chair</h1>
-                <AquaCurrencyFormat amount={200}/>
+                <h6>{title}</h6>
+                <AquaCurrencyFormat amount={price}/>
               </div>
               <div
                 class="buy"
@@ -36,7 +42,7 @@ const TestVerticalcard = () => {
                 <FaCheck />
               </div>
               <div class="details">
-                <h1>Chair</h1>
+                <h6>{title}</h6>
                 <p>Added to your cart</p>
               </div>
               <div class="remove" onClick={() => setBuyStateAnimation(false)}>
