@@ -27,10 +27,10 @@ const AquaOrdersComponent = () => {
         const productRes = await getOrderByTrasactionId(id);
         setProduct(productRes.data);
         console.log("product", productRes.data);
-        dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
+        // dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
         setLoading(false);
       } catch (err) {
-        // AquaToast("Failed to load order details, please try again", "error");
+        AquaToast("Failed to load order details, please try again", "error");
         setLoading(false);
       }
     };
@@ -47,7 +47,7 @@ const AquaOrdersComponent = () => {
 
   return (
     <AquaLayout seo={seo} container={true}>
-      <div className="card rounded-4 mb-3">
+      {/* <div className="card rounded-4 mb-3">
         <div className="card-body">
           {loading ? (
             <div className="spinner-border text-dark" role="status" />
@@ -121,7 +121,9 @@ const AquaOrdersComponent = () => {
             Download Invoice
           </button>
         </div>
-      </div>
+      </div> */}
+      {/* <div>{JSON.stringify(product)}</div> */}
+      <h1>ordered</h1>
     </AquaLayout>
   );
 };
