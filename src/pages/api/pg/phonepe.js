@@ -8,7 +8,11 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   const passedPaylaod = req.body;
-  console.log(req.body.totalAmount , process.env.PHONE_PE_MERCHANT_ID , process.env.PHONE_PE_KEY);
+  console.log(
+    req.body.totalAmount,
+    process.env.PHONE_PE_MERCHANT_ID,
+    process.env.PHONE_PE_KEY,
+  );
   db.connectDb();
   const createUserName = (email) => {
     if (email) {

@@ -3,6 +3,7 @@ import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
 import sendEmail from "@/utils/emailTemplates/sendEmail";
 import orderEmail from "@/utils/emailTemplates/orderEmail";
+import AquaEcomUser from "@/Backend/models/user";
 
 const router = createRouter();
 
@@ -12,7 +13,7 @@ router.post(async (req, res) => {
     await db.connectDb(); // Make sure to await the database connection
     const cashOnOrder = new AquaOrder(req.body); // Create a new order instance
     const savedOrder = await cashOnOrder.save(); // Await the save operation
-
+    const user = AquaEcomUser.findById(req.body.user);
     if (!savedOrder) {
       return res
         .status(400)
@@ -20,7 +21,11 @@ router.post(async (req, res) => {
     }
 
     // Send email
-    const emailContent = signupEmail(user.email); // This function should return the HTML content of the email
+    const emailContent = orderEmail(
+      user.email,
+      savedOrder.items,
+      savedOrder.orderType,
+    ); // This function should return the HTML content of the email
     const emailResult = await sendEmail({
       email: user.email,
       subject: `Thank You for Your Order!  - Aquakart`,

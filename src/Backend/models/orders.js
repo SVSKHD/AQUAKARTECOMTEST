@@ -16,7 +16,7 @@ const OrderSchema = new mongoose.Schema(
   {
     user: {
       type: ObjectId,
-      ref: "User", // Assuming you have a User model
+      ref: "AquaEcomUser", // Assuming you have a User model
       required: true,
     },
     orderType: {
@@ -68,7 +68,8 @@ const OrderSchema = new mongoose.Schema(
       of: String,
     },
     offerApplied: {
-      type: false,
+      type: Boolean,
+      default: false, // Assuming default value is false
     },
     offerAppliedDetails: {
       code: { type: String },
