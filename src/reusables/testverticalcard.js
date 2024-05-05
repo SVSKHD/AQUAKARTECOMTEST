@@ -47,7 +47,7 @@ const TestVerticalcard = ({ data }) => {
           <div class="top">
             <img src={photos[0].secure_url} className="top" />
           </div>
-          <div class={buyStateAnimation ? "bottom clicked" : "bottom"}>
+          <div class={cartAdd ? "bottom clicked" : "bottom"}>
             <div class="left">
               <div class="details">
                 <a
@@ -71,7 +71,10 @@ const TestVerticalcard = ({ data }) => {
                 <h6 onClick={() => redirectProduct(data._id)}>{title}</h6>
                 <p>Added to cart</p>
               </div>
-              <div class="remove" onClick={() => setBuyStateAnimation(false)}>
+              <div
+                class="remove"
+                onClick={() => addProductToCart(data, setFavAdd)}
+              >
                 <MdClose size={30} />
               </div>
             </div>
