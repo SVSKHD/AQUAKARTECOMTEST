@@ -458,7 +458,7 @@ const AquaCheckoutComponent = () => {
                         </div>
                         <div class="p-2 flex-fill text-end text-success">
                           <h4>
-                            <AquaCurrencyFormat amount={total} adjust={true} />
+                            <AquaCurrencyFormat amount={total} />
                           </h4>
                         </div>
                       </div>

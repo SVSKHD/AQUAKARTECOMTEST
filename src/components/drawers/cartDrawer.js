@@ -37,7 +37,7 @@ const AquaCartDrawer = () => {
                     {cartCount.length > 0 ? (
                       <>
                         Total -
-                        <AquaCurrencyFormat amount={total} adjust={true} />
+                        <AquaCurrencyFormat amount={total} />
                       </>
                     ) : (
                       "Your Cart"
