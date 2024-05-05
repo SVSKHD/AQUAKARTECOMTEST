@@ -4,15 +4,12 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import AquaEcomUser from "@/Backend/models/user";
 import db from "@/utils/db";
+import AquaOrder from "@/Backend/models/orders";
 const router = createRouter();
 
 router.post(async (req, res) => {
   const passedPaylaod = req.body;
-  console.log(
-    req.body.totalAmount,
-    process.env.PHONE_PE_MERCHANT_ID,
-    process.env.PHONE_PE_KEY,
-  );
+  console.log("phonepe initiated",req.body)
   db.connectDb();
   const createUserName = (email) => {
     if (email) {
@@ -65,8 +62,6 @@ router.post(async (req, res) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
-
         return res.json(response.data.data.instrumentResponse.redirectInfo.url);
       })
       .catch(function (error) {
