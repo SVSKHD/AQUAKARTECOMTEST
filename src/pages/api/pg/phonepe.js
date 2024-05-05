@@ -8,7 +8,7 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   const passedPaylaod = req.body;
-  console.log(req.body.totalAmount);
+  console.log(req.body.totalAmount , process.env.PHONE_PE_MERCHANT_ID , process.env.PHONE_PE_KEY);
   db.connectDb();
   const createUserName = (email) => {
     if (email) {
@@ -21,7 +21,7 @@ router.post(async (req, res) => {
 
     const merchantTransactionId = req.body.transactionId;
     const data = {
-      merchantId: process.env.PHONE_PE_MERCHANT_ID,
+      merchantId: "M22A17T812FQ1",
       merchantTransactionId: merchantTransactionId,
       merchantUserId: passedPaylaod.user,
       name: getUserById.name || createUserName(getUserById.email),
@@ -38,7 +38,7 @@ router.post(async (req, res) => {
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
     const string =
-      payloadMain + "/pg/v1/pay" + process.env.PHONE_PE_KEY;
+      payloadMain + "/pg/v1/pay" + "fb0244a9-34b5-48ae-a7a3-741d3de823d3";
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
 
