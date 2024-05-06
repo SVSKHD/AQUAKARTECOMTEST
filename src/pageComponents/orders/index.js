@@ -27,7 +27,7 @@ const AquaOrdersComponent = () => {
         const productRes = await getOrderByTrasactionId(id);
         setProduct(productRes.data);
         console.log("product", productRes.data);
-        // dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
+        dispatch({ type: "EMPTY_CART" }); // Empty cart only if order is updated
         setLoading(false);
       } catch (err) {
         AquaToast("Failed to load order details, please try again", "error");

@@ -4,8 +4,10 @@ import AquaOrderOperatrions from "@/Services/order";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 
 const AquaCodPageComponent = () => {
+  const dispatch = useDispatch()
   const router = useRouter();
   const [product, setProduct] = useState({});
   const seoData = {
@@ -18,11 +20,12 @@ const AquaCodPageComponent = () => {
     getOrderById(id)
       .then((res) => {
         setProduct(res.data.data);
+        dispatch({ type: "EMPTY_CART" });
       })
       .catch((err) => {
         AquaToast("sorry please try again", "error");
       });
-  }, [id, getOrderById]);
+  }, [id, getOrderById , dispatch]);
   return (
     <>
       <AquaLayout seo={seoData}>
