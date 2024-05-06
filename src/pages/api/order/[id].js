@@ -12,73 +12,75 @@ function getUserIdFromTransactionId(transactionId) {
 }
 
 router.post(async (req, res) => {
-  try {
-    await db.connectDb();
-    const data = req.body;
-    const allowedOrigins = [
-      "https://www.aquakart.co.in",
-      "http://localhost:3000",
-    ];
-    const origin = req.headers.origin;
+  console.log("req", req.body)
+  res.json({success:true , data:req.body})
+  // try {
+  //   await db.connectDb();
+  //   const data = req.body;
+  //   const allowedOrigins = [
+  //     "https://www.aquakart.co.in",
+  //     "http://localhost:3000",
+  //   ];
+  //   const origin = req.headers.origin;
 
-    // If the request's origin is in our list of allowed origins, set the header.
-    if (allowedOrigins.includes(origin)) {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-    }
+  //   // If the request's origin is in our list of allowed origins, set the header.
+  //   if (allowedOrigins.includes(origin)) {
+  //     res.setHeader("Access-Control-Allow-Origin", origin);
+  //   }
 
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    console.log("req", data);
-    const transactionId = data.transactionId;
-    const userId = getUserIdFromTransactionId(transactionId);
+  //   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  //   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  //   console.log("req", data);
+  //   const transactionId = data.transactionId;
+  //   const userId = getUserIdFromTransactionId(transactionId);
 
-    const options = {
-      method: "GET",
-      url: `https://api-preprod.phonepe.com/apis/pg/v1/status/${data.merchantId}/${transactionId}`,
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-        "X-VERIFY": `${SHA256(
-          `/pg/v1/status/${data.merchantId}/${transactionId}` +
-            process.env.NEXT_PUBLIC_SALT_KEY,
-        ).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
-        "X-MERCHANT-ID": data.merchantId,
-      },
-    };
+  //   const options = {
+  //     method: "GET",
+  //     url: `https://api-preprod.phonepe.com/apis/pg/v1/status/${data.merchantId}/${transactionId}`,
+  //     headers: {
+  //       accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       "X-VERIFY": `${SHA256(
+  //         `/pg/v1/status/${data.merchantId}/${transactionId}` +
+  //           process.env.NEXT_PUBLIC_SALT_KEY,
+  //       ).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
+  //       "X-MERCHANT-ID": data.merchantId,
+  //     },
+  //   };
 
-    const apiResponse = await axios.request(options);
-    console.log("PhonePe API Response:", apiResponse.data);
-    const response = apiResponse.data;
+  //   const apiResponse = await axios.request(options);
+  //   console.log("PhonePe API Response:", apiResponse.data);
+  //   const response = apiResponse.data;
 
-    if (response.success) {
-      const orderData = {
-        user: userId,
-        totalAmount: response.data.amount / 100,
-        transactionId: response.data.transactionId,
-        paymentStatus: "Paid",
-        paymentInstrument: response.data.paymentInstrument,
-        orderType: "Payment Method",
-        transactionId: transactionId,
-      };
+  //   if (response.success) {
+  //     const orderData = {
+  //       user: userId,
+  //       totalAmount: response.data.amount / 100,
+  //       transactionId: response.data.transactionId,
+  //       paymentStatus: "Paid",
+  //       paymentInstrument: response.data.paymentInstrument,
+  //       orderType: "Payment Method",
+  //       transactionId: transactionId,
+  //     };
 
-      const newOrder = new AquaOrder(orderData);
+  //     const newOrder = new AquaOrder(orderData);
 
-      await newOrder.save();
-      console.log(newOrder.user);
-      res.writeHead(302, { Location: `/order/${newOrder.transactionId}` });
-      res.end();
-    } else {
-      res.status(400).json({ error: "Payment not successful" });
-    }
-  } catch (error) {
-    console.error("Error calling PhonePe API:", error.message);
-    res.writeHead(302, {
-      Location: `/order/${transactionId}?info="FAILURE"`,
-    });
-    res.end();
-  } finally {
-    await db.disconnectDb();
-  }
+  //     await newOrder.save();
+  //     console.log(newOrder.user);
+  //     res.writeHead(302, { Location: `/order/${newOrder.transactionId}` });
+  //     res.end();
+  //   } else {
+  //     res.status(400).json({ error: "Payment not successful" });
+  //   }
+  // } catch (error) {
+  //   console.error("Error calling PhonePe API:", error.message);
+  //   res.writeHead(302, {
+  //     Location: `/order/${transactionId}?info="FAILURE"`,
+  //   });
+  //   res.end();
+  // } finally {
+  //   await db.disconnectDb();
+  // }
 });
 
 
