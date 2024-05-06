@@ -50,7 +50,7 @@ router.post(async (req, res) => {
     console.log("PhonePe API Response:", apiResponse.data);
     const response = apiResponse.data;
 
-    if (response.success && response.code === "PAYMENT_SUCCESS") {
+    if (response.success) {
       const orderData = {
         user: userId,
         totalAmount: response.data.amount / 100,
