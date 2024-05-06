@@ -1,40 +1,52 @@
 import { createRouter } from "next-connect";
-import db from "@/utils/db"; // Adjust the path according to your project structure
-import AquaOrder from "@/Backend/models/orders"; // Adjust the path according to your project structure
+import db from "@/utils/db";
+import AquaOrder from "@/Backend/models/orders";
 
 const router = createRouter();
 
 router.get(async (req, res) => {
+  const allowedOrigins = [
+    "https://www.aquakart.co.in",
+    "http://localhost:3000",
+  ];
+  const origin = req.headers.origin;
+
+  // Set CORS headers if the origin is allowed
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  
   await db.connectDb();
 
-  // Extract userId from query parameters
-  const { userId } = req.query;
+  const { userId, orderId, transactionId } = req.query;
 
   try {
-    // If userId is not provided, return an error
-    if (!userId) {
-      await db.disconnectDb(); // Ensure database connection is closed on error
-      return res.status(400).json({
-        success: false,
-        message: "No userId provided",
-      });
+    let query = {};
+
+    if (userId) {
+      query.user = userId;
     }
 
-    // Find orders that match the provided userId and sort them by createdAt in descending order
-    const orders = await AquaOrder.find({ user: userId }).sort({
-      createdAt: -1,
-    });
+    if (orderId) {
+      query._id = orderId;
+    }
 
-    // If no orders are found for the given userId, return a message
+    if (transactionId) {
+      query.transactionId = transactionId;
+     }
+
+    const orders = await AquaOrder.findOne(query).sort({ createdAt: -1 });
+
     if (orders.length === 0) {
-      await db.disconnectDb(); // Ensure database connection is closed if no data found
       return res.status(404).json({
         success: true,
-        message: "No orders found for this user",
+        message: "No orders found for the provided criteria",
       });
     }
 
-    // Return the found orders
     res.status(200).json({ success: true, data: orders });
   } catch (error) {
     res.status(500).json({
@@ -43,7 +55,6 @@ router.get(async (req, res) => {
       error: error.message,
     });
   } finally {
-    // Always disconnect the database connection in a finally block to ensure it closes
     await db.disconnectDb();
   }
 });

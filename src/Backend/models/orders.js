@@ -19,6 +19,7 @@ const OrderSchema = new mongoose.Schema(
       ref: "AquaEcomUser", // Assuming you have a User model
       required: true,
     },
+    orderId:{type:String},
     orderType: {
       type: String,
       enum: ["Cash On Delivery", "Payment Method"], // Allowed values

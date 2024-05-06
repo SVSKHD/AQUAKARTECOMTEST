@@ -25,7 +25,7 @@ const AquaCheckoutComponent = () => {
   const seo = { title: "Aquakart | Checkout" };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
-    user?.user?.addresses?.map(() => false),
+    user?.user?.addresses?.map(() => false)
   );
   const [deleteAll, setDeleteAll] = useState(false);
   const [addressAdd, setAddressAdd] = useState(false);
@@ -87,7 +87,7 @@ const AquaCheckoutComponent = () => {
 
   const handlePhonePeGateway = () => {
     const transactionId = `AQTR-${nanoid(5).toUpperCase()}D${moment(
-      new Date(),
+      new Date()
     ).format("DDMMYYYY")}`;
     const calculatedTotal = cartTotal(cartCount);
     const newOrder = {
@@ -109,7 +109,7 @@ const AquaCheckoutComponent = () => {
       shippingMethod: "Standard",
       shippingCost: 50, // Example fixed cost
       estimatedDelivery: new Date(
-        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000
       ).toISOString(), // Adding 7 days
     };
     console.log("phonepe", newOrder);
@@ -125,6 +125,10 @@ const AquaCheckoutComponent = () => {
   };
 
   const handleCashOnDelivery = () => {
+    const cashTransactionId = `AQTR-COD${nanoid(5).toUpperCase()}D${moment(
+      new Date()
+    ).format("DDMMYYYY")}`;
+    const orderId = `AQOD${moment(new Date()).format("DDMMYYYY")}${nanoid(2)}`;
     setLoadingStatus({ phonepeGateway: false, codStatus: true });
     if (!selectedAddress) {
       AquaToast("Please Select the Address", "error");
@@ -140,7 +144,9 @@ const AquaCheckoutComponent = () => {
           price: item.price,
           quantity: item.quantity,
         })),
+        transactionId: cashTransactionId,
         totalAmount: calculatedTotal,
+        orderId: orderId,
         paymentMethod: "Cash On Delivery",
         paymentStatus: "Pending",
         currency: "INR",
@@ -149,7 +155,7 @@ const AquaCheckoutComponent = () => {
         shippingMethod: "Standard",
         shippingCost: 50, // Example fixed cost
         estimatedDelivery: new Date(
-          new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+          new Date().getTime() + 7 * 24 * 60 * 60 * 1000
         ).toISOString(), // Adding 7 days for delivery
         orderStatus: "Processing",
       };
@@ -159,7 +165,7 @@ const AquaCheckoutComponent = () => {
           setCod(newOrder); // Update state after successful API call
           AquaToast("successfully created COD order", "success");
           setLoadingStatus({ codStatus: false, phonepeGateway: false });
-          router.push(`/order/${res.data.newOrder._id}`);
+          router.push(`/order/cod/${res.data.newOrder._id}`);
         })
         .catch((error) => {
           setLoadingStatus({ cod: false, phonepeGateway: false });
@@ -212,7 +218,7 @@ const AquaCheckoutComponent = () => {
 
   const handleAddressEditSave = async (editedAddress) => {
     const updatedAddresses = user?.user?.addresses.map((addr) =>
-      addr._id === editedAddress._id ? editedAddress : addr,
+      addr._id === editedAddress._id ? editedAddress : addr
     );
     await userDataUpdate(user.user._id, { addresses: updatedAddresses })
       .then((res) => {
@@ -232,7 +238,7 @@ const AquaCheckoutComponent = () => {
   const handleDeleteAddress = async (index) => {
     // Create a new array excluding the address at the specified index
     const updatedAddresses = user.user.addresses.filter(
-      (_, idx) => idx !== index,
+      (_, idx) => idx !== index
     );
     await userDataUpdate(user.user._id, { addresses: updatedAddresses })
       .then(() => {
@@ -250,7 +256,7 @@ const AquaCheckoutComponent = () => {
   useEffect(() => {
     if (user?.user?.selectedAddress) {
       const isSelectedAddress = user.user.addresses.some(
-        (address) => address._id === user.user.selectedAddress._id,
+        (address) => address._id === user.user.selectedAddress._id
       );
       setSelectedAddress(isSelectedAddress);
     }
