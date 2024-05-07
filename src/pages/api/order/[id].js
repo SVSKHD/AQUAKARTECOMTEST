@@ -15,7 +15,7 @@ router.post(async(req,res)=>{
   console.log(req,req.body)
   const data = req.body
   try {
-    res.json({success:data.success , data:data.data})
+    res.json({success:data.Success , data:data.PAYMENT_METHOD, backup:data})
   } catch (err) {
     res.json({success:false , data:null})
   }
