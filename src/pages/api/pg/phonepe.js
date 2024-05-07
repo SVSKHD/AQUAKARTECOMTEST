@@ -9,7 +9,7 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   const passedPaylaod = req.body;
-  console.log("phonepe initiated",req.body)
+  console.log("phonepe initiated", req.body);
   db.connectDb();
   const createUserName = (email) => {
     if (email) {
@@ -19,7 +19,11 @@ router.post(async (req, res) => {
   };
   try {
     const getUserById = AquaEcomUser.findById(passedPaylaod.user);
-
+    let order;
+    if (getUserById) {
+      order = new AquaOrder(req.body);
+      order.save();
+    }
     const merchantTransactionId = req.body.transactionId;
     const data = {
       merchantId: "M22A17T812FQ1",

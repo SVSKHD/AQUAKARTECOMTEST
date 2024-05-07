@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 
 const AquaCodPageComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
   const [product, setProduct] = useState({});
   const seoData = {
@@ -26,7 +26,7 @@ const AquaCodPageComponent = () => {
       .catch((err) => {
         AquaToast("sorry please try again", "error");
       });
-  }, [id, getOrderById , dispatch]);
+  }, [id, getOrderById, dispatch]);
   return (
     <>
       <AquaLayout seo={seoData}>
@@ -68,15 +68,18 @@ const AquaCodPageComponent = () => {
                   </div>
                 </div>
                 <div className="justify-content-center mt-4">
-                <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
-            Dashboard
-          </Link>
-          <button
-            className="ms-2 btn btn-outline-dark rounded-pill"
-            onClick={() => handleCLickInvoice(r)}
-          >
-            Download Invoice
-          </button>
+                  <Link
+                    href="/dashboard/orders"
+                    className="btn btn-dark rounded-pill"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    className="ms-2 btn btn-outline-dark rounded-pill"
+                    onClick={() => handleCLickInvoice(r)}
+                  >
+                    Download Invoice
+                  </button>
                 </div>
               </div>
             </div>

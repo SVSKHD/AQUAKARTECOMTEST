@@ -12,8 +12,8 @@ function getUserIdFromTransactionId(transactionId) {
 }
 
 router.post(async (req, res) => {
-  console.log("req", req.body)
-  res.json({success:req.body.success , data:req.body.data})
+  console.log("req", req.body);
+  res.json({ success: req.body.success, data: req.body.data });
   // try {
   //   await db.connectDb();
   //   const data = req.body;
@@ -83,7 +83,6 @@ router.post(async (req, res) => {
   // }
 });
 
-
 router.put(async (req, res) => {
   await db.connectDb(); // Ensure the database connection is open
 
@@ -128,7 +127,7 @@ router.get(async (req, res) => {
 
     const { id } = req.query; // Correctly extract the 'id' from request parameters
     console.log("id", id);
-    const order = await AquaOrder.findOne({transactionId:id}); // Await the async operation to get the order
+    const order = await AquaOrder.findOne({ transactionId: id }); // Await the async operation to get the order
 
     // Check if order exists
     if (!order) {

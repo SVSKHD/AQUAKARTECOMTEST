@@ -18,7 +18,7 @@ router.get(async (req, res) => {
 
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  
+
   await db.connectDb();
 
   const { userId, orderId, transactionId } = req.query;
@@ -36,7 +36,7 @@ router.get(async (req, res) => {
 
     if (transactionId) {
       query.transactionId = transactionId;
-     }
+    }
 
     const orders = await AquaOrder.findOne(query).sort({ createdAt: -1 });
 
