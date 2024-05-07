@@ -11,78 +11,88 @@ function getUserIdFromTransactionId(transactionId) {
   return parts[1];
 }
 
-router.post(async (req, res) => {
-  console.log("req", req.body);
+router.post(async(req,res)=>{
+  console.log(req,req.body)
   const data = req.body
-  res.json({ success:success, data : data});
-  // try {
-  //   await db.connectDb();
-  //   const data = req.body;
-  //   const allowedOrigins = [
-  //     "https://www.aquakart.co.in",
-  //     "http://localhost:3000",
-  //   ];
-  //   const origin = req.headers.origin;
+  try {
+    res.json({success:true , data:data})
+  } catch (err) {
+    res.json({success:false , data:null})
+  }
+})
 
-  //   // If the request's origin is in our list of allowed origins, set the header.
-  //   if (allowedOrigins.includes(origin)) {
-  //     res.setHeader("Access-Control-Allow-Origin", origin);
-  //   }
+// router.post(async (req, res) => {
+//   console.log("req", req.body);
+//   const data = req.body;
+//   res.json({ success: success, data: data });
+//   // try {
+//   //   await db.connectDb();
+//   //   const data = req.body;
+//   //   const allowedOrigins = [
+//   //     "https://www.aquakart.co.in",
+//   //     "http://localhost:3000",
+//   //   ];
+//   //   const origin = req.headers.origin;
 
-  //   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  //   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  //   console.log("req", data);
-  //   const transactionId = data.transactionId;
-  //   const userId = getUserIdFromTransactionId(transactionId);
+//   //   // If the request's origin is in our list of allowed origins, set the header.
+//   //   if (allowedOrigins.includes(origin)) {
+//   //     res.setHeader("Access-Control-Allow-Origin", origin);
+//   //   }
 
-  //   const options = {
-  //     method: "GET",
-  //     url: `https://api-preprod.phonepe.com/apis/pg/v1/status/${data.merchantId}/${transactionId}`,
-  //     headers: {
-  //       accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "X-VERIFY": `${SHA256(
-  //         `/pg/v1/status/${data.merchantId}/${transactionId}` +
-  //           process.env.NEXT_PUBLIC_SALT_KEY,
-  //       ).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
-  //       "X-MERCHANT-ID": data.merchantId,
-  //     },
-  //   };
+//   //   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   //   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   //   console.log("req", data);
+//   //   const transactionId = data.transactionId;
+//   //   const userId = getUserIdFromTransactionId(transactionId);
 
-  //   const apiResponse = await axios.request(options);
-  //   console.log("PhonePe API Response:", apiResponse.data);
-  //   const response = apiResponse.data;
+//   //   const options = {
+//   //     method: "GET",
+//   //     url: `https://api-preprod.phonepe.com/apis/pg/v1/status/${data.merchantId}/${transactionId}`,
+//   //     headers: {
+//   //       accept: "application/json",
+//   //       "Content-Type": "application/json",
+//   //       "X-VERIFY": `${SHA256(
+//   //         `/pg/v1/status/${data.merchantId}/${transactionId}` +
+//   //           process.env.NEXT_PUBLIC_SALT_KEY,
+//   //       ).toString()}###${process.env.NEXT_PUBLIC_SALT_INDEX}`,
+//   //       "X-MERCHANT-ID": data.merchantId,
+//   //     },
+//   //   };
 
-  //   if (response.success) {
-  //     const orderData = {
-  //       user: userId,
-  //       totalAmount: response.data.amount / 100,
-  //       transactionId: response.data.transactionId,
-  //       paymentStatus: "Paid",
-  //       paymentInstrument: response.data.paymentInstrument,
-  //       orderType: "Payment Method",
-  //       transactionId: transactionId,
-  //     };
+//   //   const apiResponse = await axios.request(options);
+//   //   console.log("PhonePe API Response:", apiResponse.data);
+//   //   const response = apiResponse.data;
 
-  //     const newOrder = new AquaOrder(orderData);
+//   //   if (response.success) {
+//   //     const orderData = {
+//   //       user: userId,
+//   //       totalAmount: response.data.amount / 100,
+//   //       transactionId: response.data.transactionId,
+//   //       paymentStatus: "Paid",
+//   //       paymentInstrument: response.data.paymentInstrument,
+//   //       orderType: "Payment Method",
+//   //       transactionId: transactionId,
+//   //     };
 
-  //     await newOrder.save();
-  //     console.log(newOrder.user);
-  //     res.writeHead(302, { Location: `/order/${newOrder.transactionId}` });
-  //     res.end();
-  //   } else {
-  //     res.status(400).json({ error: "Payment not successful" });
-  //   }
-  // } catch (error) {
-  //   console.error("Error calling PhonePe API:", error.message);
-  //   res.writeHead(302, {
-  //     Location: `/order/${transactionId}?info="FAILURE"`,
-  //   });
-  //   res.end();
-  // } finally {
-  //   await db.disconnectDb();
-  // }
-});
+//   //     const newOrder = new AquaOrder(orderData);
+
+//   //     await newOrder.save();
+//   //     console.log(newOrder.user);
+//   //     res.writeHead(302, { Location: `/order/${newOrder.transactionId}` });
+//   //     res.end();
+//   //   } else {
+//   //     res.status(400).json({ error: "Payment not successful" });
+//   //   }
+//   // } catch (error) {
+//   //   console.error("Error calling PhonePe API:", error.message);
+//   //   res.writeHead(302, {
+//   //     Location: `/order/${transactionId}?info="FAILURE"`,
+//   //   });
+//   //   res.end();
+//   // } finally {
+//   //   await db.disconnectDb();
+//   // }
+// });
 
 router.put(async (req, res) => {
   await db.connectDb(); // Ensure the database connection is open
@@ -103,7 +113,7 @@ router.put(async (req, res) => {
     const updatedOrder = await AquaOrder.findOneAndUpdate(
       { transactionId: id }, // Use the transactionId to find the order
       { $set: { items: updatedItems } }, // Update the 'items' field
-      { new: true, runValidators: true }, // Return the updated document and run schema validators
+      { new: true, runValidators: true } // Return the updated document and run schema validators
     );
 
     if (!updatedOrder) {
