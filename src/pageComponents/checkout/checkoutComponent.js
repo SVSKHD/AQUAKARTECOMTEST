@@ -89,6 +89,7 @@ const AquaCheckoutComponent = () => {
     const transactionId = `AQTR-${nanoid(5).toUpperCase()}D${moment(
       new Date(),
     ).format("DDMMYYYY")}`;
+    const orderId = `AQOD${moment(new Date()).format("DDMMYYYY")}${nanoid(2).toUpperCase()}`;
     const calculatedTotal = cartTotal(cartCount);
     const newOrder = {
       user: user?.user?._id, // Safe access and also make sure user exists
@@ -128,7 +129,7 @@ const AquaCheckoutComponent = () => {
     const cashTransactionId = `AQTR-COD${nanoid(5).toUpperCase()}D${moment(
       new Date(),
     ).format("DDMMYYYY")}`;
-    const orderId = `AQOD${moment(new Date()).format("DDMMYYYY")}${nanoid(2)}`;
+    const orderId = `AQOD${moment(new Date()).format("DDMMYYYY")}${nanoid(2).toUpperCase()}`;
     setLoadingStatus({ phonepeGateway: false, codStatus: true });
     if (!selectedAddress) {
       AquaToast("Please Select the Address", "error");
