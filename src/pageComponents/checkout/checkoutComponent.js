@@ -95,6 +95,7 @@ const AquaCheckoutComponent = () => {
       user: user?.user?._id, // Safe access and also make sure user exists
       transactionId: transactionId,
       orderType: "Payment Method",
+      orderId:orderId,
       items: cartCount.map((item) => ({
         productId: item.id,
         name: item.name,
