@@ -13,7 +13,8 @@ function getUserIdFromTransactionId(transactionId) {
 
 router.post(async (req, res) => {
   console.log("req", req.body);
-  res.json({ success: req.body.success, data: req.body.data });
+  const { success, data } = req.body;
+  res.json({ success, data });
   // try {
   //   await db.connectDb();
   //   const data = req.body;
