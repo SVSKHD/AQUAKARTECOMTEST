@@ -58,8 +58,6 @@ router.post(async (req, res) => {
     const apiResponse = await axios.request(options);
     if (apiResponse.data.success) {
       const orderData = {
-        totalAmount: apiResponse.data.amount / 100,
-        transactionId,
         paymentStatus: "Paid",
         paymentInstrument: apiResponse.data.paymentInstrument,
         orderType: "Payment Method",
