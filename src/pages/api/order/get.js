@@ -38,7 +38,7 @@ router.get(async (req, res) => {
       query.transactionId = transactionId;
     }
 
-    const orders = await AquaOrder.findOne(query).sort({ createdAt: -1 });
+    const orders = await AquaOrder.find(query).sort({ createdAt: -1 });
 
     if (orders.length === 0) {
       return res.status(404).json({
