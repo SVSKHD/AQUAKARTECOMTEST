@@ -56,10 +56,10 @@ router.post(async (req, res) => {
     };
 
     const apiResponse = await axios.request(options);
-    if (apiResponse.data.success) {
+    if (apiResponse.data) {
       const orderData = {
         paymentStatus: "Paid",
-        paymentInstrument: apiResponse.data.paymentInstrument,
+        paymentInstrument: apiResponse.data,
         orderType: "Payment Method",
       };
 
