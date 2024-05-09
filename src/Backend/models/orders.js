@@ -35,6 +35,10 @@ const OrderSchema = new mongoose.Schema(
       enum: ["Paid", "Pending", "Failed", "Processing"],
       default: "Processing",
     },
+    paymentGatewayDetails:{
+      type: Map,
+      of: mongoose.Schema.Types.Mixed, // Allows for flexible data types within the Map
+    },
     paymentInstrument: {
       type: Map,
       of: mongoose.Schema.Types.Mixed, // Allows for flexible data types within the Map

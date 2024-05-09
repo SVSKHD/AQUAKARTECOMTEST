@@ -60,6 +60,7 @@ router.post(async (req, res) => {
       const orderData = {
         paymentStatus: "Paid",
         paymentInstrument: apiResponse.data.data.paymentInstrument,
+        paymentGatewayDetails:apiResponse.data,
         orderType: "Payment Method",
       };
 
