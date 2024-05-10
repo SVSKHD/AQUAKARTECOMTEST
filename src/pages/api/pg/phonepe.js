@@ -21,12 +21,14 @@ router.post(async (req, res) => {
   try {
     const getUserById = await AquaEcomUser.findById(passedPayload.user); // Await the async call to find user
     if (!getUserById) {
-      return res.status(404).send({ message: 'User not found', success: false });
+      return res
+        .status(404)
+        .send({ message: "User not found", success: false });
     }
 
     let order = new AquaOrder({
       ...passedPayload,
-      userName: getUserById.name || createUserName(getUserById.email)
+      userName: getUserById.name || createUserName(getUserById.email),
     });
     await order.save(); // Save the order with proper await
 
@@ -48,7 +50,8 @@ router.post(async (req, res) => {
     const payload = JSON.stringify(data);
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
-    const string = payloadMain + "/pg/v1/pay" + "fb0244a9-34b5-48ae-a7a3-741d3de823d3";
+    const string =
+      payloadMain + "/pg/v1/pay" + "fb0244a9-34b5-48ae-a7a3-741d3de823d3";
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
 

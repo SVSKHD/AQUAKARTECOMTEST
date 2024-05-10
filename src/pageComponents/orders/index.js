@@ -1,66 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import AquaLayout from '@/Layout/Layout';
-import AquaOrderOperations from '@/Services/order';
-import AquaToast from '@/reusables/js/toast';
-import AquaCurrencyFormat from '@/reusables/currencyFormatter';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import AquaLayout from "@/Layout/Layout";
+import AquaOrderOperations from "@/Services/order";
+import AquaToast from "@/reusables/js/toast";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaOrdersComponent = () => {
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState({});
+  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
-  const { getOrderByTransactionId } = AquaOrderOperations();
+  const {getOrderByTrasactionId} = AquaOrderOperations();
 
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        setLoading(true);
-        const productRes = await getOrderByTransactionId(id);
-        if (productRes.success) {
-          setProduct(productRes.data);
-          dispatch({ type: 'EMPTY_CART' });
-        } else {
-          throw new Error('Failed to load data');
-        }
-      } catch (error) {
-        AquaToast('Failed to load order details, please try again', 'error');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const seoData = {
+    title:"Aquakart | Order Confirmations"
+  }
 
-    fetchOrderDetails();
-  }, [id, dispatch, getOrderByTransactionId]);
+  useEffect(()=>{
+    getOrderByTrasactionId(id).then((res)=>{
+      console.log("res", res.data)
+    })
+    .catch((err)=>{
+      console.log("res", err)
+    })
+  },[])
 
-  const seo = {
-    title: 'Aquakart | Order Confirmation',
+  const renderOrderCard = (order) => {
+    const cardClass = order.paymentStatus === 'Paid' ? 'bg-success' : 'bg-warning';
+    return (
+      <div className={`card text-white ${cardClass} mb-3`} key={order._id}>
+        <div className="card-header">Order ID: {order.orderId}</div>
+        <div className="card-body">
+          <h5 className="card-title">Transaction ID: {order.transactionId}</h5>
+          <p className="card-text">Payment Status: {order.paymentStatus}</p>
+          <p className="card-text">Total Amount: <AquaCurrencyFormat amount={order.totalAmount} /></p>
+          {/* Additional order details can be added here */}
+        </div>
+      </div>
+    );
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div>Loading...</div>;
 
   return (
-    <AquaLayout seo={seo} container={true}>
-      {product && product.data && product.data[0]?.paymentStatus === 'Paid' && (
-        <div className='card'>
-          <div className='card-header bg-success'>
-            <h4 className='display-2 text-white'>Order Placed - <AquaCurrencyFormat amount={product.data[0].totalAmount} /></h4>
-          </div>
-          <div className='card-body'>
-            <h3>Transaction Id : {product.data[0]?.transactionId}</h3>
-            <h4>Order Id : {product.data[0]?.orderId}</h4>
-            <h6>Ordered Items</h6>
-            <hr/>
-            {/* Un-comment and adjust the following when needed */}
-            {/* {product.data[0].items.map((item, index) => (
-              <p key={index}>{item.name}</p>
-            ))} */}
-          </div>
-        </div>
-      )}
-      <h1>Ordered</h1>
+    <AquaLayout container={true} seo={seoData}>
+      {JSON.stringify(products)}
+      <h1>Order Confirmation</h1>
+      {/* {products.length > 0 ? (
+        products.map(order => renderOrderCard(order))
+      ) : (
+        <p>No orders found.</p>
+      )} */}
     </AquaLayout>
   );
 };

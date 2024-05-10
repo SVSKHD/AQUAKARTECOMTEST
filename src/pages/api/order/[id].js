@@ -3,7 +3,7 @@ import axios from "axios";
 import { SHA256 } from "crypto-js";
 import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
-import crypto from "crypto"
+import crypto from "crypto";
 
 const router = createRouter();
 
@@ -23,13 +23,15 @@ function getUserIdFromTransactionId(transactionId) {
 //   }
 // })
 
-
 router.post(async (req, res) => {
   try {
     await db.connectDb();
 
     // Handling CORS
-    const allowedOrigins = ["https://www.aquakart.co.in", "http://localhost:3000"];
+    const allowedOrigins = [
+      "https://www.aquakart.co.in",
+      "http://localhost:3000",
+    ];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
       res.setHeader("Access-Control-Allow-Origin", origin);
@@ -40,9 +42,13 @@ router.post(async (req, res) => {
     const { transactionId, merchantId } = req.body;
     const userId = getUserIdFromTransactionId(transactionId); // Ensure this function is defined
 
-    const checksum = crypto.createHash('sha256')
-      .update(`/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`)
-      .digest('hex') + "###1";
+    const checksum =
+      crypto
+        .createHash("sha256")
+        .update(
+          `/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`,
+        )
+        .digest("hex") + "###1";
 
     const options = {
       method: "GET",
@@ -60,16 +66,22 @@ router.post(async (req, res) => {
       const orderData = {
         paymentStatus: "Paid",
         paymentInstrument: apiResponse.data.data.paymentInstrument,
-        paymentGatewayDetails:apiResponse.data,
+        paymentGatewayDetails: apiResponse.data,
         orderType: "Payment Method",
       };
 
-      const updatedOrder = await AquaOrder.findOneAndUpdate({ transactionId }, orderData, { new: true });
+      const updatedOrder = await AquaOrder.findOneAndUpdate(
+        { transactionId },
+        orderData,
+        { new: true },
+      );
       if (updatedOrder) {
-        res.writeHead(302, { Location: `/order/${updatedOrder.transactionId}` });
+        res.writeHead(302, {
+          Location: `/order/${updatedOrder.transactionId}`,
+        });
         res.end();
       } else {
-        throw new Error('Order not found');
+        throw new Error("Order not found");
       }
     } else {
       res.status(400).json({ error: "Payment not successful" });
@@ -81,7 +93,6 @@ router.post(async (req, res) => {
     await db.disconnectDb();
   }
 });
-
 
 router.put(async (req, res) => {
   await db.connectDb(); // Ensure the database connection is open
@@ -102,7 +113,7 @@ router.put(async (req, res) => {
     const updatedOrder = await AquaOrder.findOneAndUpdate(
       { transactionId: id }, // Use the transactionId to find the order
       { $set: { items: updatedItems } }, // Update the 'items' field
-      { new: true, runValidators: true } // Return the updated document and run schema validators
+      { new: true, runValidators: true }, // Return the updated document and run schema validators
     );
 
     if (!updatedOrder) {

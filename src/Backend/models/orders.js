@@ -22,7 +22,7 @@ const OrderSchema = new mongoose.Schema(
     orderId: { type: String },
     orderType: {
       type: String,
-      enum: ["Cash On Delivery", "Payment Method(PG)" , "Payment Method"], // Allowed values
+      enum: ["Cash On Delivery", "Payment Method(PG)", "Payment Method"], // Allowed values
       required: true, // Making this field required; adjust as necessary
     },
     transactionId: { type: String },
@@ -35,7 +35,7 @@ const OrderSchema = new mongoose.Schema(
       enum: ["Paid", "Pending", "Failed", "Processing"],
       default: "Processing",
     },
-    paymentGatewayDetails:{
+    paymentGatewayDetails: {
       type: Map,
       of: mongoose.Schema.Types.Mixed, // Allows for flexible data types within the Map
     },
