@@ -98,7 +98,7 @@ const AquaCheckoutComponent = () => {
       orderId: orderId,
       items: cartCount.map((item) => ({
         productId: item.id,
-        name: item.name,
+        name: item.title,
         price: item.price,
         quantity: item.quantity,
       })),

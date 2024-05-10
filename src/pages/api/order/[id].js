@@ -137,8 +137,7 @@ router.get(async (req, res) => {
     await db.connectDb(); // Ensure database connection is established
 
     const { id } = req.query; // Correctly extract the 'id' from request parameters
-    console.log("id", id);
-    const order = await AquaOrder.find({ transactionId: id }); // Await the async operation to get the order
+    const order = await AquaOrder.findOne({ transactionId: id }); // Use findOne to get a single document
 
     // Check if order exists
     if (!order) {
@@ -146,8 +145,6 @@ router.get(async (req, res) => {
         .status(404)
         .json({ success: false, message: "Order not found" });
     }
-
-    // If order is found, send it in response
     res.json({ success: true, order: order });
   } catch (error) {
     // Handle any errors that occur during the process
