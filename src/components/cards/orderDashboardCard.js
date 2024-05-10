@@ -39,7 +39,7 @@ const OrderDashboardCard = ({ order }) => {
             order.paymentStatus === "Paid" ? "text-success" : "text-danger"
           }
         >
-          {order.paymentStatus}
+          {order.paymentStatus === "Paid" ? order.paymentStatus : "COD"}
         </h3>
         <h5 className="text-success">
           <AquaCurrencyFormat amount={order.totalAmount} />
