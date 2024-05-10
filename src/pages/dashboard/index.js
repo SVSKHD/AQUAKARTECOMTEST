@@ -228,6 +228,14 @@ const UserDashBoard = () => {
                   ))}
                 </div>
               )}
+              {user.user.addresses && user.user.addresses.length > 0 && (
+                <button
+                  className="btn btn-dark"
+                  onClick={handleAddressAddDialog}
+                >
+                  Add Address
+                </button>
+              )}
             </div>
           )}
         </div>

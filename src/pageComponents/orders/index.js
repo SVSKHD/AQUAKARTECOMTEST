@@ -6,10 +6,12 @@ import AquaOrderOperations from "@/Services/order";
 import AquaToast from "@/reusables/js/toast";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import moment from "moment";
+import Link from "next/link";
+
 
 const AquaOrdersComponent = () => {
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState({});
+  const [order, setOrder] = useState({});
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
@@ -22,7 +24,7 @@ const AquaOrdersComponent = () => {
   useEffect(() => {
     getOrderByTrasactionId(id)
       .then((res) => {
-        setProducts(res.data);
+        setOrder(res.data.data);
         dispatch({ type: "EMPTY_CART" });
       })
       .catch((err) => {
@@ -50,28 +52,28 @@ const AquaOrdersComponent = () => {
 
   return (
     <AquaLayout container={true} seo={seoData}>
-      {products.data ? (
+      {order.paymentStatus==="Paid" ? (
         <>
           <div className="card mb-2">
             <div className="card-header bg-success text-white p-3">
-              <h4>Successfully Order Placed - {products?.data[0]?.orderId}</h4>
+              <h4>Successfully Order Placed - {order?.orderId}</h4>
             </div>
             <div className="card-body">
               <h4>
                 Estimated Delivery Date:{" "}
-                {products?.data[0]?.estimatedDelivery
-                  ? moment(products.data[0].estimatedDelivery).format(
+                {order?.estimatedDelivery
+                  ? moment(order.estimatedDelivery).format(
                       "YYYY-MM-DD",
                     )
                   : "N/A"}
                 {/* Check if the date is in the future */}
-                {products?.data[0]?.estimatedDelivery &&
-                moment(products.data[0].estimatedDelivery).isAfter(moment())
+                {order?.estimatedDelivery &&
+                moment(order.estimatedDelivery).isAfter(moment())
                   ? " (In the future)"
                   : " (Not in the future)"}
               </h4>
               <h5>Ordered Items</h5>
-              {products?.data[0]?.items?.map((r, i) => (
+              {order?.items?.map((r, i) => (
                 <div key={i}>{r.name}</div>
               ))}
               <div className="row">
@@ -80,12 +82,26 @@ const AquaOrdersComponent = () => {
                     Ordered Amount :{" "}
                     <span className="text-success">
                       <AquaCurrencyFormat
-                        amount={products?.data[0]?.totalAmount}
+                        amount={order?.totalAmount}
                       />
                     </span>
                   </h6>
                 </div>
               </div>
+              <div className="justify-content-center mt-4">
+                  <Link
+                    href="/dashboard/orders"
+                    className="btn btn-dark rounded-pill"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    className="ms-2 btn btn-outline-dark rounded-pill"
+                    onClick={() => handleCLickInvoice(r)}
+                  >
+                    Download Invoice
+                  </button>
+                </div>
             </div>
           </div>
         </>
