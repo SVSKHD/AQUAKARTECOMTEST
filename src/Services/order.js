@@ -7,6 +7,8 @@ const getOrderById = (id) => axios.get(`/api/order/get?orderId=${id}`);
 const getOrderByUserId = (id) => axios.get(`/api/order/get?userId=${id}`);
 const getOrderByTrasactionId = (id) =>
   axios.get(`/api/order/get?transactionId=${id}`);
+const getAllOrdersByUserId = (id) =>
+  axios.get(`/api/order/getAll?userId=${id}`);
 
 const AquaOrderOperatrions = () => {
   return {
@@ -15,6 +17,7 @@ const AquaOrderOperatrions = () => {
     UpdateOrder,
     getOrderById,
     getOrderByUserId,
+    getAllOrdersByUserId,
     getOrderByTrasactionId,
   };
 };

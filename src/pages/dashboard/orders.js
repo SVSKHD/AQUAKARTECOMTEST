@@ -7,18 +7,18 @@ import AquaHeading from "@/reusables/heading";
 
 const UserOrder = () => {
   const [orders, setOrders] = useState([]);
-  const { getOrderByUserId } = AquaOrderOperatrions();
+  const { getOrderByUserId, getAllOrdersByUserId } = AquaOrderOperatrions();
   const { user } = useSelector((state) => ({ ...state }));
   const userId = user?.user?._id;
   useEffect(() => {
-    getOrderByUserId(userId)
+    getAllOrdersByUserId(userId)
       .then((res) => {
         setOrders(res.data.data);
       })
       .catch((err) => {
         console.log("err", err);
       });
-  }, [userId, getOrderByUserId]);
+  }, [userId, getAllOrdersByUserId]);
   return (
     <>
       <UserLayout>
@@ -26,7 +26,7 @@ const UserOrder = () => {
         <div className="row">
           {orders?.map((r, i) => (
             <div key={i} className="col">
-              <OrderDashboardCard data={r} />
+              <OrderDashboardCard order={r} />
             </div>
           ))}
         </div>

@@ -1,49 +1,72 @@
+import React from "react";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
-const OrderDashboardCard = ({ data }) => {
-  const { paymentStatus, paymentInstrument, totalAmount, items } = data;
-
+const OrderDashboardCard = ({ order }) => {
   const renderPaymentInstrument = (instrument) => {
-    switch (instrument?.type) {
-      case "CARD":
-        return (
-          <div>
-            <p>Card Type: {instrument?.cardType}</p>
-            <p>ARN: {instrument?.arn}</p>
-            <p>BRN: {instrument?.brn}</p>
-          </div>
-        );
-      // Add cases for other payment instrument types if needed
-      default:
-        return <p>Payment Method: {instrument?.type}</p>;
-    }
+    if (!instrument) return <p>No payment instrument details available.</p>;
+
+    return (
+      <div>
+        <p>Payment Type: {instrument.type}</p>
+        {instrument.type === "CARD" && (
+          <>
+            <p>Card Type: {instrument.cardType}</p>
+            <p>ARN: {instrument.arn}</p>
+            <p>BRN: {instrument.brn}</p>
+          </>
+        )}
+        {instrument.utr && <p>UTR: {instrument.utr}</p>}
+        {instrument.cardNetwork && (
+          <p>Card Network: {instrument.cardNetwork}</p>
+        )}
+        {instrument.accountType && (
+          <p>Account Type: {instrument.accountType}</p>
+        )}
+      </div>
+    );
+  };
+
+  const handleDownloadInvoice = () => {
+    console.log("Invoice Downloaded for Order:", order);
+    // Additional logic to handle the download process can be added here
   };
 
   return (
     <div className="card rounded-4 mb-3">
       <div className="card-body">
         <h3
-          className={paymentStatus === "Paid" ? "text-success" : "text-danger"}
+          className={
+            order.paymentStatus === "Paid" ? "text-success" : "text-danger"
+          }
         >
-          {paymentStatus}
+          {order.paymentStatus}
         </h3>
         <h5 className="text-success">
-          <AquaCurrencyFormat amount={totalAmount} />
+          <AquaCurrencyFormat amount={order.totalAmount} />
         </h5>
         <hr />
-        {renderPaymentInstrument(paymentInstrument)}
-        <div>
-          <h6>Items:</h6>
-          {items.map((item) => (
-            <div key={item._id} className="text-muted">
-              <p>
-                {item.name} - {item.quantity} x{" "}
-                {<AquaCurrencyFormat amount={item.price} />}
-              </p>
-            </div>
+        <p>
+          <strong>Transaction ID:</strong> {order.transactionId}
+        </p>
+        <p>
+          <strong>Order ID:</strong> {order.orderId}
+        </p>
+        {renderPaymentInstrument(order.paymentInstrument)}
+        <hr />
+        <ul>
+          {order.items.map((item) => (
+            <li key={item._id}>
+              {item.name} - Quantity: {item.quantity}, Price per item:{" "}
+              <AquaCurrencyFormat amount={item.price} />
+            </li>
           ))}
-        </div>
-        <button className="btn btn-dark rounded-pill">Download Invoice</button>
+        </ul>
+        <button
+          className="btn btn-primary mt-2"
+          onClick={handleDownloadInvoice}
+        >
+          Download Invoice
+        </button>
       </div>
     </div>
   );

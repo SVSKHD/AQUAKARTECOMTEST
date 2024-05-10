@@ -28,7 +28,7 @@ const AquaOrdersComponent = () => {
       .catch((err) => {
         console.log("res", err);
       });
-  }, [id, getOrderByTrasactionId , dispatch]);
+  }, [id, getOrderByTrasactionId, dispatch]);
 
   const renderOrderCard = (order) => {
     const cardClass =
@@ -47,7 +47,6 @@ const AquaOrdersComponent = () => {
       </div>
     );
   };
-
 
   return (
     <AquaLayout container={true} seo={seoData}>
@@ -72,14 +71,19 @@ const AquaOrdersComponent = () => {
                   : " (Not in the future)"}
               </h4>
               <h5>Ordered Items</h5>
-              {products?.data[0]?.items?.map((r,i)=>(
-                <div key={i}>
-                {r.name}
-                </div>
+              {products?.data[0]?.items?.map((r, i) => (
+                <div key={i}>{r.name}</div>
               ))}
               <div className="row">
                 <div className="col">
-                <h6>Ordered Amount : <span className="text-success"><AquaCurrencyFormat amount={products?.data[0]?.totalAmount}/></span></h6>
+                  <h6>
+                    Ordered Amount :{" "}
+                    <span className="text-success">
+                      <AquaCurrencyFormat
+                        amount={products?.data[0]?.totalAmount}
+                      />
+                    </span>
+                  </h6>
                 </div>
               </div>
             </div>

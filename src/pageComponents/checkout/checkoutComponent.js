@@ -167,7 +167,7 @@ const AquaCheckoutComponent = () => {
           setCod(newOrder); // Update state after successful API call
           AquaToast("successfully created COD order", "success");
           setLoadingStatus({ codStatus: false, phonepeGateway: false });
-          router.push(`/order/cod/${res.data.newOrder._id}`);
+          router.push(`/order/cod/${res.data.transactionId}`);
         })
         .catch((error) => {
           setLoadingStatus({ cod: false, phonepeGateway: false });
