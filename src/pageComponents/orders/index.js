@@ -8,7 +8,7 @@ import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 
 const AquaOrdersComponent = () => {
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
@@ -21,11 +21,12 @@ const AquaOrdersComponent = () => {
   useEffect(()=>{
     getOrderByTrasactionId(id).then((res)=>{
       console.log("res", res.data)
+      setProducts(res.data)
     })
     .catch((err)=>{
       console.log("res", err)
     })
-  },[])
+  },[id,getOrderByTrasactionId])
 
   const renderOrderCard = (order) => {
     const cardClass = order.paymentStatus === 'Paid' ? 'bg-success' : 'bg-warning';
@@ -42,17 +43,17 @@ const AquaOrdersComponent = () => {
     );
   };
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
 
   return (
     <AquaLayout container={true} seo={seoData}>
       {JSON.stringify(products)}
       <h1>Order Confirmation</h1>
-      {/* {products.length > 0 ? (
-        products.map(order => renderOrderCard(order))
+      {products.data.length > 0 ? (
+        products.data.map(order => renderOrderCard(order))
       ) : (
         <p>No orders found.</p>
-      )} */}
+      )}
     </AquaLayout>
   );
 };
