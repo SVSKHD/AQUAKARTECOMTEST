@@ -8,7 +8,6 @@ import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import moment from "moment";
 import Link from "next/link";
 
-
 const AquaOrdersComponent = () => {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState({});
@@ -52,7 +51,7 @@ const AquaOrdersComponent = () => {
 
   return (
     <AquaLayout container={true} seo={seoData}>
-      {order.paymentStatus==="Paid" ? (
+      {order.paymentStatus === "Paid" ? (
         <>
           <div className="card mb-2">
             <div className="card-header bg-success text-white p-3">
@@ -62,9 +61,7 @@ const AquaOrdersComponent = () => {
               <h4>
                 Estimated Delivery Date:{" "}
                 {order?.estimatedDelivery
-                  ? moment(order.estimatedDelivery).format(
-                      "YYYY-MM-DD",
-                    )
+                  ? moment(order.estimatedDelivery).format("YYYY-MM-DD")
                   : "N/A"}
                 {/* Check if the date is in the future */}
                 {order?.estimatedDelivery &&
@@ -81,27 +78,25 @@ const AquaOrdersComponent = () => {
                   <h6>
                     Ordered Amount :{" "}
                     <span className="text-success">
-                      <AquaCurrencyFormat
-                        amount={order?.totalAmount}
-                      />
+                      <AquaCurrencyFormat amount={order?.totalAmount} />
                     </span>
                   </h6>
                 </div>
               </div>
               <div className="justify-content-center mt-4">
-                  <Link
-                    href="/dashboard/orders"
-                    className="btn btn-dark rounded-pill"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    className="ms-2 btn btn-outline-dark rounded-pill"
-                    onClick={() => handleCLickInvoice(r)}
-                  >
-                    Download Invoice
-                  </button>
-                </div>
+                <Link
+                  href="/dashboard/orders"
+                  className="btn btn-dark rounded-pill"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  className="ms-2 btn btn-outline-dark rounded-pill"
+                  onClick={() => handleCLickInvoice(r)}
+                >
+                  Download Invoice
+                </button>
+              </div>
             </div>
           </div>
         </>

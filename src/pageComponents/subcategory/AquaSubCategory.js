@@ -8,15 +8,6 @@ const AquaSubCategoryPageComponent = () => {
   const [category, setCategory] = useState({});
   const { getSubCategoryByTitle } = AquaSubCategoryOperations();
   const router = useRouter();
-  const SeoData = {
-    title: `Aquakart | ${category.title}`,
-    description: category.description,
-    keywords: category.keywords,
-    canonical: `${process.env.apiKey}${router.asPath}`,
-    image: category.photos
-      ? category.photos[0].secure_url
-      : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
-  };
 
   let titleData = router.query.id;
 
@@ -33,6 +24,16 @@ const AquaSubCategoryPageComponent = () => {
   useEffect(() => {
     loadCategory();
   }, [loadCategory]);
+
+  const SeoData = {
+    title: `Aquakart | ${category?.title}`,
+    description: category?.description,
+    keywords: category?.keywords,
+    canonical: `${process.env.apiKey}${router.asPath}`,
+    image: category?.photos
+      ? category?.photos[0].secure_url
+      : "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
+  };
 
   return (
     <>

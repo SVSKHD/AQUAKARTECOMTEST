@@ -1,9 +1,7 @@
 import AquaProductOperations from "@/Services/product";
-import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaCardMultiItemCarousel from "@/reusables/cardCarousel";
 import AquaToast from "@/reusables/js/toast";
 import { useEffect, useState, useCallback } from "react";
-import AquaVerticalCardRevamp from "@/reusables/verticalCardRevamp";
 import TestVerticalcard from "@/reusables/testverticalcard";
 const AquaProductHolder = () => {
   const [products, setProducts] = useState([]);

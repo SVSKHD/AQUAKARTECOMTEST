@@ -5,6 +5,7 @@ import AquaCommonCategoryCard from "@/components/cards/categoryPageCard";
 import AquaCategoryOperations from "@/Services/category";
 import AquaProductOperations from "@/Services/product";
 import AquaVerticalCard from "@/reusables/VerticalCard";
+import TestVerticalcard from "@/reusables/testverticalcard";
 
 const AquaSubCategoryPageComponent = () => {
   const [category, setCategory] = useState({});
@@ -69,13 +70,14 @@ const AquaSubCategoryPageComponent = () => {
             <div className="row">
               {products.map((product, index) => (
                 <div className="col" key={index}>
-                  <AquaVerticalCard
+                  <TestVerticalcard data={product} />
+                  {/* <AquaVerticalCard
                     title={product.title}
                     images={product.photos}
                     price={product.price}
                     description={product.description}
                     data={product}
-                  />
+                  /> */}
                 </div>
               ))}
             </div>

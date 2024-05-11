@@ -108,7 +108,7 @@ const AquaFooter = () => {
                   <div key={i}>
                     <p className="footer-item-adjust">
                       <a
-                        href={`/category/${c.title}`}
+                        href={`/subcategory/${c.title}`}
                         className="footer-item-adjust"
                       >
                         {c.title}

@@ -1,10 +1,15 @@
 import AquaSubCategoryPageComponent from "@/pageComponents/subcategory/AquaSubCategory";
 
-const AquaSubCategory = () => {
+const AquaSubCategory = ({ params }) => {
   return (
     <>
-      <AquaSubCategoryPageComponent />
+      <AquaSubCategoryPageComponent id={params.id} />
     </>
   );
 };
+export function getServerSideProps(context) {
+  return {
+    props: { params: context.params },
+  };
+}
 export default AquaSubCategory;
