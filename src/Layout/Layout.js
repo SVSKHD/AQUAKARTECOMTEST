@@ -56,7 +56,7 @@ const AquaLayout = (props) => {
     <>
       <AquaNavBar />
       <AquaCartDrawer />
-      <AquaFavDrawer/>
+      <AquaFavDrawer />
       <AquaUserDialog />
       <AquaUserPhoneDialogUpdate />
       <AquaPageWrapper>

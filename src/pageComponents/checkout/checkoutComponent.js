@@ -432,7 +432,11 @@ const AquaCheckoutComponent = () => {
                 <div className="card rounded-4">
                   <div className="card-body">
                     <div className="mb-2">
-                      <AquaHeading level={3} content={"Summary"} decorate={true} />
+                      <AquaHeading
+                        level={3}
+                        content={"Summary"}
+                        decorate={true}
+                      />
                     </div>
                     <ul className="conatiner list-group list-group-flush">
                       {cartCount.map((r) => (

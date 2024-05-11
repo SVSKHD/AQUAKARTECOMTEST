@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const AquaFavDrawer = () => {
   const dispatch = useDispatch();
-  const { favDrawer, favCount} = useSelector((state) => ({ ...state }));
+  const { favDrawer, favCount } = useSelector((state) => ({ ...state }));
   return (
     <>
       <AquaDrawer
@@ -18,7 +18,7 @@ const AquaFavDrawer = () => {
             payload: false,
           })
         }
-        title={<AquaHeading content={"Your Favourites"} decorate={true}/>}
+        title={<AquaHeading content={"Your Favourites"} decorate={true} />}
         size={"md"}
         position="bottom"
       >
@@ -41,7 +41,9 @@ const AquaFavDrawer = () => {
               alt="Aquakart Empty Cart"
               className="d-block mx-auto"
             />
-            <h6 className="text-center text-muted">Your Don't have any favorite's yet</h6>
+            <h6 className="text-center text-muted">
+              Your Don't have any favorite's yet
+            </h6>
           </>
         )}
       </AquaDrawer>
