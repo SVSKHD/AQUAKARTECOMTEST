@@ -432,7 +432,7 @@ const AquaCheckoutComponent = () => {
                 <div className="card rounded-4">
                   <div className="card-body">
                     <div className="mb-2">
-                      <AquaHeading level={3} content={"Summary"} />
+                      <AquaHeading level={3} content={"Summary"} decorate={true} />
                     </div>
                     <ul className="conatiner list-group list-group-flush">
                       {cartCount.map((r) => (
@@ -462,7 +462,7 @@ const AquaCheckoutComponent = () => {
                     {cartCount.length > 0 ? (
                       <div class="d-flex">
                         <div class="p-2 flex-fill">
-                          <h4>Total</h4>
+                          <h4>Total : </h4>
                         </div>
                         <div class="p-2 flex-fill text-end text-success">
                           <h4>

@@ -11,14 +11,14 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { FaUser, FaCartPlus, FaHome } from "react-icons/fa";
+import { FaUser, FaCartPlus, FaHome , FaHeart , FaRegHeart} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 const AquaNavBar = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { cartCount, user, signupStatus } = useSelector((state) => ({
+  const { cartCount, user, signupStatus , favDrawer} = useSelector((state) => ({
     ...state,
   }));
 
@@ -54,6 +54,14 @@ const AquaNavBar = () => {
         payload: true,
       });
     }
+  };
+
+  const handleFav = () => {
+  
+      dispatch({
+        type: "SET_FAV_DRAWER_VISIBLE",
+        payload: !favDrawer,
+      });
   };
 
   const handleLogout = () => {
@@ -166,8 +174,11 @@ const AquaNavBar = () => {
                       <Nav.Link className="text-bold" href="/about">
                         About Us
                       </Nav.Link>
+                    
                     </Nav>
+
                     <div className="position-relative">
+                    <AquaButton variant="normal" onClick={handleFav} >{favDrawer ? <FaHeart size={25}/> : <FaRegHeart size={25}/>}</AquaButton>
                       <AquaButton variant="normal" onClick={handleCart}>
                         <FaCartPlus size={25} />
                       </AquaButton>

@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import AquaToast from "@/reusables/js/toast";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 import { useRouter } from "next/router";
+import TestVerticalcard from "@/reusables/testverticalcard";
 
 const AquaShopComponent = () => {
   const router = useRouter();
@@ -77,13 +78,7 @@ const AquaShopComponent = () => {
                 <>
                   {products.map((r, i) => (
                     <div key={i} className="col">
-                      <AquaVerticalCard
-                        title={r.title}
-                        images={r.photos}
-                        price={r.price}
-                        description={r.description}
-                        data={r}
-                      />
+                     <TestVerticalcard data={r}/>
                     </div>
                   ))}
                 </>

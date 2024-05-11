@@ -2,6 +2,7 @@ import AquaNavBar from "@/Layout/Header";
 import AquaPageWrapper from "@/Layout/transition/pageWrapper";
 import AquaFooter from "./Footer";
 import AquaCartDrawer from "@/components/drawers/cartDrawer";
+import AquaFavDrawer from "@/components/drawers/favDrawer";
 import AquaUserDialog from "@/components/dialog/userDialog";
 import AquaSeo from "./seo/seo";
 import { useSelector, useDispatch } from "react-redux";
@@ -55,6 +56,7 @@ const AquaLayout = (props) => {
     <>
       <AquaNavBar />
       <AquaCartDrawer />
+      <AquaFavDrawer/>
       <AquaUserDialog />
       <AquaUserPhoneDialogUpdate />
       <AquaPageWrapper>
