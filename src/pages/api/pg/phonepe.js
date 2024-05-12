@@ -49,7 +49,8 @@ router.post(async (req, res) => {
     const payload = JSON.stringify(data);
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
-    const string = payloadMain + "/pg/v1/pay" + process.env.NEXT_PUBLIC_PHONEPE_KEY;
+    const string =
+      payloadMain + "/pg/v1/pay" + process.env.NEXT_PUBLIC_PHONEPE_KEY;
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
 

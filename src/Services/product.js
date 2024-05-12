@@ -2,6 +2,9 @@ import axios from "axios";
 
 const getProducts = async () => await axios.get(`/api/product/get`);
 
+const getAllProducts = async (type, filterId) =>
+  await axios.get(`/api/product/shop?${type}=${filterId}`);
+
 const getProductById = async (query) =>
   await axios.get(`/api/product/get?id=${query}`);
 
@@ -14,6 +17,7 @@ const getProductsByFIlter = async (type, query) =>
 const AquaProductOperations = () => {
   return {
     getProducts,
+    getAllProducts,
     getProductById,
     getProductByCategory,
     getProductsByFIlter,

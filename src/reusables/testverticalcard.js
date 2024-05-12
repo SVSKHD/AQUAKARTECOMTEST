@@ -45,7 +45,11 @@ const TestVerticalcard = ({ data }) => {
       <div class="hovercard">
         <div class="container1">
           <div class="top">
-            <img src={photos[0].secure_url} className="top" alt={`Aquakart | ${title}`}/>
+            <img
+              src={photos[0].secure_url}
+              className="top"
+              alt={`Aquakart | ${title}`}
+            />
           </div>
           <div class={cartAdd ? "bottom clicked" : "bottom"}>
             <div class="left">

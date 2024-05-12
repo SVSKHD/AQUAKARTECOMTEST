@@ -5,12 +5,13 @@ import AquaHeading from "@/reusables/heading";
 import AquaToast from "@/reusables/js/toast";
 import { useCallback, useEffect, useState } from "react";
 
-const AquaShopFilters = ({ onSelectionChange }) => {
+const AquaShopFilters = ({ onSelectionChange, onClear }) => {
   const [categories, setCategories] = useState([]);
   const [subs, setSubs] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSubs, setSelectedSubs] = useState([]);
-  const [range, setRange] = useState({ min: 0, max: 1000000, value: 100 });
+  const [range, setRange] = useState({ min: 0, max: 100000, value: 100 });
+
   const { getCategories } = AquaCategoryOperations();
   const { getSubCategories } = AquaSubCategoryOperations();
 
@@ -21,6 +22,14 @@ const AquaShopFilters = ({ onSelectionChange }) => {
       onSelectionChange({ ...updatedRange, selectedCategories, selectedSubs });
       return updatedRange;
     });
+  };
+
+  const isFilterApplied = () => {
+    return (
+      selectedCategories.length > 0 ||
+      selectedSubs.length > 0 ||
+      range.value !== 100
+    );
   };
 
   const toggleCategorySelection = (category) => {
@@ -49,6 +58,22 @@ const AquaShopFilters = ({ onSelectionChange }) => {
 
     setSelectedSubs(newSelected);
     onSelectionChange({ range, selectedCategories, selectedSubs: newSelected });
+  };
+
+  const clearFilters = () => {
+    setSelectedCategories([]);
+    setSelectedSubs([]);
+    setRange({ min: 0, max: 100000, value: 100 });
+    onSelectionChange({
+      min: 0,
+      max: 100000,
+      value: 100,
+      selectedCategories: [],
+      selectedSubs: [],
+    });
+    if (onClear) {
+      onClear();
+    }
   };
 
   const loadCategories = useCallback(() => {
@@ -87,7 +112,7 @@ const AquaShopFilters = ({ onSelectionChange }) => {
         <input
           type="range"
           className="form-range"
-          id="customRange1"
+          id="customHandleRangeChange1"
           min={range.min}
           max={range.max}
           value={range.value}
@@ -140,6 +165,11 @@ const AquaShopFilters = ({ onSelectionChange }) => {
           }
         />
       </div>
+      {isFilterApplied() && (
+        <button className="btn btn-secondary mt-3" onClick={clearFilters}>
+          Clear Filters
+        </button>
+      )}
     </>
   );
 };

@@ -3,11 +3,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
-import { FaMinus, FaPlus, FaTrash , FaCartArrowDown , FaCartPlus} from "react-icons/fa";
+import {
+  FaMinus,
+  FaPlus,
+  FaTrash,
+  FaCartArrowDown,
+  FaCartPlus,
+} from "react-icons/fa";
 import AQ from "../../assests/Default.png";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const AquaCartCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
@@ -81,7 +86,16 @@ const AquaCartCard = ({ data }) => {
                   </p>
                   {favourite ? (
                     <>
-                      <button className={cartAdd? `btn btn-success` : 'btn btn-dark'} onClick={handleAddToCart}>{cartAdd ? <FaCartArrowDown size={25}/> : <FaCartPlus size={25}/>}</button>
+                      <button
+                        className={cartAdd ? `btn btn-success` : "btn btn-dark"}
+                        onClick={handleAddToCart}
+                      >
+                        {cartAdd ? (
+                          <FaCartArrowDown size={25} />
+                        ) : (
+                          <FaCartPlus size={25} />
+                        )}
+                      </button>
                     </>
                   ) : (
                     <>

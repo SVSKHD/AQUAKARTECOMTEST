@@ -15,32 +15,57 @@ const AquaShopComponent = () => {
     title: "Aquakart | Shop",
     canonical: `${process.env.apiKey}${router.asPath}`,
   };
-  const { getProducts, getProductsByFIlter } = AquaProductOperations();
+  const { getProducts, getProductsByFIlter, getAllProducts } =
+    AquaProductOperations();
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
+
   const LoadProducts = useCallback(() => {
     setProductLoading(true);
-    getProducts()
+    getAllProducts("all", true)
       .then((res) => {
-        console.log(res.data);
-        setProducts(res.data);
+        console.log("all", res.data.products);
+        setProducts(res.data.products);
         setProductLoading(false);
       })
       .catch(() => {
         AquaToast("Please try again", "error");
         setProductLoading(false);
       });
-  }, [getProducts, setProducts]);
+  }, [getAllProducts, setProducts]);
   useEffect(() => {
     LoadProducts();
   }, [LoadProducts]);
 
   const handleRange = (newRange) => {
-    console.log("New range value", newRange);
+    getAllProducts("price", newRange.value)
+      .then((res) => {
+        console.log(res.data.products);
+        setProducts(res.data.products);
+        setProductLoading(false);
+      })
+      .catch(() => {
+        AquaToast("Please try again", "error");
+        setProductLoading(false);
+      });
+  };
+
+  const handleCategory = (data) => {
+    console.log("data", data);
   };
 
   const ReloadAndClear = () => {
-    LoadProducts();
+    getAllProducts("all", true)
+      .then((res) => {
+        console.log("all", res.data.products);
+        setProducts(res.data.products);
+        setProductLoading(false);
+      })
+      .catch(() => {
+        AquaToast("Please try again", "error");
+        setProductLoading(false);
+      });
+    // LoadProducts();
   };
 
   return (
@@ -52,7 +77,10 @@ const AquaShopComponent = () => {
         <div className="col-md-4 col-lg-4 col-xs-12 col-sm-12">
           <AquaCard>
             <AquaHeading level={3} content={"Apply filters"} decorate={true} />
-            <AquaShopFilters onRangeChange={handleRange} />
+            <AquaShopFilters
+              onSelectionChange={handleRange}
+              onClear={ReloadAndClear}
+            />
           </AquaCard>
         </div>
         <div className="col-md-8 col-lg-8 col-xs-12 col-sm-12">
