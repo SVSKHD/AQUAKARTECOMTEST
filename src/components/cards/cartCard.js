@@ -3,16 +3,19 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
-import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash , FaCartArrowDown , FaCartPlus} from "react-icons/fa";
 import AQ from "../../assests/Default.png";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import { useDispatch, useSelector } from "react-redux";
+
 
 const AquaCartCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
   const { favDrawer } = useSelector((state) => ({ ...state }));
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const [favourite, setFavourite] = useState(false);
+  const [cartAdd, setCartAdd] = useState(false);
+  const { addProductToCart, addProductToFav } = ProductFunctions();
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -47,6 +50,10 @@ const AquaCartCard = ({ data }) => {
     });
   };
 
+  const handleAddToCart = () => {
+    addProductToCart(data, setCartAdd);
+  };
+
   return (
     <>
       <div>
@@ -74,7 +81,7 @@ const AquaCartCard = ({ data }) => {
                   </p>
                   {favourite ? (
                     <>
-                      <button className="btn btn-dark">Add to Cart</button>
+                      <button className={cartAdd? `btn btn-success` : 'btn btn-dark'} onClick={handleAddToCart}>{cartAdd ? <FaCartArrowDown size={25}/> : <FaCartPlus size={25}/>}</button>
                     </>
                   ) : (
                     <>
