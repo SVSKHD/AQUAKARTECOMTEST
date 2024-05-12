@@ -1,24 +1,31 @@
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InputGroup, Button, Form } from "react-bootstrap";
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import AQ from "../../assests/Default.png";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AquaCartCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
+  const { favDrawer } = useSelector((state) => ({ ...state }));
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
+  const [favourite, setFavourite] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+
   const Redirect = () => {
     router.push(`/product/${_id}`);
   };
 
   const { QuantityAdd, QuantitySub } = ProductFunctions();
-
+  useEffect(() => {
+    if (favDrawer === true) {
+      setFavourite(true);
+    }
+  }, [favDrawer, setFavourite]);
   const handleQuantityAdd = () => {
     if (localQuantity < 5) {
       setLocalQuantity(localQuantity + 1);
@@ -65,25 +72,33 @@ const AquaCartCard = ({ data }) => {
                       <AquaCurrencyFormat amount={price} />
                     </small>
                   </p>
-                  <InputGroup size="sm" className="mb-3 mt-2  width-adjust">
-                    <Button
-                      variant="outline-light"
-                      onClick={() => handleQuantitySub(localQuantity - 1)}
-                    >
-                      <FaMinus size={25} className="text-dark" />
-                    </Button>
-                    <Form.Control
-                      aria-label="Example text with two button addons"
-                      className="text-center"
-                      value={localQuantity}
-                    />
-                    <Button
-                      variant="outline-light"
-                      onClick={() => handleQuantityAdd(localQuantity + 1)}
-                    >
-                      <FaPlus size={25} className="text-dark" />
-                    </Button>
-                  </InputGroup>
+                  {favourite ? (
+                    <>
+                      <button className="btn btn-dark">Add to Cart</button>
+                    </>
+                  ) : (
+                    <>
+                      <InputGroup size="sm" className="mb-3 mt-2  width-adjust">
+                        <Button
+                          variant="outline-light"
+                          onClick={() => handleQuantitySub(localQuantity - 1)}
+                        >
+                          <FaMinus size={25} className="text-dark" />
+                        </Button>
+                        <Form.Control
+                          aria-label="Example text with two button addons"
+                          className="text-center"
+                          value={localQuantity}
+                        />
+                        <Button
+                          variant="outline-light"
+                          onClick={() => handleQuantityAdd(localQuantity + 1)}
+                        >
+                          <FaPlus size={25} className="text-dark" />
+                        </Button>
+                      </InputGroup>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

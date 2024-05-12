@@ -24,23 +24,19 @@ router.get(async (req, res) => {
 
     // Check if no query parameters are provided
     if (Object.keys(query).length === 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "No products in this category or according to query yet.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "No products in this category or according to query yet.",
+      });
     }
 
     // Executing the query to find products based on the query object
     const products = await AquaProduct.find(query);
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "No products found matching the criteria.",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "No products found matching the criteria.",
+      });
     }
     res.json({ success: true, products });
   } catch (error) {
