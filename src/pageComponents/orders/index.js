@@ -102,7 +102,19 @@ const AquaOrdersComponent = () => {
         </>
       ) : (
         <>
-          <h1>Processing Your Order</h1>
+          <div className="card mb-3">
+            <div className="card-header bg-danger display-2 text-white">
+              Payment Failed - {order?.orderId}
+            </div>
+            <div className="card-body">
+              <button className="btn btn-dark rounded-pill">
+                Proceed to Pay
+              </button>
+              <button className="btn btn-dark ms-2 rounded-pill">
+                Cash On Delivery
+              </button>
+            </div>
+          </div>
         </>
       )}
     </AquaLayout>
