@@ -1,7 +1,7 @@
 const UserHeader = ({ name, id, date }) => {
   return (
     <>
-      <div className="card-body">
+      <div className="card-body mb-3">
         <h1>
           Hello <span className="aqua-username text-welcome">"{name}"</span>
           <p className="text-muted user-dahsboard-id">id:{id}</p>
