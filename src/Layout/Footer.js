@@ -4,7 +4,8 @@ import AQ from "../assests/logo-white.png";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import AquaCategoryOperations from "@/Services/category";
-import { FaInstagram, FaWhatsapp, FaTelegram } from "react-icons/fa";
+import { FaInstagram, FaTelegram} from "react-icons/fa";
+import {FaXTwitter} from "react-icons/fa6"
 import AquaSubCategoryOperations from "@/Services/subCategory";
 import AquaToast from "@/reusables/js/toast";
 import AquaSubscriberOperations from "@/Services/subscriber";
@@ -168,20 +169,21 @@ const AquaFooter = () => {
           <AquaCard>
             <div className="row social handle">
               <div className="col">
-                <AquaHeading level={5}>AquaKart © {Year}</AquaHeading>
+                <AquaHeading level={5} content={`Aquakart © ${Year} All Rights Reserved`} />
               </div>
               <div className="col text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <a
                     type="button"
                     class="btn"
+                    target="_blank"
                     href="https://www.instagram.com/aquakart.co.in/"
                   >
                     <FaInstagram size={20} />
                   </a>
-                  <button type="button" class="btn">
-                    <FaWhatsapp size={20} />
-                  </button>
+                  <a type="button" class="btn" target="_blank" href="https://twitter.com/aquakart8">
+                    <FaXTwitter size={20} />
+                  </a>
                 </div>
               </div>
             </div>
