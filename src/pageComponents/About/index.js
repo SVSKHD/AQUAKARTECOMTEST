@@ -2,10 +2,19 @@ import AquaLayout from "@/Layout/Layout";
 import AquaStandardShadowCard from "@/components/cards/aquaStandardShadowCard";
 import AquaHeading from "@/reusables/heading";
 import AquaLargeTitle from "@/reusables/largeTitle";
+import { useRouter } from "next/router";
 
 const AquaAboutPageComponent = () => {
+  const router = useRouter()
   const SeoData = {
     title: "Aquakart | About",
+    canonical:`${process.env.apiKey}${router.pathname}`,
+    description:"Welcome to AquaKart, your premier destination for innovative water solutions. Founded in 2020, we are dedicated to enhancing your access to premium aquatic products and services. At AquaKart, we believe that water is the essence of life, and our mission is to provide you with sustainable and efficient water-related products that enrich your lifestyle and contribute to environmental conservation.",
+    image:
+    "https://res.cloudinary.com/aquakartproducts/image/upload/v1695408027/android-chrome-384x384_ijvo24.png",
+    keywords:
+    " Aquakart Ecom About us,  Aquakart Ecom Store , water softeners  , water Ro  , ro machines , Salt Free Water Softener , Water Softener System , Water Softener Installation",
+  keyphrases: "Water Softener Salt Prices , Salt Water Softener Aquakart Ecom About us",
   };
   return (
     <>
