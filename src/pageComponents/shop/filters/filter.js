@@ -1,6 +1,7 @@
 import AquaCategoryOperations from "@/Services/category";
 import AquaSubCategoryOperations from "@/Services/subCategory";
 import AquaAccordian from "@/reusables/accrodian";
+import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import AquaHeading from "@/reusables/heading";
 import AquaToast from "@/reusables/js/toast";
 import { useCallback, useEffect, useState } from "react";
@@ -105,7 +106,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
 
   return (
     <>
-      <div>
+      <div className="mb-3">
         <label htmlFor="customRange1" className="form-label">
           Price Range
         </label>
@@ -119,8 +120,8 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
           onChange={handleRangeChange}
         />
         <div className="d-flex justify-content-between">
-          <span>{range.min}</span>
-          <span>{range.max}</span>
+          <span className="text-success">{<AquaCurrencyFormat amount={range.min}/>}</span>
+          <span className="text-success">{<AquaCurrencyFormat amount={range.max}/>}</span>
         </div>
       </div>
       <div>
