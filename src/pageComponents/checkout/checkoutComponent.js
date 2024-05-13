@@ -20,9 +20,14 @@ import AquaOrderOperatrions from "@/Services/order";
 import AquaAddressDialog from "@/components/dialog/addressDialog";
 
 const AquaCheckoutComponent = () => {
+  const router = useRouter();
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-  const seo = { title: "Aquakart | Checkout" };
+  const seo = { 
+  title: "Aquakart | Checkout" , 
+  canonical:`${process.env.apiKey}${router.pathname}`,
+  description:""
+  };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
     user?.user?.addresses?.map(() => false),
@@ -40,7 +45,7 @@ const AquaCheckoutComponent = () => {
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
   const { CreateCodOrder } = AquaOrderOperatrions();
-  const router = useRouter();
+  
 
   const handleAddressSelect = (selectedAddressIndex) => {
     const selectedAddress = user.user.addresses[selectedAddressIndex];
