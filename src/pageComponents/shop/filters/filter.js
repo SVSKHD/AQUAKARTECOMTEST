@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 const AquaShopFilters = ({ onSelectionChange, onClear }) => {
   const [categories, setCategories] = useState([]);
   const [subs, setSubs] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [range, setRange] = useState({ min: 0, max: 100000, value: 100 });
 
@@ -20,46 +20,56 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
     const newValue = event.target.value;
     setRange((prevRange) => {
       const updatedRange = { ...prevRange, value: newValue };
-      onSelectionChange({ ...updatedRange, selectedCategories, selectedSubs });
+      onSelectionChange({ ...updatedRange, selectedCategory, selectedSubs });
       return updatedRange;
     });
   };
 
   const isFilterApplied = () => {
-    return (
-      selectedCategories.length > 0 ||
-      selectedSubs.length > 0 ||
-      range.value !== 100
-    );
+    return selectedCategory || selectedSubs.length > 0 || range.value !== 100;
   };
 
   const toggleCategorySelection = (category) => {
-    const currentIndex = selectedCategories.indexOf(category);
-    const newSelected = [...selectedCategories];
-
-    if (currentIndex === -1) {
-      newSelected.push(category);
-    } else {
-      newSelected.splice(currentIndex, 1);
-    }
-
-    setSelectedCategories(newSelected);
-    onSelectionChange({ range, selectedCategories: newSelected, selectedSubs });
+    const newSelectedCategory =
+      selectedCategory && selectedCategory._id === category._id
+        ? null
+        : category;
+    setSelectedCategory(newSelectedCategory);
+    onSelectionChange({
+      range,
+      selectedCategory: newSelectedCategory,
+      selectedSubs,
+    });
   };
 
   const toggleSubCategorySelection = (subcategory) => {
-    const currentIndex = selectedSubs.indexOf(subcategory);
+    const subCategoryId = subcategory._id;
+    const currentIndex = selectedSubs.indexOf(subCategoryId);
     const newSelected = [...selectedSubs];
 
     if (currentIndex === -1) {
-      newSelected.push(subcategory);
+      newSelected.push(subCategoryId);
     } else {
       newSelected.splice(currentIndex, 1);
     }
 
     setSelectedSubs(newSelected);
-    onSelectionChange({ range, selectedCategories, selectedSubs: newSelected });
+    onSelectionChange({ range, selectedCategory, selectedSubs: newSelected });
   };
+
+  // const toggleSubCategorySelection = (subcategory) => {
+  //   const currentIndex = selectedSubs.indexOf(subcategory);
+  //   const newSelected = [...selectedSubs];
+
+  //   if (currentIndex === -1) {
+  //     newSelected.push(subcategory);
+  //   } else {
+  //     newSelected.splice(currentIndex, 1);
+  //   }
+
+  //   setSelectedSubs(newSelected);
+  //   onSelectionChange({ range, selectedCategories, selectedSubs: newSelected });
+  // };
 
   const clearFilters = () => {
     setSelectedCategories([]);
@@ -120,8 +130,12 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
           onChange={handleRangeChange}
         />
         <div className="d-flex justify-content-between">
-          <span className="text-success">{<AquaCurrencyFormat amount={range.min}/>}</span>
-          <span className="text-success">{<AquaCurrencyFormat amount={range.max}/>}</span>
+          <span className="text-success">
+            {<AquaCurrencyFormat amount={range.min} />}
+          </span>
+          <span className="text-success">
+            {<AquaCurrencyFormat amount={range.max} />}
+          </span>
         </div>
       </div>
       <div>
@@ -135,7 +149,9 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
                   <input
                     className="form-check-input me-1"
                     type="checkbox"
-                    checked={selectedCategories.includes(category)}
+                    checked={
+                      selectedCategory && selectedCategory._id === category._id
+                    }
                     onChange={() => toggleCategorySelection(category)}
                   />
                   {category.title}
@@ -145,7 +161,8 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
           }
         />
       </div>
-      <div>
+      {/* will apply this soon in next phase */}
+      {/* <div>
         <AquaAccordian
           eventKey="1"
           title={<AquaHeading level={5} content={"Sub-Categories"} />}
@@ -165,7 +182,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
             </div>
           }
         />
-      </div>
+      </div> */}
       {isFilterApplied() && (
         <button className="btn btn-secondary mt-3" onClick={clearFilters}>
           Clear Filters

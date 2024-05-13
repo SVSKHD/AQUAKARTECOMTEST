@@ -34,39 +34,48 @@ const OrderDashboardCard = ({ order }) => {
   return (
     <div className="card rounded-4 mb-3">
       <div className="card-body">
-        <h3
-          className={
-            order.paymentStatus === "Paid" ? "text-success" : "text-danger"
-          }
-        >
-          {order.paymentStatus === "Paid" ? order.paymentStatus : "COD"}
-        </h3>
-        <h5 className="text-success">
-          <AquaCurrencyFormat amount={order.totalAmount} />
-        </h5>
-        <hr />
-        <p>
+        <div class="d-flex justify-content-between">
+          <p>
+            <strong>Order ID:</strong> {order.orderId}
+          </p>
+          <h5 className="text-success">
+            <AquaCurrencyFormat amount={order.totalAmount} />
+          </h5>
+          <span>
+            <span
+              className={
+                order.paymentStatus === "Paid"
+                  ? "badge text-bg-success px-3"
+                  : "badge text-bg-warning px-3"
+              }
+            >
+              {order.paymentStatus === "Paid" ? order.paymentStatus : "COD"}
+            </span>
+          </span>
+        </div>
+        {/* <p>
           <strong>Transaction ID:</strong> {order.transactionId}
-        </p>
-        <p>
-          <strong>Order ID:</strong> {order.orderId}
-        </p>
-        {renderPaymentInstrument(order.paymentInstrument)}
-        <hr />
-        <ul>
-          {order.items.map((item) => (
-            <li key={item._id}>
-              {item.name} - Quantity: {item.quantity}, Price per item:{" "}
-              <AquaCurrencyFormat amount={item.price} />
-            </li>
-          ))}
-        </ul>
-        <button
-          className="btn btn-primary mt-2"
-          onClick={handleDownloadInvoice}
-        >
-          Download Invoice
-        </button>
+        </p> */}
+
+        {/* {renderPaymentInstrument(order.paymentInstrument)} */}
+        <div className="d-flex justify-content-between">
+          <ol className="ps-3 mb-0 small text-body-secondary">
+            {order.items.map((item) => (
+              <li key={item._id}>
+                {item.name} - Quantity: {item.quantity}, Price per item:{" "}
+                <AquaCurrencyFormat amount={item.price} />
+              </li>
+            ))}
+          </ol>
+          <span>
+            <button
+              className="btn btn-secondary btn-sm rounded-pill"
+              onClick={handleDownloadInvoice}
+            >
+              Download Invoice
+            </button>
+          </span>
+        </div>
       </div>
     </div>
   );

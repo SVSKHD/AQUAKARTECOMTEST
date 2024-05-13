@@ -22,10 +22,10 @@ const UserOrder = () => {
   return (
     <>
       <UserLayout>
-        <AquaHeading content={"Orders"} decorate={true} level={1} />
+        <AquaHeading content={"Your Orders"} level={3} />
         <div className="row">
           {orders?.map((r, i) => (
-            <div key={i} className="col">
+            <div key={i} className="col-md-12">
               <OrderDashboardCard order={r} />
             </div>
           ))}

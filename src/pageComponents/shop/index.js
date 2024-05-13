@@ -38,16 +38,30 @@ const AquaShopComponent = () => {
   }, [LoadProducts]);
 
   const handleRange = (newRange) => {
-    getAllProducts("price", newRange.value)
-      .then((res) => {
-        console.log(res.data.products);
-        setProducts(res.data.products);
-        setProductLoading(false);
-      })
-      .catch(() => {
-        AquaToast("Please try again", "error");
-        setProductLoading(false);
-      });
+    console.log("new", newRange, newRange.selectedCategory);
+    if (newRange.value !== 0) {
+      getAllProducts("price", newRange.value)
+        .then((res) => {
+          console.log(res.data.products);
+          setProducts(res.data.products);
+          setProductLoading(false);
+        })
+        .catch(() => {
+          AquaToast("Please try again", "error");
+          setProductLoading(false);
+        });
+    } else if (newRange.selectedCategory) {
+      getAllProducts("category", newRange.selectedCategory._id)
+        .then((res) => {
+          console.log(res.data.products);
+          setProducts(res.data.products);
+          setProductLoading(false);
+        })
+        .catch(() => {
+          AquaToast("Please try again", "error");
+          setProductLoading(false);
+        });
+    }
   };
 
   const handleCategory = (data) => {
@@ -65,7 +79,6 @@ const AquaShopComponent = () => {
         AquaToast("Please try again", "error");
         setProductLoading(false);
       });
-    // LoadProducts();
   };
 
   return (
