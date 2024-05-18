@@ -23,36 +23,30 @@ const AquaHomeComponent = () => {
   return (
     <>
       <AquaLayout seo={SeoData}>
-        <div className="container">
-          <div className="mb-5 text-center">
-            <h1 className="underline-animation display-1">Aquakart</h1>
-            <h2 className="index-second display-3">
-              "Transform your water from 'rock concert' to 'smooth jazz' with
-              our water softeners!"
-            </h2>
+       <div className="container mb-3">
+        <div className="row">
+          <div className="col-8">
+          <div className="card rounded-4">
+          <div className="card-body">
+
           </div>
         </div>
-        <div className="index-section1 mb-3">
-          <div className="container p-3">
-            <div className="row">
-              <div className="col-md-6 col-lg-6">
-                <p className="index-section1-p">
-                  Putting the humor aside, we're here to guide you to the
-                  perfect water softener tailored to your home's needs and
-                  preferences.
-                </p>
-              </div>
-              <div className="col-md-6 col-lg-6 image-div-adjust">
-                <AquaCategoryHolder />
+          </div>
+          <div className="col-4">
+            <div className="card rounded-4">
+              <div className="card-body">
+                <div className="mt-2 mb-3">
+                <h3>Username</h3>
+                </div>
+                <div className="">
+                  <p>Thank you for being with us! 🌟 We truly value your continued support. As a token of our appreciation, please explore the exclusive offers we’ve curated just for you. Enjoy your journey with us! 🎉</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="container">
-          <div className="h2 text-center mb-4">Featured Products</div>
-          <AquaProductHolder />
-        </div>
-        {/* <AquaSubCategoryHolder /> */}
+      
+       </div>
       </AquaLayout>
     </>
   );
