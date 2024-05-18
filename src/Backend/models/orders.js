@@ -55,6 +55,24 @@ const OrderSchema = new mongoose.Schema(
     shippingMethod: String,
     shippingCost: Number,
     estimatedDelivery: Date,
+    isOderDelivery: {
+      type: Boolean,
+    },
+    isOrderDeliveryDate: {
+      type: String,
+    },
+    orderRefund: {
+      type: Boolean,
+    },
+    orderRefundDate: {
+      type: String,
+    },
+    orderCancelled: {
+      type: Boolean,
+    },
+    orderCancelledDate: {
+      type: String,
+    },
     orderStatus: {
       type: String,
       enum: ["Pending", "Processing", "Shipped", "Completed", "Cancelled"],

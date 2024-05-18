@@ -23,10 +23,10 @@ const AquaCheckoutComponent = () => {
   const router = useRouter();
   const { favCount, cartCount, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
-  const seo = { 
-  title: "Aquakart | Checkout" , 
-  canonical:`${process.env.apiKey}${router.pathname}`,
-  description:""
+  const seo = {
+    title: "Aquakart | Checkout",
+    canonical: `${process.env.apiKey}${router.pathname}`,
+    description: "",
   };
   const [selectedAddress, setSelectedAddress] = useState(false);
   const [checkedStates, setCheckedStates] = useState(
@@ -45,7 +45,6 @@ const AquaCheckoutComponent = () => {
   const { cartTotal } = ProductFunctions();
   const { userDataUpdate } = UserOperations();
   const { CreateCodOrder } = AquaOrderOperatrions();
-  
 
   const handleAddressSelect = (selectedAddressIndex) => {
     const selectedAddress = user.user.addresses[selectedAddressIndex];
