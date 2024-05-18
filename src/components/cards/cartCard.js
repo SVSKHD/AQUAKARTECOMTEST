@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AquaCartCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
-  const { favDrawer } = useSelector((state) => ({ ...state }));
+  const { favDrawer , favCount} = useSelector((state) => ({ ...state }));
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const [favourite, setFavourite] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
@@ -27,13 +27,16 @@ const AquaCartCard = ({ data }) => {
   const Redirect = () => {
     router.push(`/product/${_id}`);
   };
-
   const { QuantityAdd, QuantitySub } = ProductFunctions();
   useEffect(() => {
     if (favDrawer === true) {
       setFavourite(true);
     }
   }, [favDrawer, setFavourite]);
+  useEffect(()=>{
+    const isProductInFav = favCount.some((item) => item._id === data?._id);
+    setCartAdd(isProductInFav);
+  },[favCount , data?._id])
   const handleQuantityAdd = () => {
     if (localQuantity < 5) {
       setLocalQuantity(localQuantity + 1);
@@ -48,12 +51,6 @@ const AquaCartCard = ({ data }) => {
     }
   };
 
-  const handleRemoveClicked = (r) => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: r._id,
-    });
-  };
 
   const handleAddToCart = () => {
     addProductToCart(data, setCartAdd);
