@@ -7,6 +7,7 @@ import AquaOrder from "@/Backend/models/orders";
 const router = createRouter();
 
 router.post(async (req, res) => {
+  console.log(process.env.PHONEPE_KEY)
   const passedPayload = req.body;
   await db.connectDb(); // Ensure database connection is awaited
 
@@ -33,7 +34,7 @@ router.post(async (req, res) => {
 
     const merchantTransactionId = passedPayload.transactionId;
     const data = {
-      merchantId: process.env.PHONE_PE_MERCHANT_ID,
+      merchantId: "M22A17T812FQ1",
       merchantTransactionId,
       merchantUserId: passedPayload.user,
       name: getUserById.name || createUserName(getUserById.email),
