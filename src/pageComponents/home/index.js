@@ -5,6 +5,7 @@ import AquaProductHolder from "./productHolder";
 import { useRouter } from "next/router";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useEffect } from "react";
+import {useSelector} from "react-redux"
 
 const AquaHomeComponent = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const AquaHomeComponent = () => {
       "Aquakart Ecom Store , water softeners  , water Ro  , ro machines , Salt Free Water Softener , Water Softener System , Water Softener Installation",
     keyphrases: "Water Softener Salt Prices , Salt Water Softener",
   };
-
+  const {user} = useSelector((state)=>({...state}))
   return (
     <>
       <AquaLayout seo={SeoData}>
@@ -34,11 +35,12 @@ const AquaHomeComponent = () => {
           </div>
           <div className="col-4">
             <div className="card rounded-4">
+
               <div className="card-body">
                 <div className="mt-2 mb-3">
-                <h3>Username</h3>
+                <h3>{user?.user?.firstName}</h3>
                 </div>
-                <div className="">
+                <div className="text-muted">
                   <p>Thank you for being with us! 🌟 We truly value your continued support. As a token of our appreciation, please explore the exclusive offers we’ve curated just for you. Enjoy your journey with us! 🎉</p>
                 </div>
               </div>

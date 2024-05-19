@@ -33,7 +33,7 @@ router.post(async (req, res) => {
 
     const merchantTransactionId = passedPayload.transactionId;
     const data = {
-      merchantId: process.env.NEXT_PUBLIC_PHONE_PE_MERCHANT_ID,
+      merchantId: process.env.PHONE_PE_MERCHANT_ID,
       merchantTransactionId,
       merchantUserId: passedPayload.user,
       name: getUserById.name || createUserName(getUserById.email),
@@ -50,7 +50,7 @@ router.post(async (req, res) => {
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
     const string =
-      payloadMain + "/pg/v1/pay" + process.env.NEXT_PUBLIC_PHONEPE_KEY;
+      payloadMain + "/pg/v1/pay" + process.env.PHONEPE_KEY;
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
 
