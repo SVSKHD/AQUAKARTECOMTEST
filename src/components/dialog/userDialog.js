@@ -254,14 +254,18 @@ const AquaUserDialog = () => {
             <div className="row">
               <div className="col"></div>
               <div className="col">
-                <span
-                  className="ms-4 text-primary"
-                  onClick={(forgotPassword) =>
-                    setForgotPassword({ ...forgotPassword, email: true })
-                  }
-                >
-                  Forgot Password
-                </span>
+                {signupStatus ? (
+                  ""
+                ) : (
+                  <span
+                    className="ms-4 text-primary"
+                    onClick={(forgotPassword) =>
+                      setForgotPassword({ ...forgotPassword, email: true })
+                    }
+                  >
+                    Forgot Password
+                  </span>
+                )}
               </div>
             </div>
             <hr />

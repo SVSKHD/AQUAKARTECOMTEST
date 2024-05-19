@@ -1,6 +1,6 @@
 // CardCarousel.js
-import React from 'react';
-import { Carousel } from 'react-bootstrap';
+import React from "react";
+import { Carousel } from "react-bootstrap";
 
 const CardCarousel = ({ cards, CardComponent }) => {
   // Split cards into chunks of 4 to display in a grid within the carousel
@@ -12,7 +12,13 @@ const CardCarousel = ({ cards, CardComponent }) => {
   }
 
   return (
-    <Carousel indicators={false} interval={3000} pause="hover" wrap={true} slide={true}>
+    <Carousel
+      indicators={false}
+      interval={3000}
+      pause="hover"
+      wrap={true}
+      slide={true}
+    >
       {chunks.map((chunk, index) => (
         <Carousel.Item key={index}>
           <div className="container">

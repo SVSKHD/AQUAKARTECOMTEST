@@ -24,44 +24,37 @@ const AquaCategoryHolder = () => {
   }, [loadCategories]);
   const cards = [
     {
-      title: 'Card 1',
-      description: 'This is card 1',
+      title: "Card 1",
+      description: "This is card 1",
     },
     {
-      title: 'Card 2',
-      description: 'This is card 2',
-
+      title: "Card 2",
+      description: "This is card 2",
     },
     {
-      title: 'Card 3',
-      description: 'This is card 3',
- 
+      title: "Card 3",
+      description: "This is card 3",
     },
     {
-      title: 'Card 4',
-      description: 'This is card 4',
-
+      title: "Card 4",
+      description: "This is card 4",
     },
     {
-      title: 'Card 5',
-      description: 'This is card 5',
-
+      title: "Card 5",
+      description: "This is card 5",
     },
     {
-      title: 'Card 6',
-      description: 'This is card 6',
-  
+      title: "Card 6",
+      description: "This is card 6",
     },
     {
-      title: 'Card 7',
-      description: 'This is card 7',
-
+      title: "Card 7",
+      description: "This is card 7",
     },
     {
-      title: 'Card 8',
-      description: 'This is card 8',
-    
-    }
+      title: "Card 8",
+      description: "This is card 8",
+    },
   ];
   return (
     <>
@@ -81,7 +74,7 @@ const AquaCategoryHolder = () => {
               </div>
             ))}
           </AquaCardMultiItemCarousel> */}
-          <CardCarousel cards={categories} CardComponent={<AquaImageCard/>}/>
+          <CardCarousel cards={categories} CardComponent={<AquaImageCard />} />
         </div>
       )}
     </>

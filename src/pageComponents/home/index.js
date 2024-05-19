@@ -5,11 +5,11 @@ import AquaProductHolder from "./productHolder";
 import { useRouter } from "next/router";
 import AquaLargeTitle from "@/reusables/largeTitle";
 import { useEffect } from "react";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CardCarousel from "@/reusables/AquaCardCarouselNew";
 
 const AquaHomeComponent = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
   const SeoData = {
     title: "Aquakart | Online Shopping for Softeners purifiers and many more",
@@ -24,53 +24,53 @@ const AquaHomeComponent = () => {
   };
   const cards = [
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 1',
-      text: 'This is card 1',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 1",
+      text: "This is card 1",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 2',
-      text: 'This is card 2',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 2",
+      text: "This is card 2",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 3',
-      text: 'This is card 3',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 3",
+      text: "This is card 3",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 4',
-      text: 'This is card 4',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 4",
+      text: "This is card 4",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 5',
-      text: 'This is card 5',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 5",
+      text: "This is card 5",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 6',
-      text: 'This is card 6',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 6",
+      text: "This is card 6",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 7',
-      text: 'This is card 7',
-      link: '#'
+      image: "https://via.placeholder.com/150",
+      title: "Card 7",
+      text: "This is card 7",
+      link: "#",
     },
     {
-      image: 'https://via.placeholder.com/150',
-      title: 'Card 8',
-      text: 'This is card 8',
-      link: '#'
-    }
+      image: "https://via.placeholder.com/150",
+      title: "Card 8",
+      text: "This is card 8",
+      link: "#",
+    },
   ];
   const { user } = useSelector((state) => ({ ...state }));
   return (
@@ -80,9 +80,7 @@ const AquaHomeComponent = () => {
           {/* first section */}
           <div className="row">
             <div className={user ? "col-9" : "col-12"}>
-             
-                <AquaCategoryHolder/>
-              
+              <AquaCategoryHolder />
             </div>
             <div className={user ? "col-3" : ""}>
               {user ? (
@@ -101,11 +99,12 @@ const AquaHomeComponent = () => {
                     </div>
                   </div>
                 </div>
-              ) : ("")}
+              ) : (
+                ""
+              )}
             </div>
           </div>
           {/* second section */}
-         
         </div>
       </AquaLayout>
     </>
