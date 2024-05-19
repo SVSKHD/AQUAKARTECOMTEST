@@ -8,7 +8,7 @@ const router = createRouter();
 
 router.post(async (req, res) => {
   const passedPayload = req.body;
-  await db.connectDb(); 
+  await db.connectDb();
 
   const createUserName = (email) => {
     if (email) {
@@ -27,7 +27,10 @@ router.post(async (req, res) => {
 
     let order = new AquaOrder({
       ...passedPayload,
-      userName: getUserById.firstName ||getUserById.name || createUserName(getUserById.email),
+      userName:
+        getUserById.firstName ||
+        getUserById.name ||
+        createUserName(getUserById.email),
     });
     await order.save(); // Save the order with proper await
 
@@ -49,8 +52,7 @@ router.post(async (req, res) => {
     const payload = JSON.stringify(data);
     const payloadMain = Buffer.from(payload).toString("base64");
     const keyIndex = 1;
-    const string =
-      payloadMain + "/pg/v1/pay" + process.env.PHONEPE_KEY;
+    const string = payloadMain + "/pg/v1/pay" + process.env.PHONEPE_KEY;
     const sha256 = crypto.createHash("sha256").update(string).digest("hex");
     const checksum = sha256 + "###" + keyIndex;
 

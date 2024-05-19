@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AquaCartCard = ({ data }) => {
   const { title, price, photos, quantity, _id } = data;
-  const { favDrawer , favCount} = useSelector((state) => ({ ...state }));
+  const { favDrawer, favCount } = useSelector((state) => ({ ...state }));
   const [localQuantity, setLocalQuantity] = useState(data ? data?.quantity : 1);
   const [favourite, setFavourite] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
@@ -33,10 +33,10 @@ const AquaCartCard = ({ data }) => {
       setFavourite(true);
     }
   }, [favDrawer, setFavourite]);
-  useEffect(()=>{
+  useEffect(() => {
     const isProductInFav = favCount.some((item) => item._id === data?._id);
     setCartAdd(isProductInFav);
-  },[favCount , data?._id])
+  }, [favCount, data?._id]);
   const handleQuantityAdd = () => {
     if (localQuantity < 5) {
       setLocalQuantity(localQuantity + 1);
@@ -50,7 +50,6 @@ const AquaCartCard = ({ data }) => {
       QuantitySub(data, localQuantity - 1);
     }
   };
-
 
   const handleAddToCart = () => {
     addProductToCart(data, setCartAdd);

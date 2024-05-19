@@ -19,10 +19,10 @@ const UserSchema = new mongoose.Schema({
   mobileOtp: { type: Number },
   ismobileLoginConfirmation: { type: Boolean },
   isMobileConfirmationDate: { type: Date },
-  // social credentials 
-  isGoogleLogin:{type:Boolean},
-  isFaceBookLogin:{type:Boolean},
-  isTwitterLogin:{type:Boolean},
+  // social credentials
+  isGoogleLogin: { type: Boolean },
+  isFaceBookLogin: { type: Boolean },
+  isTwitterLogin: { type: Boolean },
   //user signedup date
   userSignedupDate: { type: Date, default: Date.now },
   //login creds info

@@ -90,7 +90,6 @@ const AquaUserDialog = () => {
   };
 
   const handleForgotPasswordSubmit = () => {
-    console.log("load", forgotpasswordData);
     if (forgotPassword.email === true && !forgotPassword.otp) {
       ForgotPassword({ email: forgotpasswordData.email }).then((res) => {
         console.log("res", res.data.emailSent);

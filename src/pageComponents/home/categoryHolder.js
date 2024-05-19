@@ -4,6 +4,7 @@ import AquaToast from "@/reusables/js/toast";
 import AquaCardMultiItemCarousel from "@/reusables/cardCarousel";
 import { useEffect, useState, useCallback } from "react";
 import { FadeLoader } from "react-spinners";
+import CardCarousel from "@/reusables/AquaCardCarouselNew";
 
 const AquaCategoryHolder = () => {
   const [categories, setCategories] = useState([]);
@@ -21,14 +22,54 @@ const AquaCategoryHolder = () => {
   useEffect(() => {
     loadCategories();
   }, [loadCategories]);
+  const cards = [
+    {
+      title: 'Card 1',
+      description: 'This is card 1',
+    },
+    {
+      title: 'Card 2',
+      description: 'This is card 2',
 
+    },
+    {
+      title: 'Card 3',
+      description: 'This is card 3',
+ 
+    },
+    {
+      title: 'Card 4',
+      description: 'This is card 4',
+
+    },
+    {
+      title: 'Card 5',
+      description: 'This is card 5',
+
+    },
+    {
+      title: 'Card 6',
+      description: 'This is card 6',
+  
+    },
+    {
+      title: 'Card 7',
+      description: 'This is card 7',
+
+    },
+    {
+      title: 'Card 8',
+      description: 'This is card 8',
+    
+    }
+  ];
   return (
     <>
       {!categories.length ? (
         <FadeLoader />
       ) : (
         <div className="row">
-          <AquaCardMultiItemCarousel>
+          {/* <AquaCardMultiItemCarousel>
             {categories.map((r, i) => (
               <div key={i} className="col-md-2 col-lg-3 col-xs-12 col-sm-12">
                 <AquaImageCard
@@ -39,7 +80,8 @@ const AquaCategoryHolder = () => {
                 />
               </div>
             ))}
-          </AquaCardMultiItemCarousel>
+          </AquaCardMultiItemCarousel> */}
+          <CardCarousel cards={categories} CardComponent={<AquaImageCard/>}/>
         </div>
       )}
     </>
