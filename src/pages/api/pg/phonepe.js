@@ -7,9 +7,8 @@ import AquaOrder from "@/Backend/models/orders";
 const router = createRouter();
 
 router.post(async (req, res) => {
-  const phonePeMerchant = process.env.PHONE_MERCHANT
   const passedPayload = req.body;
-  await db.connectDb(); // Ensure database connection is awaited
+  await db.connectDb(); 
 
   const createUserName = (email) => {
     if (email) {
@@ -28,13 +27,13 @@ router.post(async (req, res) => {
 
     let order = new AquaOrder({
       ...passedPayload,
-      userName: getUserById.name || createUserName(getUserById.email),
+      userName: getUserById.firstName ||getUserById.name || createUserName(getUserById.email),
     });
     await order.save(); // Save the order with proper await
 
     const merchantTransactionId = passedPayload.transactionId;
     const data = {
-      merchantId: phonePeMerchant,
+      merchantId: "M22A17T812FQ1",
       merchantTransactionId,
       merchantUserId: passedPayload.user,
       name: getUserById.name || createUserName(getUserById.email),
