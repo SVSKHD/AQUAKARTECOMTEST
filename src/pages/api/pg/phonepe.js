@@ -34,7 +34,7 @@ router.post(async (req, res) => {
 
     const merchantTransactionId = passedPayload.transactionId;
     const data = {
-      merchantId: "M22A17T812FQ1",
+      merchantId: process.env.PHONE_PE_MERCHANT_ID,
       merchantTransactionId,
       merchantUserId: passedPayload.user,
       name: getUserById.name || createUserName(getUserById.email),

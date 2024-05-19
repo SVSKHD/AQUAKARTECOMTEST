@@ -92,7 +92,7 @@ const UserLayout = (props) => {
                 <div className="card shadow-lg mb-1 rounded-4">
                   <div className="card-body">
                     <UserHeader
-                      name={createUserName(user?.user?.email)}
+                      name={user?.user?.firstName || createUserName(user?.user?.email)}
                       id={user?.user?.id}
                       date={userSince(user?.user?.userSignedupDate)}
                     />
