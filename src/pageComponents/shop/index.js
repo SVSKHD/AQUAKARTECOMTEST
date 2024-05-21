@@ -38,7 +38,6 @@ const AquaShopComponent = () => {
   }, [LoadProducts]);
 
   const handleRange = (newRange) => {
-    console.log("new", newRange, newRange.selectedCategory);
     if (newRange.value !== 0) {
       getAllProducts("price", newRange.value)
         .then((res) => {
@@ -47,7 +46,7 @@ const AquaShopComponent = () => {
           setProductLoading(false);
         })
         .catch(() => {
-          AquaToast("Please try again", "error");
+          AquaToast("No Products in this Range", "info");
           setProductLoading(false);
         });
     } else if (newRange.selectedCategory) {

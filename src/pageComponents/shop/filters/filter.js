@@ -12,6 +12,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [range, setRange] = useState({ min: 0, max: 100000, value: 100 });
+  const [displayedRangeValue, setDisplayedRangeValue] = useState(100);
 
   const { getCategories } = AquaCategoryOperations();
   const { getSubCategories } = AquaSubCategoryOperations();
@@ -23,6 +24,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
       onSelectionChange({ ...updatedRange, selectedCategory, selectedSubs });
       return updatedRange;
     });
+    setDisplayedRangeValue(newValue);
   };
 
   const isFilterApplied = () => {
@@ -118,7 +120,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
     <>
       <div className="mb-3">
         <label htmlFor="customRange1" className="form-label">
-          Price Range
+        Price Range: <span className="text-success"><AquaCurrencyFormat amount={displayedRangeValue}/></span>
         </label>
         <input
           type="range"
