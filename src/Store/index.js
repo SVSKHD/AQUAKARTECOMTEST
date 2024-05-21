@@ -8,6 +8,7 @@ import { userReducer } from "./reducers/userDataReducer";
 import { cartReducer } from "./reducers/cartCountReducer";
 import { CODReducer } from "./reducers/CODreducer";
 import { favReducer } from "./reducers/favouritesReducer";
+import {compareReducer} from "./reducers/compareReducer"
 import { favDrawerReducer } from "./reducers/favDrawerReducer";
 import { userDialogReducer } from "./reducers/userPhoneDialog";
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   favDrawer: favDrawerReducer,
   cartCount: cartReducer,
   favCount: favReducer,
+  compareCount:compareReducer,
   COD: CODReducer,
   user: userReducer,
   userPhone: userDialogReducer,
