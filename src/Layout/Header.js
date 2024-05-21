@@ -137,7 +137,7 @@ const AquaNavBar = () => {
                         <DropdownButton
                           variant="dark"
                           as={ButtonGroup}
-                          title={`Hello ${createUserName(user?.user?.email)}`}
+                          title={`Hello ${createUserName(user?.user?.firstName)}`}
                           id="bg-nested-dropdown"
                         >
                           <Dropdown.Item href="/dashboard">
