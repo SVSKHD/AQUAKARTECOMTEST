@@ -36,7 +36,9 @@ const AquaComparePageComponent = () => {
 
   return (
     <>
-      <AquaTabs tabs={compareTabs} />
+      <AquaLayout seo={SeoData} container={true}>
+        <AquaTabs tabs={compareTabs} />
+      </AquaLayout>
     </>
   );
 };
