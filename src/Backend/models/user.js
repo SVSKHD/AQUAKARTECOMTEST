@@ -23,6 +23,12 @@ const UserSchema = new mongoose.Schema({
   isGoogleLogin: { type: Boolean },
   isFaceBookLogin: { type: Boolean },
   isTwitterLogin: { type: Boolean },
+  googleData: { type: Object },
+  facebookData: { type: Object },
+  twitterData: { type: Object },
+  // email verifications
+  emailOtp: { type: Number },
+  isEmailVerfied: { type: Boolean },
   //user signedup date
   userSignedupDate: { type: Date, default: Date.now },
   //login creds info

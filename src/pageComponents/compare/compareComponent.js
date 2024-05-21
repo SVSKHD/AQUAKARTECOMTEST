@@ -1,3 +1,4 @@
+import AquaHeading from "@/reusables/heading";
 import { useSelector, useDispatch } from "react-redux";
 const AquaCompareComponent = () => {
   const dispatch = useDispatch();
@@ -5,7 +6,7 @@ const AquaCompareComponent = () => {
   return (
     <>
       {compareCount.length === 0 ? (
-        <h1>Add Products to Compare</h1>
+        <AquaHeading content={"No products to compare yet"} decorate={true} />
       ) : (
         <>
           {compareCount.map((item) => {

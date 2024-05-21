@@ -120,7 +120,10 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
     <>
       <div className="mb-3">
         <label htmlFor="customRange1" className="form-label">
-        Price Range: <span className="text-success"><AquaCurrencyFormat amount={displayedRangeValue}/></span>
+          Price Range:{" "}
+          <span className="text-success">
+            <AquaCurrencyFormat amount={displayedRangeValue} />
+          </span>
         </label>
         <input
           type="range"
@@ -141,7 +144,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
         </div>
       </div>
       <div>
-        <AquaAccordian
+        {/* <AquaAccordian
           eventKey="0"
           title={<AquaHeading level={5} content={"Categories"} />}
           content={
@@ -161,7 +164,7 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
               ))}
             </div>
           }
-        />
+        /> */}
       </div>
       {/* will apply this soon in next phase */}
       {/* <div>
