@@ -6,13 +6,17 @@ const AquaCompareComponent = () => {
   return (
     <>
       {compareCount.length === 0 ? (
-        <AquaHeading content={"No products to compare yet"} decorate={true} level={2}/>
+        <AquaHeading
+          content={"No products to compare yet"}
+          decorate={true}
+          level={2}
+        />
       ) : (
         <>
           {compareCount.map((item) => {
             return (
               <div>
-                <h1>{item.name}</h1>
+                <h1 key={item}>{item.name}</h1>
               </div>
             );
           })}
