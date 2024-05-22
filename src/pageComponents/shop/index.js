@@ -19,6 +19,7 @@ const AquaShopComponent = () => {
     AquaProductOperations();
   const [products, setProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
+  const [show , setShow] = useState(false)
 
   const LoadProducts = useCallback(() => {
     setProductLoading(true);
@@ -70,7 +71,6 @@ const AquaShopComponent = () => {
   const ReloadAndClear = () => {
     getAllProducts("all", true)
       .then((res) => {
-        console.log("all", res.data.products);
         setProducts(res.data.products);
         setProductLoading(false);
       })

@@ -1,6 +1,5 @@
 import AquaCategoryOperations from "@/Services/category";
 import AquaSubCategoryOperations from "@/Services/subCategory";
-import AquaAccordian from "@/reusables/accrodian";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import AquaHeading from "@/reusables/heading";
 import AquaToast from "@/reusables/js/toast";
@@ -9,7 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 const AquaShopFilters = ({ onSelectionChange, onClear }) => {
   const [categories, setCategories] = useState([]);
   const [subs, setSubs] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubs, setSelectedSubs] = useState([]);
   const [range, setRange] = useState({ min: 0, max: 100000, value: 100 });
   const [displayedRangeValue, setDisplayedRangeValue] = useState(100);
@@ -28,7 +27,11 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
   };
 
   const isFilterApplied = () => {
-    return selectedCategory || selectedSubs.length > 0 || range.value !== 100;
+    return (
+      selectedCategory !== null ||
+      selectedSubs.length > 0 ||
+      range.value !== 100
+    );
   };
 
   const toggleCategorySelection = (category) => {
@@ -59,29 +62,16 @@ const AquaShopFilters = ({ onSelectionChange, onClear }) => {
     onSelectionChange({ range, selectedCategory, selectedSubs: newSelected });
   };
 
-  // const toggleSubCategorySelection = (subcategory) => {
-  //   const currentIndex = selectedSubs.indexOf(subcategory);
-  //   const newSelected = [...selectedSubs];
-
-  //   if (currentIndex === -1) {
-  //     newSelected.push(subcategory);
-  //   } else {
-  //     newSelected.splice(currentIndex, 1);
-  //   }
-
-  //   setSelectedSubs(newSelected);
-  //   onSelectionChange({ range, selectedCategories, selectedSubs: newSelected });
-  // };
-
   const clearFilters = () => {
-    setSelectedCategories([]);
+    setSelectedCategory(null);
     setSelectedSubs([]);
     setRange({ min: 0, max: 100000, value: 100 });
+    setDisplayedRangeValue(100);
     onSelectionChange({
       min: 0,
       max: 100000,
       value: 100,
-      selectedCategories: [],
+      selectedCategory: null,
       selectedSubs: [],
     });
     if (onClear) {
