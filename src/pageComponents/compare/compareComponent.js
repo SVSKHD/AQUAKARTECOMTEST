@@ -15,8 +15,8 @@ const AquaCompareComponent = () => {
         <>
           {compareCount.map((item) => {
             return (
-              <div>
-                <h1 key={item}>{item.name}</h1>
+              <div key={item.id}>
+                <h1>{item.name}</h1>
               </div>
             );
           })}
