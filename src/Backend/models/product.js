@@ -48,6 +48,18 @@ const AquaProductSchema = new mongoose.Schema({
       },
     },
   ],
+  arPhotos: [
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      secure_url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   category: {
     type: mongoose.Schema.ObjectId,
     ref: "AquaCategory",
