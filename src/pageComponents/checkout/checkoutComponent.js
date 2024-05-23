@@ -162,7 +162,7 @@ const AquaCheckoutComponent = () => {
         shippingCost: 50, // Example fixed cost
         estimatedDelivery: new Date(
           new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
-        ).toISOString(), // Adding 7 days for delivery
+        ).toISOString(), // Adding 7 days // Adding 7 days for delivery
         orderStatus: "Processing",
       };
       CreateCodOrder(newOrder) // Use newOrder directly here
