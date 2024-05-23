@@ -13,13 +13,13 @@ router.post(async (req, res) => {
     await db.connectDb(); // Make sure to await the database connection
     const cashOnOrder = new AquaOrder(req.body); // Create a new order instance
     const savedOrder = await cashOnOrder.save(); // Await the save operation
-    const user = AquaEcomUser.findById(req.body.user);
+    const user = await AquaEcomUser.findById(req.body.user);
     if (!savedOrder) {
       return res
         .status(400)
         .json({ success: false, message: "Please try again" });
     }
-
+    console.log(user.email);
     // Send email
     const emailContent = orderEmail(
       user.email,
