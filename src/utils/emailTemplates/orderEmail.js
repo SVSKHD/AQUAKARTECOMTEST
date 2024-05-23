@@ -1,5 +1,4 @@
-const orderEmail = (email, orderItems, paymentType) => {
-  // Generate order items rows
+const orderEmail = (email, orderItems, paymentType , estimatedDelivery) => {
   const orderItemsHTML = orderItems
     .map(
       (item) => `
@@ -76,6 +75,7 @@ const orderEmail = (email, orderItems, paymentType) => {
                         </tbody>
                       </table>
                       <p><strong>Total Amount: ${totalAmount}</strong></p>
+                      <p><strong>Estimated Delivery : ${estimatedDelivery}</strong></p>
                       <p>Payment Method: <strong>${paymentType}</strong></p>
                       <p>Your order will be shipped to the email address registered: <strong>${email}</strong></p>
                       <hr>
