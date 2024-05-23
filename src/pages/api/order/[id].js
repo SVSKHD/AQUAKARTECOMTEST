@@ -4,6 +4,9 @@ import { SHA256 } from "crypto-js";
 import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
 import crypto from "crypto";
+import AquaEcomUser from "@/Backend/models/user";
+import sendEmail from "@/utils/emailTemplates/sendEmail";
+import orderEmail from "@/utils/emailTemplates/orderEmail";
 
 const router = createRouter();
 
@@ -26,7 +29,7 @@ function getUserIdFromTransactionId(transactionId) {
 router.post(async (req, res) => {
   try {
     await db.connectDb();
-
+    const user = await AquaEcomUser.findById(req.body.user);
     // Handling CORS
     const allowedOrigins = [
       "https://www.aquakart.co.in",
@@ -46,7 +49,7 @@ router.post(async (req, res) => {
       crypto
         .createHash("sha256")
         .update(
-          `/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`,
+          `/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`
         )
         .digest("hex") + "###1";
 
@@ -73,13 +76,24 @@ router.post(async (req, res) => {
       const updatedOrder = await AquaOrder.findOneAndUpdate(
         { transactionId },
         orderData,
-        { new: true },
+        { new: true }
       );
       if (updatedOrder) {
         res.writeHead(302, {
           Location: `/order/${updatedOrder.transactionId}`,
         });
         res.end();
+        const emailContent = orderEmail(
+          user.email,
+          order.items,
+          order.orderType
+        ); // This function should return the HTML content of the email
+        const emailResult = await sendEmail({
+          email: user.email,
+          subject: `Thank You for Your Order!  - Aquakart`,
+          message: "Happy Shopping",
+          content: emailContent,
+        });
       } else {
         throw new Error("Order not found");
       }
@@ -113,7 +127,7 @@ router.put(async (req, res) => {
     const updatedOrder = await AquaOrder.findOneAndUpdate(
       { transactionId: id }, // Use the transactionId to find the order
       { $set: { items: updatedItems } }, // Update the 'items' field
-      { new: true, runValidators: true }, // Return the updated document and run schema validators
+      { new: true, runValidators: true } // Return the updated document and run schema validators
     );
 
     if (!updatedOrder) {
@@ -138,7 +152,9 @@ router.get(async (req, res) => {
 
     const { id } = req.query; // Correctly extract the 'id' from request parameters
     const order = await AquaOrder.findOne({ transactionId: id }); // Use findOne to get a single document
+    const user = await AquaEcomUser.findById(order.user);
 
+    console.log(user);
     // Check if order exists
     if (!order) {
       return res
