@@ -69,9 +69,9 @@ router.post(async (req, res) => {
       );
       if (updatedOrder) {
         res.writeHead(302, {
-          Location: `/order/hello}`,
+          Location: `/order/${updatedOrder.transactionId}`,
         });
-        res.end();
+        res.end(JSON.stringify({ user }));
         
       } else {
         throw new Error("Order not found");
