@@ -17,7 +17,6 @@ function getUserIdFromTransactionId(transactionId) {
 router.post(async (req, res) => {
   try {
     await db.connectDb();
-    const user = await AquaEcomUser.findById(req.body.user);
     // Handling CORS
     const allowedOrigins = [
       "https://www.aquakart.co.in",
@@ -66,6 +65,21 @@ router.post(async (req, res) => {
         orderData,
         { new: true }
       );
+      const fetchedUser = await AquaEcomUser.findById(updatedOrder.user)
+      if(fetchedUser){
+        const emailContent = orderEmail(
+          user.email,
+          updatedOrder.items,
+          updatedOrder.paymentStatus,
+          updatedOrder.estimatedDelivery
+        ); // This function should return the HTML content of the email
+        await sendEmail({
+          email: user.email,
+          subject: `Thank You for Your Order!  - Aquakart`,
+          message: "Happy Shopping",
+          content: emailContent,
+        });
+      }
       if (updatedOrder) {
         res.writeHead(302, {
           Location: `/order/${updatedOrder.transactionId}`,
