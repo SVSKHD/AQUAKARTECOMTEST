@@ -15,17 +15,6 @@ function getUserIdFromTransactionId(transactionId) {
   return parts[1];
 }
 
-// router.post(async(req,res)=>{
-//   console.log(req,req.body)
-//   const data = req.body
-//   try {
-//     await db.connectDb()
-//     res.json({success:data.Success , data:data.PAYMENT_METHOD, backup:data})
-//   } catch (err) {
-//     res.json({success:false , data:null})
-//   }
-// })
-
 router.post(async (req, res) => {
   try {
     await db.connectDb();
@@ -83,7 +72,7 @@ router.post(async (req, res) => {
           Location: `/order/${updatedOrder.transactionId}`,
         });
         res.end();
-        const emailContent = orderEmail(
+        const emailContent = await orderEmail(
           user.email,
           updatedOrder.items,
           updatedOrder.paymentStatus,

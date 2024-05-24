@@ -167,11 +167,11 @@ const AquaCheckoutComponent = () => {
       };
       CreateCodOrder(newOrder) // Use newOrder directly here
         .then((res) => {
-          console.log(res.data);
           setCod(newOrder); // Update state after successful API call
           AquaToast("successfully created COD order", "success");
           setLoadingStatus({ codStatus: false, phonepeGateway: false });
-          router.push(`/order/cod/${res.data.transactionId}`);
+          console.log("res", res.data.newOrder.transactionId)
+          router.push(`/order/cod/${res.data.newOrder.transactionId}`);
         })
         .catch((error) => {
           setLoadingStatus({ cod: false, phonepeGateway: false });
