@@ -69,21 +69,10 @@ router.post(async (req, res) => {
       );
       if (updatedOrder) {
         res.writeHead(302, {
-          Location: `/order/${updatedOrder.transactionId}`,
+          Location: `/order/hello}`,
         });
         res.end();
-        const emailContent = await orderEmail(
-          user.email,
-          updatedOrder.items,
-          updatedOrder.paymentStatus,
-          updatedOrder.estimatedDelivery
-        ); // This function should return the HTML content of the email
-        const emailResult = await sendEmail({
-          email: user.email,
-          subject: `Thank You for Your Order!  - Aquakart`,
-          message: "Happy Shopping",
-          content: emailContent,
-        });
+        
       } else {
         throw new Error("Order not found");
       }
@@ -119,7 +108,18 @@ router.put(async (req, res) => {
       { $set: { items: updatedItems } }, // Update the 'items' field
       { new: true, runValidators: true } // Return the updated document and run schema validators
     );
-
+    const emailContent = orderEmail(
+      user.email,
+      updatedOrder.items,
+      updatedOrder.paymentStatus,
+      updatedOrder.estimatedDelivery
+    ); // This function should return the HTML content of the email
+    const emailResult = await sendEmail({
+      email: user.email,
+      subject: `Thank You for Your Order!  - Aquakart`,
+      message: "Happy Shopping",
+      content: emailContent,
+    });
     if (!updatedOrder) {
       return res.status(404).json({
         error: "Order not found with the given transaction ID",
