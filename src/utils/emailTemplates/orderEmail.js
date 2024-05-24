@@ -1,4 +1,4 @@
-const orderEmail = (email, orderItems, paymentType , estimatedDelivery) => {
+const orderEmail = (email, orderItems, paymentType, estimatedDelivery) => {
   const orderItemsHTML = orderItems
     .map(
       (item) => `

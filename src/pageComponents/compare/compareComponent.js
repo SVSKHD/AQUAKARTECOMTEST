@@ -13,7 +13,7 @@ const AquaCompareComponent = () => {
         />
       ) : (
         <>
-        <AquaHeading content={"Compare Products"} decorate={true} level={2}/>
+          <AquaHeading content={"Compare Products"} decorate={true} level={2} />
           {compareCount.map((item) => {
             return (
               <div key={item.id}>

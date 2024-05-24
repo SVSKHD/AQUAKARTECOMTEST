@@ -57,7 +57,10 @@ const AquaOrdersComponent = ({ initialOrder }) => {
               </div>
             </div>
             <div className="justify-content-center mt-4">
-              <Link href="/dashboard/orders" className="btn btn-dark rounded-pill">
+              <Link
+                href="/dashboard/orders"
+                className="btn btn-dark rounded-pill"
+              >
                 Dashboard
               </Link>
               <button
@@ -75,8 +78,12 @@ const AquaOrdersComponent = ({ initialOrder }) => {
             Payment Failed - {initialOrder?.orderId}
           </div>
           <div className="card-body">
-            <button className="btn btn-dark rounded-pill">Proceed to Pay</button>
-            <button className="btn btn-dark ms-2 rounded-pill">Cash On Delivery</button>
+            <button className="btn btn-dark rounded-pill">
+              Proceed to Pay
+            </button>
+            <button className="btn btn-dark ms-2 rounded-pill">
+              Cash On Delivery
+            </button>
           </div>
         </div>
       )}

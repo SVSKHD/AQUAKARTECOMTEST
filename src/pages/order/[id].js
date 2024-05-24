@@ -1,5 +1,5 @@
 import AquaOrdersComponent from "@/pageComponents/orders";
-import axios from "axios"
+import axios from "axios";
 
 const AquaOrders = ({ initialOrder }) => {
   return <AquaOrdersComponent initialOrder={initialOrder} />;
@@ -10,7 +10,9 @@ export async function getServerSideProps(context) {
   let initialOrder = {};
 
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/get?transactionId=${id}`);
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/order/get?transactionId=${id}`,
+    );
     initialOrder = res.data.data;
     console.log(initialOrder);
   } catch (err) {
@@ -26,4 +28,3 @@ export async function getServerSideProps(context) {
 }
 
 export default AquaOrders;
-

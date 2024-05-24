@@ -28,7 +28,6 @@ const AquaCodPageComponent = () => {
       });
   }, [id, getOrderByTrasactionId, dispatch]);
 
-
   return (
     <>
       <AquaLayout seo={seoData}>

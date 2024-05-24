@@ -22,7 +22,13 @@ const OrderSchema = new mongoose.Schema(
     orderId: { type: String },
     orderType: {
       type: String,
-      enum: ["Cash On Delivery", "Payment Method(Phone Pe Gateway)", "Payment Method Gateway", "Payment Method Razorpay", "Payment Method"], // Allowed values
+      enum: [
+        "Cash On Delivery",
+        "Payment Method(Phone Pe Gateway)",
+        "Payment Method Gateway",
+        "Payment Method Razorpay",
+        "Payment Method",
+      ], // Allowed values
       required: true, // Making this field required; adjust as necessary
     },
     transactionId: { type: String },

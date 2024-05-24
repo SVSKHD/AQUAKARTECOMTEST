@@ -37,7 +37,7 @@ router.post(async (req, res) => {
       crypto
         .createHash("sha256")
         .update(
-          `/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`
+          `/pg/v1/status/${merchantId}/${transactionId}fb0244a9-34b5-48ae-a7a3-741d3de823d3`,
         )
         .digest("hex") + "###1";
 
@@ -64,15 +64,15 @@ router.post(async (req, res) => {
       const updatedOrder = await AquaOrder.findOneAndUpdate(
         { transactionId },
         orderData,
-        { new: true }
+        { new: true },
       );
-      const fetchedUser = await AquaEcomUser.findById(updatedOrder.user)
-      if(fetchedUser){
+      const fetchedUser = await AquaEcomUser.findById(updatedOrder.user);
+      if (fetchedUser) {
         const emailContent = orderEmail(
           fetchedUser.email,
           updatedOrder.items,
           updatedOrder.paymentStatus,
-          updatedOrder.estimatedDelivery
+          updatedOrder.estimatedDelivery,
         ); // This function should return the HTML content of the email
         await sendEmail({
           email: fetchedUser.email,
@@ -86,7 +86,6 @@ router.post(async (req, res) => {
           Location: `/order/${updatedOrder.transactionId}`,
         });
         res.end(JSON.stringify({ user }));
-        
       } else {
         throw new Error("Order not found");
       }
@@ -120,7 +119,7 @@ router.put(async (req, res) => {
     const updatedOrder = await AquaOrder.findOneAndUpdate(
       { transactionId: id }, // Use the transactionId to find the order
       { $set: { items: updatedItems } }, // Update the 'items' field
-      { new: true, runValidators: true } // Return the updated document and run schema validators
+      { new: true, runValidators: true }, // Return the updated document and run schema validators
     );
     if (!updatedOrder) {
       return res.status(404).json({

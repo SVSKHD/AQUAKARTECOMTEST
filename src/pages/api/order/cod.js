@@ -25,7 +25,7 @@ router.post(async (req, res) => {
       user.email,
       savedOrder.items,
       savedOrder.orderType,
-      savedOrder.estimatedDelivery
+      savedOrder.estimatedDelivery,
     ); // This function should return the HTML content of the email
     const emailResult = await sendEmail({
       email: user.email,

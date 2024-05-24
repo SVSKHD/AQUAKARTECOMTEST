@@ -52,21 +52,6 @@ router.get(async (req, res) => {
 
     const user = await AquaEcomUser.findById(order.user);
 
-    if (order.paymentStatus === "Paid") {
-      const emailContent = orderEmail(
-        user.email,
-        order.items,
-        order.paymentStatus,
-        order.estimatedDelivery
-      ); // This function should return the HTML content of the email
-      await sendEmail({
-        email: user.email,
-        subject: `Thank You for Your Order!  - Aquakart`,
-        message: "Happy Shopping",
-        content: emailContent,
-      });
-    }
-
     res.status(200).json({ success: true, data: order });
   } catch (error) {
     console.error("Error fetching orders:", error);
