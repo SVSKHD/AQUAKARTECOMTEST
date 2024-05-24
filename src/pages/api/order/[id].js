@@ -5,7 +5,8 @@ import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
 import crypto from "crypto";
 import AquaEcomUser from "@/Backend/models/user";
-
+import orderEmail from "@/utils/emailTemplates/orderEmail";
+import sendEmail from "@/utils/emailTemplates/sendEmail";
 
 const router = createRouter();
 
