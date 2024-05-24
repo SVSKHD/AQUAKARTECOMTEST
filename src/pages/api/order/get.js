@@ -5,7 +5,6 @@ import AquaEcomUser from "@/Backend/models/user";
 import sendEmail from "@/utils/emailTemplates/sendEmail";
 import orderEmail from "@/utils/emailTemplates/orderEmail";
 
-
 const router = createRouter();
 
 router.get(async (req, res) => {
@@ -42,35 +41,35 @@ router.get(async (req, res) => {
       query.transactionId = transactionId;
     }
 
-    const orders = await AquaOrder.findOne(query).sort({ createdAt: -1 });
-    const user = await AquaEcomUser.findById(orders.user)
+    const order = await AquaOrder.findOne(query).sort({ createdAt: -1 });
 
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "No orders found for the provided criteria",
+      });
+    }
 
-    if(orders.paymentStatus==="Paid"){
+    const user = await AquaEcomUser.findById(order.user);
+
+    if (order.paymentStatus === "Paid") {
       const emailContent = orderEmail(
         user.email,
-        orders.items,
-        orders.paymentStatus,
-        orders.estimatedDelivery
+        order.items,
+        order.paymentStatus,
+        order.estimatedDelivery
       ); // This function should return the HTML content of the email
-      const emailResult = await sendEmail({
+      await sendEmail({
         email: user.email,
         subject: `Thank You for Your Order!  - Aquakart`,
         message: "Happy Shopping",
         content: emailContent,
       });
     }
-    
 
-    if (orders.length === 0) {
-      return res.status(404).json({
-        success: true,
-        message: "No orders found for the provided criteria",
-      });
-    }
-
-    res.status(200).json({ success: true, data: orders });
+    res.status(200).json({ success: true, data: order });
   } catch (error) {
+    console.error("Error fetching orders:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch orders",

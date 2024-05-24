@@ -27,6 +27,8 @@ const AquaCodPageComponent = () => {
         AquaToast("sorry please try again", "error");
       });
   }, [id, getOrderByTrasactionId, dispatch]);
+
+
   return (
     <>
       <AquaLayout seo={seoData}>
