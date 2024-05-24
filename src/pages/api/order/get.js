@@ -1,6 +1,10 @@
 import { createRouter } from "next-connect";
 import db from "@/utils/db";
 import AquaOrder from "@/Backend/models/orders";
+import AquaEcomUser from "@/Backend/models/user";
+import sendEmail from "@/utils/emailTemplates/sendEmail";
+import orderEmail from "@/utils/emailTemplates/orderEmail";
+
 
 const router = createRouter();
 
@@ -39,6 +43,24 @@ router.get(async (req, res) => {
     }
 
     const orders = await AquaOrder.findOne(query).sort({ createdAt: -1 });
+    const user = await AquaEcomUser.findById(orders.user)
+
+
+    if(orders.paymentStatus==="Paid"){
+      const emailContent = orderEmail(
+        user.email,
+        updatedOrder.items,
+        updatedOrder.paymentStatus,
+        updatedOrder.estimatedDelivery
+      ); // This function should return the HTML content of the email
+      const emailResult = await sendEmail({
+        email: user.email,
+        subject: `Thank You for Your Order!  - Aquakart`,
+        message: "Happy Shopping",
+        content: emailContent,
+      });
+    }
+    
 
     if (orders.length === 0) {
       return res.status(404).json({

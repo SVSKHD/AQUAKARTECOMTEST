@@ -5,8 +5,7 @@ import AquaOrder from "@/Backend/models/orders";
 import db from "@/utils/db";
 import crypto from "crypto";
 import AquaEcomUser from "@/Backend/models/user";
-import sendEmail from "@/utils/emailTemplates/sendEmail";
-import orderEmail from "@/utils/emailTemplates/orderEmail";
+
 
 const router = createRouter();
 
@@ -108,18 +107,6 @@ router.put(async (req, res) => {
       { $set: { items: updatedItems } }, // Update the 'items' field
       { new: true, runValidators: true } // Return the updated document and run schema validators
     );
-    const emailContent = orderEmail(
-      user.email,
-      updatedOrder.items,
-      updatedOrder.paymentStatus,
-      updatedOrder.estimatedDelivery
-    ); // This function should return the HTML content of the email
-    const emailResult = await sendEmail({
-      email: user.email,
-      subject: `Thank You for Your Order!  - Aquakart`,
-      message: "Happy Shopping",
-      content: emailContent,
-    });
     if (!updatedOrder) {
       return res.status(404).json({
         error: "Order not found with the given transaction ID",
