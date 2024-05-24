@@ -68,13 +68,13 @@ router.post(async (req, res) => {
       const fetchedUser = await AquaEcomUser.findById(updatedOrder.user)
       if(fetchedUser){
         const emailContent = orderEmail(
-          user.email,
+          fetchedUser.email,
           updatedOrder.items,
           updatedOrder.paymentStatus,
           updatedOrder.estimatedDelivery
         ); // This function should return the HTML content of the email
         await sendEmail({
-          email: user.email,
+          email: fetchedUser.email,
           subject: `Thank You for Your Order!  - Aquakart`,
           message: "Happy Shopping",
           content: emailContent,
