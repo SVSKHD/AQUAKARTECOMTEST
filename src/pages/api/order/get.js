@@ -49,9 +49,9 @@ router.get(async (req, res) => {
     if(orders.paymentStatus==="Paid"){
       const emailContent = orderEmail(
         user.email,
-        updatedOrder.items,
-        updatedOrder.paymentStatus,
-        updatedOrder.estimatedDelivery
+        orders.items,
+        orders.paymentStatus,
+        orders.estimatedDelivery
       ); // This function should return the HTML content of the email
       const emailResult = await sendEmail({
         email: user.email,
