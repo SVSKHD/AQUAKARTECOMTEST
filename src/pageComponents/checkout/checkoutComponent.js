@@ -98,7 +98,7 @@ const AquaCheckoutComponent = () => {
     const newOrder = {
       user: user?.user?._id, // Safe access and also make sure user exists
       transactionId: transactionId,
-      orderType: "Payment Method(Phone pe Gateway)",
+      orderType: "Payment Method(Phone Pe Gateway)",
       orderId: orderId,
       items: cartCount.map((item) => ({
         productId: item.id,
