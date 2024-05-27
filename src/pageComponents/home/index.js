@@ -78,45 +78,41 @@ const AquaHomeComponent = () => {
       <AquaLayout seo={SeoData}>
         <div className="container mb-3">
           {/* first section */}
-<div>
-<div className="card rounded-4 mb-3">
-  <div className="card-body">
-  <div className="row">
-    <div className={user ? "col-9" : "col-12"}></div>
-    <div className={user ? "col-3" : ""}>
-    {user ? (
-                <div className="card rounded-4">
-                  <div className="card-body">
-                    <div className="mt-2 mb-3">
-                      <h3>{user?.user?.firstName}</h3>
-                    </div>
-                    <div className="text-muted">
-                      <p>
-                        Thank you for being with us! 🌟 We truly value your
-                        continued support. As a token of our appreciation,
-                        please explore the exclusive offers we’ve curated just
-                        for you. Enjoy your journey with us! 🎉
-                      </p>
-                    </div>
+          <div>
+            <div className="card rounded-4 mb-3">
+              <div className="card-body">
+                <div className="row">
+                  <div className={user ? "col-9" : "col-12"}></div>
+                  <div className={user ? "col-3" : ""}>
+                    {user ? (
+                      <div className="card rounded-4">
+                        <div className="card-body">
+                          <div className="mt-2 mb-3">
+                            <h3>{user?.user?.firstName}</h3>
+                          </div>
+                          <div className="text-muted">
+                            <p>
+                              Thank you for being with us! 🌟 We truly value
+                              your continued support. As a token of our
+                              appreciation, please explore the exclusive offers
+                              we’ve curated just for you. Enjoy your journey
+                              with us! 🎉
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
-              ) : (
-                ""
-              )}
-    </div>
-  </div>
-  </div>
-</div>
-</div>
-
-     
-            
-              <AquaCategoryHolder />
-            
-   
+              </div>
+            </div>
           </div>
-          {/* second section */}
 
+          <AquaCategoryHolder />
+        </div>
+        {/* second section */}
       </AquaLayout>
     </>
   );

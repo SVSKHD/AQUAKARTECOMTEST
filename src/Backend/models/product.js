@@ -90,25 +90,25 @@ const AquaProductSchema = new mongoose.Schema({
     default: 0,
   },
   reviews: [
-      {
-          user: {
-              type: mongoose.Schema.ObjectId,
-              ref: "User",
-          },
-          name: {
-              type: String,
-          },
-          rating: {
-              type: Number,
-          },
-          comment: {
-              type: String,
-          },
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
       },
+      name: {
+        type: String,
+      },
+      rating: {
+        type: Number,
+      },
+      comment: {
+        type: String,
+      },
+    },
   ],
   user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
   },
   createdAt: {
     type: Date,
