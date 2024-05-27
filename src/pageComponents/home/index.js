@@ -78,12 +78,13 @@ const AquaHomeComponent = () => {
       <AquaLayout seo={SeoData}>
         <div className="container mb-3">
           {/* first section */}
-          <div className="row">
-            <div className={user ? "col-9" : "col-12"}>
-              <AquaCategoryHolder />
-            </div>
-            <div className={user ? "col-3" : ""}>
-              {user ? (
+<div>
+<div className="card rounded-4 mb-3">
+  <div className="card-body">
+  <div className="row">
+    <div className={user ? "col-9" : "col-12"}></div>
+    <div className={user ? "col-3" : ""}>
+    {user ? (
                 <div className="card rounded-4">
                   <div className="card-body">
                     <div className="mt-2 mb-3">
@@ -102,10 +103,20 @@ const AquaHomeComponent = () => {
               ) : (
                 ""
               )}
-            </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+
+     
+            
+              <AquaCategoryHolder />
+            
+   
           </div>
           {/* second section */}
-        </div>
+
       </AquaLayout>
     </>
   );
