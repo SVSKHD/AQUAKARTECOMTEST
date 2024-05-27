@@ -64,9 +64,19 @@ const AquaHomeComponent = () => {
               </div>
             </div>
           </div>
-          <AquaHeading content={"Categories"} level={2} customclass={"mb-2"} decorate={true}/>
+          <AquaHeading
+            content={"Categories"}
+            level={2}
+            customclass={"mb-2"}
+            decorate={true}
+          />
           <AquaCategoryHolder />
-          <AquaHeading content={"Products"} level={2} customclass={"mb-2"} decorate={true}/>
+          <AquaHeading
+            content={"Products"}
+            level={2}
+            customclass={"mb-2"}
+            decorate={true}
+          />
           <AquaProductHolder />
         </div>
         {/* second section */}

@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  FaHeart,
-  FaRegHeart,
-  FaCartArrowDown,
-  FaCheck,
-} from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaCartArrowDown, FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import AquaCurrencyFormat from "./currencyFormatter";
 import { useRouter } from "next/router";
@@ -43,7 +38,6 @@ const TestVerticalcard = ({ card }) => {
   };
 
   return (
-    
     <div className="hovercard">
       <div className="container1">
         <div className="top">

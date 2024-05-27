@@ -12,25 +12,21 @@ const CardCarousel = ({ cards, CardComponent }) => {
   }
 
   return (
-    <Carousel
-    indicators={false}
-    wrap={true}
-    controls={false}
-  >
-    {chunks.map((chunk, index) => (
-      <Carousel.Item key={index}>
-        <div className="container">
-          <div className="row">
-            {chunk.map((card, idx) => (
-              <div className="col-md-3 col-sm-12" key={idx}>
-                {React.cloneElement(CardComponent, { card })}
-              </div>
-            ))}
+    <Carousel indicators={false} wrap={true} controls={false}>
+      {chunks.map((chunk, index) => (
+        <Carousel.Item key={index}>
+          <div className="container">
+            <div className="row">
+              {chunk.map((card, idx) => (
+                <div className="col-md-3 col-sm-12" key={idx}>
+                  {React.cloneElement(CardComponent, { card })}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </Carousel.Item>
-    ))}
-  </Carousel>
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
 };
 

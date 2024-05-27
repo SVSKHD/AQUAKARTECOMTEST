@@ -205,7 +205,7 @@ const DynamicProduct = () => {
                         key={i}
                         className="col-md-4 col-lg-4 col-xs-12 col-sm-12"
                       >
-                       <TestVerticalcard card={r} />
+                        <TestVerticalcard card={r} />
                       </div>
                     </>
                   ))}
