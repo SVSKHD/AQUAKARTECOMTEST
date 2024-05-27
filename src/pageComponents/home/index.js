@@ -79,7 +79,7 @@ const AquaHomeComponent = () => {
         <div className="container mb-3">
           {/* first section */}
           <div>
-            <div className="card rounded-4 mb-3">
+            <div className="mb-3">
               <div className="card-body">
                 <div className="row">
                   <div className={user ? "col-9" : "col-12"}></div>
@@ -109,8 +109,8 @@ const AquaHomeComponent = () => {
               </div>
             </div>
           </div>
-
           <AquaCategoryHolder />
+          <AquaProductHolder />
         </div>
         {/* second section */}
       </AquaLayout>

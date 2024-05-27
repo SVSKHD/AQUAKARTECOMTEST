@@ -18,6 +18,7 @@ const CardCarousel = ({ cards, CardComponent }) => {
       pause="hover"
       wrap={true}
       slide={true}
+      controls={false}
     >
       {chunks.map((chunk, index) => (
         <Carousel.Item key={index}>

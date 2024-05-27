@@ -3,6 +3,9 @@ import AquaCardMultiItemCarousel from "@/reusables/cardCarousel";
 import AquaToast from "@/reusables/js/toast";
 import { useEffect, useState, useCallback } from "react";
 import TestVerticalcard from "@/reusables/testverticalcard";
+import CardCarousel from "@/reusables/AquaCardCarouselNew";
+import AquaImageCard from "@/reusables/imageCard";
+
 const AquaProductHolder = () => {
   const [products, setProducts] = useState([]);
   const { getProducts } = AquaProductOperations();
@@ -27,23 +30,7 @@ const AquaProductHolder = () => {
           <h3>No Products yet</h3>
         ) : (
           <div className="row">
-            <AquaCardMultiItemCarousel>
-              {products.map((r, i) => (
-                <>
-                  <div key={i}>
-                    <TestVerticalcard data={r} />
-                    {/* <AquaVerticalCardRevamp data={r} /> */}
-                    {/* <AquaVerticalCard
-                      title={r.title}
-                      images={r.photos}
-                      price={r.price}
-                      description={r.description}
-                      data={r}
-                    /> */}
-                  </div>
-                </>
-              ))}
-            </AquaCardMultiItemCarousel>
+            <CardCarousel cards={products} CardComponent={<AquaImageCard />} />
           </div>
         )}
       </div>
