@@ -7,6 +7,7 @@ import AquaLargeTitle from "@/reusables/largeTitle";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardCarousel from "@/reusables/AquaCardCarouselNew";
+import AquaHeading from "@/reusables/heading";
 
 const AquaHomeComponent = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,11 @@ const AquaHomeComponent = () => {
             <div className="mb-3">
               <div className="card-body">
                 <div className="row">
-                  <div className={user ? "col-9" : "col-12"}></div>
+                  <div className={user ? "col-9" : "col-12"}>
+                    <div className="card rounded-4">
+                      <div className="card-body"></div>
+                    </div>
+                  </div>
                   <div className={user ? "col-3" : ""}>
                     {user ? (
                       <div className="card rounded-4">
@@ -59,7 +64,9 @@ const AquaHomeComponent = () => {
               </div>
             </div>
           </div>
+          <AquaHeading content={"Categories"} level={2} customclass={"mb-2"} decorate={true}/>
           <AquaCategoryHolder />
+          <AquaHeading content={"Products"} level={2} customclass={"mb-2"} decorate={true}/>
           <AquaProductHolder />
         </div>
         {/* second section */}
