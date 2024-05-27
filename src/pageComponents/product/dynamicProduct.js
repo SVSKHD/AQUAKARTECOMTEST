@@ -21,6 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AquaCurrencyFormat from "@/reusables/currencyFormatter";
 import AquaVerticalCard from "@/reusables/VerticalCard";
 import AquaHeading from "@/reusables/heading";
+import TestVerticalcard from "@/reusables/testverticalcard";
 
 const DynamicProduct = () => {
   const dispatch = useDispatch();
@@ -204,13 +205,7 @@ const DynamicProduct = () => {
                         key={i}
                         className="col-md-4 col-lg-4 col-xs-12 col-sm-12"
                       >
-                        <AquaVerticalCard
-                          title={r.title}
-                          images={r.photos}
-                          price={r.price}
-                          description={r.description}
-                          data={r}
-                        />
+                       <TestVerticalcard card={r} />
                       </div>
                     </>
                   ))}

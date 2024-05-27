@@ -70,14 +70,7 @@ const AquaSubCategoryPageComponent = () => {
             <div className="row">
               {products.map((product, index) => (
                 <div className="col" key={index}>
-                  <TestVerticalcard data={product} />
-                  {/* <AquaVerticalCard
-                    title={product.title}
-                    images={product.photos}
-                    price={product.price}
-                    description={product.description}
-                    data={product}
-                  /> */}
+                  <TestVerticalcard card={product} />
                 </div>
               ))}
             </div>
