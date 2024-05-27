@@ -3,7 +3,7 @@ const AquaCard = (props) => {
   return (
     <>
       <Card {...props} className="rounded-4">
-        <Card.Body>{props.children}</Card.Body>
+        <Card.Body className="p-1">{props.children}</Card.Body>
       </Card>
     </>
   );

@@ -170,7 +170,7 @@ const AquaFooter = () => {
             <div className="row social handle">
               <div className="col">
                 <AquaHeading
-                  level={5}
+                  level={6}
                   content={`Aquakart © ${Year} All Rights Reserved`}
                 />
               </div>
