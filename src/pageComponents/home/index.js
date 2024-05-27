@@ -22,62 +22,12 @@ const AquaHomeComponent = () => {
       "Aquakart Ecom Store , water softeners  , water Ro  , ro machines , Salt Free Water Softener , Water Softener System , Water Softener Installation",
     keyphrases: "Water Softener Salt Prices , Salt Water Softener",
   };
-  const cards = [
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 1",
-      text: "This is card 1",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 2",
-      text: "This is card 2",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 3",
-      text: "This is card 3",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 4",
-      text: "This is card 4",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 5",
-      text: "This is card 5",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 6",
-      text: "This is card 6",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 7",
-      text: "This is card 7",
-      link: "#",
-    },
-    {
-      image: "https://via.placeholder.com/150",
-      title: "Card 8",
-      text: "This is card 8",
-      link: "#",
-    },
-  ];
+
   const { user } = useSelector((state) => ({ ...state }));
   return (
     <>
       <AquaLayout seo={SeoData}>
         <div className="container mb-3">
-          {/* first section */}
           <div>
             <div className="mb-3">
               <div className="card-body">

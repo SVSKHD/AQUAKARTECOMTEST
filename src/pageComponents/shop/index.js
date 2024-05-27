@@ -118,7 +118,7 @@ const AquaShopComponent = () => {
                 <>
                   {products.map((r, i) => (
                     <div key={i} className="col">
-                      <TestVerticalcard data={r} />
+                      <TestVerticalcard card={r} />
                     </div>
                   ))}
                 </>
