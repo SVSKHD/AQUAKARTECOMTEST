@@ -30,7 +30,7 @@ const AquaProductHolder = () => {
           <h3>No Products yet</h3>
         ) : (
           <div className="row">
-            <CardCarousel cards={products} CardComponent={<AquaImageCard />} />
+            <CardCarousel cards={products} CardComponent={<TestVerticalcard/>} />
           </div>
         )}
       </div>
