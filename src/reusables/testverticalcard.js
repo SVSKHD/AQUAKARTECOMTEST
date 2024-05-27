@@ -88,13 +88,13 @@ const TestVerticalcard = ({ card }) => {
         <div className="icon">
           {favAdd ? (
             <FaHeart
-              onClick={() => addProductToFav(data, setFavAdd)}
+              onClick={() => addProductToFav(card, setFavAdd)}
               size={25}
               className="text-light"
             />
           ) : (
             <FaRegHeart
-              onClick={() => addProductToFav(data, setFavAdd)}
+              onClick={() => addProductToFav(card, setFavAdd)}
               size={25}
               className="text-light"
             />

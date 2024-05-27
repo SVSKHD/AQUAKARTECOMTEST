@@ -67,14 +67,14 @@ const AquaHomeComponent = () => {
           <AquaHeading
             content={"Categories"}
             level={2}
-            customclass={"mb-2"}
+            customclass={"mb-3"}
             decorate={true}
           />
           <AquaCategoryHolder />
           <AquaHeading
             content={"Products"}
             level={2}
-            customclass={"mb-2"}
+            customclass={"mb-3"}
             decorate={true}
           />
           <AquaProductHolder />
