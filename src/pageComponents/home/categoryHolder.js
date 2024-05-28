@@ -8,6 +8,7 @@ import CardCarousel from "@/reusables/AquaCardCarouselNew";
 const AquaCategoryHolder = () => {
   const [categories, setCategories] = useState([]);
   const { getCategories } = AquaCategoryOperations();
+
   const loadCategories = useCallback(() => {
     getCategories()
       .then((res) => {
@@ -21,16 +22,18 @@ const AquaCategoryHolder = () => {
   useEffect(() => {
     loadCategories();
   }, [loadCategories]);
+
   return (
     <>
-      {!categories.length ? (
-        <FadeLoader />
-      ) : (
-        <div className="mb-3">
+      <div className="mb-3">
+        {categories.length ? (
           <CardCarousel cards={categories} CardComponent={<AquaImageCard />} />
-        </div>
-      )}
+        ) : (
+          <h1>No categories available</h1>
+        )}
+      </div>
     </>
   );
 };
+
 export default AquaCategoryHolder;

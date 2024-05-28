@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardCarousel from "@/reusables/AquaCardCarouselNew";
 import AquaHeading from "@/reusables/heading";
+import AquaHoverImageCard from "@/reusables/imageHoverCard";
 
 const AquaHomeComponent = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const AquaHomeComponent = () => {
           />
           <AquaCategoryHolder />
           <AquaHeading
-            content={"Products"}
+            content={"Featured Products"}
             level={2}
             customclass={"mb-3"}
             decorate={true}

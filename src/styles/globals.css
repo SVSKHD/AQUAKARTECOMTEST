@@ -778,3 +778,130 @@ body {
   line-height: 17px;
   margin-bottom: 0.6rem;
 }
+
+/* image card */
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+body {
+  background: #efefef;
+}
+
+.figure {
+  background: #1d1d1d;
+  display: inline-block;
+  margin: 10px;
+  max-width: 280px;
+  min-width: 230px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.figure * {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+
+.figure:before,
+.figure:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  background-color: #1d1d1d;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #ffffff;
+  content: "";
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.figure:before {
+  -webkit-transform: skew(45deg) translateX(-180%);
+  transform: skew(45deg) translateX(-180%);
+}
+
+.figure:after {
+  -webkit-transform: skew(45deg) translate(180%);
+  transform: skew(45deg) translateX(180%);
+}
+
+.figure img {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.figure figcaption {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  z-index: 2;
+  -webkit-transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  -webkit-box-shadow: 0 0 10px #1d1d1d;
+  box-shadow: 0 0 10px #1d1d1d;
+}
+
+.figure h3 {
+  background-color: #1d1d1d;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.figure a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.figure:hover > img,
+.figure:hover > img {
+  opacity: 0.5;
+}
+
+.figure:hover:before,
+.figure.hover:before {
+  -webkit-transform: skew(45deg) translateX(-80%);
+  transform: skew(45deg) translateX(-80%);
+}
+
+.figure:hover:after,
+.figure.hover:after {
+  -webkit-transform: skew(45deg) translateX(80%);
+  transform: skew(45deg) translateX(80%);
+}
+
+.figure:hover figcaption,
+.figure.hover figcaption {
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
