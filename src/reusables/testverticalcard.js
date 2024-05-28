@@ -50,7 +50,7 @@ const TestVerticalcard = ({ card }) => {
     <>
       {loading ? (
         <>
-          <div class="card" aria-hidden="true">
+          <div class="card rounded-4" aria-hidden="true">
             <Image src={AQ}  width="250"
             height="250" className="card-img-top" alt="..." />
             <div className="card-body">
@@ -58,8 +58,6 @@ const TestVerticalcard = ({ card }) => {
                 <span className="placeholder col-6 rounded-4"></span>
               </h5>
               <p className="card-text placeholder-glow">
-                <span className="placeholder col-8 rounded-4"></span>
-                <span className="placeholder col-9 rounded-4"></span>
                 <span className="placeholder col-10 rounded-4"></span>
                 <span className="placeholder col-12 rounded-4"></span>
               </p>
