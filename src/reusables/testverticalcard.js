@@ -7,10 +7,17 @@ import { useSelector } from "react-redux";
 import ProductFunctions from "@/reusableUtils/poroductFunctions";
 
 const TestVerticalcard = ({ card }) => {
-  if (!card) {
-    console.error("No data provided to TestVerticalcard");
-    return null;
-  }
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (card) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000); // Delay of 1 second
+    } else {
+      setLoading(true);
+    }
+  }, [card]);
 
   const { title, price, photos } = card;
   const { cartCount, favCount } = useSelector((state) => ({ ...state }));
@@ -38,7 +45,8 @@ const TestVerticalcard = ({ card }) => {
   };
 
   return (
-    <div className="hovercard">
+    <>
+    {loading ?() : (  <div className="hovercard">
       <div className="container1">
         <div className="top">
           {photos && photos.length > 0 ? (
@@ -101,7 +109,9 @@ const TestVerticalcard = ({ card }) => {
           )}
         </div>
       </div>
-    </div>
+    </div>)}
+  
+    </>
   );
 };
 

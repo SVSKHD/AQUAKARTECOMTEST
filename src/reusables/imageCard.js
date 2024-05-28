@@ -10,7 +10,7 @@ const AquaImageCard = ({ card }) => {
     if (card) {
       setTimeout(() => {
         setLoading(false);
-      }, 5000); // Delay of 1 second
+      }, 2000); // Delay of 1 second
     } else {
       setLoading(true);
     }
@@ -31,13 +31,9 @@ const AquaImageCard = ({ card }) => {
             height="250"
           />
           <div class="card-body">
-            <h5 class="card-title placeholder-glow">
-              <span class="placeholder col-12"></span>
+            <h5 class="card-title placeholder-glow rounded-4">
+              <span class="placeholder col-12 rounded-4"></span>
             </h5>
-            <p class="card-text placeholder-glow">
-              <span class="placeholder col-12"></span>
-              <span class="placeholder col-8"></span>
-            </p>
           </div>
         </div>
       ) : (
