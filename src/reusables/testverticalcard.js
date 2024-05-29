@@ -15,7 +15,7 @@ const TestVerticalcard = ({ card }) => {
     if (card) {
       setTimeout(() => {
         setLoading(false);
-      }, 6000); // Delay of 1 second
+      }, 2000); // Delay of 1 second
     } else {
       setLoading(true);
     }
