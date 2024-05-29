@@ -26,9 +26,7 @@ const AquaProductHolder = () => {
   return (
     <>
       <div className="mt-2">
-        {!products.length ? (
-          <h3>No Products yet</h3>
-        ) : (
+        {!products.length ? '' : (
           <div className="row">
             <CardCarousel
               cards={products}
