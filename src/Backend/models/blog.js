@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
 const BlogSchema = new mongoose.Schema({
+  photos: [
+    {
+      id: {
+        type: String,
+        required: true,
+      },
+      secure_url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   title: {
     type: String,
     required: [true, "please provide product name"],
@@ -38,10 +50,9 @@ const BlogSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "AquaSubCategory",
   },
-  //this field was updated in order videos later
-  stock: {
-    type: Number,
-    required: [true, "please add a number in stock"],
+  product: {
+    type: mongoose.Schema.ObjectId,
+    ref: "AquaProduct",
   },
   brand: {
     type: String,
@@ -80,11 +91,6 @@ const BlogSchema = new mongoose.Schema({
       },
     },
   ],
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
