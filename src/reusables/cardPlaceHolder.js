@@ -1,9 +1,4 @@
-
-const AquaCardPlaceHolder = () =>{
-return(
-    <>
-    
-    </>
-)
-}
-export default AquaCardPlaceHolder
+const AquaCardPlaceHolder = () => {
+  return <></>;
+};
+export default AquaCardPlaceHolder;

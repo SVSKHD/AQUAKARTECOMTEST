@@ -28,7 +28,9 @@ const AquaCategoryHolder = () => {
       <div className="mb-3">
         {categories.length ? (
           <CardCarousel cards={categories} CardComponent={<AquaImageCard />} />
-        ) : ''}
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
