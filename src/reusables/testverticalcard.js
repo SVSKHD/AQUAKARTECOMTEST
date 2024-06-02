@@ -93,7 +93,7 @@ const TestVerticalcard = ({ card }) => {
                   <a
                     href="#"
                     className="d-block fw-medium text-dark text-decoration-none"
-                    onClick={() => redirectProduct(data._id)}
+                    onClick={() => redirectProduct(card._id)}
                   >
                     {title}
                   </a>
@@ -108,7 +108,7 @@ const TestVerticalcard = ({ card }) => {
                   <FaCheck />
                 </div>
                 <div className="details">
-                  <h6 onClick={() => redirectProduct(data._id)}>{title}</h6>
+                  <h6 onClick={() => redirectProduct(card._id)}>{title}</h6>
                   <p>Added to cart</p>
                 </div>
                 <div
