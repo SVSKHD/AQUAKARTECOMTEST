@@ -1139,7 +1139,7 @@ body {
   border-radius: 0.5rem;
 }
 
-.icon {
+.blog-icon {
   position: absolute;
   bottom: -0.375rem;
   right: -0.375rem;
@@ -1149,11 +1149,11 @@ body {
   border-top-left-radius: 50%;
 }
 
-.icon:hover .iconBox {
+.blog-icon:hover .iconBox {
   transform: scale(1.1);
 }
 
-.icon::before {
+.blog-icon::before {
   position: absolute;
   content: "";
   bottom: 0.375rem;

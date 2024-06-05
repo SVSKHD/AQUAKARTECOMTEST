@@ -1,6 +1,6 @@
 import React from "react";
 import { FaShare } from "react-icons/fa";
-// Assuming your CSS is saved in a file named Card.css
+
 
 const AquaTestBlogCard = ({ data }) => {
   return (
@@ -10,7 +10,7 @@ const AquaTestBlogCard = ({ data }) => {
           <div className="imgBox">
             <img src={data?.titleImages[0].secure_url} alt={data?.title} />
           </div>
-          <div className="icon">
+          <div className="blog-icon">
             <a href={`/blog/${data?._id}`} className="iconBox">
               <span className="material-symbols-outlined">
                 <FaShare />

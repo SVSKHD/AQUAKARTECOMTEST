@@ -28,11 +28,13 @@ Router.get(async (req, res) => {
     const { categoryId, subCategoryId, id } = req.query;
 
     if (id) {
-      const blogById = await AquaBlog.findById(id);
+      const blogById = await AquaBlog.findById(id).lean();
       if (!blogById) {
+        db.disconnectDb();
         return res.status(404).json({ error: "Blog not found" });
       }
-      res.status(200).json(blogById);
+      db.disconnectDb();
+      return res.status(200).json({ data: blogById });
     } else {
       const query = {};
 
@@ -44,12 +46,12 @@ Router.get(async (req, res) => {
       }
 
       const blogs = await AquaBlog.find(query).lean();
-      res.status(200).json(blogs);
+      db.disconnectDb();
+      return res.status(200).json({ data: blogs });
     }
-
-    db.disconnectDb();
   } catch (error) {
     console.error(error);
+    db.disconnectDb();
     res.status(500).json({ error: "Server error" });
   }
 });
