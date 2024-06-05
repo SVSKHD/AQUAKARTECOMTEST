@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import CardCarousel from "@/reusables/AquaCardCarouselNew";
 import AquaHeading from "@/reusables/heading";
 import AquaHoverImageCard from "@/reusables/imageHoverCard";
+import AquaBlogHolder from "./blogHolder";
+import AquaTestBlogCard from "@/reusables/aquaTestCard";
 
 const AquaHomeComponent = () => {
   const dispatch = useDispatch();
@@ -79,7 +81,11 @@ const AquaHomeComponent = () => {
             decorate={true}
           />
           <AquaProductHolder />
+          <div className="m-1">
+            <AquaBlogHolder />
+          </div>
         </div>
+
         {/* second section */}
       </AquaLayout>
     </>

@@ -5,6 +5,17 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+.card {
+  transition:
+    0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
 
 .underline-animation {
   font-family: "Roboto";
@@ -904,4 +915,300 @@ body {
   -webkit-transform: translate(-50%, -50%) scale(1);
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+}
+
+/* // blog card */
+
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+/* DEMO GENERAL ============================== */
+.hover {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 60%;
+}
+
+.hover-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  transition: all 0.4s;
+}
+
+.hover img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s;
+}
+
+.hover-content {
+  position: absolute;
+  z-index: 99;
+}
+
+/* DEMO 1 ============================== */
+.hover-1 img {
+  width: 105%;
+  position: absolute;
+  top: 0;
+  left: -5%;
+  transition: all 0.3s;
+}
+
+.hover-1-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  transition: all 0.4s;
+}
+
+.hover-1 .hover-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hover-1-description {
+  transform: translateY(0.5rem);
+  transition: all 0.4s;
+  opacity: 0;
+}
+
+.hover-1:hover .hover-1-content {
+  bottom: 0.2rem;
+}
+
+.hover-1:hover .hover-1-description {
+  opacity: 1;
+  transform: none;
+}
+
+.hover-1:hover img {
+  left: 0;
+}
+
+.hover-1:hover .hover-overlay {
+  opacity: 0;
+}
+
+.ver_mas {
+  background-color: #feb66c;
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0;
+  transform: translate(0px, 70px);
+  -webkit-transform: translate(0px, 70px);
+  -moz-transform: translate(0px, 70px);
+  -o-transform: translate(0px, 70px);
+  -ms-transform: translate(0px, 70px);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.ver_mas span {
+  font-size: 40px;
+  color: #fff;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  top: 13px;
+}
+
+.Uni-block .uni-main {
+  position: relative;
+}
+.Uni-block .uni-main .uni-card {
+  transition: 0.5s;
+  width: 300px;
+  height: 100%;
+  border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.uni-main .uni-card.uni-card1 {
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
+.uni-main:hover .uni-card.uni-card1 {
+  transform: translateY(0px);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.uni-main:hover .uni-card.uni-card2 {
+  transform: translateY(0px);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.uni-main:hover .uni-card.uni-content {
+  transform: translateY(0px);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.uni-main .uni-card.uni-card2 {
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-100px);
+}
+.uni-main .uni-card.uni-card1 .uni-content p {
+  margin: 0;
+  padding: 0;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.uni-card.uni-card1 .uni-content img {
+  object-fit: cover;
+  width: 300px;
+  height: 100%;
+  border-radius: 20px;
+  object-position: center center;
+}
+.uni-main .uni-card.uni-card2 .uni-content a {
+  border: 1px solid #222;
+  text-decoration: none;
+  padding: 5px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Alegreya Sans SC", sans-serif;
+  color: #333;
+}
+.uni-main .uni-card.uni-card2 .uni-content a:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.card {
+  width: 100%;
+}
+
+.card-inner {
+  position: relative;
+  width: inherit;
+  height: 18.75rem;
+  background: var(--clr);
+  border-radius: 1.2rem;
+  border-bottom-right-radius: 0;
+  overflow: hidden;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.imgBox {
+  position: absolute;
+  inset: 0;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.icon {
+  position: absolute;
+  bottom: -0.375rem;
+  right: -0.375rem;
+  width: 6rem;
+  height: 6rem;
+  background: var(--clr);
+  border-top-left-radius: 50%;
+}
+
+.icon:hover .iconBox {
+  transform: scale(1.1);
+}
+
+.icon::before {
+  position: absolute;
+  content: "";
+  bottom: 0.375rem;
+  left: -1.25rem;
+  background: transparent;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0.313rem 0.313rem 0 0.313rem #fff;
+}
+
+.icon::after {
+  position: absolute;
+  content: "";
+  top: -1.25rem;
+  right: 0.375rem;
+  background: transparent;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
+}
+
+.iconBox {
+  position: absolute;
+  inset: 0.625rem;
+  background: #282828;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.iconBox span {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.content {
+  padding: 0.938rem 0.625rem;
+}
+
+.content h3 {
+  text-transform: capitalize;
+  font-size: clamp(1.5rem, 1.3909rem + 0.4364vw, 1.8rem);
+}
+
+.content p {
+  margin: 0.625rem 0 1.25rem;
+  color: #565656;
+}
+
+
+
+.blog-title{
+  font-size: 3.2rem;
 }
