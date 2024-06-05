@@ -9,7 +9,7 @@ const AquaBlogHolder = () => {
   useEffect(() => {
     getBlogs()
       .then((res) => {
-        setBlogs(res.data);
+        setBlogs(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -18,7 +18,7 @@ const AquaBlogHolder = () => {
   return (
     <>
       <div className="row">
-        {blogs.map((r, i) => (
+        {blogs?.map((r, i) => (
           <div className="col-md-3" key={i}>
             <AquaTestBlogCard data={r} />
           </div>
