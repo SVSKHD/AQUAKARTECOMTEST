@@ -21,7 +21,6 @@ const AquaTestBlogCard = ({ data }) => {
       </div>
       <div className="content">
         <h4>{data?.title}</h4>
-     
       </div>
     </div>
   );
