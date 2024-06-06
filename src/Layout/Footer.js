@@ -84,7 +84,7 @@ const AquaFooter = () => {
     <>
       <div>
         <div className="footer-aqua">
-          <div className="mt-2 container">
+          <div className="mt-2">
             <div className="row">
               <div className="col text-center">
                 <Image src={AQ} alt="Aquakart" height="150" width="150" />
@@ -166,8 +166,8 @@ const AquaFooter = () => {
               </div>
             </div>
           </div>
-          <AquaCard>
-            <div className="row social handle">
+          <hr/>
+            <div className="row">
               <div className="col">
                 <AquaHeading
                   level={6}
@@ -182,7 +182,7 @@ const AquaFooter = () => {
                     target="_blank"
                     href="https://www.instagram.com/aquakart.co.in/"
                   >
-                    <FaInstagram size={20} />
+                    <FaInstagram size={20} className="text-white" />
                   </a>
                   <a
                     type="button"
@@ -190,12 +190,11 @@ const AquaFooter = () => {
                     target="_blank"
                     href="https://twitter.com/aquakart8"
                   >
-                    <FaXTwitter size={20} />
+                    <FaXTwitter size={20} className="text-white" />
                   </a>
                 </div>
               </div>
             </div>
-          </AquaCard>
         </div>
       </div>
     </>
