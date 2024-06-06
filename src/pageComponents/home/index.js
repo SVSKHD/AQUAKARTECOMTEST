@@ -82,12 +82,12 @@ const AquaHomeComponent = () => {
           />
           <AquaProductHolder />
           <div className="m-1">
-          <AquaHeading
-            content={"Know More"}
-            level={2}
-            customclass={"mb-3"}
-            decorate={true}
-          />
+            <AquaHeading
+              content={"Know More"}
+              level={2}
+              customclass={"mb-3"}
+              decorate={true}
+            />
             <AquaBlogHolder />
           </div>
         </div>

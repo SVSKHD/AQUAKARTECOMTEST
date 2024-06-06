@@ -144,21 +144,11 @@ const DynamicProduct = () => {
                     </span>
                   </h5>
                   <h6 className="mb-3">Brand : {product?.brand}</h6>
-                  <InputGroup className="mb-3 width-adjust">
-                    <Button variant="outline-dark" onClick={stockSub}>
-                      <FaMinus size={25} />
-                    </Button>
-                    <Form.Control
-                      aria-label="Example text with two button addons"
-                      className="text-center"
-                      value={product.quantity}
-                    />
-                    <Button variant="outline-dark" onClick={stockAdd}>
-                      <FaPlus size={25} />
-                    </Button>
-                  </InputGroup>
+
                   <div className="dynamic-product-cart-fav">
                     <AquaButton
+                      tooltip
+                      tooltipMessage={cart ? "Added to Cart" : "Add to Cart"}
                       variant="normal"
                       onClick={() => addProductToCart(product, setCart)}
                     >
@@ -169,6 +159,10 @@ const DynamicProduct = () => {
                       )}
                     </AquaButton>
                     <AquaButton
+                      tooltip
+                      tooltipMessage={
+                        fav ? "Added to Favourites" : "Add to you Favourites"
+                      }
                       variant="normal"
                       onClick={() => addProductToFav(product, setFav)}
                     >
@@ -178,8 +172,29 @@ const DynamicProduct = () => {
                         <FaRegHeart size={25} className="text-danger" />
                       )}
                     </AquaButton>
-                    <AquaButton href="/checkout">Go To Cart</AquaButton>
+                    {cart ? (
+                      <AquaButton href="/checkout">Go To Cart</AquaButton>
+                    ) : (
+                      ""
+                    )}
                   </div>
+                  {cart ? (
+                    <InputGroup className="mt-3 width-adjust">
+                      <Button variant="outline-dark" onClick={stockSub}>
+                        <FaMinus size={25} />
+                      </Button>
+                      <Form.Control
+                        aria-label="Example text with two button addons"
+                        className="text-center"
+                        value={product.quantity}
+                      />
+                      <Button variant="outline-dark" onClick={stockAdd}>
+                        <FaPlus size={25} />
+                      </Button>
+                    </InputGroup>
+                  ) : (
+                    ""
+                  )}
                   <hr />
                   <div className="container">
                     <div

@@ -1,7 +1,6 @@
 import React from "react";
 import { FaShare } from "react-icons/fa";
 
-
 const AquaTestBlogCard = ({ data }) => {
   return (
     <div className="card rounded-4">

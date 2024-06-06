@@ -1210,3 +1210,15 @@ body {
 .blog-title {
   font-size: 3.2rem;
 }
+
+@media (max-width: 768px) {
+  .blog-title {
+    font-size: 1.6rem; /* Half of 3.2rem */
+  }
+}
+
+@media (max-width: 576px) {
+  .blog-title {
+    font-size: 1.6rem; /* Half of 3.2rem */
+  }
+}
